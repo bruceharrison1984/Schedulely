@@ -1,0 +1,22 @@
+{
+  "directory": "./src",
+  "delete": true,
+  "location": "branch",
+  "name": "index",
+  "structure": "flat",
+  "exportDefault": true,
+  "verbose": false,
+  "singleQuotes": true,
+  "include": [
+    "(src)/.*.tsx$",
+    "(src)/.*.ts$"
+  ],
+  "exclude": [
+    ".stories.tsx$",
+    ".props.ts$",
+    "./index.ts",
+    "apiHelpers.ts",
+    ".spec.tsx$",
+    ".spec.tsx.snap$"
+  ]
+}
