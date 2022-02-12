@@ -87,31 +87,6 @@ describe('Date Convertor', () => {
       }
     );
 
-    it('getWeeksInMonth returns correct values', () => {
-      const result = convertor.getWeeksInMonth(new Date(2021, 0, 1));
-      expect(result).toEqual([
-        new Date(2020, 11, 27),
-        new Date(2021, 0, 3),
-        new Date(2021, 0, 10),
-        new Date(2021, 0, 17),
-        new Date(2021, 0, 24),
-        new Date(2021, 0, 31),
-      ]);
-    });
-
-    it('getDaysInWeek returns correct values', () => {
-      const result = convertor.getDaysInWeek(new Date(2021, 0, 10));
-      expect(result).toEqual([
-        new Date(2021, 0, 10),
-        new Date(2021, 0, 11),
-        new Date(2021, 0, 12),
-        new Date(2021, 0, 13),
-        new Date(2021, 0, 14),
-        new Date(2021, 0, 15),
-        new Date(2021, 0, 16),
-      ]);
-    });
-
     it('getCalendarViewInWeeks returns correct values', () => {
       const result = convertor.getCalendarViewInWeeks(new Date(2021, 0, 10));
       expect(result).toEqual([

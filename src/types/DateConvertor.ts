@@ -8,12 +8,6 @@ export interface DateConvertor {
   /** Compare two dates, returns true if they are in the same month, in the same year */
   areSameMonth: (firstDate: Date, secondDate: Date) => boolean;
 
-  /** Get the first day of the week for a given date's month */
-  getWeeksInMonth: (date: Date) => Date[];
-
-  /** Get all days in the week for a given date */
-  getDaysInWeek: (date: Date) => Date[];
-
   /** Returns all days in the month, split apart by week. Includes leading/trailing days. */
   getCalendarViewInWeeks: (date: Date) => Date[][];
 
@@ -38,13 +32,9 @@ export interface DateConvertor {
   /** Subtract a number of months from a date */
   subMonthsToDate: (date: Date, amount: number) => Date;
 
-  getIntervalLength: (start: Date, end: Date) => number;
-
   getDayOfWeek: (date: Date) => number;
 
   areSameWeek: (firstDate: Date, secondDate: Date) => boolean;
-
-  getWeekNumber: (date: Date) => number;
 }
 
 //TODO: This needs to be changed. It is tightly coupled for date-fns

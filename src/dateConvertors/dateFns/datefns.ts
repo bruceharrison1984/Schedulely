@@ -40,15 +40,15 @@ export const createDateFnsConvertor = (
     return { start, end };
   };
 
-  const getWeeksInMonth = (date: Date) => {
+  const _getWeeksInMonth = (date: Date) => {
     return eachWeekOfInterval(_getCalendarRangeForDate(date));
   };
 
-  const getDaysInWeek = (date: Date) =>
-    eachDayOfInterval({ start: date, end: _endOfWeek(date) });
-
   const getCalendarViewInWeeks = (date: Date) =>
-    getWeeksInMonth(date).map((week) => getDaysInWeek(week));
+    _getWeeksInMonth(date).map((week) => _getDaysInWeek(week));
+
+  const _getDaysInWeek = (date: Date) =>
+    eachDayOfInterval({ start: date, end: _endOfWeek(date) });
 
   const getDaysOfWeek = (dayOfWeekFormat?: DayOfWeekNameFormat) => {
     const today = new Date();
@@ -87,20 +87,10 @@ export const createDateFnsConvertor = (
   const subMonthsToDate = (date: Date, amount: number) =>
     addMonths(date, -amount);
 
-  const getIntervalLength = (start: Date, end: Date) =>
-    eachDayOfInterval({
-      start: startOfWeek(start),
-      end: _endOfWeek(end),
-    }).length;
-
   const areSameWeek = (firstDate: Date, secondDate: Date) =>
     isSameWeek(firstDate, secondDate);
 
-  const getWeekNumber = (date: Date) => getWeek(date);
-
   return {
-    getWeeksInMonth,
-    getDaysInWeek,
     getCalendarViewInWeeks,
     getDaysOfWeek,
     getMonthNameFromDate,
@@ -111,9 +101,7 @@ export const createDateFnsConvertor = (
     toIso,
     addMonthsToDate,
     subMonthsToDate,
-    getIntervalLength,
     getDayOfWeek,
     areSameWeek,
-    getWeekNumber,
   };
 };
