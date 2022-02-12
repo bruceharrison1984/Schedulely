@@ -18,7 +18,6 @@ export const EventLayout = ({
 }: EventLayoutProps) => {
   const {
     dateConvertor: { getDayOfWeek },
-    dayOffset,
   } = useCalendar();
   const { eventComponent: EventComponent } = useComponents();
 
@@ -27,7 +26,8 @@ export const EventLayout = ({
 
   const getEndIndex = (eventEndDate: Date) => {
     if (eventEndDate > endOfWeek) return 8;
-    return getDayOfWeek(eventEndDate) + dayOffset;
+    const end = getDayOfWeek(eventEndDate) + 2; // i don't know why we have to add 2, but it makes it work
+    return end;
   };
 
   return (
