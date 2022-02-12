@@ -9,7 +9,6 @@ import {
   eachDayOfInterval,
   eachWeekOfInterval,
   format,
-  getWeek,
   isSameWeek,
   startOfMonth,
   startOfWeek,
@@ -36,7 +35,6 @@ const convertors = [
       startOfWeek,
       addMonths,
       isSameWeek,
-      getWeek,
     }),
   },
 ];

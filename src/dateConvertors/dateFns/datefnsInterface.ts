@@ -101,14 +101,4 @@ export interface DateFnsFunctions {
         }
       | undefined
   ): boolean;
-  getWeek(
-    date: Date | number,
-    options?:
-      | {
-          locale?: Locale | undefined;
-          weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined;
-          firstWeekContainsDate?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | undefined;
-        }
-      | undefined
-  ): number;
 }

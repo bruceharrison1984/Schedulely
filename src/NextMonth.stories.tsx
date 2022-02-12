@@ -7,7 +7,6 @@ import {
   eachDayOfInterval,
   eachWeekOfInterval,
   format,
-  getWeek,
   isSameWeek,
   startOfMonth,
   startOfWeek,
@@ -88,6 +87,5 @@ datefns.args = {
     startOfWeek,
     addMonths,
     isSameWeek,
-    getWeek,
   }),
 };
