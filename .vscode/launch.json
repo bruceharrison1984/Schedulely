@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Storybook Debug",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run storybook",
+      "internalConsoleOptions": "openOnFirstSessionStart",
+      "webRoot": "${workspaceFolder}/dist",
+      "serverReadyAction": {
+        "pattern": "Local:.+(https?://[^:]+:[0-9]+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      }
+    }
+  ]
+}

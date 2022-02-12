@@ -1,0 +1,11 @@
+.nm--default-forward-button {
+  border: none;
+  background-color: transparent;
+  font-size: 2em;
+  opacity: 50%;
+}
+
+.nm--default-forward-button:hover {
+  opacity: 100%;
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.nm--event-layout {
+  display: grid;
+  grid-area: 1 / 1;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(4, 20%);
+  z-index: 100;
+  gap: 0.3em;
+  margin-top: 2em;
+  white-space: nowrap;
+}

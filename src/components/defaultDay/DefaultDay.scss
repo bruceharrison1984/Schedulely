@@ -1,0 +1,13 @@
+.nm--default-day {
+  height: var(--nextmonth-dayHeight);
+  // border: 1px black solid;
+}
+
+.nm--default-day-current {
+  background-color: var(--nextmonth-currentMonthBgColor);
+}
+
+.nm--default-day-sibling {
+  background-color: var(--nextmonth-siblingMonthBgColor);
+  color: dimgray;
+}

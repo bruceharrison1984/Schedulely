@@ -1,0 +1,18 @@
+.nm--default-day-header {
+  text-align: center;
+  width: 100%;
+}
+
+.nm--default-day-header--text {
+  position: relative;
+  top: 3px;
+  font-weight: bold;
+}
+
+.nm--default-day-header--indicator {
+  height: 25px;
+  width: 25px;
+  background-color: salmon;
+  border-radius: 50%;
+  display: inline-block;
+}

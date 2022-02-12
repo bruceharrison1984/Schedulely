@@ -6,7 +6,7 @@ public/sw.js
 public/workbox-*.js
 
 # dependencies
-/node_modules
+**/node_modules
 /.pnp
 .pnp.js
 

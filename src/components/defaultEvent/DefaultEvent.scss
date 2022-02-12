@@ -1,0 +1,16 @@
+.nm--event {
+  opacity: 80%;
+  border-radius: 10px;
+  padding-left: 1em;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-right: 5px;
+  box-shadow: dimgray 2px 2px 3px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.nm--event:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
