@@ -49,6 +49,7 @@ export const CalendarProvider = ({
     return offset;
   }, [currentMonth, dateConvertor]);
 
+  //TODO: This is implementation specific to date-fns format
   const daysOfWeek = useMemo(() => {
     let format = DayOfWeekNameFormat.long;
     if (isTinyDisplay) format = DayOfWeekNameFormat.short;
