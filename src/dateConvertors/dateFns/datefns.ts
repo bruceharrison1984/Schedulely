@@ -16,7 +16,6 @@ export const createDateFnsConvertor = (
     startOfMonth,
     startOfWeek,
     isSameWeek,
-    getWeek,
   } = datefns;
 
   /** Use some creative math to avoid importing more than we need to */
