@@ -3,18 +3,19 @@
  */
 import 'regenerator-runtime/runtime';
 import { DateConvertor } from '@/types/DateConvertor';
-import chance from 'chance';
-
 import {
   addDays,
   addMonths,
   eachDayOfInterval,
   eachWeekOfInterval,
   format,
+  getWeek,
+  isSameWeek,
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
 import { createDateFnsConvertor } from '.';
+import chance from 'chance';
 
 /**
  * Additional convertors should just be added to this array
@@ -34,6 +35,8 @@ const convertors = [
       startOfMonth,
       startOfWeek,
       addMonths,
+      isSameWeek,
+      getWeek,
     }),
   },
 ];
