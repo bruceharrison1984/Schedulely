@@ -1,4 +1,4 @@
-import { DateConvertor, DayOfWeekNameFormat } from '@/types/index';
+import { DateConvertor, DisplaySize } from '@/types/index';
 import { DateFnsFunctions } from './datefnsInterface';
 
 /**
@@ -49,13 +49,18 @@ export const createDateFnsConvertor = (
   const _getDaysInWeek = (date: Date) =>
     eachDayOfInterval({ start: date, end: _endOfWeek(date) });
 
-  const getDaysOfWeek = (dayOfWeekFormat?: DayOfWeekNameFormat) => {
+  const getDaysOfWeek = (displaySize?: DisplaySize) => {
     const today = new Date();
     const weekDays = eachDayOfInterval({
       start: startOfWeek(today),
       end: _endOfWeek(today),
     });
-    return weekDays.map((day) => format(day, dayOfWeekFormat || 'EEE'));
+
+    let template = 'EEEE'; //default large
+    if (displaySize == DisplaySize.medium) template = 'EE';
+    if (displaySize == DisplaySize.tiny) template = 'EEEEE';
+
+    return weekDays.map((day) => format(day, template));
   };
 
   const getDayOfWeek = (date: Date) => parseInt(format(date, 'i'));

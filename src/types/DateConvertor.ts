@@ -12,7 +12,7 @@ export interface DateConvertor {
   getCalendarViewInWeeks: (date: Date) => Date[][];
 
   /** Get full names of all days of the week */
-  getDaysOfWeek: (format?: DayOfWeekNameFormat) => string[];
+  getDaysOfWeek: (displaySize?: DisplaySize) => string[];
 
   /** Get the full name of the month for a given date */
   getMonthNameFromDate: (date: Date) => string;
@@ -37,9 +37,8 @@ export interface DateConvertor {
   areSameWeek: (firstDate: Date, secondDate: Date) => boolean;
 }
 
-//TODO: This needs to be changed. It is tightly coupled for date-fns
-export enum DayOfWeekNameFormat {
-  short = 'EEEEE',
-  medium = 'EE',
-  long = 'EEEE',
+export enum DisplaySize {
+  tiny,
+  medium,
+  large,
 }

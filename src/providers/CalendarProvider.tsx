@@ -2,7 +2,7 @@ import {
   CalendarEvent,
   CalendarState,
   DateConvertor,
-  DayOfWeekNameFormat,
+  DisplaySize,
   EventWeek,
 } from '@/types/index';
 import {
@@ -55,13 +55,12 @@ export const CalendarProvider = ({
     return offset;
   }, [currentMonth, dateConvertor]);
 
-  //TODO: This is implementation specific to date-fns format
   const daysOfWeek = useMemo(() => {
-    let format = DayOfWeekNameFormat.long;
-    if (isTinyDisplay) format = DayOfWeekNameFormat.short;
-    if (isMediumDisplay) format = DayOfWeekNameFormat.medium;
+    let displaySize = DisplaySize.large;
+    if (isMediumDisplay) displaySize = DisplaySize.medium;
+    if (isTinyDisplay) displaySize = DisplaySize.tiny;
 
-    return dateConvertor.getDaysOfWeek(format);
+    return dateConvertor.getDaysOfWeek(displaySize);
   }, [isMediumDisplay, isTinyDisplay, dateConvertor]);
 
   const weeksInMonth = useMemo(
