@@ -2,7 +2,6 @@ import {
   CalendarEvent,
   CalendarState,
   DateConvertor,
-  DisplaySize,
   EventWeek,
 } from '@/types/index';
 import {
@@ -12,7 +11,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import useMediaQuery from '@/hooks/useMediaQuery';
+import useScreenSize from '@/hooks/useScreenSize';
 
 export const CalendarContext = createContext<CalendarState | null>(null);
 CalendarContext.displayName = 'CalendarContext';
@@ -42,11 +41,7 @@ export const CalendarProvider = ({
   children,
 }: CalendarProviderProps) => {
   const [currentMonth, setCurrentMonth] = useState(initialDate);
-
-  const isMediumDisplay = useMediaQuery(
-    '(max-width: 768px) and (min-width: 481px)'
-  );
-  const isTinyDisplay = useMediaQuery('(max-width: 480px)');
+  const screenSize = useScreenSize();
 
   const dayOffset = useMemo(() => {
     const offset = dateConvertor.getDayOfWeek(
@@ -56,12 +51,8 @@ export const CalendarProvider = ({
   }, [currentMonth, dateConvertor]);
 
   const daysOfWeek = useMemo(() => {
-    let displaySize = DisplaySize.large;
-    if (isMediumDisplay) displaySize = DisplaySize.medium;
-    if (isTinyDisplay) displaySize = DisplaySize.tiny;
-
-    return dateConvertor.getDaysOfWeek(displaySize);
-  }, [isMediumDisplay, isTinyDisplay, dateConvertor]);
+    return dateConvertor.getDaysOfWeek(screenSize);
+  }, [screenSize, dateConvertor]);
 
   const weeksInMonth = useMemo(
     () => dateConvertor.getCalendarViewInWeeks(currentMonth),
@@ -77,7 +68,7 @@ export const CalendarProvider = ({
             dateConvertor.areSameMonth(event.start, currentMonth) ||
             dateConvertor.areSameMonth(event.end, currentMonth)
         )
-        .sort((a, b) => sortByEventStart(a, b) && sortByEventLength(a, b)), //unary operator so we can easily compare
+        .sort((a, b) => sortByEventStart(a, b)), //unary operator so we can easily compare
     [currentMonth, calendarEvents, dateConvertor]
   );
 

@@ -4,4 +4,4 @@
 
 export * from './useCalendar';
 export * from './useComponents';
-export * from './useMediaQuery';
+export * from './useScreenSize';
