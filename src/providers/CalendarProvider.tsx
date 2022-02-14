@@ -23,12 +23,6 @@ interface CalendarProviderProps {
   children: ReactNode;
 }
 
-const sortByEventLength = (eventA: CalendarEvent, eventB: CalendarEvent) =>
-  +eventA.end - +eventA.start - (+eventB.end - +eventB.start);
-
-const sortByEventStart = (eventA: CalendarEvent, eventB: CalendarEvent) =>
-  +eventA.start - +eventB.start;
-
 /**
  * The provides access to data and behaviors that control the calendar
  * @param param0 CalendarProviderProps
@@ -68,7 +62,7 @@ export const CalendarProvider = ({
             dateConvertor.areSameMonth(event.start, currentMonth) ||
             dateConvertor.areSameMonth(event.end, currentMonth)
         )
-        .sort((a, b) => sortByEventStart(a, b)), //unary operator so we can easily compare
+        .sort((a, b) => +a.start - +b.start), //unary operator so we can easily compare
     [currentMonth, calendarEvents, dateConvertor]
   );
 
