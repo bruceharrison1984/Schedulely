@@ -8,9 +8,8 @@
   box-shadow: dimgray 2px 2px 3px;
   text-overflow: ellipsis;
   overflow: hidden;
-}
-
-.nm--event:hover {
-  opacity: 100%;
-  cursor: pointer;
+  &:hover {
+    opacity: 100%;
+    cursor: pointer;
+  }
 }
