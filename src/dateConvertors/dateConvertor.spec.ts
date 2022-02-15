@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import 'regenerator-runtime/runtime';
-import { DateConvertor } from '@/types/DateConvertor';
+import { DateConvertor, DisplaySize } from '@/types/DateConvertor';
 import {
   addDays,
   addMonths,
@@ -145,19 +145,35 @@ describe('Date Convertor', () => {
       ]);
     });
 
-    //TODO: Add more tests
-    it('getDaysOfWeek returns correct values (english)', () => {
-      const result = convertor.getDaysOfWeek();
-      expect(result).toEqual([
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-      ]);
-    });
+    // getDaysOfWeek
+    it.each<{ format: DisplaySize; expected: string[] }>([
+      {
+        format: DisplaySize.large,
+        expected: [
+          'Sunday',
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+        ],
+      },
+      {
+        format: DisplaySize.medium,
+        expected: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      },
+      {
+        format: DisplaySize.tiny,
+        expected: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+      },
+    ])(
+      'getDaysOfWeek with format "$format" returns $expected',
+      ({ format, expected }) => {
+        const result = convertor.getDaysOfWeek(format);
+        expect(result).toEqual(expected);
+      }
+    );
 
     it('getMonthNameFromDate returns correct values (english)', () => {
       const intlFormatter = new Intl.DateTimeFormat('en', { month: 'long' });
