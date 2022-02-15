@@ -1,15 +1,16 @@
-## React NextMonth
+# React NextMonth
+
+![Large Calendar Preview](/assets/large_preview.png)
+
+- ### 🤏 Extremely small package size
+- ### 📱 Entire design is based on CSS-grid, so it is fully responsive (and fast!)
+- ### 🔩 Easy to override default components (you're expected to)
 
 [**Storybook Demo**](https://bruceharrison1984.github.io/NextMonth/?path=/story/nextmonth--datefns)
 
 A light-weight, highly customizable Month calendar for React-based applications. The primary focus of NextMonth is to just display a CSS-based month calendar with events.
 
-- 🤏 Extremely small package size
-- 📱 Entire design is based on CSS-grid, so it is fully responsive (and fast!)
-- 🔩 Easy to override default components (you're expected to)
-- 🔧 Customization is a first-class concern
-
-The ultimate goal for this library was to create a system that allowed for users to create their own calendar components for use in the pre-existing grid system. This allows for users to easily add additional functionality without bloating the base library with features not everyone may want. Additional calendar styles and components can easily be created by using this library as a base.
+The ultimate goal for this library was to create a blank canvas that allowed for users to create their own calendar and components for use in the grid system. This allows for users to easily add additional functionality without bloating the base library with features not everyone may want.
 
 ## Custom Components
 
