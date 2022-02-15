@@ -15,7 +15,8 @@
     "prettier": "prettier --check './src/**.(ts|tsx|js)'",
     "prepare": "husky install",
     "test": "jest",
-    "storybook": "start-storybook -p 6006 --no-open"
+    "storybook": "start-storybook -p 6006 --no-open",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "files": [
     "dist"
