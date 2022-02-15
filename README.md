@@ -5,6 +5,7 @@
 A light-weight, highly customizable Month calendar for React-based applications. The primary focus of NextMonth is to just display a CSS-based month calendar with events.
 
 - 🤏 Extremely small package size
+- 📱 Entire design is based on CSS-grid, so it is fully responsive (and fast!)
 - 🔩 Easy to override default components (you're expected to)
 - 🔧 Customization is a first-class concern
 
@@ -18,15 +19,11 @@ All default components have interfaces available, and custom components can be p
 
 ## DateTime Libraries
 
-NextMonth doesn't force a particular DateTime library on you. By implementing the `DateConvertor` interface, you can pass in whatever DateTime implementation that you want. This helps us keep the package size very small, and don't force consumers to have to marshall DateTime objects between libraries within their own projects.
-
 [See DateConvertor Docs](src/dateConvertors/readme.md)
 
-Existing `DateConvertors`:
+NextMonth doesn't force a particular DateTime library on you. By implementing the `DateConvertor` interface, you can pass in whatever DateTime implementation that you want. This helps us keep the package size very small, and not force consumers to have to marshall DateTime objects between libraries within their own projects.
 
-- date-fns
-
-The long term plan is to implement a default DateConvertor based on `Temporal` when it is finally approved. Until then, you are required to bring-your-own-dates.
+The long term plan is to implement a default DateConvertor based on `Temporal` when it is finally approved. Until then, you are required to bring-your-own-date-lib.
 
 ## TODO
 
