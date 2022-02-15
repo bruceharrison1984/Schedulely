@@ -2,9 +2,11 @@
 
 ![Large Calendar Preview](/assets/large_preview.png)
 
-- ### 🤏 Extremely small package size
-- ### 📱 Entire design is based on CSS-grid, so it is fully responsive (and fast!)
-- ### 🔩 Easy to override default components (you're expected to)
+---
+
+- ## 🤏 Extremely small package size
+- ## 📱 Entire design is based on CSS-grid, so it is fully responsive (and fast!)
+- ## 🔩 Easy to override default components (you're expected to)
 
 [**Storybook Demo**](https://bruceharrison1984.github.io/NextMonth/?path=/story/nextmonth--datefns)
 
