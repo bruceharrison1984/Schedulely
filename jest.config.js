@@ -8,4 +8,8 @@ module.exports = {
     '^@/providers/(.*)$': '<rootDir>/src/providers/$1',
     '^@/types/(.*)$': '<rootDir>/src/types/$1',
   },
+  transform: {
+    '^.+\\.ts(x)?$': 'babel-jest',
+    '^.+\\.scss$': 'jest-transform-css',
+  },
 };

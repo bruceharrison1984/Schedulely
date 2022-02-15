@@ -148,7 +148,15 @@ describe('Date Convertor', () => {
     //TODO: Add more tests
     it('getDaysOfWeek returns correct values (english)', () => {
       const result = convertor.getDaysOfWeek();
-      expect(result).toEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+      expect(result).toEqual([
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ]);
     });
 
     it('getMonthNameFromDate returns correct values (english)', () => {
