@@ -8,8 +8,8 @@
 ## Description
 
 - 🤏 Extremely small package size
-- 📱 Entire design is based on CSS-grid, so it is fully responsive (and fast!)
-- 🔩 Easy to override default components to add behavior (and you should!)
+- 📱 Entire design is based on CSS-grid, so it is fully responsive and fast!
+- 🔩 Easy to override default components to add behavior... and you should!
 
 A light-weight, highly customizable Month calendar for React-based applications. The primary focus of NextMonth is to just display a CSS-grid based month calendar with events.
 
