@@ -6,7 +6,9 @@ New convertors can be easily added by using the `DateConvertor` interface as a m
 
 ## Included Convertors
 
-There are some convertors already included. If you create one, please consider submitting it as a PR for this library!
+There are some convertors already included.
+
+_If you create one, please consider submitting it as a PR for this library! You can easily add your convertor to existing unit tests without needing to rewrite them._
 
 ### Date-Fns
 
