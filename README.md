@@ -61,8 +61,19 @@ import {
 } from 'date-fns';
 import { createDateFnsConvertor } from './dateConvertors/dateFns';
 ...
-  <NextMonth
-    events={[
+  export const MyApp = () => {
+    const convertor = createDateFnsConvertor(
+        addDays,
+        eachDayOfInterval,
+        eachWeekOfInterval,
+        format,
+        startOfMonth,
+        startOfWeek,
+        addMonths,
+        isSameWeek
+      );
+
+    const events = [
       {
         id: '1',
         start: new Date(2022, 1, 7),
@@ -77,20 +88,10 @@ import { createDateFnsConvertor } from './dateConvertors/dateFns';
         summary: 'EVENT 2 2022-2-11 -> 2022-2-12',
         color: 'cyan',
       },
-    ]}
-    dateConvertor={createDateFnsConvertor(
-    addDays,
-    eachDayOfInterval,
-    eachWeekOfInterval,
-    format,
-    startOfMonth,
-    startOfWeek,
-    addMonths,
-    isSameWeek,
-  })}
-  ></NextMonth>
-...
+    ];
 
+    return (<NextMonth events={events} dateConvertor={convertor} />);
+  }
 ```
 
 ## TODO
