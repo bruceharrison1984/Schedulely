@@ -45,7 +45,53 @@ TBD
 
 ## Basic Usage
 
-TBD
+This example initializes the calendar with default components, using date-fns as the date library.
+
+```js
+import { NextMonth } from './NextMonth';
+import {
+  addDays,
+  eachDayOfInterval,
+  eachWeekOfInterval,
+  format,
+  startOfMonth,
+  startOfWeek,
+  addMonths,
+  isSameWeek,
+} from 'date-fns';
+import { createDateFnsConvertor } from './dateConvertors/dateFns';
+...
+  <NextMonth
+    events={[
+      {
+        id: '1',
+        start: new Date(2022, 1, 7),
+        end: new Date(2022, 1, 11),
+        summary: 'EVENT 2022-2-7 -> 2022-2-11',
+        color: 'lightblue',
+      },
+      {
+        id: '3',
+        start: new Date(2022, 1, 11),
+        end: new Date(2022, 1, 12),
+        summary: 'EVENT 2 2022-2-11 -> 2022-2-12',
+        color: 'cyan',
+      },
+    ]}
+    dateConvertor={createDateFnsConvertor(
+    addDays,
+    eachDayOfInterval,
+    eachWeekOfInterval,
+    format,
+    startOfMonth,
+    startOfWeek,
+    addMonths,
+    isSameWeek,
+  })}
+  ></NextMonth>
+...
+
+```
 
 ## TODO
 
