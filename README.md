@@ -96,6 +96,7 @@ import { createDateFnsConvertor } from './dateConvertors/dateFns';
 
 ## TODO
 
+- Replace nested CSS-grid with `subgrid` when it becomes more widely available
 - Internationalization
   - A good way to support multiple languages
 - Limit display events to visible area
