@@ -37,10 +37,10 @@ const convertors = [
       isSameWeek,
     }),
   },
-  {
-    name: 'native-js',
-    convertor: createDefaultConvertor(),
-  },
+  // {
+  //   name: 'native-js',
+  //   convertor: createDefaultConvertor(),
+  // },
 ];
 
 describe('Date Convertor', () => {

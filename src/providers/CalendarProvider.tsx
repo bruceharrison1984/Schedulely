@@ -37,13 +37,6 @@ export const CalendarProvider = ({
   const [currentMonth, setCurrentMonth] = useState(initialDate);
   const screenSize = useScreenSize();
 
-  const dayOffset = useMemo(() => {
-    const offset = dateConvertor.getDayOfWeek(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1)
-    );
-    return offset;
-  }, [currentMonth, dateConvertor]);
-
   const daysOfWeek = useMemo(() => {
     return dateConvertor.getDaysOfWeek(screenSize);
   }, [screenSize, dateConvertor]);
@@ -98,7 +91,6 @@ export const CalendarProvider = ({
     onNextMonth,
     onPrevMonth,
     calendarWithEvents,
-    dayOffset,
   };
 
   return (

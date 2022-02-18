@@ -23,8 +23,6 @@ export const createDefaultConvertor = (): DateConvertor => {
     throw Error('not implemented');
   };
 
-  const getDayOfWeek = (date: Date) => date.getDay();
-
   const getMonthNameFromDate = (date: Date) => {
     const formatter = new Intl.DateTimeFormat('en', {
       month: 'long',
@@ -71,7 +69,6 @@ export const createDefaultConvertor = (): DateConvertor => {
     toIso,
     addMonthsToDate,
     subMonthsToDate,
-    getDayOfWeek,
     areSameWeek,
   };
 };

@@ -19,7 +19,4 @@ export type CalendarState = {
 
   /** Calendar with events that will be displayed */
   calendarWithEvents: EventWeek[];
-
-  /** Positive offset used for position calendar events. Represents leading days visible on the current month. */
-  dayOffset: number;
 };

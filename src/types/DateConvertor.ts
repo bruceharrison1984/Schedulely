@@ -32,8 +32,6 @@ export interface DateConvertor {
   /** Subtract a number of months from a date */
   subMonthsToDate: (date: Date, amount: number) => Date;
 
-  getDayOfWeek: (date: Date) => number;
-
   areSameWeek: (firstDate: Date, secondDate: Date) => boolean;
 }
 
