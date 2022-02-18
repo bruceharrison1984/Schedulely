@@ -68,7 +68,7 @@ export const createDefaultConvertor = (): DateConvertor => {
       ...startsOfNextMonth,
     ];
 
-    return [...Array(Math.ceil(flatMonthView.length / 7))].map((_) =>
+    return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>
       flatMonthView.splice(0, 7)
     );
   };
