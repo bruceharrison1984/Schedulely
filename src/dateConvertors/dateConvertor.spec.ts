@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import 'regenerator-runtime/runtime';
 import { DateConvertor, DisplaySize } from '@/types/DateConvertor';
 import {
@@ -37,10 +34,10 @@ const convertors = [
       isSameWeek,
     }),
   },
-  // {
-  //   name: 'native-js',
-  //   convertor: createDefaultConvertor(),
-  // },
+  {
+    name: 'native-js',
+    convertor: createDefaultConvertor(),
+  },
 ];
 
 describe('Date Convertor', () => {

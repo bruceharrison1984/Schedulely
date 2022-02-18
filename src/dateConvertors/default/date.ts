@@ -20,7 +20,57 @@ export const createDefaultConvertor = (): DateConvertor => {
   };
 
   const getCalendarViewInWeeks = (date: Date) => {
-    throw Error('not implemented');
+    const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+    const finalsOfPrevMonth = [];
+    const currentMonth = [];
+    const startsOfNextMonth = [];
+
+    let iteratedDate = startOfMonth;
+    while (iteratedDate.getDay() !== 0) {
+      iteratedDate = new Date(
+        iteratedDate.getFullYear(),
+        iteratedDate.getMonth(),
+        iteratedDate.getDate() - 1
+      );
+      finalsOfPrevMonth.push(iteratedDate);
+    }
+
+    iteratedDate = startOfMonth;
+    while (iteratedDate.getMonth() !== startOfMonth.getMonth() + 1) {
+      currentMonth.push(iteratedDate);
+      iteratedDate = new Date(
+        iteratedDate.getFullYear(),
+        iteratedDate.getMonth(),
+        iteratedDate.getDate() + 1
+      );
+    }
+
+    iteratedDate = endOfMonth;
+    while (
+      finalsOfPrevMonth.length +
+        currentMonth.length +
+        startsOfNextMonth.length <
+      42
+    ) {
+      iteratedDate = new Date(
+        iteratedDate.getFullYear(),
+        iteratedDate.getMonth(),
+        iteratedDate.getDate() + 1
+      );
+      startsOfNextMonth.push(iteratedDate);
+    }
+
+    const flatMonthView = [
+      ...finalsOfPrevMonth.reverse(),
+      ...currentMonth,
+      ...startsOfNextMonth,
+    ];
+
+    return [...Array(Math.ceil(flatMonthView.length / 7))].map((_) =>
+      flatMonthView.splice(0, 7)
+    );
   };
 
   const getMonthNameFromDate = (date: Date) => {
