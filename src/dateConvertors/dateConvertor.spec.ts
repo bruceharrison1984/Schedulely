@@ -13,7 +13,7 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
-import { createDateFnsConvertor } from '.';
+import { createDateFnsConvertor, createDefaultConvertor } from '.';
 import chance from 'chance';
 
 /**
@@ -36,6 +36,10 @@ const convertors = [
       addMonths,
       isSameWeek,
     }),
+  },
+  {
+    name: 'native-js',
+    convertor: createDefaultConvertor(),
   },
 ];
 

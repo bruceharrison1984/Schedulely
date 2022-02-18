@@ -49,7 +49,7 @@ export const createDateFnsConvertor = (
   const _getDaysInWeek = (date: Date) =>
     eachDayOfInterval({ start: date, end: _endOfWeek(date) });
 
-  const getDaysOfWeek = (displaySize?: DisplaySize) => {
+  const getDaysOfWeek = (displaySize: DisplaySize) => {
     const today = new Date();
     const weekDays = eachDayOfInterval({
       start: startOfWeek(today),

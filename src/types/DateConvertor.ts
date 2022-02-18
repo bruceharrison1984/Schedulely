@@ -12,7 +12,7 @@ export interface DateConvertor {
   getCalendarViewInWeeks: (date: Date) => Date[][];
 
   /** Get full names of all days of the week */
-  getDaysOfWeek: (displaySize?: DisplaySize) => string[];
+  getDaysOfWeek: (displaySize: DisplaySize) => string[];
 
   /** Get the full name of the month for a given date */
   getMonthNameFromDate: (date: Date) => string;
