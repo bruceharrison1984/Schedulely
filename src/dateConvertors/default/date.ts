@@ -104,9 +104,14 @@ export const createDefaultConvertor = (): DateConvertor => {
   const subMonthsToDate = (date: Date, amount: number) =>
     addMonthsToDate(date, -amount);
 
-  const areSameWeek = (firstDate: Date, secondDate: Date) => {
-    throw Error('not implemented');
+  const _getOrdinalWeek = (date: Date) => {
+    const oneJan = new Date(date.getFullYear(), 0, 1);
+    const numberOfDays = Math.floor((+date - +oneJan) / (24 * 60 * 60 * 1000));
+    return Math.ceil((date.getDay() + 1 + numberOfDays) / 7);
   };
+
+  const areSameWeek = (firstDate: Date, secondDate: Date) =>
+    _getOrdinalWeek(firstDate) === _getOrdinalWeek(secondDate);
 
   const getDayOfWeek = (date: Date) => date.getDay();
 
