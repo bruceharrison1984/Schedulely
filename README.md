@@ -106,3 +106,4 @@ import { createDateFnsConvertor } from './dateConvertors/dateFns';
 ## Known Bugs
 
 - Events that span multiple weeks will only highlight a single segments
+- Events appearing in wrong months
