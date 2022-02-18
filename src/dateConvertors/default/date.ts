@@ -23,9 +23,7 @@ export const createDefaultConvertor = (): DateConvertor => {
     throw Error('not implemented');
   };
 
-  const getDayOfWeek = (date: Date) => {
-    throw Error('not implemented');
-  };
+  const getDayOfWeek = (date: Date) => date.getDay();
 
   const getMonthNameFromDate = (date: Date) => {
     const formatter = new Intl.DateTimeFormat('en', {
@@ -34,13 +32,9 @@ export const createDefaultConvertor = (): DateConvertor => {
     return formatter.format(date);
   };
 
-  const getYearFromDate = (date: Date) => {
-    return date.getFullYear();
-  };
+  const getYearFromDate = (date: Date) => date.getFullYear();
 
-  const getDayNumberFromDate = (date: Date) => {
-    return date.getDate();
-  };
+  const getDayNumberFromDate = (date: Date) => date.getDate();
 
   /** This comparison is easy, no need for a library */
   const areSameMonth = (firstDate: Date, secondDate: Date) =>
