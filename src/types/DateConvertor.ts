@@ -33,6 +33,8 @@ export interface DateConvertor {
   subMonthsToDate: (date: Date, amount: number) => Date;
 
   areSameWeek: (firstDate: Date, secondDate: Date) => boolean;
+
+  getDayOfWeek: (date: Date) => number;
 }
 
 export enum DisplaySize {

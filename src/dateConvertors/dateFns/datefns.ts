@@ -92,6 +92,8 @@ export const createDateFnsConvertor = (
   const areSameWeek = (firstDate: Date, secondDate: Date) =>
     isSameWeek(firstDate, secondDate);
 
+  const getDayOfWeek = (date: Date) => parseInt(format(date, 'i'));
+
   return {
     getCalendarViewInWeeks,
     getDaysOfWeek,
@@ -104,5 +106,6 @@ export const createDateFnsConvertor = (
     addMonthsToDate,
     subMonthsToDate,
     areSameWeek,
+    getDayOfWeek,
   };
 };

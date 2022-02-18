@@ -12,7 +12,7 @@ import {
   startOfWeek,
 } from 'date-fns';
 import { createDateFnsConvertor } from './dateConvertors/dateFns';
-import React from 'react';
+import { createDefaultConvertor } from './dateConvertors';
 
 export default {
   title: 'NextMonth',
@@ -88,4 +88,10 @@ datefns.args = {
     addMonths,
     isSameWeek,
   }),
+};
+
+export const nativeJs = Template.bind({});
+nativeJs.args = {
+  events: mockEvents,
+  dateConvertor: createDefaultConvertor(),
 };

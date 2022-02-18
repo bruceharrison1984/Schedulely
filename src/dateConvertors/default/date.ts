@@ -108,6 +108,8 @@ export const createDefaultConvertor = (): DateConvertor => {
     throw Error('not implemented');
   };
 
+  const getDayOfWeek = (date: Date) => date.getDay();
+
   return {
     getCalendarViewInWeeks,
     getDaysOfWeek,
@@ -120,5 +122,6 @@ export const createDefaultConvertor = (): DateConvertor => {
     addMonthsToDate,
     subMonthsToDate,
     areSameWeek,
+    getDayOfWeek,
   };
 };
