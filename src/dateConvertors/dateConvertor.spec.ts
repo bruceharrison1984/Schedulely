@@ -232,5 +232,20 @@ describe('Date Convertor', () => {
         new Date(testYear, testMonth - monthsToAdd, testDay)
       );
     });
+
+    // isSameWeek
+    it.each<{ date: Date; date2: Date; expected: boolean }>([
+      {
+        date: new Date(2021, 0, 2),
+        date2: new Date(2021, 0, 2),
+        expected: true,
+      },
+    ])(
+      'isSameWeek $date with $date2 returns $expected',
+      ({ date, date2, expected }) => {
+        const result = convertor.areSameWeek(date, date2);
+        expect(result).toEqual(expected);
+      }
+    );
   });
 });

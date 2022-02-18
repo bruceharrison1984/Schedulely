@@ -32,8 +32,10 @@ export interface DateConvertor {
   /** Subtract a number of months from a date */
   subMonthsToDate: (date: Date, amount: number) => Date;
 
+  /** Return true if both days fall within the same 7 day week */
   areSameWeek: (firstDate: Date, secondDate: Date) => boolean;
 
+  /** Get the ordinal position of the date in the week */
   getDayOfWeek: (date: Date) => number;
 }
 
