@@ -277,5 +277,30 @@ describe('Date Convertor', () => {
         expect(result).toBe(expected);
       }
     );
+
+    // getStartIndex
+    it.each<{ eventStart: Date; startOfWeek: Date; expected: number }>([
+      {
+        eventStart: new Date(2022, 1, 7),
+        startOfWeek: new Date(2022, 1, 6),
+        expected: 2,
+      },
+      {
+        eventStart: new Date(2022, 1, 9),
+        startOfWeek: new Date(2022, 1, 6),
+        expected: 4,
+      },
+      {
+        eventStart: new Date(2022, 3, 10),
+        startOfWeek: new Date(2022, 3, 10),
+        expected: 1,
+      },
+    ])(
+      'getEndIndex $date with $date2 returns $expected',
+      ({ eventStart, startOfWeek, expected }) => {
+        const result = convertor.getStartIndex(eventStart, startOfWeek);
+        expect(result).toBe(expected);
+      }
+    );
   });
 });

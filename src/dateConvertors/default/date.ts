@@ -118,7 +118,7 @@ export const createDefaultConvertor = (): DateConvertor => {
   const getDayOfWeek = (date: Date) => date.getDay();
 
   const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
-    eventDate <= startOfWeek ? 1 : getDayOfWeek(eventDate) + 1; //o
+    eventDate <= startOfWeek ? 1 : getDayOfWeek(eventDate) + 1; //add one for some reason
 
   const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate > endOfWeek) return 8;

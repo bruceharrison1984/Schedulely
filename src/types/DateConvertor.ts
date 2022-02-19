@@ -35,9 +35,6 @@ export interface DateConvertor {
   /** Return true if both days fall within the same 7 day week */
   areSameWeek: (firstDate: Date, secondDate: Date) => boolean;
 
-  /** Get the ordinal position of the date in the week */
-  getDayOfWeek: (date: Date) => number;
-
   /** Get the day of week index for the end of the event */
   getEndIndex: (eventEndDate: Date, endOfWeek: Date) => number;
 
