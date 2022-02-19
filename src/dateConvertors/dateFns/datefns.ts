@@ -18,6 +18,8 @@ export const createDateFnsConvertor = (
     isSameWeek,
   } = datefns;
 
+  const _getDayOfWeek = (date: Date) => parseInt(format(date, 'i'));
+
   /** Use some creative math to avoid importing more than we need to */
   const _endOfWeek = (date: Date) => addDays(startOfWeek(date), 6);
 
@@ -92,14 +94,12 @@ export const createDateFnsConvertor = (
   const areSameWeek = (firstDate: Date, secondDate: Date) =>
     isSameWeek(firstDate, secondDate);
 
-  const getDayOfWeek = (date: Date) => parseInt(format(date, 'i'));
-
   const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
-    eventDate <= startOfWeek ? 1 : getDayOfWeek(eventDate) + 1; //o
+    eventDate <= startOfWeek ? 1 : _getDayOfWeek(eventDate) + 1; //o
 
   const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate > endOfWeek) return 8;
-    const end = getDayOfWeek(eventEndDate) + 2; // i don't know why we have to add 2, but it makes it work
+    const end = _getDayOfWeek(eventEndDate) + 2; // i don't know why we have to add 2, but it makes it work
     return end;
   };
 
@@ -115,7 +115,6 @@ export const createDateFnsConvertor = (
     addMonthsToDate,
     subMonthsToDate,
     areSameWeek,
-    getDayOfWeek,
     getStartIndex,
     getEndIndex,
   };

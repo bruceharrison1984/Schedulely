@@ -115,14 +115,12 @@ export const createDefaultConvertor = (): DateConvertor => {
   const areSameWeek = (firstDate: Date, secondDate: Date) =>
     _getOrdinalWeek(firstDate) === _getOrdinalWeek(secondDate);
 
-  const getDayOfWeek = (date: Date) => date.getDay();
-
   const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
-    eventDate <= startOfWeek ? 1 : getDayOfWeek(eventDate) + 1; //add one for some reason
+    eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one for some reason
 
   const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate > endOfWeek) return 8;
-    const end = getDayOfWeek(eventEndDate) + 2; // i don't know why we have to add 2, but it makes it work
+    const end = eventEndDate.getDay() + 2; // i don't know why we have to add 2, but it makes it work
     return end;
   };
 
@@ -138,7 +136,6 @@ export const createDefaultConvertor = (): DateConvertor => {
     addMonthsToDate,
     subMonthsToDate,
     areSameWeek,
-    getDayOfWeek,
     getEndIndex,
     getStartIndex,
   };
