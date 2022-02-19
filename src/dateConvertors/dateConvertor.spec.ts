@@ -270,6 +270,11 @@ describe('Date Convertor', () => {
         endOfWeek: new Date(2022, 1, 12),
         expected: 7,
       },
+      {
+        eventEnd: new Date(2022, 1, 9),
+        endOfWeek: new Date(2022, 1, 12),
+        expected: 5,
+      },
     ])(
       'getEndIndex $date with $date2 returns $expected',
       ({ eventEnd, endOfWeek, expected }) => {
