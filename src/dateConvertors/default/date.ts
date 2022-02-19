@@ -105,15 +105,17 @@ export const createDefaultConvertor = (): DateConvertor => {
     addMonthsToDate(date, -amount);
 
   const _getOrdinalWeek = (date: Date) => {
-    const oneJan = new Date(date.getFullYear(), 0, 1);
-    const numberOfDays = Math.floor((+date - +oneJan) / (24 * 60 * 60 * 1000));
-    return Math.ceil((date.getDay() + 1 + numberOfDays) / 7);
+    const firstOfYear = new Date(date.getFullYear(), 0, 1);
+    const numberOfDays = Math.floor(
+      (+date - +firstOfYear) / (24 * 60 * 60 * 1000)
+    );
+    return Math.ceil((date.getDay() + 2 + numberOfDays) / 7);
   };
 
   const areSameWeek = (firstDate: Date, secondDate: Date) =>
     _getOrdinalWeek(firstDate) === _getOrdinalWeek(secondDate);
 
-  const getDayOfWeek = (date: Date) => date.getDay();
+  const getDayOfWeek = (date: Date) => date.getDay() + 2;
 
   return {
     getCalendarViewInWeeks,

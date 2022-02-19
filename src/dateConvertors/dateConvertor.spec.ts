@@ -233,18 +233,33 @@ describe('Date Convertor', () => {
       );
     });
 
-    // isSameWeek
+    // areSameWeek
     it.each<{ date: Date; date2: Date; expected: boolean }>([
       {
-        date: new Date(2021, 0, 2),
-        date2: new Date(2021, 0, 2),
+        date: new Date(2022, 0, 2),
+        date2: new Date(2022, 0, 3),
+        expected: true,
+      },
+      {
+        date: new Date(2022, 0, 1),
+        date2: new Date(2022, 0, 3),
+        expected: false,
+      },
+      {
+        date: new Date(2022, 1, 12),
+        date2: new Date(2022, 1, 13),
+        expected: false,
+      },
+      {
+        date: new Date(2022, 4, 20),
+        date2: new Date(2022, 4, 21),
         expected: true,
       },
     ])(
-      'isSameWeek $date with $date2 returns $expected',
+      'areSameWeek $date with $date2 returns $expected',
       ({ date, date2, expected }) => {
         const result = convertor.areSameWeek(date, date2);
-        expect(result).toEqual(expected);
+        expect(result).toBe(expected);
       }
     );
   });
