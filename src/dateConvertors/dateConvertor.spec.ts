@@ -266,7 +266,7 @@ describe('Date Convertor', () => {
     // getEndIndex
     it.each<{ eventEnd: Date; endOfWeek: Date; expected: number }>([
       {
-        eventEnd: new Date(2022, 1, 7),
+        eventEnd: new Date(2022, 1, 11),
         endOfWeek: new Date(2022, 1, 12),
         expected: 7,
       },
