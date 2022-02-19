@@ -17,18 +17,9 @@ export const EventLayout = ({
   endOfWeek,
 }: EventLayoutProps) => {
   const {
-    dateConvertor: { getDayOfWeek },
+    dateConvertor: { getStartIndex, getEndIndex },
   } = useCalendar();
   const { eventComponent: EventComponent } = useComponents();
-
-  const getStartIndex = (eventDate: Date) =>
-    eventDate <= startOfWeek ? 1 : getDayOfWeek(eventDate) + 1; //offset by one due to getDayOfWeek being zero index'd
-
-  const getEndIndex = (eventEndDate: Date) => {
-    if (eventEndDate > endOfWeek) return 8;
-    const end = getDayOfWeek(eventEndDate) + 2; // i don't know why we have to add 2, but it makes it work
-    return end;
-  };
 
   return (
     <div className="nm--event-layout">
@@ -37,8 +28,8 @@ export const EventLayout = ({
           data-eventid={event.id}
           key={event.id}
           style={{
-            gridColumnStart: getStartIndex(event.start),
-            gridColumnEnd: getEndIndex(event.end),
+            gridColumnStart: getStartIndex(event.start, startOfWeek),
+            gridColumnEnd: getEndIndex(event.end, endOfWeek),
             minWidth: 0,
           }}
         >

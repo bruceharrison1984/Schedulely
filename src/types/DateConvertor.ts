@@ -37,6 +37,12 @@ export interface DateConvertor {
 
   /** Get the ordinal position of the date in the week */
   getDayOfWeek: (date: Date) => number;
+
+  /** Get the day of week index for the end of the event */
+  getEndIndex: (eventEndDate: Date, endOfWeek: Date) => number;
+
+  /** Get the day of week index for the start of the event */
+  getStartIndex: (eventDate: Date, startOfWeek: Date) => number;
 }
 
 export enum DisplaySize {

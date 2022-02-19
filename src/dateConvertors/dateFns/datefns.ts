@@ -94,6 +94,15 @@ export const createDateFnsConvertor = (
 
   const getDayOfWeek = (date: Date) => parseInt(format(date, 'i'));
 
+  const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
+    eventDate <= startOfWeek ? 1 : getDayOfWeek(eventDate) + 1; //o
+
+  const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
+    if (eventEndDate > endOfWeek) return 8;
+    const end = getDayOfWeek(eventEndDate) + 2; // i don't know why we have to add 2, but it makes it work
+    return end;
+  };
+
   return {
     getCalendarViewInWeeks,
     getDaysOfWeek,
@@ -107,5 +116,7 @@ export const createDateFnsConvertor = (
     subMonthsToDate,
     areSameWeek,
     getDayOfWeek,
+    getStartIndex,
+    getEndIndex,
   };
 };

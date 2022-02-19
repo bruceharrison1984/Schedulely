@@ -262,5 +262,20 @@ describe('Date Convertor', () => {
         expect(result).toBe(expected);
       }
     );
+
+    // getEndIndex
+    it.each<{ eventEnd: Date; endOfWeek: Date; expected: number }>([
+      {
+        eventEnd: new Date(2022, 1, 7),
+        endOfWeek: new Date(2022, 1, 12),
+        expected: 7,
+      },
+    ])(
+      'getEndIndex $date with $date2 returns $expected',
+      ({ eventEnd, endOfWeek, expected }) => {
+        const result = convertor.getEndIndex(eventEnd, endOfWeek);
+        expect(result).toBe(expected);
+      }
+    );
   });
 });
