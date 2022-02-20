@@ -11,7 +11,13 @@ import {
   startOfWeek,
 } from 'date-fns';
 import { createDateFnsConvertor, createDefaultConvertor } from '.';
-import chance from 'chance';
+import {
+  getAddMonthsToDateTestCases,
+  getAreSameMonthTestCases,
+  getIsTodayTestCases,
+  getSubMonthsToDateTestCases,
+  randomDate,
+} from './testHelpers';
 
 /**
  * Additional convertors should just be added to this array
@@ -45,38 +51,32 @@ describe('Date Convertor', () => {
     name: string;
     convertor: DateConvertor;
   }>(convertors)('$name function', ({ convertor }) => {
-    const testYear = chance().integer({ min: 2000, max: 2021 });
-    const testMonth = chance().integer({ min: 0, max: 11 });
-    // const testDay = chance().integer({ min: 1, max: 28 });
-    const testDate = new Date(testYear, testMonth, 1);
+    // addMonthsToDate
+    it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
+      getAddMonthsToDateTestCases(10)
+    )(
+      'addMonthsToDate $originalDate and $amount returns $expectedDate',
+      ({ originalDate, amount, expectedDate }) => {
+        const result = convertor.addMonthsToDate(originalDate, amount);
+        expect(result).toEqual(expectedDate);
+      }
+    );
 
-    it(`addMonthsToDate returns correct value`, () => {
-      const monthsToAdd = chance().integer({ min: 0, max: 11 });
-      const result = convertor.addMonthsToDate(testDate, monthsToAdd);
-      expect(result).toEqual(new Date(testYear, testMonth + monthsToAdd, 1));
-    });
+    // subMonthsToDate
+    it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
+      getSubMonthsToDateTestCases(10)
+    )(
+      'subMonthsToDate $originalDate and $amount returns $expectedDate',
+      ({ originalDate, amount, expectedDate }) => {
+        const result = convertor.subMonthsToDate(originalDate, amount);
+        expect(result).toEqual(expectedDate);
+      }
+    );
 
     // areSameMonth
-    it.each<{ firstDate: Date; secondDate: Date; expected: boolean }>([
-      {
-        //same month, same year
-        firstDate: new Date(2000, 1, 1),
-        secondDate: new Date(2000, 1, 2),
-        expected: true,
-      },
-      {
-        // same year, different month
-        firstDate: new Date(2000, 1, 1),
-        secondDate: new Date(2000, 2, 2),
-        expected: false,
-      },
-      {
-        // same month, diferent year
-        firstDate: new Date(2001, 1, 1),
-        secondDate: new Date(2000, 1, 2),
-        expected: false,
-      },
-    ])(
+    it.each<{ firstDate: Date; secondDate: Date; expected: boolean }>(
+      getAreSameMonthTestCases(10)
+    )(
       'areSameMonth $firstDate and $secondDate returns $expected',
       ({ firstDate, secondDate, expected }) => {
         const result = convertor.areSameMonth(firstDate, secondDate);
@@ -175,37 +175,32 @@ describe('Date Convertor', () => {
     );
 
     it('getMonthNameFromDate returns correct values (english)', () => {
+      const testDate = randomDate();
       const intlFormatter = new Intl.DateTimeFormat('en', { month: 'long' });
       const result = convertor.getMonthNameFromDate(testDate);
       expect(result).toEqual(intlFormatter.format(testDate));
     });
 
     it('getYearFromDate returns correct values', () => {
+      const testDate = randomDate();
       const result = convertor.getYearFromDate(testDate);
-      expect(result).toEqual(testYear);
+      expect(result).toEqual(testDate.getFullYear());
     });
 
     it('getDayNumberFromDate returns correct values', () => {
+      const testDate = randomDate();
       const result = convertor.getDayNumberFromDate(testDate);
       expect(result).toEqual(1);
     });
 
     // isDateToday
-    it.each<{ date: Date; expected: boolean }>([
-      {
-        // not today
-        date: new Date(2000, 1, 1),
-        expected: false,
-      },
-      {
-        // is today
-        date: new Date(),
-        expected: true,
-      },
-    ])('isDateToday $date returns $expected', ({ date, expected }) => {
-      const result = convertor.isDateToday(date);
-      expect(result).toBe(expected);
-    });
+    it.each<{ date: Date; expected: boolean }>(getIsTodayTestCases())(
+      'isDateToday $date returns $expected',
+      ({ date, expected }) => {
+        const result = convertor.isDateToday(date);
+        expect(result).toBe(expected);
+      }
+    );
 
     // toIso
     // TODO: This test sucks because it ignores TZ
@@ -221,12 +216,6 @@ describe('Date Convertor', () => {
     ])('toIso $date returns $expected', ({ date, expected }) => {
       const result = convertor.toIso(date);
       expect(result).toMatch(expected);
-    });
-
-    it(`subMonthsToDate returns correct value`, () => {
-      const monthsToAdd = chance().integer({ min: 0, max: 11 });
-      const result = convertor.subMonthsToDate(testDate, monthsToAdd);
-      expect(result).toEqual(new Date(testYear, testMonth - monthsToAdd, 1));
     });
 
     // areSameWeek
@@ -282,7 +271,7 @@ describe('Date Convertor', () => {
         expected: 5,
       },
     ])(
-      'getEndIndex $date with $date2 returns $expected',
+      'getEndIndex $eventEnd with $endOfWeek returns $expected',
       ({ eventEnd, endOfWeek, expected }) => {
         const result = convertor.getEndIndex(eventEnd, endOfWeek);
         expect(result).toBe(expected);
@@ -307,7 +296,7 @@ describe('Date Convertor', () => {
         expected: 1,
       },
     ])(
-      'getEndIndex $date with $date2 returns $expected',
+      'getStartIndex $eventStart with $startOfWeek returns $expected',
       ({ eventStart, startOfWeek, expected }) => {
         const result = convertor.getStartIndex(eventStart, startOfWeek);
         expect(result).toBe(expected);
