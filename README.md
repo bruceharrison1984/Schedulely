@@ -107,3 +107,4 @@ import { createDateFnsConvertor } from './dateConvertors/dateFns';
 
 - Events that span multiple weeks will only highlight a single segments
 - Events appearing in wrong months
+- Events that span across an entire week do not appear in that week
