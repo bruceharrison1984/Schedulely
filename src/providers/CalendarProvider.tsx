@@ -37,9 +37,10 @@ export const CalendarProvider = ({
   const [currentMonth, setCurrentMonth] = useState(initialDate);
   const screenSize = useScreenSize();
 
-  const daysOfWeek = useMemo(() => {
-    return dateConvertor.getDaysOfWeek(screenSize);
-  }, [screenSize, dateConvertor]);
+  const daysOfWeek = useMemo(
+    () => dateConvertor.getDaysOfWeek(screenSize),
+    [screenSize, dateConvertor]
+  );
 
   const weeksInMonth = useMemo(
     () => dateConvertor.getCalendarViewInWeeks(currentMonth),
@@ -79,10 +80,13 @@ export const CalendarProvider = ({
     [dateConvertor]
   );
 
-  const onPrevMonth = useCallback(
-    () => setCurrentMonth((month) => dateConvertor.subMonthsToDate(month, 1)),
-    [dateConvertor]
-  );
+  const onPrevMonth = useCallback(() => {
+    try {
+      setCurrentMonth((month) => dateConvertor.subMonthsToDate(month, 1));
+    } catch (ex) {
+      console.log(ex);
+    }
+  }, [dateConvertor]);
 
   const contextValue: CalendarState = {
     currentMonth,

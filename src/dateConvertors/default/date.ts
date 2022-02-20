@@ -47,6 +47,10 @@ export const createDefaultConvertor = (): DateConvertor => {
       );
     }
 
+    // calendar should only print the last week that contains days in the current month
+    // right now it is always 42 square long
+    const lastDateOfMonth = currentMonth[currentMonth.length - 1];
+
     iteratedDate = endOfMonth;
     while (
       finalsOfPrevMonth.length +
@@ -84,25 +88,23 @@ export const createDefaultConvertor = (): DateConvertor => {
 
   const getDayNumberFromDate = (date: Date) => date.getDate();
 
-  /** This comparison is easy, no need for a library */
   const areSameMonth = (firstDate: Date, secondDate: Date) =>
     getYearFromDate(firstDate) === getYearFromDate(secondDate) &&
     firstDate.getMonth() === secondDate.getMonth();
 
-  /** This comparison is easy, no need for a library */
   const isDateToday = (date: Date) => {
     const today = new Date();
     return areSameMonth(date, today) && date.getDate() === today.getDate();
   };
 
-  /** Manually construct ISO date so we don't have to import toIso */
   const toIso = (date: Date) => date.toISOString();
 
   const addMonthsToDate = (date: Date, amount: number) =>
     new Date(date.getFullYear(), date.getMonth() + amount, date.getDate());
 
-  const subMonthsToDate = (date: Date, amount: number) =>
-    addMonthsToDate(date, -amount);
+  const subMonthsToDate = (date: Date, amount: number) => {
+    return addMonthsToDate(date, -amount);
+  };
 
   const _getOrdinalWeek = (date: Date) => {
     const firstOfYear = new Date(date.getFullYear(), 0, 1);
