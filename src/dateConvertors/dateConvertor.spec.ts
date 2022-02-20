@@ -47,15 +47,13 @@ describe('Date Convertor', () => {
   }>(convertors)('$name function', ({ convertor }) => {
     const testYear = chance().integer({ min: 2000, max: 2021 });
     const testMonth = chance().integer({ min: 0, max: 11 });
-    const testDay = chance().integer({ min: 1, max: 28 });
-    const testDate = new Date(testYear, testMonth, testDay);
+    // const testDay = chance().integer({ min: 1, max: 28 });
+    const testDate = new Date(testYear, testMonth, 1);
 
     it(`addMonthsToDate returns correct value`, () => {
       const monthsToAdd = chance().integer({ min: 0, max: 11 });
       const result = convertor.addMonthsToDate(testDate, monthsToAdd);
-      expect(result).toEqual(
-        new Date(testYear, testMonth + monthsToAdd, testDay)
-      );
+      expect(result).toEqual(new Date(testYear, testMonth + monthsToAdd, 1));
     });
 
     // areSameMonth
@@ -189,7 +187,7 @@ describe('Date Convertor', () => {
 
     it('getDayNumberFromDate returns correct values', () => {
       const result = convertor.getDayNumberFromDate(testDate);
-      expect(result).toEqual(testDay);
+      expect(result).toEqual(1);
     });
 
     // isDateToday
@@ -228,9 +226,7 @@ describe('Date Convertor', () => {
     it(`subMonthsToDate returns correct value`, () => {
       const monthsToAdd = chance().integer({ min: 0, max: 11 });
       const result = convertor.subMonthsToDate(testDate, monthsToAdd);
-      expect(result).toEqual(
-        new Date(testYear, testMonth - monthsToAdd, testDay)
-      );
+      expect(result).toEqual(new Date(testYear, testMonth - monthsToAdd, 1));
     });
 
     // areSameWeek

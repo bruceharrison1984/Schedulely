@@ -80,13 +80,10 @@ export const CalendarProvider = ({
     [dateConvertor]
   );
 
-  const onPrevMonth = useCallback(() => {
-    try {
-      setCurrentMonth((month) => dateConvertor.subMonthsToDate(month, 1));
-    } catch (ex) {
-      console.log(ex);
-    }
-  }, [dateConvertor]);
+  const onPrevMonth = useCallback(
+    () => setCurrentMonth((month) => dateConvertor.subMonthsToDate(month, 1)),
+    [dateConvertor]
+  );
 
   const contextValue: CalendarState = {
     currentMonth,
