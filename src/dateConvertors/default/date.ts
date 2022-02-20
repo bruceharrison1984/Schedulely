@@ -106,21 +106,20 @@ export const createDefaultConvertor = (): DateConvertor => {
 
   const _getOrdinalWeek = (date: Date) => {
     const firstOfYear = new Date(date.getFullYear(), 0, 1);
-    const numberOfDays = Math.floor(
-      (+date - +firstOfYear) / (24 * 60 * 60 * 1000)
-    );
-    return Math.ceil((date.getDay() + 2 + numberOfDays) / 7);
+    const dateDiff = date.valueOf() - firstOfYear.valueOf();
+    const numberOfDays = dateDiff / (24 * 60 * 60 * 1000);
+    return Math.ceil(numberOfDays / 7);
   };
 
   const areSameWeek = (firstDate: Date, secondDate: Date) =>
     _getOrdinalWeek(firstDate) === _getOrdinalWeek(secondDate);
 
   const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
-    eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one for some reason
+    eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one because css-grid isn't zero-index'd
 
   const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate > endOfWeek) return 8;
-    const end = eventEndDate.getDay() + 2; // i don't know why we have to add 2, but it makes it work
+    const end = eventEndDate.getDay() + 2; // add two because css-grid isn't zero index'd, and it goes to 8
     return end;
   };
 

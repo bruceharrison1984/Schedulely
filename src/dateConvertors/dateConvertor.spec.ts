@@ -255,6 +255,16 @@ describe('Date Convertor', () => {
         date2: new Date(2022, 4, 21),
         expected: true,
       },
+      {
+        date: new Date(2022, 1, 7),
+        date2: new Date(2022, 1, 13),
+        expected: false,
+      },
+      {
+        date: new Date(2022, 1, 11),
+        date2: new Date(2022, 1, 13),
+        expected: false,
+      },
     ])(
       'areSameWeek $date with $date2 returns $expected',
       ({ date, date2, expected }) => {
