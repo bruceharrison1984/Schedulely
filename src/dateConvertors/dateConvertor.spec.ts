@@ -14,9 +14,12 @@ import { createDateFnsConvertor, createDefaultConvertor } from '.';
 import {
   getAddMonthsToDateTestCases,
   getAreSameMonthTestCases,
+  getDayNumberFromDateTestCases,
+  getDaysOfWeekTestCases,
   getIsTodayTestCases,
+  getMonthNameFromDateTestCases,
   getSubMonthsToDateTestCases,
-  randomDate,
+  getYearFromDateTestCases,
 } from './testHelpers';
 
 /**
@@ -53,7 +56,7 @@ describe('Date Convertor', () => {
   }>(convertors)('$name function', ({ convertor }) => {
     // addMonthsToDate
     it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
-      getAddMonthsToDateTestCases(10)
+      getAddMonthsToDateTestCases()
     )(
       'addMonthsToDate $originalDate and $amount returns $expectedDate',
       ({ originalDate, amount, expectedDate }) => {
@@ -64,7 +67,7 @@ describe('Date Convertor', () => {
 
     // subMonthsToDate
     it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
-      getSubMonthsToDateTestCases(10)
+      getSubMonthsToDateTestCases()
     )(
       'subMonthsToDate $originalDate and $amount returns $expectedDate',
       ({ originalDate, amount, expectedDate }) => {
@@ -75,7 +78,7 @@ describe('Date Convertor', () => {
 
     // areSameMonth
     it.each<{ firstDate: Date; secondDate: Date; expected: boolean }>(
-      getAreSameMonthTestCases(10)
+      getAreSameMonthTestCases()
     )(
       'areSameMonth $firstDate and $secondDate returns $expected',
       ({ firstDate, secondDate, expected }) => {
@@ -145,28 +148,9 @@ describe('Date Convertor', () => {
     });
 
     // getDaysOfWeek
-    it.each<{ format: DisplaySize; expected: string[] }>([
-      {
-        format: DisplaySize.large,
-        expected: [
-          'Sunday',
-          'Monday',
-          'Tuesday',
-          'Wednesday',
-          'Thursday',
-          'Friday',
-          'Saturday',
-        ],
-      },
-      {
-        format: DisplaySize.medium,
-        expected: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      },
-      {
-        format: DisplaySize.tiny,
-        expected: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-      },
-    ])(
+    it.each<{ format: DisplaySize; expected: string[] }>(
+      getDaysOfWeekTestCases()
+    )(
       'getDaysOfWeek with format "$format" returns $expected',
       ({ format, expected }) => {
         const result = convertor.getDaysOfWeek(format);
@@ -174,24 +158,32 @@ describe('Date Convertor', () => {
       }
     );
 
-    it('getMonthNameFromDate returns correct values (english)', () => {
-      const testDate = randomDate();
-      const intlFormatter = new Intl.DateTimeFormat('en', { month: 'long' });
-      const result = convertor.getMonthNameFromDate(testDate);
-      expect(result).toEqual(intlFormatter.format(testDate));
-    });
+    // getMonthNameFromDate
+    it.each<{ date: Date; expected: string }>(getMonthNameFromDateTestCases())(
+      'getMonthNameFromDate $date returns $expected',
+      ({ date, expected }) => {
+        const result = convertor.getMonthNameFromDate(date);
+        expect(result).toBe(expected);
+      }
+    );
 
-    it('getYearFromDate returns correct values', () => {
-      const testDate = randomDate();
-      const result = convertor.getYearFromDate(testDate);
-      expect(result).toEqual(testDate.getFullYear());
-    });
+    // getYearFromDate
+    it.each<{ date: Date; expected: number }>(getYearFromDateTestCases())(
+      'getYearFromDate $date returns $expected',
+      ({ date, expected }) => {
+        const result = convertor.getYearFromDate(date);
+        expect(result).toBe(expected);
+      }
+    );
 
-    it('getDayNumberFromDate returns correct values', () => {
-      const testDate = randomDate();
-      const result = convertor.getDayNumberFromDate(testDate);
-      expect(result).toEqual(1);
-    });
+    // getDayNumberFromDate
+    it.each<{ date: Date; expected: number }>(getDayNumberFromDateTestCases())(
+      'getDayNumberFromDate $date returns $expected',
+      ({ date, expected }) => {
+        const result = convertor.getDayNumberFromDate(date);
+        expect(result).toBe(expected);
+      }
+    );
 
     // isDateToday
     it.each<{ date: Date; expected: boolean }>(getIsTodayTestCases())(
