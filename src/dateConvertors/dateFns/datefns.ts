@@ -92,11 +92,11 @@ export const createDateFnsConvertor = (
     isSameWeek(firstDate, secondDate);
 
   const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
-    eventDate <= startOfWeek ? 1 : _getDayOfWeek(eventDate) + 1; //o
+    eventDate <= startOfWeek ? 1 : _getDayOfWeek(eventDate) + 1;
 
   const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
-    if (eventEndDate > endOfWeek) return 8;
-    const end = _getDayOfWeek(eventEndDate) + 2; // i don't know why we have to add 2, but it makes it work
+    if (eventEndDate >= endOfWeek) return 8;
+    const end = _getDayOfWeek(eventEndDate) + 2;
     return end;
   };
 
