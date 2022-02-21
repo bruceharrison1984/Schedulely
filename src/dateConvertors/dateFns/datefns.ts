@@ -82,9 +82,6 @@ export const createDateFnsConvertor = (
     return areSameMonth(date, today) && date.getDate() === today.getDate();
   };
 
-  /** Manually construct ISO date so we don't have to import toIso */
-  const toIso = (date: Date) => format(date, "yyyy-MM-dd'T'HH:mm:ssxxx");
-
   const addMonthsToDate = (date: Date, amount: number) =>
     addMonths(date, amount);
 
@@ -111,7 +108,6 @@ export const createDateFnsConvertor = (
     getDayNumberFromDate,
     areSameMonth,
     isDateToday,
-    toIso,
     addMonthsToDate,
     subMonthsToDate,
     areSameWeek,

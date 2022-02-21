@@ -7,16 +7,13 @@ import { useCalendar } from '@/hooks/index';
  * @returns MonthLayout Component
  */
 export const MonthLayout = () => {
-  const {
-    calendarWithEvents,
-    dateConvertor: { toIso },
-  } = useCalendar();
+  const { calendarWithEvents } = useCalendar();
 
   return (
     <>
       {calendarWithEvents.map((week, idx) => (
         <div
-          key={`${toIso(week.weekStart)}`}
+          key={`${week.weekStart.toISOString()}`}
           className="nm--week-container"
           data-week={idx}
         >

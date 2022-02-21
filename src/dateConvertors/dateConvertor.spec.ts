@@ -194,22 +194,6 @@ describe('Date Convertor', () => {
       }
     );
 
-    // toIso
-    // TODO: This test sucks because it ignores TZ
-    it.each<{ date: Date; expected: RegExp }>([
-      {
-        date: new Date(2000, 0, 1),
-        expected: /2000-01-01/,
-      },
-      {
-        date: new Date(2010, 1, 28),
-        expected: /2010-02-28/,
-      },
-    ])('toIso $date returns $expected', ({ date, expected }) => {
-      const result = convertor.toIso(date);
-      expect(result).toMatch(expected);
-    });
-
     // areSameWeek
     it.each<{ date: Date; date2: Date; expected: boolean }>([
       {

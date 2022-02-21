@@ -97,8 +97,6 @@ export const createDefaultConvertor = (): DateConvertor => {
     return areSameMonth(date, today) && date.getDate() === today.getDate();
   };
 
-  const toIso = (date: Date) => date.toISOString();
-
   const addMonthsToDate = (date: Date, amount: number) =>
     new Date(date.getFullYear(), date.getMonth() + amount, 1);
 
@@ -132,7 +130,6 @@ export const createDefaultConvertor = (): DateConvertor => {
     getDayNumberFromDate,
     areSameMonth,
     isDateToday,
-    toIso,
     addMonthsToDate,
     subMonthsToDate,
     areSameWeek,

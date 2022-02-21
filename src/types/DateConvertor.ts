@@ -26,9 +26,6 @@ export interface DateConvertor {
   /** Returns true if the date represent today */
   isDateToday: (date: Date) => boolean;
 
-  /** Return the ISO string representation of the date*/
-  toIso: (date: Date) => string;
-
   /** Subtract a number of months from a date */
   subMonthsToDate: (date: Date, amount: number) => Date;
 
