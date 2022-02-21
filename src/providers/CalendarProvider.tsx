@@ -64,12 +64,13 @@ export const CalendarProvider = ({
     () =>
       weeksInMonth.map<EventWeek>((week) => ({
         weekStart: week[0],
-        weekEnd: week[7],
+        weekEnd: week[6],
         daysInWeek: week,
         events: events.filter(
           (event) =>
+            (event.start < week[0] && event.end > week[6]) ||
             dateConvertor.areSameWeek(event.start, week[0]) ||
-            dateConvertor.areSameWeek(event.end, week[0])
+            dateConvertor.areSameWeek(event.end, week[6])
         ),
       })),
     [weeksInMonth, events, dateConvertor]
