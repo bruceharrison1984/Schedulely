@@ -105,3 +105,4 @@ import { createDateFnsConvertor } from './dateConvertors/dateFns';
 ## Known Bugs
 
 - Events that span multiple weeks will only highlight a single segments
+- DateFns incorrectly handles single day events that occur on sunday
