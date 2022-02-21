@@ -106,3 +106,5 @@ import { createDateFnsConvertor } from './dateConvertors/dateFns';
 
 - Events that span multiple weeks will only highlight a single segments
 - DateFns incorrectly handles single day events that occur on sunday
+- Single day events sometimes display on the previous week
+- Events that end on a sunday, they only appear on the previous saturday
