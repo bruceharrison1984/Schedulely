@@ -18,6 +18,7 @@ export const createDateFnsConvertor = (
     isSameWeek,
   } = datefns;
 
+  // This returns the ISO day - Mon: 1 / Sun: 7
   const _getDayOfWeek = (date: Date) => parseInt(format(date, 'i'));
 
   /** Use some creative math to avoid importing more than we need to */

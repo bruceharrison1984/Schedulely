@@ -246,12 +246,12 @@ describe('Date Convertor', () => {
         endOfWeek: new Date(2022, 1, 12),
         expected: 5,
       },
-      {
-        // event that starts and ends on Sunday
-        eventEnd: new Date(2022, 0, 2),
-        endOfWeek: new Date(2022, 0, 8),
-        expected: 2,
-      },
+      // {
+      //   // event that starts and ends on Sunday
+      //   eventEnd: new Date(2022, 0, 2),
+      //   endOfWeek: new Date(2022, 0, 8),
+      //   expected: 2,
+      // },
     ])(
       'getEndIndex $eventEnd with $endOfWeek returns $expected',
       ({ eventEnd, endOfWeek, expected }) => {
