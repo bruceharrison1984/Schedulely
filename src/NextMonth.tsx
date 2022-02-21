@@ -6,10 +6,11 @@ import {
 import { CalendarProvider, ComponentProvider } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { Theme, defaultTheme, makeCssTheme } from '@/theme/index';
+import { createDefaultConvertor } from './dateConvertors';
 import { useMemo } from 'react';
 
 export interface NextMonthProps {
-  dateConvertor: DateConvertor;
+  dateConvertor?: DateConvertor;
   nextMonthComponents?: Partial<NextMonthComponents>;
   events: CalendarEvent[];
   theme?: Partial<Theme>;
@@ -17,7 +18,7 @@ export interface NextMonthProps {
 }
 
 export const NextMonth = ({
-  dateConvertor,
+  dateConvertor = createDefaultConvertor(),
   nextMonthComponents,
   events,
   theme,

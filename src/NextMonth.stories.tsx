@@ -91,6 +91,7 @@ const generateEvents = (numberOfEvents = 100) => {
 // ];
 
 export const datefns = Template.bind({});
+datefns.storyName = 'DateFns';
 datefns.args = {
   events: generateEvents(),
   dateConvertor: createDateFnsConvertor({
@@ -106,6 +107,7 @@ datefns.args = {
 };
 
 export const nativeJs = Template.bind({});
+nativeJs.storyName = 'NativeJS Date';
 nativeJs.args = {
   events: generateEvents(),
   dateConvertor: createDefaultConvertor(),

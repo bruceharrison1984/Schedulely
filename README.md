@@ -101,10 +101,7 @@ import { createDateFnsConvertor } from './dateConvertors/dateFns';
   - A good way to support multiple languages
 - Limit display events to visible area
   - add `additional event` indicator for days when events exceed the display size
-- Provde default DateTime implementaion with `Temporal` once approved
 
 ## Known Bugs
 
 - Events that span multiple weeks will only highlight a single segments
-- Events appearing in wrong months
-- Events that span across an entire week do not appear in that week

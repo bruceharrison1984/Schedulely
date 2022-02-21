@@ -31,7 +31,7 @@ import {
  */
 const convertors = [
   {
-    name: 'date-fns',
+    name: 'DateFns',
     convertor: createDateFnsConvertor({
       addDays,
       eachDayOfInterval,
@@ -44,7 +44,7 @@ const convertors = [
     }),
   },
   {
-    name: 'native-js',
+    name: 'NativeJs',
     convertor: createDefaultConvertor(),
   },
 ];
@@ -53,7 +53,7 @@ describe('Date Convertor', () => {
   describe.each<{
     name: string;
     convertor: DateConvertor;
-  }>(convertors)('$name function', ({ convertor }) => {
+  }>(convertors)('$name convertor', ({ convertor }) => {
     // addMonthsToDate
     it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
       getAddMonthsToDateTestCases()
