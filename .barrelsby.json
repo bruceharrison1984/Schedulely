@@ -14,6 +14,7 @@
   "exclude": [
     ".stories.tsx$",
     ".spec.tsx?$",
-    ".spec.tsx.snap$"
+    ".spec.tsx.snap$",
+    ".util.tsx?$"
   ]
 }
