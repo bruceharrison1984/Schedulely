@@ -68,7 +68,7 @@ export const CalendarProvider = ({
         daysInWeek: week,
         events: events.filter(
           (event) =>
-            (event.start < week[0] && event.end > week[6]) ||
+            (event.start < week[0] && event.end > week[6]) || // events that end on Sundays but start in previous weeks don't appear for NativeJS
             dateConvertor.areSameWeek(event.start, week[0]) ||
             dateConvertor.areSameWeek(event.end, week[6])
         ),
