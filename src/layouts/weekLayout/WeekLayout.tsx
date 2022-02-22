@@ -24,7 +24,7 @@ export const WeekLayout = ({ dates }: WeekLayoutProps) => {
           data-istoday={dateConvertor.isDateToday(day) ? true : undefined}
         >
           <DayComponent
-            isCurrentMonth={dateConvertor.areSameMonth(day, currentMonth)}
+            isCurrentMonth={dateConvertor.isSameMonth(day, currentMonth)}
           >
             <DayHeader
               isToday={dateConvertor.isDateToday(day)}

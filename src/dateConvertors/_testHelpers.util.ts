@@ -52,7 +52,9 @@ export const getSubMonthsToDateTestCases = (
   return testCases;
 };
 
-export const getAreSameMonthTestCases = (iterations = DEFAULT_ITERATIONS) => {
+export const getIsSameMonthMonthTestCases = (
+  iterations = DEFAULT_ITERATIONS
+) => {
   const testCases = [];
   for (let index = 0; index < iterations; index++) {
     const firstDate = randomDate();

@@ -51,8 +51,8 @@ export const CalendarProvider = ({
     () =>
       calendarEvents.filter(
         (event) =>
-          dateConvertor.areSameMonth(event.start, currentMonth) ||
-          dateConvertor.areSameMonth(event.end, currentMonth)
+          dateConvertor.isSameMonth(event.start, currentMonth) ||
+          dateConvertor.isSameMonth(event.end, currentMonth)
       ),
     [currentMonth, calendarEvents, dateConvertor]
   );

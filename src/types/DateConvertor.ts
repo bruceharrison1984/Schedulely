@@ -6,7 +6,7 @@ export interface DateConvertor {
   addMonthsToDate: (date: Date, amount: number) => Date;
 
   /** Compare two dates, returns true if they are in the same month, in the same year */
-  areSameMonth: (firstDate: Date, secondDate: Date) => boolean;
+  isSameMonth: (firstDate: Date, secondDate: Date) => boolean;
 
   /** Returns all days in the month, split apart by week. Includes leading/trailing days. */
   getCalendarViewInWeeks: (date: Date) => Date[][];

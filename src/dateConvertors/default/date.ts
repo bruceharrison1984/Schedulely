@@ -79,13 +79,13 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
 
   const getDayNumberFromDate = (date: Date) => date.getDate();
 
-  const areSameMonth = (firstDate: Date, secondDate: Date) =>
+  const isSameMonth = (firstDate: Date, secondDate: Date) =>
     getYearFromDate(firstDate) === getYearFromDate(secondDate) &&
     firstDate.getMonth() === secondDate.getMonth();
 
   const isDateToday = (date: Date) => {
     const today = new Date();
-    return areSameMonth(date, today) && date.getDate() === today.getDate();
+    return isSameMonth(date, today) && date.getDate() === today.getDate();
   };
 
   const addMonthsToDate = (date: Date, amount: number) =>
@@ -122,7 +122,7 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     getMonthNameFromDate,
     getYearFromDate,
     getDayNumberFromDate,
-    areSameMonth,
+    isSameMonth,
     isDateToday,
     addMonthsToDate,
     subMonthsToDate,

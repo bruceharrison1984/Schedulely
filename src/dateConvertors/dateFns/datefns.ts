@@ -15,7 +15,6 @@ export const createDateFnsConvertor = (
     format,
     startOfMonth,
     startOfWeek,
-    isSameWeek,
   } = datefns;
 
   // This returns the ISO day - Mon: 1 / Sun: 7
@@ -73,14 +72,14 @@ export const createDateFnsConvertor = (
   const getDayNumberFromDate = (date: Date) => parseInt(format(date, 'dd'));
 
   /** This comparison is easy, no need for a library */
-  const areSameMonth = (firstDate: Date, secondDate: Date) =>
+  const isSameMonth = (firstDate: Date, secondDate: Date) =>
     firstDate.getFullYear() === secondDate.getFullYear() &&
     firstDate.getMonth() === secondDate.getMonth();
 
   /** This comparison is easy, no need for a library */
   const isDateToday = (date: Date) => {
     const today = new Date();
-    return areSameMonth(date, today) && date.getDate() === today.getDate();
+    return isSameMonth(date, today) && date.getDate() === today.getDate();
   };
 
   const addMonthsToDate = (date: Date, amount: number) =>
@@ -112,7 +111,7 @@ export const createDateFnsConvertor = (
     getMonthNameFromDate,
     getYearFromDate,
     getDayNumberFromDate,
-    areSameMonth,
+    isSameMonth,
     isDateToday,
     addMonthsToDate,
     subMonthsToDate,

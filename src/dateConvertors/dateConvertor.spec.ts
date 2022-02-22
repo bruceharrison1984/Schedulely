@@ -14,9 +14,9 @@ import { DateConvertor, DisplaySize } from '@/types/DateConvertor';
 import { createDefaultConvertor } from '.';
 import {
   getAddMonthsToDateTestCases,
-  getAreSameMonthTestCases,
   getDayNumberFromDateTestCases,
   getDaysOfWeekTestCases,
+  getIsSameMonthMonthTestCases,
   getIsTodayTestCases,
   getMonthNameFromDateTestCases,
   getSubMonthsToDateTestCases,
@@ -77,13 +77,13 @@ describe('Date Convertor', () => {
       }
     );
 
-    // areSameMonth
+    // isSameMonth
     it.each<{ firstDate: Date; secondDate: Date; expected: boolean }>(
-      getAreSameMonthTestCases()
+      getIsSameMonthMonthTestCases()
     )(
-      'areSameMonth $firstDate and $secondDate returns $expected',
+      'isSameMonth $firstDate and $secondDate returns $expected',
       ({ firstDate, secondDate, expected }) => {
-        const result = convertor.areSameMonth(firstDate, secondDate);
+        const result = convertor.isSameMonth(firstDate, secondDate);
         expect(result).toBe(expected);
       }
     );
