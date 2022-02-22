@@ -65,17 +65,6 @@ describe('Date Convertor', () => {
       }
     );
 
-    // // subMonthsToDate
-    // it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
-    //   getSubMonthsToDateTestCases()
-    // )(
-    //   'subMonthsToDate $originalDate and $amount returns $expectedDate',
-    //   ({ originalDate, amount, expectedDate }) => {
-    //     const result = convertor.subMonthsToDate(originalDate, amount);
-    //     expect(result).toEqual(expectedDate);
-    //   }
-    // );
-
     // isSameMonth
     it.each<{ firstDate: Date; secondDate: Date; expected: boolean }>(
       getIsSameMonthMonthTestCases()

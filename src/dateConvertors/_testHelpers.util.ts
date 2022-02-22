@@ -1,7 +1,7 @@
 import { DisplaySize } from '@/types/index';
 import chance from 'chance';
 
-const DEFAULT_ITERATIONS = 20;
+const DEFAULT_ITERATIONS = 30;
 
 export const randomDate = () =>
   new Date(
@@ -16,7 +16,7 @@ export const getAddMonthsToDateTestCases = (
   const testCases = [];
   for (let index = 0; index < iterations; index++) {
     const originalDate = randomDate();
-    const amount = chance().integer({ min: 0, max: 48 });
+    const amount = chance().integer({ min: -48, max: 48 });
     const expectedDate = new Date(
       originalDate.getFullYear(),
       originalDate.getMonth() + amount,
