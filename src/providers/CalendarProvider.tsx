@@ -76,7 +76,7 @@ export const CalendarProvider = ({
   );
 
   const onPrevMonth = useCallback(
-    () => setCurrentMonth((month) => dateConvertor.subMonthsToDate(month, 1)),
+    () => setCurrentMonth((month) => dateConvertor.addMonthsToDate(month, -1)),
     [dateConvertor]
   );
 

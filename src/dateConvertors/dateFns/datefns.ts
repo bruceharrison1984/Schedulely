@@ -85,9 +85,6 @@ export const createDateFnsConvertor = (
   const addMonthsToDate = (date: Date, amount: number) =>
     addMonths(date, amount);
 
-  const subMonthsToDate = (date: Date, amount: number) =>
-    addMonths(date, -amount);
-
   const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
     eventDate <= startOfWeek ? 1 : _getDayOfWeek(eventDate) + 1;
 
@@ -114,7 +111,6 @@ export const createDateFnsConvertor = (
     isSameMonth,
     isDateToday,
     addMonthsToDate,
-    subMonthsToDate,
     getStartIndex,
     getEndIndex,
     isEventInWeek,

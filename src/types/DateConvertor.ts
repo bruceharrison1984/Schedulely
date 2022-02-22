@@ -2,7 +2,7 @@
  * Common interface for porting date libraries so they can be used with NextMonth
  */
 export interface DateConvertor {
-  /** Add the specified number of months to the date */
+  /** Add the specified number of months to the date. Using a negative value will subtract that amount. */
   addMonthsToDate: (date: Date, amount: number) => Date;
 
   /** Compare two dates, returns true if they are in the same month, in the same year */
@@ -25,9 +25,6 @@ export interface DateConvertor {
 
   /** Returns true if the date represent today */
   isDateToday: (date: Date) => boolean;
-
-  /** Subtract a number of months from a date */
-  subMonthsToDate: (date: Date, amount: number) => Date;
 
   /** Does the event fall within or span the supplied week */
   isEventInWeek: (

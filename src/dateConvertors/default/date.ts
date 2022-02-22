@@ -91,9 +91,6 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
   const addMonthsToDate = (date: Date, amount: number) =>
     new Date(date.getFullYear(), date.getMonth() + amount, 1);
 
-  const subMonthsToDate = (date: Date, amount: number) =>
-    new Date(date.getFullYear(), date.getMonth() - amount, 1);
-
   const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
     eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one because css-grid isn't zero-index'd
 
@@ -125,7 +122,6 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     isSameMonth,
     isDateToday,
     addMonthsToDate,
-    subMonthsToDate,
     getEndIndex,
     getStartIndex,
     isEventInWeek,
