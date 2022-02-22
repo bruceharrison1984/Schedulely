@@ -103,7 +103,7 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     return end;
   };
 
-  const eventFallsWithinWeek = (
+  const isEventInWeek = (
     eventStartDate: Date,
     eventEndDate: Date,
     week: Date[]
@@ -128,6 +128,6 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     subMonthsToDate,
     getEndIndex,
     getStartIndex,
-    eventFallsWithinWeek,
+    isEventInWeek,
   };
 };

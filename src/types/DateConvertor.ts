@@ -30,7 +30,7 @@ export interface DateConvertor {
   subMonthsToDate: (date: Date, amount: number) => Date;
 
   /** Does the event fall within or span the supplied week */
-  eventFallsWithinWeek: (
+  isEventInWeek: (
     eventStartDate: Date,
     eventEndDate: Date,
     week: Date[]

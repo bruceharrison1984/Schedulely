@@ -97,7 +97,7 @@ export const createDateFnsConvertor = (
     return end;
   };
 
-  const eventFallsWithinWeek = (
+  const isEventInWeek = (
     eventStartDate: Date,
     eventEndDate: Date,
     week: Date[]
@@ -117,6 +117,6 @@ export const createDateFnsConvertor = (
     subMonthsToDate,
     getStartIndex,
     getEndIndex,
-    eventFallsWithinWeek,
+    isEventInWeek,
   };
 };

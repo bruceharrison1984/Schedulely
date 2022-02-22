@@ -64,7 +64,7 @@ export const CalendarProvider = ({
         weekEnd: week[6],
         daysInWeek: week,
         events: events.filter((event) =>
-          dateConvertor.eventFallsWithinWeek(event.start, event.end, week)
+          dateConvertor.isEventInWeek(event.start, event.end, week)
         ),
       })),
     [weeksInMonth, events, dateConvertor]

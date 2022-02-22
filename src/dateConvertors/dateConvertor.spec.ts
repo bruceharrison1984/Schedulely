@@ -313,7 +313,7 @@ describe('Date Convertor', () => {
     ])(
       'eventFallsWithinWeek event: [$eventStartDate -> $eventEndDate] for week: [$week.0 -> $week.6] returns $expected',
       ({ eventStartDate, eventEndDate, week, expected }) => {
-        const result = convertor.eventFallsWithinWeek(
+        const result = convertor.isEventInWeek(
           eventStartDate,
           eventEndDate,
           week
