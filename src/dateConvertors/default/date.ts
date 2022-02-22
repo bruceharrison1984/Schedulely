@@ -19,7 +19,7 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     return days;
   };
 
-  const getCalendarViewInWeeks = (date: Date) => {
+  const getCalendarView = (date: Date) => {
     const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
@@ -117,7 +117,7 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
   };
 
   return {
-    getCalendarViewInWeeks,
+    getCalendarView,
     getDaysOfWeek,
     getMonthName,
     getYear,

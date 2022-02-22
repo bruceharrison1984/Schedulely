@@ -42,8 +42,8 @@ export const CalendarProvider = ({
     [screenSize, dateConvertor]
   );
 
-  const weeksInMonth = useMemo(
-    () => dateConvertor.getCalendarViewInWeeks(currentMonth),
+  const calendarView = useMemo(
+    () => dateConvertor.getCalendarView(currentMonth),
     [currentMonth, dateConvertor]
   );
 
@@ -59,7 +59,7 @@ export const CalendarProvider = ({
 
   const calendarWithEvents = useMemo<EventWeek[]>(
     () =>
-      weeksInMonth.map<EventWeek>((week) => ({
+      calendarView.map<EventWeek>((week) => ({
         weekStart: week[0],
         weekEnd: week[6],
         daysInWeek: week,
@@ -67,7 +67,7 @@ export const CalendarProvider = ({
           dateConvertor.isEventInWeek(event.start, event.end, week)
         ),
       })),
-    [weeksInMonth, events, dateConvertor]
+    [calendarView, events, dateConvertor]
   );
 
   const onNextMonth = useCallback(

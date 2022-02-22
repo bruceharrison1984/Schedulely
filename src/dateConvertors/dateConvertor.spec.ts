@@ -89,7 +89,7 @@ describe('Date Convertor', () => {
     );
 
     it('getCalendarViewInWeeks returns correct values (including sibling days)', () => {
-      const result = convertor.getCalendarViewInWeeks(new Date(2021, 0, 10));
+      const result = convertor.getCalendarView(new Date(2021, 0, 10));
       expect(result).toEqual([
         [
           new Date(2020, 11, 27),

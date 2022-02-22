@@ -9,7 +9,7 @@ export interface DateConvertor {
   isSameMonth: (firstDate: Date, secondDate: Date) => boolean;
 
   /** Returns all days in the month, split apart by week. Includes leading/trailing days. */
-  getCalendarViewInWeeks: (date: Date) => Date[][];
+  getCalendarView: (date: Date) => Date[][];
 
   /** Get full names of all days of the week */
   getDaysOfWeek: (displaySize: DisplaySize) => string[];

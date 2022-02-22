@@ -45,7 +45,7 @@ export const createDateFnsConvertor = (
     return eachWeekOfInterval(_getCalendarRangeForDate(date));
   };
 
-  const getCalendarViewInWeeks = (date: Date) =>
+  const getCalendarView = (date: Date) =>
     _getWeeksInMonth(date).map((week) => _getDaysInWeek(week));
 
   const _getDaysInWeek = (date: Date) =>
@@ -106,7 +106,7 @@ export const createDateFnsConvertor = (
   };
 
   return {
-    getCalendarViewInWeeks,
+    getCalendarView,
     getDaysOfWeek,
     getMonthName,
     getYear,
