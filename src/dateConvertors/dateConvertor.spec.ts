@@ -297,5 +297,38 @@ describe('Date Convertor', () => {
         expect(result).toBe(expected);
       }
     );
+
+    // eventFallsWithinWeek
+    it.each<{
+      eventStartDate: Date;
+      eventEndDate: Date;
+      week: Date[];
+      expected: boolean;
+    }>([
+      {
+        eventStartDate: new Date(2022, 1, 7),
+        eventEndDate: new Date(2022, 1, 6),
+        week: [
+          new Date(2022, 1, 6),
+          new Date(2022, 1, 6),
+          new Date(2022, 1, 6),
+          new Date(2022, 1, 6),
+          new Date(2022, 1, 6),
+          new Date(2022, 1, 6),
+          new Date(2022, 1, 9),
+        ],
+        expected: true,
+      },
+    ])(
+      'eventFallsWithinWeek event: [$eventStartDate -> $eventEndDate] for week: [$week.0 -> $week.6] returns $expected',
+      ({ eventStartDate, eventEndDate, week, expected }) => {
+        const result = convertor.eventFallsWithinWeek(
+          eventStartDate,
+          eventEndDate,
+          week
+        );
+        expect(result).toBe(expected);
+      }
+    );
   });
 });

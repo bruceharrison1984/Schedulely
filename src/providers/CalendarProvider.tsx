@@ -47,7 +47,6 @@ export const CalendarProvider = ({
     [currentMonth, dateConvertor]
   );
 
-  //TODO: This needs to be refactored to account for sibling month days
   const events = useMemo(
     () =>
       calendarEvents.filter(

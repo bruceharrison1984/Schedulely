@@ -32,6 +32,13 @@ export interface DateConvertor {
   /** Return true if both days fall within the same 7 day week */
   areSameWeek: (firstDate: Date, secondDate: Date) => boolean;
 
+  /** Does the event fall within or span the supplied week */
+  eventFallsWithinWeek: (
+    eventStartDate: Date,
+    eventEndDate: Date,
+    week: Date[]
+  ) => boolean;
+
   /** Get the day of week index for the end of the event */
   getEndIndex: (eventEndDate: Date, endOfWeek: Date) => number;
 

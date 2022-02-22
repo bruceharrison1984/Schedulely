@@ -101,6 +101,14 @@ export const createDateFnsConvertor = (
     return end;
   };
 
+  const eventFallsWithinWeek = (
+    eventStartDate: Date,
+    eventEndDate: Date,
+    week: Date[]
+  ) => {
+    throw new Error('not implemented');
+  };
+
   return {
     getCalendarViewInWeeks,
     getDaysOfWeek,
@@ -114,5 +122,6 @@ export const createDateFnsConvertor = (
     areSameWeek,
     getStartIndex,
     getEndIndex,
+    eventFallsWithinWeek,
   };
 };

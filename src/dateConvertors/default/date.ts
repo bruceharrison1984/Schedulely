@@ -113,6 +113,19 @@ export const createDefaultConvertor = (): DateConvertor => {
     return end;
   };
 
+  const eventFallsWithinWeek = (
+    eventStartDate: Date,
+    eventEndDate: Date,
+    week: Date[]
+  ) => {
+    if (week.length !== 7) throw new Error('Week length must be 7');
+    return (
+      (eventStartDate <= week[0] && eventEndDate >= week[6]) ||
+      areSameWeek(eventStartDate, week[0]) ||
+      areSameWeek(eventEndDate, week[6])
+    );
+  };
+
   return {
     getCalendarViewInWeeks,
     getDaysOfWeek,
@@ -126,5 +139,6 @@ export const createDefaultConvertor = (): DateConvertor => {
     areSameWeek,
     getEndIndex,
     getStartIndex,
+    eventFallsWithinWeek,
   };
 };
