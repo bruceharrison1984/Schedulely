@@ -33,11 +33,11 @@ export interface DateConvertor {
     week: Date[]
   ) => boolean;
 
-  /** Get the day of week index for the end of the event */
-  getEndIndex: (eventEndDate: Date, endOfWeek: Date) => number;
+  /** Get the day of week grid index for the end of the event. Used for positioning within the Week css-grid. */
+  getGridEndIndex: (eventEndDate: Date, endOfWeek: Date) => number;
 
-  /** Get the day of week index for the start of the event */
-  getStartIndex: (eventDate: Date, startOfWeek: Date) => number;
+  /** Get the day of week index for the start of the event. Used for positioning within the Week css-grid */
+  getGridStartIndex: (eventDate: Date, startOfWeek: Date) => number;
 }
 
 export enum DisplaySize {

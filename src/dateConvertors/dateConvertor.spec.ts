@@ -210,7 +210,7 @@ describe('Date Convertor', () => {
     ])(
       'getEndIndex $eventEnd with $endOfWeek returns $expected',
       ({ eventEnd, endOfWeek, expected }) => {
-        const result = convertor.getEndIndex(eventEnd, endOfWeek);
+        const result = convertor.getGridEndIndex(eventEnd, endOfWeek);
         expect(result).toBe(expected);
       }
     );
@@ -241,7 +241,7 @@ describe('Date Convertor', () => {
     ])(
       'getStartIndex $eventStart with $startOfWeek returns $expected',
       ({ eventStart, startOfWeek, expected }) => {
-        const result = convertor.getStartIndex(eventStart, startOfWeek);
+        const result = convertor.getGridStartIndex(eventStart, startOfWeek);
         expect(result).toBe(expected);
       }
     );

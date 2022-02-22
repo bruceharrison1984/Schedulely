@@ -17,7 +17,10 @@ export const EventLayout = ({
   endOfWeek,
 }: EventLayoutProps) => {
   const {
-    dateConvertor: { getStartIndex, getEndIndex },
+    dateConvertor: {
+      getGridStartIndex: getStartIndex,
+      getGridEndIndex: getEndIndex,
+    },
   } = useCalendar();
   const { eventComponent: EventComponent } = useComponents();
 

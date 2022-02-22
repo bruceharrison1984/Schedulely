@@ -91,10 +91,10 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
   const addMonthsToDate = (date: Date, amount: number) =>
     new Date(date.getFullYear(), date.getMonth() + amount, 1);
 
-  const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
+  const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
     eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one because css-grid isn't zero-index'd
 
-  const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
+  const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate > endOfWeek) return 8;
     const end = eventEndDate.getDay() + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
     return end;
@@ -122,8 +122,8 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     isSameMonth,
     isDateToday,
     addMonthsToDate,
-    getEndIndex,
-    getStartIndex,
+    getGridEndIndex,
+    getGridStartIndex,
     isEventInWeek,
   };
 };

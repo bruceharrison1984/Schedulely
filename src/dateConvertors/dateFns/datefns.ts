@@ -85,10 +85,10 @@ export const createDateFnsConvertor = (
   const addMonthsToDate = (date: Date, amount: number) =>
     addMonths(date, amount);
 
-  const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
+  const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
     eventDate <= startOfWeek ? 1 : _getDayOfWeek(eventDate) + 1;
 
-  const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
+  const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate >= endOfWeek) return 8;
     const end = _getDayOfWeek(eventEndDate) + 2; //offset for zero-index, add additional so event ends at correct line
     return end;
@@ -111,8 +111,8 @@ export const createDateFnsConvertor = (
     isSameMonth,
     isDateToday,
     addMonthsToDate,
-    getStartIndex,
-    getEndIndex,
+    getGridStartIndex,
+    getGridEndIndex,
     isEventInWeek,
   };
 };
