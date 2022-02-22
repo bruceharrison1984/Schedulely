@@ -26,7 +26,11 @@ const Template: ComponentStory<typeof NextMonth> = (props) => (
 
 const chanceSeed = chance(1);
 
-const generateEvents = (numberOfEvents = 100) => {
+const generateEvents = (
+  numberOfEvents = 100,
+  minLength = 0,
+  maxLength = 15
+) => {
   const events: CalendarEvent[] = [];
   const today = new Date();
   for (let index = 0; index < numberOfEvents; index++) {
@@ -39,7 +43,10 @@ const generateEvents = (numberOfEvents = 100) => {
       chanceSeed.integer({ min: 0, max: 11 }),
       chanceSeed.integer({ min: 1, max: 30 })
     );
-    const end = addDays(start, chanceSeed.integer({ min: 0, max: 15 }));
+    const end = addDays(
+      start,
+      chanceSeed.integer({ min: minLength, max: maxLength })
+    );
     const summary = chanceSeed.name();
     const color = chanceSeed.color({ format: 'hex' });
     events.push({ id, start, end, summary, color });
@@ -92,7 +99,7 @@ const generateEvents = (numberOfEvents = 100) => {
 //   },
 // ];
 
-const events = generateEvents();
+const events = [...generateEvents(), ...generateEvents(100, 0, 1)];
 
 // export const datefns = Template.bind({});
 // datefns.storyName = 'DateFns';
