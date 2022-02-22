@@ -1,16 +1,17 @@
 import 'regenerator-runtime/runtime';
 import { DateConvertor, DisplaySize } from '@/types/DateConvertor';
-import {
-  addDays,
-  addMonths,
-  eachDayOfInterval,
-  eachWeekOfInterval,
-  format,
-  isSameWeek,
-  startOfMonth,
-  startOfWeek,
-} from 'date-fns';
-import { createDateFnsConvertor, createDefaultConvertor } from '.';
+// import {
+//   addDays,
+//   addMonths,
+//   eachDayOfInterval,
+//   eachWeekOfInterval,
+//   format,
+//   isSameWeek,
+//   startOfMonth,
+//   startOfWeek,
+// } from 'date-fns';
+// import { createDateFnsConvertor } from '.';
+import { createDefaultConvertor } from '.';
 import {
   getAddMonthsToDateTestCases,
   getAreSameMonthTestCases,
@@ -30,19 +31,19 @@ import {
  * All tests presume US/eng units
  */
 const convertors = [
-  {
-    name: 'DateFns',
-    convertor: createDateFnsConvertor({
-      addDays,
-      eachDayOfInterval,
-      eachWeekOfInterval,
-      format,
-      startOfMonth,
-      startOfWeek,
-      addMonths,
-      isSameWeek,
-    }),
-  },
+  // {
+  //   name: 'DateFns',
+  //   convertor: createDateFnsConvertor({
+  //     addDays,
+  //     eachDayOfInterval,
+  //     eachWeekOfInterval,
+  //     format,
+  //     startOfMonth,
+  //     startOfWeek,
+  //     addMonths,
+  //     isSameWeek,
+  //   }),
+  // },
   {
     name: 'NativeJs',
     convertor: createDefaultConvertor(),

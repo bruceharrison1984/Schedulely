@@ -3,15 +3,15 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { NextMonth } from './NextMonth';
 import {
   addDays,
-  addMonths,
-  eachDayOfInterval,
-  eachWeekOfInterval,
-  format,
-  isSameWeek,
-  startOfMonth,
-  startOfWeek,
+  // addMonths,
+  // eachDayOfInterval,
+  // eachWeekOfInterval,
+  // format,
+  // isSameWeek,
+  // startOfMonth,
+  // startOfWeek,
 } from 'date-fns';
-import { createDateFnsConvertor } from './dateConvertors/dateFns';
+// import { createDateFnsConvertor } from './dateConvertors/dateFns';
 import { createDefaultConvertor } from './dateConvertors';
 import chance from 'chance';
 
@@ -94,21 +94,21 @@ const generateEvents = (numberOfEvents = 100) => {
 
 const events = generateEvents();
 
-export const datefns = Template.bind({});
-datefns.storyName = 'DateFns';
-datefns.args = {
-  events,
-  dateConvertor: createDateFnsConvertor({
-    addDays,
-    eachDayOfInterval,
-    eachWeekOfInterval,
-    format,
-    startOfMonth,
-    startOfWeek,
-    addMonths,
-    isSameWeek,
-  }),
-};
+// export const datefns = Template.bind({});
+// datefns.storyName = 'DateFns';
+// datefns.args = {
+//   events,
+//   dateConvertor: createDateFnsConvertor({
+//     addDays,
+//     eachDayOfInterval,
+//     eachWeekOfInterval,
+//     format,
+//     startOfMonth,
+//     startOfWeek,
+//     addMonths,
+//     isSameWeek,
+//   }),
+// };
 
 export const nativeJs = Template.bind({});
 nativeJs.storyName = 'NativeJS Date';

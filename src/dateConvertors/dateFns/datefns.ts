@@ -97,7 +97,7 @@ export const createDateFnsConvertor = (
 
   const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate >= endOfWeek) return 8;
-    const end = _getDayOfWeek(eventEndDate) + 2;
+    const end = _getDayOfWeek(eventEndDate) + 2; //offset for zero-index, add additional so event ends at correct line
     return end;
   };
 
