@@ -19,7 +19,7 @@ export const HeaderLayout = () => {
     <div className="nm--header-layout">
       <BackNavigationButton onClick={onPrevMonth} />
       <HeaderBanner
-        month={dateConvertor.getMonthNameFromDate(currentMonth)}
+        month={dateConvertor.getMonthName(currentMonth)}
         year={dateConvertor.getYearFromDate(currentMonth)}
       />
       <ForwardNavigationButton onClick={onNextMonth} />

@@ -15,7 +15,7 @@ export interface DateConvertor {
   getDaysOfWeek: (displaySize: DisplaySize) => string[];
 
   /** Get the full name of the month for a given date */
-  getMonthNameFromDate: (date: Date) => string;
+  getMonthName: (date: Date) => string;
 
   /** Get the year component for a given date */
   getYearFromDate: (date: Date) => number;

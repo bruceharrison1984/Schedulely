@@ -163,7 +163,7 @@ describe('Date Convertor', () => {
     it.each<{ date: Date; expected: string }>(getMonthNameFromDateTestCases())(
       'getMonthNameFromDate $date returns $expected',
       ({ date, expected }) => {
-        const result = convertor.getMonthNameFromDate(date);
+        const result = convertor.getMonthName(date);
         expect(result).toBe(expected);
       }
     );

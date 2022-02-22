@@ -68,7 +68,7 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     );
   };
 
-  const getMonthNameFromDate = (date: Date) => {
+  const getMonthName = (date: Date) => {
     const formatter = new Intl.DateTimeFormat(locale, {
       month: 'long',
     });
@@ -119,7 +119,7 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
   return {
     getCalendarViewInWeeks,
     getDaysOfWeek,
-    getMonthNameFromDate,
+    getMonthName,
     getYearFromDate,
     getDayNumberFromDate,
     isSameMonth,

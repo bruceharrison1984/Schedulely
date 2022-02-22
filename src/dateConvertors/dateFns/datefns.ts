@@ -65,7 +65,7 @@ export const createDateFnsConvertor = (
     return weekDays.map((day) => format(day, template));
   };
 
-  const getMonthNameFromDate = (date: Date) => format(date, 'MMMM');
+  const getMonthName = (date: Date) => format(date, 'MMMM');
 
   const getYearFromDate = (date: Date) => parseInt(format(date, 'yyyy'));
 
@@ -108,7 +108,7 @@ export const createDateFnsConvertor = (
   return {
     getCalendarViewInWeeks,
     getDaysOfWeek,
-    getMonthNameFromDate,
+    getMonthName,
     getYearFromDate,
     getDayNumberFromDate,
     isSameMonth,
