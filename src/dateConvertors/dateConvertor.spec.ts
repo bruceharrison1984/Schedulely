@@ -248,13 +248,14 @@ describe('Date Convertor', () => {
 
     // eventFallsWithinWeek
     it.each<{
+      message: string;
       eventStartDate: Date;
       eventEndDate: Date;
       week: Date[];
       expected: boolean;
     }>([
       {
-        // starts in previous week
+        message: 'starts in previous week and ends in current week',
         eventStartDate: new Date(2021, 9, 19),
         eventEndDate: new Date(2021, 10, 3),
         week: [
@@ -269,7 +270,22 @@ describe('Date Convertor', () => {
         expected: true,
       },
       {
-        // starts in previous week, ends in next week
+        message: 'starts in current week and ends in later week',
+        eventStartDate: new Date(2021, 10, 1),
+        eventEndDate: new Date(2021, 10, 9),
+        week: [
+          new Date(2021, 9, 31),
+          new Date(2021, 10, 1),
+          new Date(2021, 10, 2),
+          new Date(2021, 10, 3),
+          new Date(2021, 10, 4),
+          new Date(2021, 10, 5),
+          new Date(2021, 10, 6),
+        ],
+        expected: true,
+      },
+      {
+        message: 'spans the current week',
         eventStartDate: new Date(2022, 1, 16),
         eventEndDate: new Date(2022, 1, 28),
         week: [
@@ -284,7 +300,7 @@ describe('Date Convertor', () => {
         expected: true,
       },
       {
-        // ensure events don't appear in previous weeks
+        message: "ensure events in later weeks don't appear in previous weeks",
         eventStartDate: new Date(2022, 9, 5),
         eventEndDate: new Date(2022, 9, 6),
         week: [
@@ -298,8 +314,23 @@ describe('Date Convertor', () => {
         ],
         expected: false,
       },
+      {
+        message: "ensure events in previous weeks don't appear in later weeks",
+        eventStartDate: new Date(2022, 8, 1),
+        eventEndDate: new Date(2022, 8, 25),
+        week: [
+          new Date(2022, 8, 26),
+          new Date(2022, 8, 27),
+          new Date(2022, 8, 28),
+          new Date(2022, 8, 29),
+          new Date(2022, 8, 30),
+          new Date(2022, 9, 1),
+          new Date(2022, 9, 2),
+        ],
+        expected: false,
+      },
     ])(
-      'eventFallsWithinWeek event: [$eventStartDate -> $eventEndDate] for week: [$week.0 -> $week.6] returns $expected',
+      'eventFallsWithinWeek $message',
       ({ eventStartDate, eventEndDate, week, expected }) => {
         const result = convertor.isEventInWeek(
           eventStartDate,
