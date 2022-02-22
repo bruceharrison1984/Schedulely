@@ -20,7 +20,7 @@ export const HeaderLayout = () => {
       <BackNavigationButton onClick={onPrevMonth} />
       <HeaderBanner
         month={dateConvertor.getMonthName(currentMonth)}
-        year={dateConvertor.getYearFromDate(currentMonth)}
+        year={dateConvertor.getYear(currentMonth)}
       />
       <ForwardNavigationButton onClick={onNextMonth} />
     </div>

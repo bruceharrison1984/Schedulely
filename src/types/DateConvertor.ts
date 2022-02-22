@@ -18,10 +18,10 @@ export interface DateConvertor {
   getMonthName: (date: Date) => string;
 
   /** Get the year component for a given date */
-  getYearFromDate: (date: Date) => number;
+  getYear: (date: Date) => number;
 
   /** Get the day number component for a given date */
-  getDayNumberFromDate: (date: Date) => number;
+  getDayNumber: (date: Date) => number;
 
   /** Returns true if the date represent today */
   isDateToday: (date: Date) => boolean;

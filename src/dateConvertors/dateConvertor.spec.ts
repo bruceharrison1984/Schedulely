@@ -172,7 +172,7 @@ describe('Date Convertor', () => {
     it.each<{ date: Date; expected: number }>(getYearFromDateTestCases())(
       'getYearFromDate $date returns $expected',
       ({ date, expected }) => {
-        const result = convertor.getYearFromDate(date);
+        const result = convertor.getYear(date);
         expect(result).toBe(expected);
       }
     );
@@ -181,7 +181,7 @@ describe('Date Convertor', () => {
     it.each<{ date: Date; expected: number }>(getDayNumberFromDateTestCases())(
       'getDayNumberFromDate $date returns $expected',
       ({ date, expected }) => {
-        const result = convertor.getDayNumberFromDate(date);
+        const result = convertor.getDayNumber(date);
         expect(result).toBe(expected);
       }
     );

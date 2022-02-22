@@ -28,7 +28,7 @@ export const WeekLayout = ({ dates }: WeekLayoutProps) => {
           >
             <DayHeader
               isToday={dateConvertor.isDateToday(day)}
-              dateNumber={dateConvertor.getDayNumberFromDate(day)}
+              dateNumber={dateConvertor.getDayNumber(day)}
             />
           </DayComponent>
         </div>

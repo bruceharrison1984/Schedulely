@@ -75,12 +75,12 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     return formatter.format(date);
   };
 
-  const getYearFromDate = (date: Date) => date.getFullYear();
+  const getYear = (date: Date) => date.getFullYear();
 
-  const getDayNumberFromDate = (date: Date) => date.getDate();
+  const getDayNumber = (date: Date) => date.getDate();
 
   const isSameMonth = (firstDate: Date, secondDate: Date) =>
-    getYearFromDate(firstDate) === getYearFromDate(secondDate) &&
+    getYear(firstDate) === getYear(secondDate) &&
     firstDate.getMonth() === secondDate.getMonth();
 
   const isDateToday = (date: Date) => {
@@ -120,8 +120,8 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     getCalendarViewInWeeks,
     getDaysOfWeek,
     getMonthName,
-    getYearFromDate,
-    getDayNumberFromDate,
+    getYear,
+    getDayNumber,
     isSameMonth,
     isDateToday,
     addMonthsToDate,

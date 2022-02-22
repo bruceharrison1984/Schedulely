@@ -67,9 +67,9 @@ export const createDateFnsConvertor = (
 
   const getMonthName = (date: Date) => format(date, 'MMMM');
 
-  const getYearFromDate = (date: Date) => parseInt(format(date, 'yyyy'));
+  const getYear = (date: Date) => parseInt(format(date, 'yyyy'));
 
-  const getDayNumberFromDate = (date: Date) => parseInt(format(date, 'dd'));
+  const getDayNumber = (date: Date) => parseInt(format(date, 'dd'));
 
   /** This comparison is easy, no need for a library */
   const isSameMonth = (firstDate: Date, secondDate: Date) =>
@@ -109,8 +109,8 @@ export const createDateFnsConvertor = (
     getCalendarViewInWeeks,
     getDaysOfWeek,
     getMonthName,
-    getYearFromDate,
-    getDayNumberFromDate,
+    getYear,
+    getDayNumber,
     isSameMonth,
     isDateToday,
     addMonthsToDate,
