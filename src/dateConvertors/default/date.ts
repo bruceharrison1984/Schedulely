@@ -1,6 +1,6 @@
 import { DateConvertor, DisplaySize } from '@/types/index';
 
-export const createDefaultConvertor = (): DateConvertor => {
+export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
   /** Map used to translate DisplaySize in to Intl day name format */
   const map = new Map<DisplaySize, 'long' | 'narrow' | 'short'>([
     [DisplaySize.large, 'long'],
@@ -9,7 +9,7 @@ export const createDefaultConvertor = (): DateConvertor => {
   ]);
 
   const getDaysOfWeek = (displaySize: DisplaySize) => {
-    const formatter = new Intl.DateTimeFormat('en', {
+    const formatter = new Intl.DateTimeFormat(locale, {
       weekday: map.get(displaySize),
     });
     const days = [];
@@ -69,7 +69,7 @@ export const createDefaultConvertor = (): DateConvertor => {
   };
 
   const getMonthNameFromDate = (date: Date) => {
-    const formatter = new Intl.DateTimeFormat('en', {
+    const formatter = new Intl.DateTimeFormat(locale, {
       month: 'long',
     });
     return formatter.format(date);
@@ -94,22 +94,12 @@ export const createDefaultConvertor = (): DateConvertor => {
   const subMonthsToDate = (date: Date, amount: number) =>
     new Date(date.getFullYear(), date.getMonth() - amount, 1);
 
-  const _getOrdinalWeek = (date: Date) => {
-    const firstOfYear = new Date(date.getFullYear(), 0, 1);
-    const dateDiff = date.valueOf() - firstOfYear.valueOf();
-    const numberOfDays = dateDiff / (24 * 60 * 60 * 1000);
-    return Math.ceil(numberOfDays / 7);
-  };
-
-  const areSameWeek = (firstDate: Date, secondDate: Date) =>
-    _getOrdinalWeek(firstDate) === _getOrdinalWeek(secondDate);
-
   const getStartIndex = (eventDate: Date, startOfWeek: Date) =>
     eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one because css-grid isn't zero-index'd
 
   const getEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate > endOfWeek) return 8;
-    const end = eventEndDate.getDay() + 2; // add two because css-grid isn't zero index'd, and it goes to 8
+    const end = eventEndDate.getDay() + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
     return end;
   };
 
@@ -119,17 +109,11 @@ export const createDefaultConvertor = (): DateConvertor => {
     week: Date[]
   ) => {
     if (week.length !== 7) throw new Error('Week length must be 7');
-    const eventStartInWeek = areSameWeek(eventStartDate, week[0]);
-    const eventEndsInWeek = areSameWeek(eventEndDate, week[6]);
-    const startsBeforeWeek = eventStartDate <= week[0];
-    const endsDuringWeek = eventEndDate >= week[0] && eventEndDate <= week[6];
-    const eventSpansWeek = startsBeforeWeek && eventEndDate >= week[6];
-    return (
-      eventSpansWeek ||
-      (startsBeforeWeek && endsDuringWeek) ||
-      eventStartInWeek ||
-      eventEndsInWeek
-    );
+    const eventStartInWeek =
+      eventStartDate >= week[0] && eventStartDate <= week[6];
+    const eventEndsInWeek = eventEndDate >= week[0] && eventEndDate <= week[6];
+    const eventSpansWeek = eventStartDate <= week[0] && eventEndDate >= week[6];
+    return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
   return {
@@ -142,7 +126,6 @@ export const createDefaultConvertor = (): DateConvertor => {
     isDateToday,
     addMonthsToDate,
     subMonthsToDate,
-    areSameWeek,
     getEndIndex,
     getStartIndex,
     eventFallsWithinWeek,

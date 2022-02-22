@@ -195,46 +195,6 @@ describe('Date Convertor', () => {
       }
     );
 
-    // areSameWeek
-    it.each<{ date: Date; date2: Date; expected: boolean }>([
-      {
-        date: new Date(2022, 0, 2),
-        date2: new Date(2022, 0, 3),
-        expected: true,
-      },
-      {
-        date: new Date(2022, 0, 1),
-        date2: new Date(2022, 0, 3),
-        expected: false,
-      },
-      {
-        date: new Date(2022, 1, 12),
-        date2: new Date(2022, 1, 13),
-        expected: false,
-      },
-      {
-        date: new Date(2022, 4, 20),
-        date2: new Date(2022, 4, 21),
-        expected: true,
-      },
-      {
-        date: new Date(2022, 1, 7),
-        date2: new Date(2022, 1, 13),
-        expected: false,
-      },
-      {
-        date: new Date(2022, 1, 11),
-        date2: new Date(2022, 1, 13),
-        expected: false,
-      },
-    ])(
-      'areSameWeek $date with $date2 returns $expected',
-      ({ date, date2, expected }) => {
-        const result = convertor.areSameWeek(date, date2);
-        expect(result).toBe(expected);
-      }
-    );
-
     // getEndIndex
     it.each<{ eventEnd: Date; endOfWeek: Date; expected: number }>([
       {
@@ -334,6 +294,21 @@ describe('Date Convertor', () => {
           new Date(2022, 1, 26),
         ],
         expected: true,
+      },
+      {
+        // ensure events don't appear in previous weeks
+        eventStartDate: new Date(2022, 9, 5),
+        eventEndDate: new Date(2022, 9, 6),
+        week: [
+          new Date(2022, 8, 26),
+          new Date(2022, 8, 27),
+          new Date(2022, 8, 28),
+          new Date(2022, 8, 29),
+          new Date(2022, 8, 30),
+          new Date(2022, 9, 1),
+          new Date(2022, 9, 2),
+        ],
+        expected: false,
       },
     ])(
       'eventFallsWithinWeek event: [$eventStartDate -> $eventEndDate] for week: [$week.0 -> $week.6] returns $expected',
