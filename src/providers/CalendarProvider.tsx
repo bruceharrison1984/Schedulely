@@ -50,13 +50,11 @@ export const CalendarProvider = ({
   //TODO: This needs to be refactored to account for sibling month days
   const events = useMemo(
     () =>
-      calendarEvents
-        .filter(
-          (event) =>
-            dateConvertor.areSameMonth(event.start, currentMonth) ||
-            dateConvertor.areSameMonth(event.end, currentMonth)
-        )
-        .sort((a, b) => +a.start - +b.start), //unary operator so we can easily compare
+      calendarEvents.filter(
+        (event) =>
+          dateConvertor.areSameMonth(event.start, currentMonth) ||
+          dateConvertor.areSameMonth(event.end, currentMonth)
+      ),
     [currentMonth, calendarEvents, dateConvertor]
   );
 
@@ -68,7 +66,7 @@ export const CalendarProvider = ({
         daysInWeek: week,
         events: events.filter(
           (event) =>
-            (event.start < week[0] && event.end > week[6]) || //TODO: events that end on Sundays but start in previous weeks don't appear for NativeJS
+            (event.start <= week[0] && event.end >= week[6]) || //TODO: events that end on Sundays but start in previous weeks don't appear for NativeJS
             dateConvertor.areSameWeek(event.start, week[0]) ||
             dateConvertor.areSameWeek(event.end, week[6])
         ),

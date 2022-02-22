@@ -47,17 +47,8 @@ export const createDefaultConvertor = (): DateConvertor => {
       );
     }
 
-    // calendar should only print the last week that contains days in the current month
-    // right now it is always 42 square long
-    // const lastDateOfMonth = currentMonth[currentMonth.length - 1];
-
     iteratedDate = endOfMonth;
-    while (
-      finalsOfPrevMonth.length +
-        currentMonth.length +
-        startsOfNextMonth.length <
-      42
-    ) {
+    while (iteratedDate.getDay() + 1 !== 7) {
       iteratedDate = new Date(
         iteratedDate.getFullYear(),
         iteratedDate.getMonth(),
