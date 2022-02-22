@@ -306,16 +306,32 @@ describe('Date Convertor', () => {
       expected: boolean;
     }>([
       {
-        eventStartDate: new Date(2022, 1, 7),
-        eventEndDate: new Date(2022, 1, 6),
+        // starts in previous week
+        eventStartDate: new Date(2021, 9, 19),
+        eventEndDate: new Date(2021, 10, 3),
         week: [
-          new Date(2022, 1, 6),
-          new Date(2022, 1, 6),
-          new Date(2022, 1, 6),
-          new Date(2022, 1, 6),
-          new Date(2022, 1, 6),
-          new Date(2022, 1, 6),
-          new Date(2022, 1, 9),
+          new Date(2021, 9, 31),
+          new Date(2021, 10, 1),
+          new Date(2021, 10, 2),
+          new Date(2021, 10, 3),
+          new Date(2021, 10, 4),
+          new Date(2021, 10, 5),
+          new Date(2021, 10, 6),
+        ],
+        expected: true,
+      },
+      {
+        // starts in previous week, ends in next week
+        eventStartDate: new Date(2022, 1, 16),
+        eventEndDate: new Date(2022, 1, 28),
+        week: [
+          new Date(2022, 1, 20),
+          new Date(2022, 1, 21),
+          new Date(2022, 1, 22),
+          new Date(2022, 1, 23),
+          new Date(2022, 1, 24),
+          new Date(2022, 1, 25),
+          new Date(2022, 1, 26),
         ],
         expected: true,
       },

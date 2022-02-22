@@ -63,11 +63,8 @@ export const CalendarProvider = ({
         weekStart: week[0],
         weekEnd: week[6],
         daysInWeek: week,
-        events: events.filter(
-          (event) =>
-            (event.start <= week[0] && event.end >= week[6]) || //TODO: events that end on Sundays but start in previous weeks don't appear for NativeJS
-            dateConvertor.areSameWeek(event.start, week[0]) ||
-            dateConvertor.areSameWeek(event.end, week[6])
+        events: events.filter((event) =>
+          dateConvertor.eventFallsWithinWeek(event.start, event.end, week)
         ),
       })),
     [weeksInMonth, events, dateConvertor]

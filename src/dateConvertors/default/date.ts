@@ -119,10 +119,16 @@ export const createDefaultConvertor = (): DateConvertor => {
     week: Date[]
   ) => {
     if (week.length !== 7) throw new Error('Week length must be 7');
+    const eventStartInWeek = areSameWeek(eventStartDate, week[0]);
+    const eventEndsInWeek = areSameWeek(eventEndDate, week[6]);
+    const startsBeforeWeek = eventStartDate <= week[0];
+    const endsDuringWeek = eventEndDate >= week[0] && eventEndDate <= week[6];
+    const eventSpansWeek = startsBeforeWeek && eventEndDate >= week[6];
     return (
-      (eventStartDate <= week[0] && eventEndDate >= week[6]) ||
-      areSameWeek(eventStartDate, week[0]) ||
-      areSameWeek(eventEndDate, week[6])
+      eventSpansWeek ||
+      (startsBeforeWeek && endsDuringWeek) ||
+      eventStartInWeek ||
+      eventEndsInWeek
     );
   };
 
