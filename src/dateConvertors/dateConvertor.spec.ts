@@ -338,7 +338,7 @@ describe('Date Convertor', () => {
           ],
           expected: false,
         },
-      ])(' $message', ({ eventStartDate, eventEndDate, week, expected }) => {
+      ])('$message', ({ eventStartDate, eventEndDate, week, expected }) => {
         const result = convertor.isEventInWeek(
           eventStartDate,
           eventEndDate,
