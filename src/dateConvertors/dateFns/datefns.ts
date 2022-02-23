@@ -1,12 +1,12 @@
-import { DateConvertor, DisplaySize } from '@/types/index';
 import { DateFnsFunctions } from './datefnsInterface';
+import { DateTimeAdapter, DisplaySize } from '@/types/index';
 
 /**
  * Create a NextMonth compatible DateConvertor from date-fns.
  */
 export const createDateFnsConvertor = (
   datefns: DateFnsFunctions
-): DateConvertor => {
+): DateTimeAdapter => {
   const {
     addDays,
     addMonths,
@@ -102,6 +102,10 @@ export const createDateFnsConvertor = (
     throw new Error('not implemented');
   };
 
+  const convertIsoToDate = (isoDate: string) => {
+    throw new Error('not implemented');
+  };
+
   return {
     getCalendarView,
     getDaysOfWeek,
@@ -114,5 +118,6 @@ export const createDateFnsConvertor = (
     getGridStartIndex,
     getGridEndIndex,
     isEventInWeek,
+    convertIsoToDate,
   };
 };

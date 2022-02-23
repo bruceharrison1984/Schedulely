@@ -1,5 +1,5 @@
 import 'regenerator-runtime/runtime';
-import { DateConvertor, DisplaySize } from '@/types/DateConvertor';
+import { DateTimeAdapter, DisplaySize } from '@/types/DateConvertor';
 // import {
 //   addDays,
 //   addMonths,
@@ -52,7 +52,7 @@ const convertors = [
 describe('Date Convertor', () => {
   describe.each<{
     name: string;
-    convertor: DateConvertor;
+    convertor: DateTimeAdapter;
   }>(convertors)('$name convertor', ({ convertor }) => {
     describe('addMonthsToDate', () => {
       it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(

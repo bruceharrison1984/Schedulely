@@ -1,6 +1,6 @@
-import { DateConvertor, DisplaySize } from '@/types/index';
+import { DateTimeAdapter, DisplaySize } from '@/types/index';
 
-export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
+export const createDefaultConvertor = (locale = 'en'): DateTimeAdapter => {
   /** Map used to translate DisplaySize in to Intl day name format */
   const map = new Map<DisplaySize, 'long' | 'narrow' | 'short'>([
     [DisplaySize.large, 'long'],
@@ -112,6 +112,8 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
+  const convertIsoToDate = (isoDate: string) => new Date(isoDate);
+
   return {
     getCalendarView,
     getDaysOfWeek,
@@ -124,5 +126,6 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     getGridEndIndex,
     getGridStartIndex,
     isEventInWeek,
+    convertIsoToDate,
   };
 };

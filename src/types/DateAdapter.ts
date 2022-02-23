@@ -1,12 +1,13 @@
 /**
  * Common interface for porting date libraries so they can be used with NextMonth
  */
-export interface DateConvertor {
+export interface DateTimeAdapter {
   /** Add the specified number of months to the date. Using a negative value will subtract that amount. */
   addMonthsToDate: (date: Date, amount: number) => Date;
 
   /** Returns all days in the month, split apart by week. Includes leading/trailing days. */
   getCalendarView: (date: Date) => Date[][];
+
   /** Get the day number component for a given date */
   getDayNumber: (date: Date) => number;
 
@@ -24,6 +25,9 @@ export interface DateConvertor {
 
   /** Get the year component for a given date */
   getYear: (date: Date) => number;
+
+  /** Convert and ISO format string to a Date object */
+  convertIsoToDate: (isoDate: string) => Date;
 
   /** Returns true if the date represent today */
   isDateToday: (date: Date) => boolean;

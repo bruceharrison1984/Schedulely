@@ -127,5 +127,5 @@ export const nativeJs = Template.bind({});
 nativeJs.storyName = 'NativeJS Date';
 nativeJs.args = {
   events,
-  dateConvertor: createDefaultConvertor(),
+  dateAdapter: createDefaultConvertor(),
 };

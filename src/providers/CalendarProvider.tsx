@@ -1,7 +1,7 @@
 import {
   CalendarEvent,
   CalendarState,
-  DateConvertor,
+  DateTimeAdapter,
   EventWeek,
   InternalCalendarEvent,
 } from '@/types/index';
@@ -18,7 +18,7 @@ export const CalendarContext = createContext<CalendarState | null>(null);
 CalendarContext.displayName = 'CalendarContext';
 
 interface CalendarProviderProps {
-  dateConvertor: DateConvertor;
+  dateAdapter: DateTimeAdapter;
   initialDate?: Date;
   calendarEvents: CalendarEvent[];
   children: ReactNode;
@@ -30,7 +30,7 @@ interface CalendarProviderProps {
  * @returns CalendarContext.Provider component
  */
 export const CalendarProvider = ({
-  dateConvertor,
+  dateAdapter,
   initialDate = new Date(),
   calendarEvents,
   children,
@@ -39,13 +39,13 @@ export const CalendarProvider = ({
   const screenSize = useScreenSize();
 
   const daysOfWeek = useMemo(
-    () => dateConvertor.getDaysOfWeek(screenSize),
-    [screenSize, dateConvertor]
+    () => dateAdapter.getDaysOfWeek(screenSize),
+    [screenSize, dateAdapter]
   );
 
   const calendarView = useMemo(
-    () => dateConvertor.getCalendarView(currentMonth),
-    [currentMonth, dateConvertor]
+    () => dateAdapter.getCalendarView(currentMonth),
+    [currentMonth, dateAdapter]
   );
 
   const events = useMemo(
@@ -53,8 +53,8 @@ export const CalendarProvider = ({
       calendarEvents
         .map((x) => {
           const internalEvent: InternalCalendarEvent = {
-            start: new Date(x.start),
-            end: new Date(x.end),
+            start: dateAdapter.convertIsoToDate(x.start),
+            end: dateAdapter.convertIsoToDate(x.end),
             color: x.color,
             id: x.id,
             summary: x.summary,
@@ -63,10 +63,10 @@ export const CalendarProvider = ({
         })
         .filter(
           (event) =>
-            dateConvertor.isSameMonth(event.start, currentMonth) ||
-            dateConvertor.isSameMonth(event.end, currentMonth)
+            dateAdapter.isSameMonth(event.start, currentMonth) ||
+            dateAdapter.isSameMonth(event.end, currentMonth)
         ),
-    [currentMonth, calendarEvents, dateConvertor]
+    [currentMonth, calendarEvents, dateAdapter]
   );
 
   const calendarWithEvents = useMemo<EventWeek[]>(
@@ -76,25 +76,25 @@ export const CalendarProvider = ({
         weekEnd: week[6],
         daysInWeek: week,
         events: events.filter((event) =>
-          dateConvertor.isEventInWeek(event.start, event.end, week)
+          dateAdapter.isEventInWeek(event.start, event.end, week)
         ),
       })),
-    [calendarView, events, dateConvertor]
+    [calendarView, events, dateAdapter]
   );
 
   const onNextMonth = useCallback(
-    () => setCurrentMonth((month) => dateConvertor.addMonthsToDate(month, 1)),
-    [dateConvertor]
+    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, 1)),
+    [dateAdapter]
   );
 
   const onPrevMonth = useCallback(
-    () => setCurrentMonth((month) => dateConvertor.addMonthsToDate(month, -1)),
-    [dateConvertor]
+    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -1)),
+    [dateAdapter]
   );
 
   const contextValue: CalendarState = {
     currentMonth,
-    dateConvertor,
+    dateConvertor: dateAdapter,
     daysOfWeek: daysOfWeek,
     onNextMonth,
     onPrevMonth,

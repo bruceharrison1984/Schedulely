@@ -4,6 +4,6 @@
 
 export * from './CalendarEvent';
 export * from './CalendarState';
-export * from './DateConvertor';
+export * from './DateAdapter';
 export * from './EventWeek';
 export * from './components/index';

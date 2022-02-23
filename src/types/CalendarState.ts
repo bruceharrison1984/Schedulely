@@ -1,4 +1,4 @@
-import { DateConvertor } from '.';
+import { DateTimeAdapter } from '.';
 import { EventWeek } from './EventWeek';
 
 export type CalendarState = {
@@ -6,7 +6,7 @@ export type CalendarState = {
   currentMonth: Date;
 
   /** The DateConvertor that is being utilized */
-  dateConvertor: DateConvertor;
+  dateConvertor: DateTimeAdapter;
 
   /** Array with localized names of the days of the week */
   daysOfWeek: string[];
