@@ -6,7 +6,7 @@ import {
 import { CalendarProvider, ComponentProvider } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { Theme, defaultTheme, makeCssTheme } from '@/theme/index';
-import { createDefaultConvertor } from './dateAdapters';
+import { createDefaultAdapter } from './dateAdapters';
 import { useMemo } from 'react';
 
 export interface NextMonthProps {
@@ -18,13 +18,13 @@ export interface NextMonthProps {
 }
 
 export const NextMonth = ({
-  dateAdapter = createDefaultConvertor(),
+  dateAdapter = createDefaultAdapter(),
   nextMonthComponents,
   events,
   theme,
   className = 'nextmonth',
 }: NextMonthProps) => {
-  if (!dateAdapter) throw new Error('Date Convertor must be supplied!');
+  if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
   const cssTheme = useMemo(
     () => makeCssTheme(theme || defaultTheme, 'nextmonth'),

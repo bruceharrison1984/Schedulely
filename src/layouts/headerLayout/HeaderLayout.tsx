@@ -6,8 +6,7 @@ import { useCalendar, useComponents } from '@/hooks/index';
  * @returns HeaderLayout component
  */
 export const HeaderLayout = () => {
-  const { currentMonth, onNextMonth, onPrevMonth, dateConvertor } =
-    useCalendar();
+  const { currentMonth, onNextMonth, onPrevMonth, dateAdapter } = useCalendar();
 
   const {
     forwardNavigationButtonComponent: ForwardNavigationButton,
@@ -19,8 +18,8 @@ export const HeaderLayout = () => {
     <div className="nm--header-layout">
       <BackNavigationButton onClick={onPrevMonth} />
       <HeaderBanner
-        month={dateConvertor.getMonthName(currentMonth)}
-        year={dateConvertor.getYear(currentMonth)}
+        month={dateAdapter.getMonthName(currentMonth)}
+        year={dateAdapter.getYear(currentMonth)}
       />
       <ForwardNavigationButton onClick={onNextMonth} />
     </div>

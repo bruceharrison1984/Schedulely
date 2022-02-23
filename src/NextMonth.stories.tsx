@@ -12,7 +12,7 @@ import {
   // startOfWeek,
 } from 'date-fns';
 // import { createDateFnsConvertor } from './dateConvertors/dateFns';
-import { createDefaultConvertor } from './dateAdapters';
+import { createDefaultAdapter } from './dateAdapters';
 import chance from 'chance';
 
 export default {
@@ -127,5 +127,5 @@ export const nativeJs = Template.bind({});
 nativeJs.storyName = 'NativeJS Date';
 nativeJs.args = {
   events,
-  dateAdapter: createDefaultConvertor(),
+  dateAdapter: createDefaultAdapter(),
 };

@@ -1,6 +1,6 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
 
-export const createDefaultConvertor = (locale = 'en'): DateTimeAdapter => {
+export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
   /** Map used to translate DisplaySize in to Intl day name format */
   const map = new Map<DisplaySize, 'long' | 'narrow' | 'short'>([
     [DisplaySize.large, 'long'],

@@ -10,7 +10,7 @@ interface WeekLayoutProps {
  * @returns WeekLayout Component
  */
 export const WeekLayout = ({ dates }: WeekLayoutProps) => {
-  const { dateConvertor, currentMonth } = useCalendar();
+  const { dateAdapter, currentMonth } = useCalendar();
 
   const { dayComponent: DayComponent, dayHeaderComponent: DayHeader } =
     useComponents();
@@ -21,14 +21,14 @@ export const WeekLayout = ({ dates }: WeekLayoutProps) => {
         <div
           key={day.getDate()}
           data-day={day.getDate()}
-          data-istoday={dateConvertor.isDateToday(day) ? true : undefined}
+          data-istoday={dateAdapter.isDateToday(day) ? true : undefined}
         >
           <DayComponent
-            isCurrentMonth={dateConvertor.isSameMonth(day, currentMonth)}
+            isCurrentMonth={dateAdapter.isSameMonth(day, currentMonth)}
           >
             <DayHeader
-              isToday={dateConvertor.isDateToday(day)}
-              dateNumber={dateConvertor.getDayNumber(day)}
+              isToday={dateAdapter.isDateToday(day)}
+              dateNumber={dateAdapter.getDayNumber(day)}
             />
           </DayComponent>
         </div>

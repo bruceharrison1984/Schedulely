@@ -11,7 +11,7 @@ import { DateTimeAdapter, DisplaySize } from '@/types/DateConvertor';
 //   startOfWeek,
 // } from 'date-fns';
 // import { createDateFnsConvertor } from '.';
-import { createDefaultConvertor } from '.';
+import { createDefaultAdapter } from '.';
 import {
   getAddMonthsToDateTestCases,
   getDayNumberFromDateTestCases,
@@ -45,7 +45,7 @@ const convertors = [
   // },
   {
     name: 'NativeJs',
-    convertor: createDefaultConvertor(),
+    convertor: createDefaultAdapter(),
   },
 ];
 
