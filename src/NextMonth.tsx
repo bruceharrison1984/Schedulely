@@ -6,7 +6,7 @@ import {
 import { CalendarProvider, ComponentProvider } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { Theme, defaultTheme, makeCssTheme } from '@/theme/index';
-import { createDefaultConvertor } from './dateConvertors';
+import { createDefaultConvertor } from './dateAdapters';
 import { useMemo } from 'react';
 
 export interface NextMonthProps {

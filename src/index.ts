@@ -4,7 +4,7 @@
 
 export * from './NextMonth';
 export * from './components/index';
-export * from './dateConvertors/index';
+export * from './dateAdapters/index';
 export * from './hooks/index';
 export * from './layouts/index';
 export * from './providers/index';

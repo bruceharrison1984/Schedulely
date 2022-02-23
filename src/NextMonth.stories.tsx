@@ -12,7 +12,7 @@ import {
   // startOfWeek,
 } from 'date-fns';
 // import { createDateFnsConvertor } from './dateConvertors/dateFns';
-import { createDefaultConvertor } from './dateConvertors';
+import { createDefaultConvertor } from './dateAdapters';
 import chance from 'chance';
 
 export default {
