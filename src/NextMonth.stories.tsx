@@ -49,7 +49,13 @@ const generateEvents = (
     );
     const summary = chanceSeed.name();
     const color = chanceSeed.color({ format: 'hex' });
-    events.push({ id, start, end, summary, color });
+    events.push({
+      id,
+      start: start.toISOString(),
+      end: end.toISOString(),
+      summary,
+      color,
+    });
   }
   return events;
 };

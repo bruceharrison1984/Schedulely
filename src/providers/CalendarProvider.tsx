@@ -3,6 +3,7 @@ import {
   CalendarState,
   DateConvertor,
   EventWeek,
+  InternalCalendarEvent,
 } from '@/types/index';
 import {
   ReactNode,
@@ -49,11 +50,22 @@ export const CalendarProvider = ({
 
   const events = useMemo(
     () =>
-      calendarEvents.filter(
-        (event) =>
-          dateConvertor.isSameMonth(event.start, currentMonth) ||
-          dateConvertor.isSameMonth(event.end, currentMonth)
-      ),
+      calendarEvents
+        .map((x) => {
+          const internalEvent: InternalCalendarEvent = {
+            start: new Date(x.start),
+            end: new Date(x.end),
+            color: x.color,
+            id: x.id,
+            summary: x.summary,
+          };
+          return internalEvent;
+        })
+        .filter(
+          (event) =>
+            dateConvertor.isSameMonth(event.start, currentMonth) ||
+            dateConvertor.isSameMonth(event.end, currentMonth)
+        ),
     [currentMonth, calendarEvents, dateConvertor]
   );
 

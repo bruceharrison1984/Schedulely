@@ -1,8 +1,8 @@
 import './EventLayout.scss';
-import { CalendarEvent, useCalendar, useComponents } from 'src';
+import { InternalCalendarEvent, useCalendar, useComponents } from 'src';
 
 interface EventLayoutProps {
-  events: CalendarEvent[];
+  events: InternalCalendarEvent[];
   startOfWeek: Date;
   endOfWeek: Date;
 }

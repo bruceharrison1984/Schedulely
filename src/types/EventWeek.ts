@@ -1,8 +1,8 @@
-import { CalendarEvent } from './CalendarEvent';
+import { InternalCalendarEvent } from '@/types/index';
 
 export interface EventWeek {
   weekStart: Date;
   weekEnd: Date;
   daysInWeek: Date[];
-  events: CalendarEvent[];
+  events: InternalCalendarEvent[];
 }
