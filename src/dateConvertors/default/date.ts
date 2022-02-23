@@ -12,11 +12,9 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     const formatter = new Intl.DateTimeFormat(locale, {
       weekday: map.get(displaySize),
     });
-    const days = [];
-    for (let index = 0; index < 7; index++) {
-      days.push(formatter.format(new Date(2012, 0, index + 1)));
-    }
-    return days;
+    return [0, 1, 2, 3, 4, 5, 6].map((x) =>
+      formatter.format(new Date(2012, 0, x + 1))
+    );
   };
 
   const getCalendarView = (date: Date) => {
@@ -48,6 +46,7 @@ export const createDefaultConvertor = (locale = 'en'): DateConvertor => {
     }
 
     iteratedDate = endOfMonth;
+    //only gather enough days until sunday
     while (iteratedDate.getDay() + 1 !== 7) {
       iteratedDate = new Date(
         iteratedDate.getFullYear(),
