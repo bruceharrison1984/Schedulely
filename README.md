@@ -33,11 +33,11 @@ Care should be taken when styling custom components. The underlying calendar lay
 
 ## DateTime Libraries
 
-[See DateConvertor Docs](src/dateConvertors/readme.md)
+[See DateAdapter Docs](src/dateAdapters/readme.md)
 
-NextMonth doesn't force a particular DateTime library on you. By implementing the `DateConvertor` interface, you can pass in whatever DateTime implementation that you want. This helps us keep the package size very small, and not force consumers to have to marshall DateTime objects between libraries within their own projects.
+NextMonth doesn't force a particular DateTime library on you. By implementing the `DateAdapter` interface, you can pass in whatever DateTime implementation that you want. This helps us keep the package size very small, and not force consumers to have to marshall DateTime objects between libraries within their own projects.
 
-The long term plan is to implement a default DateConvertor based on `Temporal` when it is finally approved. Until then, you are required to bring-your-own-date-lib.
+The long term plan is to implement a default DateAdapter based on `Temporal` when it is finally approved. Until then, you are required to bring-your-own-date-lib.
 
 ## SCSS Overrides
 
@@ -59,7 +59,7 @@ import {
   addMonths,
   isSameWeek,
 } from 'date-fns';
-import { createDateFnsConvertor } from './dateConvertors/dateFns';
+import { createDateFnsConvertor } from './dateAdapters/dateFns';
 ...
   export const MyApp = () => {
     const convertor = createDateFnsConvertor(
@@ -90,7 +90,7 @@ import { createDateFnsConvertor } from './dateConvertors/dateFns';
       },
     ];
 
-    return (<NextMonth events={events} dateConvertor={convertor} />);
+    return (<NextMonth events={events} dateAdapter={convertor} />);
   }
 ```
 

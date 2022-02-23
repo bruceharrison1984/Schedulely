@@ -94,7 +94,7 @@ export const CalendarProvider = ({
 
   const contextValue: CalendarState = {
     currentMonth,
-    dateConvertor: dateAdapter,
+    dateAdapter: dateAdapter,
     daysOfWeek: daysOfWeek,
     onNextMonth,
     onPrevMonth,
