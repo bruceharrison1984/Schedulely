@@ -54,203 +54,209 @@ describe('Date Convertor', () => {
     name: string;
     convertor: DateConvertor;
   }>(convertors)('$name convertor', ({ convertor }) => {
-    // addMonthsToDate
-    it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
-      getAddMonthsToDateTestCases()
-    )(
-      'addMonthsToDate $originalDate and $amount returns $expectedDate',
-      ({ originalDate, amount, expectedDate }) => {
-        const result = convertor.addMonthsToDate(originalDate, amount);
-        expect(result).toEqual(expectedDate);
-      }
-    );
-
-    // isSameMonth
-    it.each<{ firstDate: Date; secondDate: Date; expected: boolean }>(
-      getIsSameMonthMonthTestCases()
-    )(
-      'isSameMonth $firstDate and $secondDate returns $expected',
-      ({ firstDate, secondDate, expected }) => {
-        const result = convertor.isSameMonth(firstDate, secondDate);
-        expect(result).toBe(expected);
-      }
-    );
-
-    it('getCalendarViewInWeeks returns correct values (including sibling days)', () => {
-      const result = convertor.getCalendarView(new Date(2021, 0, 10));
-      expect(result).toEqual([
-        [
-          new Date(2020, 11, 27),
-          new Date(2020, 11, 28),
-          new Date(2020, 11, 29),
-          new Date(2020, 11, 30),
-          new Date(2020, 11, 31),
-          new Date(2021, 0, 1),
-          new Date(2021, 0, 2),
-        ],
-        [
-          new Date(2021, 0, 3),
-          new Date(2021, 0, 4),
-          new Date(2021, 0, 5),
-          new Date(2021, 0, 6),
-          new Date(2021, 0, 7),
-          new Date(2021, 0, 8),
-          new Date(2021, 0, 9),
-        ],
-        [
-          new Date(2021, 0, 10),
-          new Date(2021, 0, 11),
-          new Date(2021, 0, 12),
-          new Date(2021, 0, 13),
-          new Date(2021, 0, 14),
-          new Date(2021, 0, 15),
-          new Date(2021, 0, 16),
-        ],
-        [
-          new Date(2021, 0, 17),
-          new Date(2021, 0, 18),
-          new Date(2021, 0, 19),
-          new Date(2021, 0, 20),
-          new Date(2021, 0, 21),
-          new Date(2021, 0, 22),
-          new Date(2021, 0, 23),
-        ],
-        [
-          new Date(2021, 0, 24),
-          new Date(2021, 0, 25),
-          new Date(2021, 0, 26),
-          new Date(2021, 0, 27),
-          new Date(2021, 0, 28),
-          new Date(2021, 0, 29),
-          new Date(2021, 0, 30),
-        ],
-        [
-          new Date(2021, 0, 31),
-          new Date(2021, 1, 1),
-          new Date(2021, 1, 2),
-          new Date(2021, 1, 3),
-          new Date(2021, 1, 4),
-          new Date(2021, 1, 5),
-          new Date(2021, 1, 6),
-        ],
-      ]);
+    describe('addMonthsToDate', () => {
+      it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
+        getAddMonthsToDateTestCases()
+      )(
+        '$originalDate and $amount returns $expectedDate',
+        ({ originalDate, amount, expectedDate }) => {
+          const result = convertor.addMonthsToDate(originalDate, amount);
+          expect(result).toEqual(expectedDate);
+        }
+      );
     });
 
-    // getDaysOfWeek
-    it.each<{ format: DisplaySize; expected: string[] }>(
-      getDaysOfWeekTestCases()
-    )(
-      'getDaysOfWeek with format "$format" returns $expected',
-      ({ format, expected }) => {
+    describe('isSameMonth', () => {
+      it.each<{ firstDate: Date; secondDate: Date; expected: boolean }>(
+        getIsSameMonthMonthTestCases()
+      )(
+        '$firstDate and $secondDate returns $expected',
+        ({ firstDate, secondDate, expected }) => {
+          const result = convertor.isSameMonth(firstDate, secondDate);
+          expect(result).toBe(expected);
+        }
+      );
+    });
+
+    describe('getCalendarView', () => {
+      it('returns correct values (including sibling days)', () => {
+        const result = convertor.getCalendarView(new Date(2021, 0, 10));
+        expect(result).toEqual([
+          [
+            new Date(2020, 11, 27),
+            new Date(2020, 11, 28),
+            new Date(2020, 11, 29),
+            new Date(2020, 11, 30),
+            new Date(2020, 11, 31),
+            new Date(2021, 0, 1),
+            new Date(2021, 0, 2),
+          ],
+          [
+            new Date(2021, 0, 3),
+            new Date(2021, 0, 4),
+            new Date(2021, 0, 5),
+            new Date(2021, 0, 6),
+            new Date(2021, 0, 7),
+            new Date(2021, 0, 8),
+            new Date(2021, 0, 9),
+          ],
+          [
+            new Date(2021, 0, 10),
+            new Date(2021, 0, 11),
+            new Date(2021, 0, 12),
+            new Date(2021, 0, 13),
+            new Date(2021, 0, 14),
+            new Date(2021, 0, 15),
+            new Date(2021, 0, 16),
+          ],
+          [
+            new Date(2021, 0, 17),
+            new Date(2021, 0, 18),
+            new Date(2021, 0, 19),
+            new Date(2021, 0, 20),
+            new Date(2021, 0, 21),
+            new Date(2021, 0, 22),
+            new Date(2021, 0, 23),
+          ],
+          [
+            new Date(2021, 0, 24),
+            new Date(2021, 0, 25),
+            new Date(2021, 0, 26),
+            new Date(2021, 0, 27),
+            new Date(2021, 0, 28),
+            new Date(2021, 0, 29),
+            new Date(2021, 0, 30),
+          ],
+          [
+            new Date(2021, 0, 31),
+            new Date(2021, 1, 1),
+            new Date(2021, 1, 2),
+            new Date(2021, 1, 3),
+            new Date(2021, 1, 4),
+            new Date(2021, 1, 5),
+            new Date(2021, 1, 6),
+          ],
+        ]);
+      });
+    });
+
+    describe('getDaysOfWeek', () => {
+      it.each<{ format: DisplaySize; expected: string[] }>(
+        getDaysOfWeekTestCases()
+      )('with format "$format" returns $expected', ({ format, expected }) => {
         const result = convertor.getDaysOfWeek(format);
         expect(result).toEqual(expected);
-      }
-    );
+      });
+    });
 
-    // getMonthNameFromDate
-    it.each<{ date: Date; expected: string }>(getMonthNameFromDateTestCases())(
-      'getMonthNameFromDate $date returns $expected',
-      ({ date, expected }) => {
+    describe('getMonthName', () => {
+      it.each<{ date: Date; expected: string }>(
+        getMonthNameFromDateTestCases()
+      )('$date returns $expected', ({ date, expected }) => {
         const result = convertor.getMonthName(date);
         expect(result).toBe(expected);
-      }
-    );
+      });
+    });
 
-    // getYearFromDate
-    it.each<{ date: Date; expected: number }>(getYearFromDateTestCases())(
-      'getYearFromDate $date returns $expected',
-      ({ date, expected }) => {
-        const result = convertor.getYear(date);
-        expect(result).toBe(expected);
-      }
-    );
+    describe('getYear', () => {
+      it.each<{ date: Date; expected: number }>(getYearFromDateTestCases())(
+        '$date returns $expected',
+        ({ date, expected }) => {
+          const result = convertor.getYear(date);
+          expect(result).toBe(expected);
+        }
+      );
+    });
 
-    // getDayNumberFromDate
-    it.each<{ date: Date; expected: number }>(getDayNumberFromDateTestCases())(
-      'getDayNumberFromDate $date returns $expected',
-      ({ date, expected }) => {
+    describe('getDayNumber', () => {
+      it.each<{ date: Date; expected: number }>(
+        getDayNumberFromDateTestCases()
+      )('$date returns $expected', ({ date, expected }) => {
         const result = convertor.getDayNumber(date);
         expect(result).toBe(expected);
-      }
-    );
+      });
+    });
 
-    // isDateToday
-    it.each<{ date: Date; expected: boolean }>(getIsTodayTestCases())(
-      'isDateToday $date returns $expected',
-      ({ date, expected }) => {
-        const result = convertor.isDateToday(date);
-        expect(result).toBe(expected);
-      }
-    );
+    describe('isDateToday', () => {
+      it.each<{ date: Date; expected: boolean }>(getIsTodayTestCases())(
+        '$date returns $expected',
+        ({ date, expected }) => {
+          const result = convertor.isDateToday(date);
+          expect(result).toBe(expected);
+        }
+      );
+    });
 
-    // getEndIndex
-    it.each<{ eventEnd: Date; endOfWeek: Date; expected: number }>([
-      {
-        eventEnd: new Date(2022, 1, 11),
-        endOfWeek: new Date(2022, 1, 12),
-        expected: 7,
-      },
-      {
-        // event ends after end of week
-        eventEnd: new Date(2022, 1, 13),
-        endOfWeek: new Date(2022, 1, 12),
-        expected: 8,
-      },
-      {
-        eventEnd: new Date(2022, 1, 9),
-        endOfWeek: new Date(2022, 1, 12),
-        expected: 5,
-      },
-      {
-        // event ends on Sunday
-        eventEnd: new Date(2021, 8, 26),
-        endOfWeek: new Date(2021, 9, 2),
-        expected: 2,
-      },
-      {
-        // event that starts and ends on Sunday
-        eventEnd: new Date(2022, 0, 2),
-        endOfWeek: new Date(2022, 0, 8),
-        expected: 2,
-      },
-    ])(
-      'getEndIndex $eventEnd with $endOfWeek returns $expected',
-      ({ eventEnd, endOfWeek, expected }) => {
-        const result = convertor.getGridEndIndex(eventEnd, endOfWeek);
-        expect(result).toBe(expected);
-      }
-    );
+    describe('getGridEndIndex', () => {
+      it.each<{ eventEnd: Date; endOfWeek: Date; expected: number }>([
+        {
+          eventEnd: new Date(2022, 1, 11),
+          endOfWeek: new Date(2022, 1, 12),
+          expected: 7,
+        },
+        {
+          // event ends after end of week
+          eventEnd: new Date(2022, 1, 13),
+          endOfWeek: new Date(2022, 1, 12),
+          expected: 8,
+        },
+        {
+          eventEnd: new Date(2022, 1, 9),
+          endOfWeek: new Date(2022, 1, 12),
+          expected: 5,
+        },
+        {
+          // event ends on Sunday
+          eventEnd: new Date(2021, 8, 26),
+          endOfWeek: new Date(2021, 9, 2),
+          expected: 2,
+        },
+        {
+          // event that starts and ends on Sunday
+          eventEnd: new Date(2022, 0, 2),
+          endOfWeek: new Date(2022, 0, 8),
+          expected: 2,
+        },
+      ])(
+        '$eventEnd with $endOfWeek returns $expected',
+        ({ eventEnd, endOfWeek, expected }) => {
+          const result = convertor.getGridEndIndex(eventEnd, endOfWeek);
+          expect(result).toBe(expected);
+        }
+      );
+    });
 
-    // getStartIndex
-    it.each<{ eventStart: Date; startOfWeek: Date; expected: number }>([
-      {
-        eventStart: new Date(2022, 1, 7),
-        startOfWeek: new Date(2022, 1, 6),
-        expected: 2,
-      },
-      {
-        eventStart: new Date(2022, 1, 9),
-        startOfWeek: new Date(2022, 1, 6),
-        expected: 4,
-      },
-      {
-        eventStart: new Date(2022, 3, 10),
-        startOfWeek: new Date(2022, 3, 10),
-        expected: 1,
-      },
-      {
-        // event that starts and ends on Sunday
-        eventStart: new Date(2022, 0, 2),
-        startOfWeek: new Date(2022, 0, 2),
-        expected: 1,
-      },
-    ])(
-      'getStartIndex $eventStart with $startOfWeek returns $expected',
-      ({ eventStart, startOfWeek, expected }) => {
-        const result = convertor.getGridStartIndex(eventStart, startOfWeek);
-        expect(result).toBe(expected);
-      }
-    );
+    describe('getGridStartIndex', () => {
+      it.each<{ eventStart: Date; startOfWeek: Date; expected: number }>([
+        {
+          eventStart: new Date(2022, 1, 7),
+          startOfWeek: new Date(2022, 1, 6),
+          expected: 2,
+        },
+        {
+          eventStart: new Date(2022, 1, 9),
+          startOfWeek: new Date(2022, 1, 6),
+          expected: 4,
+        },
+        {
+          eventStart: new Date(2022, 3, 10),
+          startOfWeek: new Date(2022, 3, 10),
+          expected: 1,
+        },
+        {
+          // event that starts and ends on Sunday
+          eventStart: new Date(2022, 0, 2),
+          startOfWeek: new Date(2022, 0, 2),
+          expected: 1,
+        },
+      ])(
+        '$eventStart with $startOfWeek returns $expected',
+        ({ eventStart, startOfWeek, expected }) => {
+          const result = convertor.getGridStartIndex(eventStart, startOfWeek);
+          expect(result).toBe(expected);
+        }
+      );
+    });
 
     describe('eventFallsWithinWeek', () => {
       // eventFallsWithinWeek
