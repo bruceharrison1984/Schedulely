@@ -1,5 +1,5 @@
 import 'regenerator-runtime/runtime';
-import { DateTimeAdapter, DisplaySize } from '@/types/DateConvertor';
+import { DateTimeAdapter, DisplaySize } from '@/types/index';
 // import {
 //   addDays,
 //   addMonths,
@@ -23,13 +23,13 @@ import {
 } from './_testHelpers.util';
 
 /**
- * Additional convertors should just be added to this array
- * This ensures all convertors run the same tests, and makes it much easier to
- * add a new convertor without having to rewrite all the tests
+ * Additional adapters should just be added to this array
+ * This ensures all adapters run the same tests, and makes it much easier to
+ * add a new adapter without having to rewrite all the tests
  *
  * All tests presume US/eng units
  */
-const convertors = [
+const adapters = [
   // {
   //   name: 'DateFns',
   //   convertor: createDateFnsConvertor({
@@ -45,22 +45,22 @@ const convertors = [
   // },
   {
     name: 'NativeJs',
-    convertor: createDefaultAdapter(),
+    adapter: createDefaultAdapter(),
   },
 ];
 
-describe('Date Convertor', () => {
+describe('Date Adapter', () => {
   describe.each<{
     name: string;
-    convertor: DateTimeAdapter;
-  }>(convertors)('$name convertor', ({ convertor }) => {
+    adapter: DateTimeAdapter;
+  }>(adapters)('$name', ({ adapter }) => {
     describe('addMonthsToDate', () => {
       it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
         getAddMonthsToDateTestCases()
       )(
         '$originalDate and $amount returns $expectedDate',
         ({ originalDate, amount, expectedDate }) => {
-          const result = convertor.addMonthsToDate(originalDate, amount);
+          const result = adapter.addMonthsToDate(originalDate, amount);
           expect(result).toEqual(expectedDate);
         }
       );
@@ -72,7 +72,7 @@ describe('Date Convertor', () => {
       )(
         '$firstDate and $secondDate returns $expected',
         ({ firstDate, secondDate, expected }) => {
-          const result = convertor.isSameMonth(firstDate, secondDate);
+          const result = adapter.isSameMonth(firstDate, secondDate);
           expect(result).toBe(expected);
         }
       );
@@ -80,7 +80,7 @@ describe('Date Convertor', () => {
 
     describe('getCalendarView', () => {
       it('returns correct values (including sibling days)', () => {
-        const result = convertor.getCalendarView(new Date(2021, 0, 10));
+        const result = adapter.getCalendarView(new Date(2021, 0, 10));
         expect(result).toEqual([
           [
             new Date(2020, 11, 27),
@@ -144,7 +144,7 @@ describe('Date Convertor', () => {
       it.each<{ format: DisplaySize; expected: string[] }>(
         getDaysOfWeekTestCases()
       )('with format "$format" returns $expected', ({ format, expected }) => {
-        const result = convertor.getDaysOfWeek(format);
+        const result = adapter.getDaysOfWeek(format);
         expect(result).toEqual(expected);
       });
     });
@@ -153,7 +153,7 @@ describe('Date Convertor', () => {
       it.each<{ date: Date; expected: string }>(
         getMonthNameFromDateTestCases()
       )('$date returns $expected', ({ date, expected }) => {
-        const result = convertor.getMonthName(date);
+        const result = adapter.getMonthName(date);
         expect(result).toBe(expected);
       });
     });
@@ -162,7 +162,7 @@ describe('Date Convertor', () => {
       it.each<{ date: Date; expected: number }>(getYearFromDateTestCases())(
         '$date returns $expected',
         ({ date, expected }) => {
-          const result = convertor.getYear(date);
+          const result = adapter.getYear(date);
           expect(result).toBe(expected);
         }
       );
@@ -172,7 +172,7 @@ describe('Date Convertor', () => {
       it.each<{ date: Date; expected: number }>(
         getDayNumberFromDateTestCases()
       )('$date returns $expected', ({ date, expected }) => {
-        const result = convertor.getDayNumber(date);
+        const result = adapter.getDayNumber(date);
         expect(result).toBe(expected);
       });
     });
@@ -181,7 +181,7 @@ describe('Date Convertor', () => {
       it.each<{ date: Date; expected: boolean }>(getIsTodayTestCases())(
         '$date returns $expected',
         ({ date, expected }) => {
-          const result = convertor.isDateToday(date);
+          const result = adapter.isDateToday(date);
           expect(result).toBe(expected);
         }
       );
@@ -220,7 +220,7 @@ describe('Date Convertor', () => {
       ])(
         '$eventEnd with $endOfWeek returns $expected',
         ({ eventEnd, endOfWeek, expected }) => {
-          const result = convertor.getGridEndIndex(eventEnd, endOfWeek);
+          const result = adapter.getGridEndIndex(eventEnd, endOfWeek);
           expect(result).toBe(expected);
         }
       );
@@ -252,7 +252,7 @@ describe('Date Convertor', () => {
       ])(
         '$eventStart with $startOfWeek returns $expected',
         ({ eventStart, startOfWeek, expected }) => {
-          const result = convertor.getGridStartIndex(eventStart, startOfWeek);
+          const result = adapter.getGridStartIndex(eventStart, startOfWeek);
           expect(result).toBe(expected);
         }
       );
@@ -345,7 +345,7 @@ describe('Date Convertor', () => {
           expected: false,
         },
       ])('$message', ({ eventStartDate, eventEndDate, week, expected }) => {
-        const result = convertor.isEventInWeek(
+        const result = adapter.isEventInWeek(
           eventStartDate,
           eventEndDate,
           week
@@ -357,7 +357,7 @@ describe('Date Convertor', () => {
         const eventStartDate = new Date(2022, 8, 1);
         const eventEndDate = new Date(2022, 8, 25);
         expect(() =>
-          convertor.isEventInWeek(eventStartDate, eventEndDate, [])
+          adapter.isEventInWeek(eventStartDate, eventEndDate, [])
         ).toThrow();
       });
     });
