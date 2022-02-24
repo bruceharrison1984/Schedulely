@@ -258,8 +258,7 @@ describe('Date Adapter', () => {
       );
     });
 
-    describe('eventFallsWithinWeek', () => {
-      // eventFallsWithinWeek
+    describe('isEventInWeek', () => {
       it.each<{
         message: string;
         eventStartDate: Date;
