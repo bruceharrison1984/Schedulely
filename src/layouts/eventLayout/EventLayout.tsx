@@ -24,21 +24,35 @@ export const EventLayout = ({
   } = useCalendar();
   const { eventComponent: EventComponent } = useComponents();
 
+  const highlight = (eventId: string) => {
+    const matchingEvents = document.querySelectorAll(
+      `[data-eventid="${eventId}"]`
+    );
+    // console.log(matchingEvents);
+    matchingEvents.forEach((v, k) => {
+      const style = v.getAttribute('style');
+      v.setAttribute('style', `${style}; opacity: 100%`);
+    });
+  };
+
   return (
     <div className="nm--event-layout">
-      {events.map((event) => (
-        <div
-          data-eventid={event.id}
-          key={event.id}
-          style={{
-            gridColumnStart: getStartIndex(event.start, startOfWeek),
-            gridColumnEnd: getEndIndex(event.end, endOfWeek),
-            minWidth: 0,
-          }}
-        >
-          <EventComponent event={event} />
-        </div>
-      ))}
+      {events.map((event) => {
+        return (
+          <div
+            data-eventid={event.id}
+            key={event.id}
+            style={{
+              gridColumnStart: getStartIndex(event.start, startOfWeek),
+              gridColumnEnd: getEndIndex(event.end, endOfWeek),
+              minWidth: 0,
+            }}
+            onMouseOver={() => highlight(event.id)}
+          >
+            <EventComponent event={event} />
+          </div>
+        );
+      })}
     </div>
   );
 };
