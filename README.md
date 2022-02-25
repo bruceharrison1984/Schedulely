@@ -5,7 +5,7 @@
 This component is still very early in development. An npm package will be made available once it has reached a suitable level of functionality.
 
 ![Large Calendar Preview](/assets/large_preview.png)
-[**Storybook Demo**](https://bruceharrison1984.github.io/NextMonth/?path=/story/nextmonth--datefns)
+[**Storybook Demo**](https://bruceharrison1984.github.io/NextMonth)
 
 ---
 
