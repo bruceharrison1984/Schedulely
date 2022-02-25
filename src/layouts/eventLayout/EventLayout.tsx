@@ -1,10 +1,13 @@
 import './EventLayout.scss';
+import { Dispatch, SetStateAction } from 'react';
 import { InternalCalendarEvent, useCalendar, useComponents } from 'src';
 
 interface EventLayoutProps {
   events: InternalCalendarEvent[];
   startOfWeek: Date;
   endOfWeek: Date;
+  setHighlightedEvent: Dispatch<SetStateAction<string | undefined>>;
+  highlightedEvent: string | undefined;
 }
 
 /**
@@ -15,6 +18,8 @@ export const EventLayout = ({
   events,
   startOfWeek,
   endOfWeek,
+  setHighlightedEvent,
+  highlightedEvent,
 }: EventLayoutProps) => {
   const {
     dateAdapter: {
@@ -24,17 +29,6 @@ export const EventLayout = ({
   } = useCalendar();
   const { eventComponent: EventComponent } = useComponents();
 
-  const highlight = (eventId: string) => {
-    const matchingEvents = document.querySelectorAll(
-      `[data-eventid="${eventId}"]`
-    );
-    // console.log(matchingEvents);
-    matchingEvents.forEach((v, k) => {
-      const style = v.getAttribute('style');
-      v.setAttribute('style', `${style}; opacity: 100%`);
-    });
-  };
-
   return (
     <div className="nm--event-layout">
       {events.map((event) => {
@@ -43,11 +37,13 @@ export const EventLayout = ({
             data-eventid={event.id}
             key={event.id}
             style={{
+              opacity: highlightedEvent === event.id ? '100%' : '80%',
               gridColumnStart: getStartIndex(event.start, startOfWeek),
               gridColumnEnd: getEndIndex(event.end, endOfWeek),
               minWidth: 0,
             }}
-            onMouseOver={() => highlight(event.id)}
+            onMouseOver={() => setHighlightedEvent(event.id)}
+            onMouseLeave={() => setHighlightedEvent(undefined)}
           >
             <EventComponent event={event} />
           </div>

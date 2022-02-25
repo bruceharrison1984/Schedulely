@@ -1,6 +1,7 @@
 import './MonthLayout.scss';
 import { EventLayout, WeekLayout } from '@/layouts/index';
 import { useCalendar } from '@/hooks/index';
+import { useState } from 'react';
 
 /**
  * This component controls the layout of the weeks of the calendar
@@ -8,6 +9,15 @@ import { useCalendar } from '@/hooks/index';
  */
 export const MonthLayout = () => {
   const { calendarWithEvents } = useCalendar();
+  /**
+   * TODO:
+   * Hacky way to get multi-line highlights working
+   * causes excessive re-render of all events :(
+   * Pure SCSS option is likely possible
+   */
+  const [highlightedEvent, setHighlightedEvent] = useState<
+    string | undefined
+  >();
 
   return (
     <>
@@ -23,6 +33,8 @@ export const MonthLayout = () => {
               events={week.events}
               startOfWeek={week.daysInWeek[0]}
               endOfWeek={week.daysInWeek[6]}
+              setHighlightedEvent={setHighlightedEvent}
+              highlightedEvent={highlightedEvent}
             />
           )}
           <WeekLayout dates={week.daysInWeek} />

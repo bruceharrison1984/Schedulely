@@ -101,10 +101,4 @@ import { createDateFnsConvertor } from './dateAdapters/dateFns';
   - A good way to support multiple languages
 - Limit display events to visible area
   - add `additional event` indicator for days when events exceed the display size
-
-## Known Bugs
-
-- Events that span multiple weeks will only highlight a single segments
-- DateFns incorrectly handles single day events that occur on sunday
-- Single day events sometimes display on the previous week
-- Events that end on a sunday, they only appear on the previous saturday
+- Multi-line even highlighting is hacky and forces re-renders

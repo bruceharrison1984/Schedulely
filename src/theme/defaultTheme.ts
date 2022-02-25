@@ -5,6 +5,7 @@ export interface Theme {
   dayOfWeekHeaderBgColor: string;
   dayOfWeekTextHeaderTextColor: string;
   dayHeight: string;
+  selectedEvent: string;
 }
 
 export const defaultTheme: Theme = {
@@ -14,6 +15,7 @@ export const defaultTheme: Theme = {
   dayOfWeekHeaderBgColor: 'black',
   dayOfWeekTextHeaderTextColor: 'white',
   dayHeight: '7em',
+  selectedEvent: '',
 };
 
 /** Create a theme by merging partial keys with the default theme */
