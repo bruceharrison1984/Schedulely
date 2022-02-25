@@ -37,6 +37,8 @@ Care should be taken when styling custom components. The underlying calendar lay
 
 NextMonth doesn't force a particular DateTime library on you. By implementing the `DateAdapter` interface, you can pass in whatever DateTime implementation that you want. This helps us keep the package size very small, and not force consumers to have to marshall DateTime objects between libraries within their own projects.
 
+_By default, the calendar will use the NativeJs DateAdapter for dealing with dates._
+
 The long term plan is to implement a default DateAdapter based on `Temporal` when it is finally approved. Until then, you are required to bring-your-own-date-lib.
 
 ## SCSS Overrides
