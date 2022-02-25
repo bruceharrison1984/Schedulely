@@ -51,30 +51,9 @@ This example initializes the calendar with default components, using date-fns as
 
 ```js
 import { NextMonth } from './NextMonth';
-import {
-  addDays,
-  eachDayOfInterval,
-  eachWeekOfInterval,
-  format,
-  startOfMonth,
-  startOfWeek,
-  addMonths,
-  isSameWeek,
-} from 'date-fns';
-import { createDateFnsConvertor } from './dateAdapters/dateFns';
+
 ...
   export const MyApp = () => {
-    const convertor = createDateFnsConvertor(
-        addDays,
-        eachDayOfInterval,
-        eachWeekOfInterval,
-        format,
-        startOfMonth,
-        startOfWeek,
-        addMonths,
-        isSameWeek
-      );
-
     const events = [
       {
         id: '1',
@@ -92,6 +71,6 @@ import { createDateFnsConvertor } from './dateAdapters/dateFns';
       },
     ];
 
-    return (<NextMonth events={events} dateAdapter={convertor} />);
+    return (<NextMonth events={events} />);
   }
 ```
