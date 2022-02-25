@@ -93,12 +93,3 @@ import { createDateFnsConvertor } from './dateAdapters/dateFns';
     return (<NextMonth events={events} dateAdapter={convertor} />);
   }
 ```
-
-## TODO
-
-- Replace nested CSS-grid with `subgrid` when it becomes more widely available
-- Internationalization
-  - A good way to support multiple languages
-- Limit display events to visible area
-  - add `additional event` indicator for days when events exceed the display size
-- Multi-line even highlighting is hacky and forces re-renders
