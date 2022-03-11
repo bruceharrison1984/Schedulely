@@ -10,7 +10,14 @@ There are some convertors already included.
 
 _If you create one, please consider submitting it as a PR for this library! You can easily add your convertor to existing unit tests without needing to rewrite them._
 
+### NativeJS
+
+The default DateAdapter uses the built in `Date` object for javascript. This adapter is used by default, so nothing additional needs to be passed in to
+the `Calendo` component.
+
 ### Date-Fns
+
+#### In development
 
 After importing all the necessary functions, they can all be directly passed to `createDateFnsConvertor`
 
