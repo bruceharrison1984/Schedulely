@@ -12,7 +12,7 @@ import React from 'react';
 
 export interface CalendoProps {
   dateAdapter?: DateTimeAdapter;
-  nextMonthComponents?: Partial<CalendoComponents>;
+  calendoComponents?: Partial<CalendoComponents>;
   events: CalendarEvent[];
   theme?: Partial<Theme>;
   className?: string;
@@ -20,7 +20,7 @@ export interface CalendoProps {
 
 export const Calendo = ({
   dateAdapter = createDefaultAdapter(),
-  nextMonthComponents,
+  calendoComponents,
   events,
   theme,
   className = 'calendo',
@@ -35,7 +35,7 @@ export const Calendo = ({
   return (
     <React.StrictMode>
       <div className={className} style={cssTheme}>
-        <ComponentProvider calendarComponents={nextMonthComponents}>
+        <ComponentProvider calendarComponents={calendoComponents}>
           <CalendarProvider dateAdapter={dateAdapter} calendarEvents={events}>
             <HeaderLayout />
             <DayOfWeekLayout />
