@@ -37,7 +37,6 @@ export const EventLayout = ({
             data-eventid={event.id}
             key={event.id}
             style={{
-              opacity: highlightedEvent === event.id ? '100%' : '80%',
               gridColumnStart: getStartIndex(event.start, startOfWeek),
               gridColumnEnd: getEndIndex(event.end, endOfWeek),
               minWidth: 0,
@@ -45,7 +44,10 @@ export const EventLayout = ({
             onMouseOver={() => setHighlightedEvent(event.id)}
             onMouseLeave={() => setHighlightedEvent(undefined)}
           >
-            <EventComponent event={event} />
+            <EventComponent
+              event={event}
+              isHovered={highlightedEvent === event.id}
+            />
           </div>
         );
       })}

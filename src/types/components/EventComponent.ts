@@ -6,6 +6,7 @@ import { JSXElementConstructor } from 'react';
  */
 export interface EventComponentProps {
   event: InternalCalendarEvent;
+  isHovered: boolean;
 }
 
 /**
