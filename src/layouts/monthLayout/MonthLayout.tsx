@@ -19,21 +19,23 @@ export const MonthLayout = () => {
     string | undefined
   >();
 
-  console.log(calendarWithEvents);
-
-  return calendarWithEvents.map((week, idx) => (
-    <div key={idx} className="nm--week-container" data-week={idx}>
-      {/* If we have no events, don't bother rendering the event grid */}
-      {!!week.events.length && (
-        <EventLayout
-          events={week.events}
-          startOfWeek={week.daysInWeek[0]}
-          endOfWeek={week.daysInWeek[6]}
-          setHighlightedEvent={setHighlightedEvent}
-          highlightedEvent={highlightedEvent}
-        />
-      )}
-      <WeekLayout dates={week.daysInWeek} />
-    </div>
-  ));
+  return (
+    <>
+      {calendarWithEvents.map((week, idx) => (
+        <div key={idx} className="nm--week-container" data-week={idx}>
+          {/* If we have no events, don't bother rendering the event grid */}
+          {!!week.events.length && (
+            <EventLayout
+              events={week.events}
+              startOfWeek={week.daysInWeek[0]}
+              endOfWeek={week.daysInWeek[6]}
+              setHighlightedEvent={setHighlightedEvent}
+              highlightedEvent={highlightedEvent}
+            />
+          )}
+          <WeekLayout dates={week.daysInWeek} />
+        </div>
+      ))}
+    </>
+  );
 };
