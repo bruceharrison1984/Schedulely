@@ -16,7 +16,7 @@ import {
 } from '@/components/index';
 import { DefaultForwardButton } from '@/components/defaultForwardButton';
 
-export interface NextMonthComponents {
+export interface CalendoComponents {
   dayOfWeekComponent: DayOfWeekComponent;
   dayComponent: DayComponent;
   forwardNavigationButtonComponent: NavigationButtonComponent;
@@ -28,17 +28,17 @@ export interface NextMonthComponents {
 
 /**
  * Replace default components with custom ones
- * @param customComponents Partial<NextMonthComponents>
- * @returns NextMonthComponents object
+ * @param customComponents Partial<CalendoComponents>
+ * @returns CalendoComponents object
  */
 export const combineComponentDeclarations = (
-  customComponents?: Partial<NextMonthComponents>
+  customComponents?: Partial<CalendoComponents>
 ) => {
   if (!customComponents) return defaultComponents;
   return { ...defaultComponents, ...customComponents };
 };
 
-const defaultComponents: NextMonthComponents = {
+const defaultComponents: CalendoComponents = {
   dayOfWeekComponent: DefaultDayOfWeek,
   dayComponent: DefaultDay,
   forwardNavigationButtonComponent: DefaultForwardButton,

@@ -23,7 +23,7 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
 
     const finalsOfPrevMonth = [];
     const currentMonth = [];
-    const startsOfNextMonth = [];
+    const startsOfCalendo = [];
 
     let iteratedDate = startOfMonth;
     while (iteratedDate.getDay() !== 0) {
@@ -53,13 +53,13 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
         iteratedDate.getMonth(),
         iteratedDate.getDate() + 1
       );
-      startsOfNextMonth.push(iteratedDate);
+      startsOfCalendo.push(iteratedDate);
     }
 
     const flatMonthView = [
       ...finalsOfPrevMonth.reverse(),
       ...currentMonth,
-      ...startsOfNextMonth,
+      ...startsOfCalendo,
     ];
 
     return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>

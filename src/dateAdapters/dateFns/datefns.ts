@@ -2,7 +2,7 @@ import { DateFnsFunctions } from './datefnsInterface';
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
 
 /**
- * Create a NextMonth compatible DateConvertor from date-fns.
+ * Create a Calendo compatible DateConvertor from date-fns.
  */
 export const createDateFnsConvertor = (
   datefns: DateFnsFunctions

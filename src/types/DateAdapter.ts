@@ -1,5 +1,5 @@
 /**
- * Common interface for porting date libraries so they can be used with NextMonth
+ * Common interface for porting date libraries so they can be used with Calendo
  */
 export interface DateTimeAdapter {
   /** Add the specified number of months to the date. Using a negative value will subtract that amount. */

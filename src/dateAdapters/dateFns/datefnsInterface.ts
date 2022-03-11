@@ -44,7 +44,7 @@ interface Locale {
 }
 
 /**
- * Simple interface for using date-fns with NextMonth
+ * Simple interface for using date-fns with Calendo
  *
  * Functions can be passed directly from import.
  */

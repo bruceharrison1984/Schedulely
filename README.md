@@ -1,11 +1,11 @@
-# React NextMonth
+# React Calendo
 
 ### Prerelease
 
 _This component is still very early in development. An npm package will be made available once it has reached a suitable level of functionality. Everything is currently still subject to massive change (including the project name), so use at your own risk!_
 
 ![Large Calendar Preview](/assets/large_preview.png)
-[**Storybook Demo**](https://bruceharrison1984.github.io/NextMonth)
+[**Storybook Demo**](https://bruceharrison1984.github.io/Calendo)
 
 ---
 
@@ -15,7 +15,7 @@ _This component is still very early in development. An npm package will be made 
 - 📱 Entire design is based on CSS-grid, so it is fully responsive and fast!
 - 🔩 Easy to override default components to add behavior... and you should!
 
-A light-weight, highly customizable Month calendar for React-based applications. The primary focus of NextMonth is to just display a CSS-grid based month calendar with events.
+A light-weight, highly customizable Month calendar for React-based applications. The primary focus of Calendo is to just display a CSS-grid based month calendar with events.
 
 The ultimate goal for this library was to create a blank canvas that allowed for users to create their own calendar and components for use in the grid system. This allows for users to easily add additional functionality without bloating the base library with features not everyone may want.
 
@@ -35,7 +35,7 @@ Care should be taken when styling custom components. The underlying calendar lay
 
 [See DateAdapter Docs](src/dateAdapters/readme.md)
 
-NextMonth doesn't force a particular DateTime library on you. By implementing the `DateAdapter` interface, you can pass in whatever DateTime implementation that you want. This helps us keep the package size very small, and not force consumers to have to marshall DateTime objects between libraries within their own projects.
+Calendo doesn't force a particular DateTime library on you. By implementing the `DateAdapter` interface, you can pass in whatever DateTime implementation that you want. This helps us keep the package size very small, and not force consumers to have to marshall DateTime objects between libraries within their own projects.
 
 _By default, the calendar will use the NativeJs DateAdapter for dealing with dates._
 
@@ -50,7 +50,7 @@ TBD
 This example initializes the calendar with default components, using date-fns as the date library.
 
 ```js
-import { NextMonth } from './NextMonth';
+import { Calendo } from './Calendo';
 
 ...
   export const MyApp = () => {
@@ -71,6 +71,6 @@ import { NextMonth } from './NextMonth';
       },
     ];
 
-    return (<NextMonth events={events} />);
+    return (<Calendo events={events} />);
   }
 ```

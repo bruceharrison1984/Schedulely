@@ -1,13 +1,13 @@
 .nm--default-day {
-  height: var(--nextmonth-dayHeight);
+  height: var(--calendo-dayHeight);
   // border: 1px black solid;
 }
 
 .nm--default-day-current {
-  background-color: var(--nextmonth-currentMonthBgColor);
+  background-color: var(--calendo-currentMonthBgColor);
 }
 
 .nm--default-day-sibling {
-  background-color: var(--nextmonth-siblingMonthBgColor);
+  background-color: var(--calendo-siblingMonthBgColor);
   color: dimgray;
 }

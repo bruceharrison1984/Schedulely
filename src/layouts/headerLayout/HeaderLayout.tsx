@@ -6,7 +6,7 @@ import { useCalendar, useComponents } from '@/hooks/index';
  * @returns HeaderLayout component
  */
 export const HeaderLayout = () => {
-  const { currentMonth, onNextMonth, onPrevMonth, dateAdapter } = useCalendar();
+  const { currentMonth, onCalendo, onPrevMonth, dateAdapter } = useCalendar();
 
   const {
     forwardNavigationButtonComponent: ForwardNavigationButton,
@@ -21,7 +21,7 @@ export const HeaderLayout = () => {
         month={dateAdapter.getMonthName(currentMonth)}
         year={dateAdapter.getYear(currentMonth)}
       />
-      <ForwardNavigationButton onClick={onNextMonth} />
+      <ForwardNavigationButton onClick={onCalendo} />
     </div>
   );
 };

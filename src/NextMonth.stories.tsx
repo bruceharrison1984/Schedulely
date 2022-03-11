@@ -1,6 +1,6 @@
 import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { NextMonth } from './NextMonth';
+import { Calendo } from './Calendo';
 import {
   addDays,
   // addMonths,
@@ -16,12 +16,12 @@ import { createDefaultAdapter } from './dateAdapters';
 import chance from 'chance';
 
 export default {
-  title: 'NextMonth',
-  component: NextMonth,
-} as ComponentMeta<typeof NextMonth>;
+  title: 'Calendo',
+  component: Calendo,
+} as ComponentMeta<typeof Calendo>;
 
-const Template: ComponentStory<typeof NextMonth> = (props) => (
-  <NextMonth {...props}></NextMonth>
+const Template: ComponentStory<typeof Calendo> = (props) => (
+  <Calendo {...props}></Calendo>
 );
 
 const chanceSeed = chance(1);

@@ -1,7 +1,7 @@
 import {
   CalendarEvent,
   DateTimeAdapter,
-  NextMonthComponents,
+  CalendoComponents,
 } from '@/types/index';
 import { CalendarProvider, ComponentProvider } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
@@ -10,25 +10,25 @@ import { createDefaultAdapter } from './dateAdapters';
 import { useMemo } from 'react';
 import React from 'react';
 
-export interface NextMonthProps {
+export interface CalendoProps {
   dateAdapter?: DateTimeAdapter;
-  nextMonthComponents?: Partial<NextMonthComponents>;
+  nextMonthComponents?: Partial<CalendoComponents>;
   events: CalendarEvent[];
   theme?: Partial<Theme>;
   className?: string;
 }
 
-export const NextMonth = ({
+export const Calendo = ({
   dateAdapter = createDefaultAdapter(),
   nextMonthComponents,
   events,
   theme,
-  className = 'nextmonth',
-}: NextMonthProps) => {
+  className = 'calendo',
+}: CalendoProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
   const cssTheme = useMemo(
-    () => makeCssTheme(theme || defaultTheme, 'nextmonth'),
+    () => makeCssTheme(theme || defaultTheme, 'calendo'),
     [theme]
   );
 

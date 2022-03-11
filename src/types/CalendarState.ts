@@ -12,7 +12,7 @@ export type CalendarState = {
   daysOfWeek: string[];
 
   /** Advance the calendar one month */
-  onNextMonth: () => void;
+  onCalendo: () => void;
 
   /** Decrease the calendar by one month */
   onPrevMonth: () => void;

@@ -1,20 +1,17 @@
-import {
-  NextMonthComponents,
-  combineComponentDeclarations,
-} from '@/types/index';
+import { CalendoComponents, combineComponentDeclarations } from '@/types/index';
 import { ReactNode, createContext, useMemo } from 'react';
 
-export const ComponentContext = createContext<NextMonthComponents | null>(null);
+export const ComponentContext = createContext<CalendoComponents | null>(null);
 ComponentContext.displayName = 'ComponentContext';
 
 interface ComponentProviderProps {
-  calendarComponents?: Partial<NextMonthComponents>;
+  calendarComponents?: Partial<CalendoComponents>;
   children: ReactNode;
 }
 
 /**
  * Provides the layout components with the visible calendar components
- * @param param0 Partial<NextMonthComponents> that will over-ride the default components
+ * @param param0 Partial<CalendoComponents> that will over-ride the default components
  * @returns ComponentProvider component
  */
 export const ComponentProvider = ({
@@ -26,7 +23,7 @@ export const ComponentProvider = ({
     [calendarComponents]
   );
 
-  const contextValue: NextMonthComponents = {
+  const contextValue: CalendoComponents = {
     ...components,
   };
 
