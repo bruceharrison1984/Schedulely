@@ -1,6 +1,6 @@
 import { CalendarEvent } from '@/types/index';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Calendo } from './Calendo';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   addDays,
   // addMonths,

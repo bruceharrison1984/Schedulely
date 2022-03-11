@@ -1,7 +1,7 @@
 import {
   CalendarEvent,
-  DateTimeAdapter,
   CalendoComponents,
+  DateTimeAdapter,
 } from '@/types/index';
 import { CalendarProvider, ComponentProvider } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
