@@ -29,12 +29,13 @@ const chanceSeed = chance(1);
 const generateEvents = (
   numberOfEvents = 100,
   minLength = 0,
-  maxLength = 15
+  maxLength = 15,
+  idOffset = 0
 ) => {
   const events: CalendarEvent[] = [];
   const today = new Date();
   for (let index = 0; index < numberOfEvents; index++) {
-    const id = index.toString();
+    const id = (index + idOffset).toString();
     const start = new Date(
       chanceSeed.integer({
         min: today.getFullYear() - 1,
@@ -105,7 +106,7 @@ const generateEvents = (
 //   },
 // ];
 
-const events = [...generateEvents(), ...generateEvents(100, 0, 1)];
+const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
 // export const datefns = Template.bind({});
 // datefns.storyName = 'DateFns';
