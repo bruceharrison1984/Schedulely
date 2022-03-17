@@ -16,7 +16,7 @@ export const WeekLayout = ({ dates }: WeekLayoutProps) => {
     useComponents();
 
   return (
-    <div className="nm--week-layout">
+    <div className="calendo--week-layout">
       {dates.map((day) => (
         <div
           key={day.getDate()}

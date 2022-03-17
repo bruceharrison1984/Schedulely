@@ -7,5 +7,5 @@ import { DayOfWeekComponent } from '@/types/index';
  * @returns DayOfWeek component
  */
 export const DefaultDayOfWeek: DayOfWeekComponent = ({ dayName }) => (
-  <div className="nm--default-day-of-week">{dayName}</div>
+  <div className="calendo--default-day-of-week">{dayName}</div>
 );

@@ -1,21 +1,21 @@
-.nm--week-layout {
+.calendo--week-layout {
   display: grid;
   grid-area: 1 / 1;
   grid-template-columns: repeat(7, 1fr);
 }
 
-.nm--week-layout > div {
+.calendo--week-layout > div {
   border: 1px black solid;
 }
 
-// .nm--week-layout > div:first-child {
+// .calendo--week-layout > div:first-child {
 //   border-left: none;
 // }
 
-// .nm--week-layout > div:last-child {
+// .calendo--week-layout > div:last-child {
 //   border-right: none;
 // }
 
-// .nm--week-layout:last-child > div {
+// .calendo--week-layout:last-child > div {
 //   border-bottom: none;
 // }

@@ -7,7 +7,7 @@ import { EventComponent } from '@/types/index';
  */
 export const DefaultEvent: EventComponent = ({ event, isHovered }) => (
   <div
-    className="nm--event"
+    className="calendo--event"
     style={{
       backgroundColor: event.color,
       opacity: isHovered ? '100%' : '80%',

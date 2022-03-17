@@ -15,7 +15,7 @@ export const HeaderLayout = () => {
   } = useComponents();
 
   return (
-    <div className="nm--header-layout">
+    <div className="calendo--header-layout">
       <BackNavigationButton onClick={onPrevMonth} />
       <HeaderBanner
         month={dateAdapter.getMonthName(currentMonth)}

@@ -30,7 +30,7 @@ export const EventLayout = ({
   const { eventComponent: EventComponent } = useComponents();
 
   return (
-    <div className="nm--event-layout">
+    <div className="calendo--event-layout">
       {events.map((event) => {
         return (
           <div

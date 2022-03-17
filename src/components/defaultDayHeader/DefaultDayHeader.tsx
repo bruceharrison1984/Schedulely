@@ -5,13 +5,13 @@ export const DefaultDayHeader: DayHeaderComponent = ({
   dateNumber,
   isToday,
 }) => (
-  <div className="nm--default-day-header">
+  <div className="calendo--default-day-header">
     {isToday ? (
-      <div className="nm--default-day-header--indicator">
-        <span className="nm--default-day-header--text">{dateNumber}</span>
+      <div className="calendo--default-day-header--indicator">
+        <span className="calendo--default-day-header--text">{dateNumber}</span>
       </div>
     ) : (
-      <span className="nm--default-day-header--text">{dateNumber}</span>
+      <span className="calendo--default-day-header--text">{dateNumber}</span>
     )}
   </div>
 );

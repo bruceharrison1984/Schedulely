@@ -11,7 +11,7 @@ export const DayOfWeekLayout = () => {
   const { dayOfWeekComponent: DayOfWeek } = useComponents();
 
   return (
-    <div className="nm--day-of-week-layout">
+    <div className="calendo--day-of-week-layout">
       {/* We cheat a bit here and use the index as part of the key. This is because short day names can be identical. */}
       {daysOfWeek.map((dayOfWeek, idx) => (
         <DayOfWeek key={`${dayOfWeek}-${idx}`} dayName={dayOfWeek} />
