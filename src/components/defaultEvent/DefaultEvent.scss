@@ -11,3 +11,11 @@
     cursor: pointer;
   }
 }
+
+.calendo--event-selected {
+  opacity: 100%;
+}
+
+.calendo--event-unselected {
+  opacity: 80%;
+}

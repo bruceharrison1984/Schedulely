@@ -7,10 +7,11 @@ import { EventComponent } from '@/types/index';
  */
 export const DefaultEvent: EventComponent = ({ event, isHovered }) => (
   <div
-    className="calendo--event"
+    className={`calendo--event ${
+      isHovered ? 'calendo--event-selected' : 'calendo--event-unselected'
+    }`}
     style={{
       backgroundColor: event.color,
-      opacity: isHovered ? '100%' : '80%',
     }}
     title={event.summary}
     onClick={() => console.log(event)}
