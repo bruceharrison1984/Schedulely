@@ -1,4 +1,3 @@
-import './DefaultBackButton.scss';
 import { NavigationButtonComponent } from '@/types/index';
 
 export const DefaultBackButton: NavigationButtonComponent = ({ onClick }) => (

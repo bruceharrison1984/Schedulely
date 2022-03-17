@@ -1,4 +1,3 @@
-import './EventLayout.scss';
 import { Dispatch, SetStateAction } from 'react';
 import { InternalCalendarEvent, useCalendar, useComponents } from 'src';
 

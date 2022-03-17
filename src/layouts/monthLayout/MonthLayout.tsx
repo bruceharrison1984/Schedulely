@@ -1,4 +1,3 @@
-import './MonthLayout.scss';
 import { EventLayout, WeekLayout } from '@/layouts/index';
 import { useCalendar } from '@/hooks/index';
 import { useState } from 'react';

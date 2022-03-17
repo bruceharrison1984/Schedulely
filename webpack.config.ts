@@ -6,7 +6,10 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 
 const config: webpack.Configuration = {
-  entry: path.resolve(__dirname, 'src/index.ts'),
+  entry: [
+    path.resolve(__dirname, 'src/index.ts'),
+    path.resolve(__dirname, 'src/Calendo.scss'),
+  ],
   mode: process.env.NODE_ENV !== 'production' ? 'development' : 'production',
   plugins: [
     new CleanWebpackPlugin(),

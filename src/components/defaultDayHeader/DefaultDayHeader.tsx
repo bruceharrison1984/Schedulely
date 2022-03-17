@@ -1,4 +1,3 @@
-import './DefaultDayHeader.scss';
 import { DayHeaderComponent } from '@/types/index';
 
 export const DefaultDayHeader: DayHeaderComponent = ({

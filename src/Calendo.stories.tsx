@@ -1,3 +1,5 @@
+import './Calendo.scss';
+
 import { CalendarEvent } from '@/types/index';
 import { Calendo } from './Calendo';
 import { ComponentMeta, ComponentStory } from '@storybook/react';

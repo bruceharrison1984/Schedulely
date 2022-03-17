@@ -1,4 +1,3 @@
-import './DefaultDay.scss';
 import { DayComponent } from '@/types/index';
 
 export const DefaultDay: DayComponent = ({ isCurrentMonth, children }) => (
