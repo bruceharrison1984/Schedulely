@@ -25,7 +25,7 @@ export const Calendo = ({
 
   return (
     <React.StrictMode>
-      <div className={className}>
+      <div id="calendo" className={className}>
         <ComponentProvider calendarComponents={calendoComponents}>
           <CalendarProvider dateAdapter={dateAdapter} calendarEvents={events}>
             <HeaderLayout />

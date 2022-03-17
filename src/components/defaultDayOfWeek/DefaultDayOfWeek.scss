@@ -1,5 +1,6 @@
 .calendo--default-day-of-week {
-  border: 1px black solid;
+  border: 1px solid;
+  border-color: var(--calendo-border-color);
   background: var(--calendo-dayOfWeekHeaderBgColor);
   color: var(--calendo-dayOfWeekTextHeaderTextColor);
   text-align: center;

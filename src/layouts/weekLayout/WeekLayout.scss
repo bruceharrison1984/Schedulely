@@ -5,7 +5,8 @@
 }
 
 .calendo--week-layout > div {
-  border: 1px black solid;
+  border: 1px solid;
+  border-color: var(--calendo-border-color);
 }
 
 // .calendo--week-layout > div:first-child {

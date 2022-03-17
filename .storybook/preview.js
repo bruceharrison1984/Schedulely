@@ -1,4 +1,6 @@
 import '@storybook/addon-console';
+import { useDarkMode } from 'storybook-dark-mode';
+import { useEffect } from 'react';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -9,3 +11,17 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  (Story) => {
+    const isDarkMode = useDarkMode();
+    useEffect(
+      () =>
+        (document.getElementById('calendo').dataset.theme = isDarkMode
+          ? 'dark'
+          : 'light'),
+      [isDarkMode]
+    );
+    return <Story />;
+  },
+];
