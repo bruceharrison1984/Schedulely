@@ -8,5 +8,4 @@ export * from './dateAdapters/index';
 export * from './hooks/index';
 export * from './layouts/index';
 export * from './providers/index';
-export * from './theme/index';
 export * from './types/index';

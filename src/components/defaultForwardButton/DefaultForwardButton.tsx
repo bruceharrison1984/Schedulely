@@ -1,4 +1,3 @@
-import './DefaultForwardButton.scss';
 import { NavigationButtonComponent } from '@/types/index';
 
 export const DefaultForwardButton: NavigationButtonComponent = ({

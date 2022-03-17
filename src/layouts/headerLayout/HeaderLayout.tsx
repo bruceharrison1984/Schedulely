@@ -1,4 +1,3 @@
-import './HeaderLayout.scss';
 import { useCalendar, useComponents } from '@/hooks/index';
 
 /**

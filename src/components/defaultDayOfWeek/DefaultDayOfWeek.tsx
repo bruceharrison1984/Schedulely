@@ -1,4 +1,3 @@
-import './DefaultDayOfWeek.scss';
 import { DayOfWeekComponent } from '@/types/index';
 
 /**

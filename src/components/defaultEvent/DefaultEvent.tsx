@@ -1,4 +1,3 @@
-import './DefaultEvent.scss';
 import { EventComponent } from '@/types/index';
 
 /**

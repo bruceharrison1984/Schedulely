@@ -1,4 +1,3 @@
-import './DayOfWeekLayout.scss';
 import { useCalendar } from '@/hooks/useCalendar';
 import { useComponents } from 'src';
 

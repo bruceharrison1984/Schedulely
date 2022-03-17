@@ -1,4 +1,3 @@
-import './DefaultHeaderBanner.scss';
 import { HeaderBannerComponent } from '@/types/index';
 
 export const DefaultHeaderBanner: HeaderBannerComponent = ({ month, year }) => {

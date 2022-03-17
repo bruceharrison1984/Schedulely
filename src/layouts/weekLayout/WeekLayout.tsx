@@ -1,4 +1,3 @@
-import './WeekLayout.scss';
 import { useCalendar, useComponents } from '@/hooks/index';
 
 interface WeekLayoutProps {

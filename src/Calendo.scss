@@ -1,0 +1,12 @@
+@import './components/components.scss';
+@import './layouts/layouts.scss';
+
+.calendo {
+  gap: 0em;
+  --calendo-currentMonthBgColor: white;
+  --calendo-siblingMonthBgColor: #eff2f1;
+  --calendo-gridGap: 0em;
+  --calendo-dayOfWeekHeaderBgColor: black;
+  --calendo-dayOfWeekTextHeaderTextColor: white;
+  --calendo-dayHeight: 7em;
+}
