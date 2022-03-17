@@ -1,12 +1,11 @@
 {
-  "name": "@next-month/layout",
+  "name": "@calendo/layout",
   "version": "0.0.1",
-  "description": "A simple month view calendar",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "description": "A React calendar using modern CSS practices",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "rollup": "rollup -c",
     "analyze": "NODE_ENV=production ANALYZE=true webpack",
     "barrels": "barrelsby -c .barrelsby.json",
     "build": "NODE_ENV=production webpack",

@@ -13,7 +13,7 @@ const config: webpack.Configuration = {
   mode: process.env.NODE_ENV !== 'production' ? 'development' : 'production',
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({ filename: 'styles/Calendo.css' }),
     new BundleAnalyzerPlugin({
       analyzerMode: process.env.ANALYZE ? 'server' : 'disabled',
     }),
