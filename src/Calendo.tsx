@@ -13,7 +13,7 @@ export interface CalendoProps {
   calendoComponents?: Partial<CalendoComponents>;
   events: CalendarEvent[];
   className?: string;
-  theme: string;
+  theme?: string;
 }
 
 export const Calendo = ({

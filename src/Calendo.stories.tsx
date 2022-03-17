@@ -131,4 +131,5 @@ nativeJs.storyName = 'NativeJS Date';
 nativeJs.args = {
   events,
   dateAdapter: createDefaultAdapter(),
+  theme: 'light',
 };
