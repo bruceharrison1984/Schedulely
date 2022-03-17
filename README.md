@@ -43,7 +43,11 @@ The long term plan is to implement a default DateAdapter based on `Temporal` whe
 
 ## SCSS Overrides
 
-TBD
+All styles are delivered through the `Calendo.css` file, which should be imported either at the global scope of your React project, or in the individual component where Calendo is used. Any styles can easily be overridden by creating a copy of this stylesheet, and changing the values you would like to change.
+
+## Light/Dark Mode
+
+Dark mode is supported by setting the `theme` attribute to `dark` on the main calendo component. Note that the CSS names must correctly line up in order for dark-mode to function.
 
 ## Basic Usage
 

@@ -13,19 +13,21 @@ export interface CalendoProps {
   calendoComponents?: Partial<CalendoComponents>;
   events: CalendarEvent[];
   className?: string;
+  theme: string;
 }
 
 export const Calendo = ({
   dateAdapter = createDefaultAdapter(),
   calendoComponents,
   events,
+  theme = 'light',
   className = 'calendo',
 }: CalendoProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
   return (
     <React.StrictMode>
-      <div id="calendo" className={className}>
+      <div id="calendo" className={className} data-theme={theme}>
         <ComponentProvider calendarComponents={calendoComponents}>
           <CalendarProvider dateAdapter={dateAdapter} calendarEvents={events}>
             <HeaderLayout />
