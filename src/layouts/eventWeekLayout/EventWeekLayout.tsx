@@ -1,4 +1,9 @@
-import { InternalCalendarEvent, useCalendar, useComponents } from 'src';
+import {
+  EventPositionLayout,
+  InternalCalendarEvent,
+  useCalendar,
+  useComponents,
+} from 'src';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
 
 interface EventLayoutProps {
@@ -22,28 +27,21 @@ export const EventWeekLayout = ({
       getGridEndIndex: getEndIndex,
     },
   } = useCalendar();
-  const { isHighlighted, setHighlight, clearHighlight } = useEventHighlight();
   const { eventComponent: EventComponent } = useComponents();
+  const { isHighlighted } = useEventHighlight();
 
   return (
     <div className="calendo--event-week-layout">
-      {events.map((event) => {
-        return (
-          <div
-            data-eventid={event.id}
-            key={event.id}
-            style={{
-              gridColumnStart: getStartIndex(event.start, startOfWeek),
-              gridColumnEnd: getEndIndex(event.end, endOfWeek),
-              minWidth: 0,
-            }}
-            onMouseOver={() => setHighlight(event.id)}
-            onMouseLeave={clearHighlight}
-          >
-            <EventComponent event={event} isHovered={isHighlighted(event.id)} />
-          </div>
-        );
-      })}
+      {events.map((event) => (
+        <EventPositionLayout
+          key={event.id}
+          event={event}
+          startIndex={getStartIndex(event.start, startOfWeek)}
+          endIndex={getEndIndex(event.end, endOfWeek)}
+        >
+          <EventComponent event={event} isHovered={isHighlighted(event.id)} />
+        </EventPositionLayout>
+      ))}
     </div>
   );
 };
