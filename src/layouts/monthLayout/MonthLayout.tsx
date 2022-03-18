@@ -1,4 +1,4 @@
-import { EventLayout, WeekLayout } from '@/layouts/index';
+import { EventWeekLayout, WeekLayout } from '@/layouts/index';
 import { useCalendar } from '@/hooks/index';
 import { useState } from 'react';
 
@@ -24,7 +24,7 @@ export const MonthLayout = () => {
         <div key={idx} className="calendo--week-container" data-week={idx}>
           {/* If we have no events, don't bother rendering the event grid */}
           {!!week.events.length && (
-            <EventLayout
+            <EventWeekLayout
               events={week.events}
               startOfWeek={week.daysInWeek[0]}
               endOfWeek={week.daysInWeek[6]}

@@ -3,7 +3,7 @@
  */
 
 export * from './dayOfWeekLayout/index';
-export * from './eventLayout/index';
+export * from './eventWeekLayout/index';
 export * from './headerLayout/index';
 export * from './monthLayout/index';
 export * from './weekLayout/index';

@@ -13,7 +13,7 @@ interface EventLayoutProps {
  * This component controls the layout of an individual events within a week
  * @returns EventLayout Component
  */
-export const EventLayout = ({
+export const EventWeekLayout = ({
   events,
   startOfWeek,
   endOfWeek,
@@ -29,7 +29,7 @@ export const EventLayout = ({
   const { eventComponent: EventComponent } = useComponents();
 
   return (
-    <div className="calendo--event-layout">
+    <div className="calendo--event-week-layout">
       {events.map((event) => {
         return (
           <div
