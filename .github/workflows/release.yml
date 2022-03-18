@@ -17,15 +17,15 @@ jobs:
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/v}
 
       - name: Use Node.js 16.x
-          uses: actions/setup-node@v2
-          with:
-            node-version: 16.x
-            cache: 'npm'
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
       - run: npm ci
       - run: npm run lint
       - run: npm run prettier
       - run: npm run test
-      
+
       ## publish NPM package here
 
       ## Checkout so we can apply the new tag
