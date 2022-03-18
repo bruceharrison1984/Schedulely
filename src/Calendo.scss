@@ -23,3 +23,41 @@
   --calendo-font-color: white;
   --calendo-border-color: white;
 }
+
+.calendo[data-theme='minimal'] {
+  gap: 0em;
+  /* Custom font must be made available via link tag, etc. */
+  font-family: 'Roboto', sans-serif;
+  --calendo-currentMonthBgColor: white;
+  --calendo-font-color: black;
+  --calendo-siblingMonthBgColor: #f1f1f1;
+  --calendo-gridGap: 0em;
+  --calendo-dayOfWeekHeaderBgColor: white;
+  --calendo-dayOfWeekTextHeaderTextColor: black;
+  --calendo-dayHeight: 7em;
+  --calendo-border-color: black;
+
+  .calendo--week-layout > div:first-child {
+    border-left: none;
+  }
+
+  .calendo--week-layout > div:last-child {
+    border-right: none;
+  }
+
+  .calendo--week-layout:last-child > div {
+    border-bottom: none;
+  }
+
+  .calendo--day-of-week-layout > div:first-child {
+    border-left: none;
+  }
+
+  .calendo--day-of-week-layout > div:last-child {
+    border-right: none;
+  }
+
+  .calendo--day-of-week-layout > div {
+    border-top: none;
+  }
+}

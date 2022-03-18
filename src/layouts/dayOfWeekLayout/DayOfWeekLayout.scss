@@ -2,3 +2,8 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
+
+.calendo--day-of-week-layout > div {
+  border: 1px solid;
+  border-color: var(--calendo-border-color);
+}
