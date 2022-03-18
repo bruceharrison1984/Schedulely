@@ -1,12 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
 import { InternalCalendarEvent, useCalendar, useComponents } from 'src';
+import { useEventHighlight } from '@/hooks/useEventHighlight';
 
 interface EventLayoutProps {
   events: InternalCalendarEvent[];
   startOfWeek: Date;
   endOfWeek: Date;
-  setHighlightedEvent: Dispatch<SetStateAction<string | undefined>>;
-  highlightedEvent: string | undefined;
 }
 
 /**
@@ -17,8 +15,6 @@ export const EventWeekLayout = ({
   events,
   startOfWeek,
   endOfWeek,
-  setHighlightedEvent,
-  highlightedEvent,
 }: EventLayoutProps) => {
   const {
     dateAdapter: {
@@ -26,6 +22,7 @@ export const EventWeekLayout = ({
       getGridEndIndex: getEndIndex,
     },
   } = useCalendar();
+  const { isHighlighted, setHighlight, clearHighlight } = useEventHighlight();
   const { eventComponent: EventComponent } = useComponents();
 
   return (
@@ -40,13 +37,10 @@ export const EventWeekLayout = ({
               gridColumnEnd: getEndIndex(event.end, endOfWeek),
               minWidth: 0,
             }}
-            onMouseOver={() => setHighlightedEvent(event.id)}
-            onMouseLeave={() => setHighlightedEvent(undefined)}
+            onMouseOver={() => setHighlight(event.id)}
+            onMouseLeave={clearHighlight}
           >
-            <EventComponent
-              event={event}
-              isHovered={highlightedEvent === event.id}
-            />
+            <EventComponent event={event} isHovered={isHighlighted(event.id)} />
           </div>
         );
       })}
