@@ -2,10 +2,14 @@
   display: grid;
   grid-area: 1 / 1;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(4, 20%);
+  grid-template-rows: repeat(4, 1fr);
   z-index: 100;
-  gap: 0.5em;
-  margin-top: 2em;
+  gap: 0.5em; /* space between events */
+  margin-top: 1.5em;
   white-space: nowrap;
   grid-auto-flow: dense;
+}
+
+.calendo--event-week-layout > div:nth-child(n + 4) {
+  display: none;
 }
