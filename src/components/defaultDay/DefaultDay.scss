@@ -1,5 +1,5 @@
 .calendo--default-day {
-  height: var(--calendo-dayHeight);
+  height: var(--calendo-day-height);
   // border: 1px black solid;
 }
 
@@ -8,6 +8,6 @@
 }
 
 .calendo--default-day-sibling {
-  background-color: var(--calendo-siblingMonthBgColor);
+  background-color: var(--calendo-sibling-month-bg-color);
   color: dimgray;
 }

@@ -2,12 +2,12 @@
   gap: 0em;
   /* Custom font must be made available via link tag, etc. */
   font-family: 'Roboto', sans-serif;
-  --calendo-currentMonthBgColor: white;
+  --calendo-current-month-bg-color: white;
   --calendo-font-color: black;
-  --calendo-siblingMonthBgColor: #eff2f1;
-  --calendo-gridGap: 0em;
-  --calendo-dayOfWeekHeaderBgColor: black;
-  --calendo-dayOfWeekTextHeaderTextColor: white;
-  --calendo-dayHeight: 7em;
+  --calendo-sibling-month-bg-color: #eff2f1;
+  --calendo-grid-gap: 0em;
+  --calendo-day-of-week-header-bg-color: black;
+  --calendo-day-of-week-header-text-color: white;
+  --calendo-day-height: 7em;
   --calendo-border-color: black;
 }

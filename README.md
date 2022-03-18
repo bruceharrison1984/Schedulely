@@ -86,10 +86,10 @@ Example Theme:
 /* my-theme.css */
 
 .calendo[data-theme='dark'] {
-  --calendo-currentMonthBgColor: rgb(112, 112, 112);
-  --calendo-siblingMonthBgColor: #2b2b2b;
-  --calendo-dayOfWeekHeaderBgColor: white;
-  --calendo-dayOfWeekTextHeaderTextColor: black;
+  --calendo-current-month-bg-color: rgb(112, 112, 112);
+  --calendo-sibling-month-bg-color: #2b2b2b;
+  --calendo-day-of-week-header-bg-color: white;
+  --calendo-day-of-week-header-text-color: black;
   --calendo-font-color: white;
   --calendo-border-color: white;
 }
