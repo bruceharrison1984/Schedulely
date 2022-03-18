@@ -108,7 +108,52 @@ const generateEvents = (
 //   },
 // ];
 
-const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
+const events = [
+  ...generateEvents(100),
+  ...generateEvents(100, 0, 1, 100),
+  {
+    color: '#4b578a',
+    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    id: '147',
+    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    summary: 'Craig Bishop',
+  },
+  {
+    color: '#4b578a',
+    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    id: '147',
+    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    summary: 'Craig Bishop',
+  },
+  {
+    color: '#4b578a',
+    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    id: '147',
+    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    summary: 'Craig Bishop',
+  },
+  {
+    color: '#4b578a',
+    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    id: '147',
+    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    summary: 'Craig Bishop',
+  },
+  {
+    color: '#4b578a',
+    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    id: '147',
+    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    summary: 'Craig Bishop',
+  },
+  {
+    color: '#4b578a',
+    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    id: '147',
+    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    summary: 'Craig Bishop',
+  },
+];
 
 // export const datefns = Template.bind({});
 // datefns.storyName = 'DateFns';
