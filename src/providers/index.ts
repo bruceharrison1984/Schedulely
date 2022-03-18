@@ -4,3 +4,4 @@
 
 export * from './CalendarProvider';
 export * from './ComponentProvider';
+export * from './HightlightProvider';
