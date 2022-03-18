@@ -23,7 +23,7 @@ The included default calendar components can be simply used as is, but the real 
 
 ## Basic Usage
 
-This example initializes the calendar with default components, using date-fns as the date library.
+This example initializes the calendar with default components, using the included NativeJS DateAdapter as the date library.
 
 ```js
 import { Calendo } from './Calendo';
