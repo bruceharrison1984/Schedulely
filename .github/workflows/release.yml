@@ -1,0 +1,40 @@
+name: Release Build
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Release Version
+        id: getReleaseVersion
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/v}
+
+      - name: Use Node.js 16.x
+            uses: actions/setup-node@v2
+            with:
+              node-version: 16.x
+              cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run prettier
+      - run: npm run test
+      
+      ## publish NPM package here
+
+      ## Checkout so we can apply the new tag
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+
+      ## Documentation: https://github.com/marvinpinto/action-automatic-releases
+      - uses: 'marvinpinto/action-automatic-releases@latest'
+        with:
+          repo_token: '${{ secrets.GITHUB_TOKEN }}'
+          prerelease: false
