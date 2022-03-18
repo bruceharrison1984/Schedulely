@@ -2,7 +2,7 @@
 
 ### Prerelease
 
-_This component is still very early in development. An npm package will be made available once it has reached a suitable level of functionality. Everything is currently still subject to massive change (including the project name), so use at your own risk!_
+_This component is still very early in development. An npm package will be made available once it has reached a suitable level of functionality. Everything is currently still subject to massive change (including the project name), so use at your own risk! It is very likely that before release, the layout system will be split from the base calendar components to futher reduce package size._
 
 ![Large Calendar Preview](/assets/large_preview.png)
 [**Storybook Demo**](https://bruceharrison1984.github.io/Calendo)
