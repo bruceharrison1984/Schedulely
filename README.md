@@ -26,6 +26,7 @@ The included default calendar components can be simply used as is, but the real 
 This example initializes the calendar with default components, using the included NativeJS DateAdapter as the date library.
 
 ```js
+import './Calendo.css';
 import { Calendo } from './Calendo';
 
 ...
