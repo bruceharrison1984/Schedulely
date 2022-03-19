@@ -18,8 +18,7 @@ export const MonthLayout = () => {
           {!!week.events.length && (
             <EventWeekLayout
               events={week.events}
-              startOfWeek={week.daysInWeek[0]}
-              endOfWeek={week.daysInWeek[6]}
+              daysInweek={week.daysInWeek}
             />
           )}
           <WeekLayout dates={week.daysInWeek} />
