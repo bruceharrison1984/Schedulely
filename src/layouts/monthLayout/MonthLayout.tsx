@@ -1,7 +1,6 @@
 import { EventWeekLayout, WeekLayout } from '@/layouts/index';
 import { HighlightProvider } from '@/providers/HightlightProvider';
 import { useCalendar } from '@/hooks/index';
-// import { useState } from 'react';
 
 /**
  * This component controls the layout of the weeks of the calendar
@@ -19,6 +18,7 @@ export const MonthLayout = () => {
             <EventWeekLayout
               events={week.events}
               daysInweek={week.daysInWeek}
+              eventsOnDays={week.eventsOnDays}
             />
           )}
           <WeekLayout dates={week.daysInWeek} />

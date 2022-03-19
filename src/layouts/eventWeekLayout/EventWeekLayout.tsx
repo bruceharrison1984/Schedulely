@@ -9,8 +9,7 @@ import { useEventHighlight } from '@/hooks/useEventHighlight';
 interface EventLayoutProps {
   events: InternalCalendarEvent[];
   daysInweek: Date[];
-  // startOfWeek: Date;
-  // endOfWeek: Date;
+  eventsOnDays: { [x: string]: InternalCalendarEvent[] }[];
 }
 
 /**
@@ -20,6 +19,7 @@ interface EventLayoutProps {
 export const EventWeekLayout = ({
   events,
   daysInweek,
+  eventsOnDays,
 }: // startOfWeek,
 // endOfWeek,
 EventLayoutProps) => {
@@ -31,20 +31,6 @@ EventLayoutProps) => {
   } = useCalendar();
   const { eventComponent: EventComponent } = useComponents();
   const { isHighlighted } = useEventHighlight();
-
-  const eventsOnDayMap = () => {
-    const eventsDayMap = new Map<number, InternalCalendarEvent[]>([]);
-    for (let index = 0; index < 6; index++) {
-      eventsDayMap.set(
-        daysInweek[index].getDate(),
-        events.filter(
-          (event) =>
-            event.start <= daysInweek[index] && event.end >= daysInweek[index]
-        )
-      );
-    }
-    return eventsDayMap;
-  };
 
   return (
     <div className="calendo--event-week-layout">
@@ -58,7 +44,7 @@ EventLayoutProps) => {
           <EventComponent event={event} isHovered={isHighlighted(event.id)} />
         </EventPositionLayout>
       ))}
-      {console.log(eventsOnDayMap())}
+      {console.log(eventsOnDays)}
     </div>
   );
 };
