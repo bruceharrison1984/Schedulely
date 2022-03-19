@@ -18,10 +18,12 @@ export const MonthLayout = () => {
             <EventWeekLayout
               events={week.events}
               daysInweek={week.daysInWeek}
-              eventsOnDays={week.eventsOnDays}
             />
           )}
-          <WeekLayout dates={week.daysInWeek} />
+          <WeekLayout
+            eventsOnDays={week.eventsOnDays}
+            dates={week.daysInWeek}
+          />
         </div>
       ))}
     </HighlightProvider>

@@ -78,11 +78,14 @@ export const CalendarProvider = ({
         events: events.filter((event) =>
           dateAdapter.isEventInWeek(event.start, event.end, week)
         ),
-        eventsOnDays: week.map((day) => ({
-          [day.toISOString()]: events.filter(
-            (event) => event.start <= day && event.end >= day
-          ),
-        })),
+        eventsOnDays: Object.assign(
+          {},
+          ...week.map((day) => ({
+            [day.toISOString()]: events.filter(
+              (event) => event.start <= day && event.end >= day
+            ),
+          }))
+        ),
       })),
     [calendarView, events, dateAdapter]
   );
