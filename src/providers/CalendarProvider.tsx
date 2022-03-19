@@ -82,7 +82,7 @@ export const CalendarProvider = ({
     [calendarView, events, dateAdapter]
   );
 
-  const onCalendo = useCallback(
+  const onNextMonth = useCallback(
     () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, 1)),
     [dateAdapter]
   );
@@ -96,7 +96,7 @@ export const CalendarProvider = ({
     currentMonth,
     dateAdapter: dateAdapter,
     daysOfWeek: daysOfWeek,
-    onCalendo,
+    onNextMonth,
     onPrevMonth,
     calendarWithEvents,
   };
