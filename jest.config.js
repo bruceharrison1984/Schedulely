@@ -10,6 +10,6 @@ module.exports = {
   },
   transform: {
     '^.+\\.ts(x)?$': 'babel-jest',
-    '^.+\\.scss$': 'jest-transform-css',
+    '^.+\\.css$': 'jest-transform-css',
   },
 };
