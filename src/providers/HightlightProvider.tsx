@@ -7,7 +7,7 @@ HighlightContext.displayName = 'HighlightContext';
 
 /**
  * Enables highlighting of events that span multiple weeks. Kinda hacky but it works.
- * @param param0 Child nodes
+ * @param {ReactNode} children Child nodes
  * @returns HighlightProvider component
  */
 export const HighlightProvider = ({ children }: { children: ReactNode }) => {

@@ -1,21 +1,14 @@
-import {
-  CalendarEvent,
-  CalendoComponents,
-  DateTimeAdapter,
-} from '@/types/index';
 import { CalendarProvider, ComponentProvider } from '@/providers/index';
+import { CalendoProps } from '@/types/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { createDefaultAdapter } from './dateAdapters';
 import React from 'react';
 
-export interface CalendoProps {
-  dateAdapter?: DateTimeAdapter;
-  calendoComponents?: Partial<CalendoComponents>;
-  events: CalendarEvent[];
-  additionalClassNames?: string[];
-  theme?: string;
-}
-
+/**
+ * Create an instance of Calendo
+ * @param {CalendoProps} param0 Calendo configuration properties
+ * @returns
+ */
 export const Calendo = ({
   dateAdapter = createDefaultAdapter(),
   calendoComponents,
