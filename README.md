@@ -34,15 +34,15 @@ import { Calendo } from './Calendo';
     const events = [
       {
         id: '1',
-        start: new Date(2022, 1, 7),
-        end: new Date(2022, 1, 11),
+        start: '2022-02-07T06:00:00.000Z', // ISO formatted
+        end: '2022-02-11T06:00:00.000Z'), // ISO formatted
         summary: 'EVENT 2022-2-7 -> 2022-2-11',
         color: 'lightblue',
       },
       {
         id: '3',
-        start: new Date(2022, 1, 11),
-        end: new Date(2022, 1, 12),
+        start: '2022-02-11T06:00:00.000Z', // ISO formatted
+        end: '2022-02-12T06:00:00.000Z', // ISO formatted
         summary: 'EVENT 2 2022-2-11 -> 2022-2-12',
         color: 'cyan',
       },
