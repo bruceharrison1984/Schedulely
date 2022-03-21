@@ -117,7 +117,7 @@ Dark mode is supported by setting the `theme` attribute to `dark` on the main ca
 
 Themes can be demoed in the Storybook application by changing the theme prop to one of the following values:
 
-- light
+- light _(default)_
 - dark
 - minimal
 

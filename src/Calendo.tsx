@@ -20,7 +20,7 @@ export const Calendo = ({
   dateAdapter = createDefaultAdapter(),
   calendoComponents,
   events,
-  theme = 'light',
+  theme,
   className = 'calendo',
 }: CalendoProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
