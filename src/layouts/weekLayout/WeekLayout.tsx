@@ -3,7 +3,7 @@ import { useCalendar, useComponents } from '@/hooks/index';
 
 interface WeekLayoutProps {
   dates: Date[];
-  eventsOnDays: { [x: string]: InternalCalendarEvent[] }[];
+  eventsOnDays: { date: Date; events: InternalCalendarEvent[] }[];
 }
 
 /**
@@ -15,6 +15,13 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
 
   const { dayComponent: DayComponent, dayHeaderComponent: DayHeader } =
     useComponents();
+
+  /** Display 'more events' indicator */
+  const hasEventOverflow = (date: Date, overflowLimit = 3) => {
+    const events = eventsOnDays.find((x) => x.date === date)?.events;
+    if (!events) return false;
+    if (events.length > overflowLimit) return true;
+  };
 
   return (
     <div className="calendo--week-layout">
@@ -32,15 +39,17 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
               dateNumber={dateAdapter.getDayNumber(day)}
             />
           </DayComponent>
-          <div
-            className="calendo--additional-events"
-            title="More events"
-            onClick={() =>
-              console.log(eventsOnDays[day.toISOString() as never])
-            }
-          >
-            . . .
-          </div>
+          {hasEventOverflow(day) && (
+            <div
+              className="calendo--additional-events"
+              title="More events"
+              onClick={() =>
+                console.log(eventsOnDays.find((x) => x.date === day))
+              }
+            >
+              . . .
+            </div>
+          )}
         </div>
       ))}
     </div>

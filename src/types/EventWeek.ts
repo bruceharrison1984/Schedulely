@@ -5,5 +5,5 @@ export interface EventWeek {
   weekEnd: Date;
   daysInWeek: Date[];
   events: InternalCalendarEvent[];
-  eventsOnDays: { [x: string]: InternalCalendarEvent[] }[];
+  eventsOnDays: { date: Date; events: InternalCalendarEvent[] }[];
 }
