@@ -1,10 +1,10 @@
 .calendo--default-day {
   height: var(--calendo-day-height);
-  // border: 1px black solid;
 }
 
 .calendo--default-day-current {
   background-color: var(--calendo-currentMonthBgColor);
+  color: var(--calendo-font-color);
 }
 
 .calendo--default-day-sibling {

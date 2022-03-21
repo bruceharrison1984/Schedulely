@@ -7,4 +7,17 @@
 .calendo--week-layout > div {
   border: 1px solid;
   border-color: var(--calendo-border-color);
+  position: relative;
+}
+
+.calendo--additional-events {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 5px;
+  cursor: pointer;
+  z-index: 100;
+  font-weight: bolder;
+  opacity: 0.7;
+  color: var(--calendo-font-color);
 }
