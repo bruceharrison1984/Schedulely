@@ -15,7 +15,7 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
 
   const { dayComponent: DayComponent, dayHeaderComponent: DayHeader } =
     useComponents();
-  console.log(eventsOnDays);
+
   return (
     <div className="calendo--week-layout">
       {dates.map((day) => (
@@ -33,16 +33,13 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
             />
           </DayComponent>
           <div
-            style={{
-              display: 'block',
-              position: 'relative',
-              bottom: '3px',
-              cursor: 'pointer',
-              zIndex: 100,
-            }}
-            onClick={() => console.log(eventsOnDays[day.toISOString()])}
+            className="calendo--additional-events"
+            title="More events"
+            onClick={() =>
+              console.log(eventsOnDays[day.toISOString() as never])
+            }
           >
-            ...
+            . . .
           </div>
         </div>
       ))}
