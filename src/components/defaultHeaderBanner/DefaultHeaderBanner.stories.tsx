@@ -9,7 +9,9 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof DefaultHeaderBanner> = (props) => (
-  <DefaultHeaderBanner {...props} />
+  <div id="schedulely" className="schedulely" data-theme={'light'}>
+    <DefaultHeaderBanner {...props} />
+  </div>
 );
 
 export const Primary = Template.bind({});

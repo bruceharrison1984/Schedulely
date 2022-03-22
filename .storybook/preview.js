@@ -19,13 +19,13 @@ export const parameters = {
 export const decorators = [
   (Story) => {
     const isDarkMode = useDarkMode();
-    useEffect(
-      () =>
-        (document.getElementById('schedulely').dataset.theme = isDarkMode
+    useEffect(() => {
+      if (document.getElementById('schedulely')) {
+        document.getElementById('schedulely').dataset.theme = isDarkMode
           ? 'dark'
-          : 'light'),
-      [isDarkMode]
-    );
+          : 'light';
+      }
+    }, [isDarkMode]);
     return <Story />;
   },
 ];

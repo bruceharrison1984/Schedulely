@@ -9,7 +9,9 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof DefaultBackButton> = (props) => (
-  <DefaultBackButton {...props} />
+  <div id="schedulely" className="schedulely" data-theme={'light'}>
+    <DefaultBackButton {...props} />
+  </div>
 );
 
 export const Primary = Template.bind({});
