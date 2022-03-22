@@ -9,11 +9,11 @@ _This component is still very early in development. An npm package will be made 
 
 ---
 
-## Description
+## 📃 Description
 
-- 🤏 Extremely small package size
-- 📱 Entire design is based on CSS-grid, so it is fully responsive and fast!
-- 🔩 Easy to override default components to add behavior... and you should!
+- Extremely small package size
+- Entire design is based on CSS-grid, so it is fully responsive and fast!
+- Easy to override default components to add unique behavior
 
 A light-weight, highly customizable Month calendar for React-based applications. The primary focus of Calendo is to just display a CSS-grid based month calendar with events.
 
@@ -21,7 +21,7 @@ The ultimate goal for this library was to create a blank canvas that allowed for
 
 The included default calendar components can be simply used as is, but the real power is being able to easily override these components. This allows consumers to use any state-management, styles, UX, or _whatever_ without needing them included in this library, and without interfering with it's behavior.
 
-## Basic Usage
+## 🔨 Basic Usage
 
 This example initializes the calendar with default components, using the included NativeJS DateAdapter as the date library.
 
@@ -60,17 +60,13 @@ import { Calendo } from './Calendo';
 />
 ```
 
-## Custom Components
+## 🔧 Custom Components
+
+[See Component Docs](src/components/README.md)
 
 The default components contain very little behavior outside of simply being displayed. Implementing things such as `onClick` handlers or selection is entirely up to the end user. While the Default components can be restyled, the approach _we recommend is creating custom components for the display and actions that your project requires_.
 
-The default components aren't really extensible. For example, the default event component onClick handler just prints the event data in to the console. As a consumer, you would extend the `EventComponent` interface to implement your own Event component that has the behavior you require.
-
-All default components have interfaces available, and custom components can be passed in via the `calendoComponents` property.
-
-Care should be taken when styling custom components. The underlying calendar layout is flexible, but it can still be easily broken.
-
-## DateTime Libraries
+## 📚 DateTime Libraries
 
 [See DateAdapter Docs](src/dateAdapters/readme.md)
 
@@ -80,46 +76,9 @@ _By default, the calendar will use the NativeJs DateAdapter for dealing with dat
 
 The long term plan is to implement a default DateAdapter based on `Temporal` when it is finally approved. Until then, you are required to bring-your-own-date-lib.
 
-## SCSS Overrides
+## 👓 Themes
 
-All styles are delivered through the `Calendo.css` file, which should be imported either at the global scope of your React project, or in the individual component where Calendo is used. Any styles can easily be overridden by creating a copy of this stylesheet, and changing the values you would like to change.
-
-## Theming
-
-Themes can be applied by passing in the correct theme name to the `theme` property on Calendo. Additional themes can be easily added by creating a new `*.css` file and importing it where Calendo is initialized. If you create any nice looking themes, please consider submitting them via PR.
-
-Example Theme:
-
-```css
-/* my-theme.css */
-
-.calendo[data-theme='dark'] {
-  --calendo-current-month-bg-color: rgb(112, 112, 112);
-  --calendo-sibling-month-bg-color: #2b2b2b;
-  --calendo-day-of-week-header-bg-color: white;
-  --calendo-day-of-week-header-text-color: black;
-  --calendo-font-color: white;
-  --calendo-border-color: white;
-}
-```
-
-```js
-import './my-theme.css';
-
-<Calendo ... theme="dark" />
-```
-
-### Dark Mode
-
-Dark mode is supported by setting the `theme` attribute to `dark` on the main calendo component. Note that the CSS names must correctly line up in order for dark-mode to function.
-
-### Included Themes
-
-Themes can be demoed in the Storybook application by changing the theme prop to one of the following values:
-
-- light _(default)_
-- dark
-- minimal
+[See Theme Docs](src/themes/README.md)
 
 ## Alternatives
 
