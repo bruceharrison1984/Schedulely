@@ -31,7 +31,7 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
   );
 
   return (
-    <div className="calendo--week-layout">
+    <div className="schedulely--week-layout">
       {dates.map((day) => (
         <div
           key={day.getDate()}

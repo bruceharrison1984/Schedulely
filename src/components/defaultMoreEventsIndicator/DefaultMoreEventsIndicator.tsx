@@ -5,11 +5,11 @@ export const DefaultMoreEventsIndicator: MoreEventsIndicatorComponent = ({
 }) => {
   return (
     <div
-      className="calendo--additional-events"
+      className="schedulely--additional-events"
       title={`(${events.length}) total events`}
       onClick={() => console.log(events)}
     >
-      <div className="calendo--additional-events-indicator">. . .</div>
+      <div className="schedulely--additional-events-indicator">. . .</div>
     </div>
   );
 };

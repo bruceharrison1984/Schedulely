@@ -1,5 +1,5 @@
 {
-  "name": "calendo",
+  "name": "schedulely",
   "version": "0.0.1",
   "description": "A React calendar using modern CSS practices",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
   "author": "Bruce Harrison",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/bruceharrison1984/Calendo",
+    "url": "https://github.com/bruceharrison1984/Schedulely",
     "type": "git"
   },
   "devDependencies": {

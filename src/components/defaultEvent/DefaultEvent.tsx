@@ -6,8 +6,8 @@ import { EventComponent } from '@/types/index';
  */
 export const DefaultEvent: EventComponent = ({ event, isHovered }) => (
   <div
-    className={`calendo--event ${
-      isHovered ? 'calendo--event-selected' : 'calendo--event-unselected'
+    className={`schedulely--event ${
+      isHovered ? 'schedulely--event-selected' : 'schedulely--event-unselected'
     }`}
     style={{
       backgroundColor: event.color,

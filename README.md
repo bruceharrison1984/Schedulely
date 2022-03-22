@@ -1,11 +1,11 @@
-# Calendo
+# Schedulely
 
 ### Prerelease
 
 _This component is still very early in development. An npm package will be made available once it has reached a suitable level of functionality. Everything is currently still subject to massive change (including the project name), so use at your own risk! It is very likely that before release, the layout system will be split from the base calendar components to futher reduce package size._
 
 ![Large Calendar Preview](/assets/large_preview.png)
-[**Storybook Demo**](https://bruceharrison1984.github.io/Calendo)
+[**Storybook Demo**](https://bruceharrison1984.github.io/Schedulely)
 
 ---
 
@@ -26,8 +26,8 @@ The included default calendar components can be simply used as is, but the real 
 This example initializes the calendar with default components, using the included NativeJS DateAdapter as the date library.
 
 ```js
-import './Calendo.css';
-import { Calendo } from './Calendo';
+import './Schedulely.css';
+import { Schedulely } from './Schedulely';
 
 ...
   export const MyApp = () => {
@@ -48,7 +48,7 @@ import { Calendo } from './Calendo';
       },
     ];
 
-    return (<Calendo events={events} />);
+    return (<Schedulely events={events} />);
   }
 
 /* HEAD (for custom font) */
@@ -70,7 +70,7 @@ The default components contain very little behavior outside of simply being disp
 
 [See DateAdapter Docs](src/dateAdapters/readme.md)
 
-Calendo doesn't force a particular DateTime library on you. By implementing the `DateAdapter` interface, you can pass in whatever DateTime implementation that you want. This helps us keep the package size very small, and not force consumers to have to marshall DateTime objects between libraries within their own projects.
+Schedulely doesn't force a particular DateTime library on you. By implementing the `DateAdapter` interface, you can pass in whatever DateTime implementation that you want. This helps us keep the package size very small, and not force consumers to have to marshall DateTime objects between libraries within their own projects.
 
 _By default, the calendar will use the NativeJs DateAdapter for dealing with dates._
 
@@ -82,7 +82,7 @@ The long term plan is to implement a default DateAdapter based on `Temporal` whe
 
 ## Alternatives
 
-Here are some other libraries that also offer calendar functionality similar to what Calendo provides. Open-source initiatives are important, so I think it is a good idea to shine a light on one another.
+Here are some other libraries that also offer calendar functionality similar to what Schedulely provides. Open-source initiatives are important, so I think it is a good idea to shine a light on one another.
 
 - [react-big-calendar](https://github.com/jquense/react-big-calendar)
   - Month view along with multiple other views

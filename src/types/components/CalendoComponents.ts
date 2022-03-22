@@ -8,7 +8,7 @@ import {
 } from '@/types/index';
 import { MoreEventsIndicatorComponent } from './MoreEventsIndicator';
 
-export interface CalendoComponents {
+export interface SchedulelyComponents {
   dayOfWeekComponent: DayOfWeekComponent;
   dayComponent: DayComponent;
   forwardNavigationButtonComponent: NavigationButtonComponent;

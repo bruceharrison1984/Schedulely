@@ -1,5 +1,5 @@
-.calendo--default-day-of-week {
-  background: var(--calendo-day-of-week-header-bg-color);
-  color: var(--calendo-day-of-week-header-text-color);
+.schedulely--default-day-of-week {
+  background: var(--schedulely-day-of-week-header-bg-color);
+  color: var(--schedulely-day-of-week-header-text-color);
   text-align: center;
 }

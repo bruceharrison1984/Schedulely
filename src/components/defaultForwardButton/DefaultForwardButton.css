@@ -1,12 +1,12 @@
-.calendo--default-forward-button {
+.schedulely--default-forward-button {
   border: none;
   background-color: transparent;
   font-size: 2em;
   opacity: 50%;
-  color: var(--calendo-font-color);
+  color: var(--schedulely-font-color);
 }
 
-.calendo--default-forward-button:hover {
+.schedulely--default-forward-button:hover {
   opacity: 100%;
   cursor: pointer;
 }
