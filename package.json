@@ -1,5 +1,5 @@
 {
-  "name": "@calendo/layout",
+  "name": "calendo",
   "version": "0.0.1",
   "description": "A React calendar using modern CSS practices",
   "main": "dist/index.js",
