@@ -6,5 +6,6 @@ export * from './CalendarState';
 export * from './CalendoProps';
 export * from './DateAdapter';
 export * from './EventWeek';
+export * from './HighlightEventState';
 export * from './InternalCalendarEvent';
 export * from './components/index';
