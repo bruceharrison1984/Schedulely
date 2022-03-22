@@ -1,5 +1,5 @@
 import { HighlightEventState } from '@/types/HighlightEventState';
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useCallback, useState } from 'react';
 
 export const HighlightContext = createContext<HighlightEventState | null>(null);
 HighlightContext.displayName = 'HighlightContext';
@@ -14,9 +14,20 @@ export const HighlightProvider = ({ children }: { children: ReactNode }) => {
     undefined
   );
 
-  const setHighlight = (eventId: string) => setHighlightedEvent(eventId);
-  const clearHighlight = () => setHighlightedEvent(undefined);
-  const isHighlighted = (eventId: string) => highlightedEvent === eventId;
+  const setHighlight = useCallback(
+    (eventId: string) => setHighlightedEvent(eventId),
+    [setHighlightedEvent]
+  );
+
+  const clearHighlight = useCallback(
+    () => setHighlightedEvent(undefined),
+    [setHighlightedEvent]
+  );
+
+  const isHighlighted = useCallback(
+    (eventId: string) => highlightedEvent === eventId,
+    [highlightedEvent]
+  );
 
   const context: HighlightEventState = {
     setHighlight,
