@@ -68,6 +68,7 @@
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
     "regenerator-runtime": "^0.13.9",
+    "storybook-addon-performance": "^0.16.1",
     "storybook-dark-mode": "^1.0.10-canary.177.3666.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
