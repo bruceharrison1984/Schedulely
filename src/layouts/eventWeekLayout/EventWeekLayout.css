@@ -1,4 +1,4 @@
-.calendo--event-week-layout {
+.schedulely--event-week-layout {
   display: grid;
   grid-area: 1 / 1;
   grid-template-columns: repeat(7, 1fr);
@@ -10,6 +10,6 @@
   grid-auto-flow: dense;
 }
 
-.calendo--event-week-layout > div:nth-child(n + 4) {
+.schedulely--event-week-layout > div:nth-child(n + 4) {
   display: none;
 }

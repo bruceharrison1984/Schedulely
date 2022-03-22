@@ -2,10 +2,10 @@ import { DayComponent } from '@/types/index';
 
 export const DefaultDay: DayComponent = ({ isCurrentMonth, children }) => (
   <div
-    className={`calendo--default-day ${
+    className={`schedulely--default-day ${
       isCurrentMonth
-        ? 'calendo--default-day-current'
-        : 'calendo--default-day-sibling'
+        ? 'schedulely--default-day-current'
+        : 'schedulely--default-day-sibling'
     }`}
   >
     {children}

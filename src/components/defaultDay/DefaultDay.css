@@ -1,13 +1,13 @@
-.calendo--default-day {
-  height: var(--calendo-day-height);
+.schedulely--default-day {
+  height: var(--schedulely-day-height);
 }
 
-.calendo--default-day-current {
-  background-color: var(--calendo-currentMonthBgColor);
-  color: var(--calendo-font-color);
+.schedulely--default-day-current {
+  background-color: var(--schedulely-currentMonthBgColor);
+  color: var(--schedulely-font-color);
 }
 
-.calendo--default-day-sibling {
-  background-color: var(--calendo-sibling-month-bg-color);
+.schedulely--default-day-sibling {
+  background-color: var(--schedulely-sibling-month-bg-color);
   color: dimgray;
 }

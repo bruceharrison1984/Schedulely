@@ -1,14 +1,14 @@
 import { CalendarEvent } from './InternalCalendarEvent';
-import { CalendoComponents } from './components';
 import { DateTimeAdapter } from './DateAdapter';
+import { SchedulelyComponents } from './components';
 
-/** Properties used to initialize Calendo */
-export interface CalendoProps {
+/** Properties used to initialize Schedulely */
+export interface SchedulelyProps {
   /** DateAdapter used to process dates */
   dateAdapter?: DateTimeAdapter;
 
   /** Component overrides */
-  calendoComponents?: Partial<CalendoComponents>;
+  schedulelyComponents?: Partial<SchedulelyComponents>;
 
   /** List of events to display */
   events: CalendarEvent[];

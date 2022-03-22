@@ -1,4 +1,4 @@
-.calendo--week-container {
+.schedulely--week-container {
   /* We use a grid here so WeekLayout and EventLayout can inheirit it's position */
   display: grid;
   /* overflow: hidden;

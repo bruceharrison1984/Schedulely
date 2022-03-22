@@ -1,5 +1,5 @@
-.calendo--default-header-banner {
+.schedulely--default-header-banner {
   flex-grow: 2;
   text-align: center;
-  color: var(--calendo-font-color);
+  color: var(--schedulely-font-color);
 }

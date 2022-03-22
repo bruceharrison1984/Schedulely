@@ -23,7 +23,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { isHighlighted } = useEventHighlight();
 
   return (
-    <div className="calendo--event-week-layout">
+    <div className="schedulely--event-week-layout">
       {events.map((event) => (
         <EventPositionLayout
           key={event.id}

@@ -44,7 +44,7 @@ interface Locale {
 }
 
 /**
- * Simple interface for using date-fns with Calendo
+ * Simple interface for using date-fns with Schedulely
  *
  * Functions can be passed directly from import.
  */

@@ -1,8 +1,8 @@
-.calendo[data-theme='dark'] {
-  --calendo-current-month-bg-color: rgb(112, 112, 112);
-  --calendo-sibling-month-bg-color: #2b2b2b;
-  --calendo-day-of-week-header-bg-color: white;
-  --calendo-day-of-week-header-text-color: black;
-  --calendo-font-color: white;
-  --calendo-border-color: white;
+.schedulely[data-theme='dark'] {
+  --schedulely-current-month-bg-color: rgb(112, 112, 112);
+  --schedulely-sibling-month-bg-color: #2b2b2b;
+  --schedulely-day-of-week-header-bg-color: white;
+  --schedulely-day-of-week-header-text-color: black;
+  --schedulely-font-color: white;
+  --schedulely-border-color: white;
 }

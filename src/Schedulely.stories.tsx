@@ -1,8 +1,8 @@
-import './Calendo.css';
+import './Schedulely.css';
 
 import { CalendarEvent } from '@/types/index';
-import { Calendo } from './Calendo';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Schedulely } from './Schedulely';
 import {
   addDays,
   // addMonths,
@@ -18,12 +18,12 @@ import { createDefaultAdapter } from './dateAdapters';
 import chance from 'chance';
 
 export default {
-  title: 'Calendo',
-  component: Calendo,
-} as ComponentMeta<typeof Calendo>;
+  title: 'Schedulely',
+  component: Schedulely,
+} as ComponentMeta<typeof Schedulely>;
 
-const Template: ComponentStory<typeof Calendo> = (props) => (
-  <Calendo {...props}></Calendo>
+const Template: ComponentStory<typeof Schedulely> = (props) => (
+  <Schedulely {...props}></Schedulely>
 );
 
 const chanceSeed = chance(1);

@@ -21,7 +21,7 @@ export const decorators = [
     const isDarkMode = useDarkMode();
     useEffect(
       () =>
-        (document.getElementById('calendo').dataset.theme = isDarkMode
+        (document.getElementById('schedulely').dataset.theme = isDarkMode
           ? 'dark'
           : 'light'),
       [isDarkMode]

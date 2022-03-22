@@ -1,11 +1,11 @@
-.calendo--week-layout {
+.schedulely--week-layout {
   display: grid;
   grid-area: 1 / 1;
   grid-template-columns: repeat(7, 1fr);
 }
 
-.calendo--week-layout > div {
+.schedulely--week-layout > div {
   border: 1px solid;
-  border-color: var(--calendo-border-color);
+  border-color: var(--schedulely-border-color);
   position: relative;
 }

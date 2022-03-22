@@ -1,15 +1,15 @@
-.calendo--default-day-header {
+.schedulely--default-day-header {
   text-align: center;
   width: 100%;
 }
 
-.calendo--default-day-header--text {
+.schedulely--default-day-header--text {
   position: relative;
   top: 3px;
   font-weight: bold;
 }
 
-.calendo--default-day-header--indicator {
+.schedulely--default-day-header--indicator {
   height: 25px;
   width: 25px;
   background-color: salmon;

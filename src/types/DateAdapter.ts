@@ -1,5 +1,5 @@
 /**
- * Common interface for porting date libraries so they can be used with Calendo
+ * Common interface for porting date libraries so they can be used with Schedulely
  */
 export interface DateTimeAdapter {
   /** Add the specified number of months to the date. Using a negative value will subtract that amount. */

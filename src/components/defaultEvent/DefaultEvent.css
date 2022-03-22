@@ -1,4 +1,4 @@
-.calendo--event {
+.schedulely--event {
   border-radius: 10px;
   padding-left: 1em;
   font-weight: bold;
@@ -9,14 +9,14 @@
   overflow: hidden;
 }
 
-.calendo--event:hover {
+.schedulely--event:hover {
   cursor: pointer;
 }
 
-.calendo--event-selected {
+.schedulely--event-selected {
   opacity: 100%;
 }
 
-.calendo--event-unselected {
+.schedulely--event-unselected {
   opacity: 80%;
 }

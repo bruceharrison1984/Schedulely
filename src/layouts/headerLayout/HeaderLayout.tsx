@@ -8,7 +8,7 @@ import useKeyboardControls from '@/hooks/useKeyboardControls';
 export const HeaderLayout = () => {
   const {
     currentMonth,
-    onNextMonth: onCalendo,
+    onNextMonth: onSchedulely,
     onPrevMonth,
     dateAdapter,
   } = useCalendar();
@@ -22,13 +22,13 @@ export const HeaderLayout = () => {
   useKeyboardControls();
 
   return (
-    <div className="calendo--header-layout">
+    <div className="schedulely--header-layout">
       <BackNavigationButton onClick={onPrevMonth} />
       <HeaderBanner
         month={dateAdapter.getMonthName(currentMonth)}
         year={dateAdapter.getYear(currentMonth)}
       />
-      <ForwardNavigationButton onClick={onCalendo} />
+      <ForwardNavigationButton onClick={onSchedulely} />
     </div>
   );
 };

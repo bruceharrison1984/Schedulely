@@ -1,9 +1,9 @@
-.calendo--day-of-week-layout {
+.schedulely--day-of-week-layout {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
 
-.calendo--day-of-week-layout > div {
+.schedulely--day-of-week-layout > div {
   border: 1px solid;
-  border-color: var(--calendo-border-color);
+  border-color: var(--schedulely-border-color);
 }

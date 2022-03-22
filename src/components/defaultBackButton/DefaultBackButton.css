@@ -1,12 +1,12 @@
-.calendo--default-back-button {
+.schedulely--default-back-button {
   border: none;
   background-color: transparent;
-  color: var(--calendo-font-color);
+  color: var(--schedulely-font-color);
   font-size: 2em;
   opacity: 50%;
 }
 
-.calendo--default-back-button:hover {
+.schedulely--default-back-button:hover {
   opacity: 100%;
   cursor: pointer;
 }

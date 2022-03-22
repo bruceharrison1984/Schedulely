@@ -11,12 +11,12 @@ import path from 'path';
 const config: webpack.Configuration = {
   entry: [
     path.resolve(__dirname, 'src/index.ts'),
-    path.resolve(__dirname, 'src/Calendo.css'),
+    path.resolve(__dirname, 'src/Schedulely.css'),
   ],
   mode: process.env.NODE_ENV !== 'production' ? 'development' : 'production',
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: 'styles/Calendo.css' }),
+    new MiniCssExtractPlugin({ filename: 'styles/Schedulely.css' }),
     new BundleAnalyzerPlugin({
       analyzerMode: process.env.ANALYZE ? 'server' : 'disabled',
     }),

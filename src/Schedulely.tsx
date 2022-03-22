@@ -1,31 +1,31 @@
 import { CalendarProvider, ComponentProvider } from '@/providers/index';
-import { CalendoProps } from '@/types/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
+import { SchedulelyProps } from '@/types/index';
 import { createDefaultAdapter } from './dateAdapters';
 import React from 'react';
 
 /**
- * Create an instance of Calendo
- * @param {CalendoProps} param0 Calendo configuration properties
+ * Create an instance of Schedulely
+ * @param {SchedulelyProps} param0 Schedulely configuration properties
  * @returns
  */
-export const Calendo = ({
+export const Schedulely = ({
   dateAdapter = createDefaultAdapter(),
-  calendoComponents,
+  schedulelyComponents,
   events,
   theme,
   additionalClassNames = [],
-}: CalendoProps) => {
+}: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
-  additionalClassNames?.push('calendo');
+  additionalClassNames?.push('schedulely');
   return (
     <React.StrictMode>
       <div
-        id="calendo"
+        id="schedulely"
         className={additionalClassNames?.join(' ')}
         data-theme={theme}
       >
-        <ComponentProvider calendarComponents={calendoComponents}>
+        <ComponentProvider calendarComponents={schedulelyComponents}>
           <CalendarProvider dateAdapter={dateAdapter} calendarEvents={events}>
             <HeaderLayout />
             <DayOfWeekLayout />

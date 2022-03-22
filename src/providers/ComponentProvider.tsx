@@ -1,4 +1,3 @@
-import { CalendoComponents } from '@/types/index';
 import {
   DefaultBackButton,
   DefaultDay,
@@ -10,19 +9,22 @@ import {
   DefaultMoreEventsIndicator,
 } from '../components';
 import { ReactNode, createContext, useMemo } from 'react';
+import { SchedulelyComponents } from '@/types/index';
 import React from 'react';
 
-export const ComponentContext = createContext<CalendoComponents | null>(null);
+export const ComponentContext = createContext<SchedulelyComponents | null>(
+  null
+);
 ComponentContext.displayName = 'ComponentContext';
 
 interface ComponentProviderProps {
-  calendarComponents?: Partial<CalendoComponents>;
+  calendarComponents?: Partial<SchedulelyComponents>;
   children: ReactNode;
 }
 
 /**
  * Provides the layout components with the visible calendar components
- * @param param0 Partial<CalendoComponents> that will over-ride the default components
+ * @param param0 Partial<SchedulelyComponents> that will over-ride the default components
  * @returns ComponentProvider component
  */
 export const ComponentProvider = ({
@@ -34,7 +36,7 @@ export const ComponentProvider = ({
     return { ...defaultComponents, ...calendarComponents };
   }, [calendarComponents]);
 
-  const contextValue: CalendoComponents = {
+  const contextValue: SchedulelyComponents = {
     dayOfWeekComponent: React.memo(components.dayOfWeekComponent),
     dayComponent: React.memo(components.dayComponent),
     forwardNavigationButtonComponent: React.memo(
@@ -58,7 +60,7 @@ export const ComponentProvider = ({
   );
 };
 
-const defaultComponents: CalendoComponents = {
+const defaultComponents: SchedulelyComponents = {
   dayOfWeekComponent: DefaultDayOfWeek,
   dayComponent: DefaultDay,
   forwardNavigationButtonComponent: DefaultForwardButton,

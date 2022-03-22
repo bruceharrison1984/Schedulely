@@ -1,40 +1,40 @@
-.calendo[data-theme='minimal'] {
-  --calendo-sibling-month-bg-color: #f1f1f1;
-  --calendo-day-of-week-header-bg-color: white;
-  --calendo-day-of-week-header-text-color: black;
+.schedulely[data-theme='minimal'] {
+  --schedulely-sibling-month-bg-color: #f1f1f1;
+  --schedulely-day-of-week-header-bg-color: white;
+  --schedulely-day-of-week-header-text-color: black;
 }
 
-.calendo[data-theme='minimal']
-  > .calendo--week-container
-  > .calendo--week-layout
+.schedulely[data-theme='minimal']
+  > .schedulely--week-container
+  > .schedulely--week-layout
   > div:first-child {
   border-left: none;
 }
 
-.calendo[data-theme='minimal']
-  > .calendo--week-container
-  > .calendo--week-layout
+.schedulely[data-theme='minimal']
+  > .schedulely--week-container
+  > .schedulely--week-layout
   > div:last-child {
   border-right: none;
 }
 
-.calendo[data-theme='minimal']
-  > .calendo--week-container
-  > .calendo--week-layout:last-child
+.schedulely[data-theme='minimal']
+  > .schedulely--week-container
+  > .schedulely--week-layout:last-child
   > div {
   border-bottom: none;
 }
 
-.calendo[data-theme='minimal']
-  > .calendo--day-of-week-layout
+.schedulely[data-theme='minimal']
+  > .schedulely--day-of-week-layout
   > div:first-child {
   border-left: none;
 }
 
-.calendo[data-theme='minimal'] > .calendo--day-of-week-layout > div:last-child {
+.schedulely[data-theme='minimal'] > .schedulely--day-of-week-layout > div:last-child {
   border-right: none;
 }
 
-.calendo[data-theme='minimal'] > .calendo--day-of-week-layout > div {
+.schedulely[data-theme='minimal'] > .schedulely--day-of-week-layout > div {
   border-top: none;
 }
