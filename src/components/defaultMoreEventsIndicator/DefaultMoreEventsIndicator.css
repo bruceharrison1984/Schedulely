@@ -1,0 +1,22 @@
+/* TODO: styles on this element are a little messy */
+
+.calendo--additional-events {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  z-index: 100;
+}
+
+.calendo--additional-events-indicator {
+  display: inline-block;
+  opacity: 0.5;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: bolder;
+  color: var(--calendo-font-color);
+}
+
+.calendo--additional-events-indicator:hover {
+  opacity: 1;
+}

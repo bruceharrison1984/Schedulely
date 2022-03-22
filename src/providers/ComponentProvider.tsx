@@ -7,6 +7,7 @@ import {
   DefaultEvent,
   DefaultForwardButton,
   DefaultHeaderBanner,
+  DefaultMoreEventsIndicator,
 } from '../components';
 import { ReactNode, createContext, useMemo } from 'react';
 import React from 'react';
@@ -45,6 +46,9 @@ export const ComponentProvider = ({
     headerBannerComponent: React.memo(components.headerBannerComponent),
     dayHeaderComponent: React.memo(components.dayHeaderComponent),
     eventComponent: React.memo(components.eventComponent),
+    moreEventsIndicatorComponent: React.memo(
+      components.moreEventsIndicatorComponent
+    ),
   };
 
   return (
@@ -62,4 +66,5 @@ const defaultComponents: CalendoComponents = {
   headerBannerComponent: DefaultHeaderBanner,
   dayHeaderComponent: DefaultDayHeader,
   eventComponent: DefaultEvent,
+  moreEventsIndicatorComponent: DefaultMoreEventsIndicator,
 };

@@ -8,4 +8,5 @@ export * from './DayHeaderComponent';
 export * from './DayOfWeekComponent';
 export * from './EventComponent';
 export * from './HeaderBannerComponent';
+export * from './MoreEventsIndicator';
 export * from './NavigationButtonComponent';

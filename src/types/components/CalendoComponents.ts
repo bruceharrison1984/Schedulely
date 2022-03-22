@@ -6,6 +6,7 @@ import {
   HeaderBannerComponent,
   NavigationButtonComponent,
 } from '@/types/index';
+import { MoreEventsIndicatorComponent } from './MoreEventsIndicator';
 
 export interface CalendoComponents {
   dayOfWeekComponent: DayOfWeekComponent;
@@ -15,4 +16,5 @@ export interface CalendoComponents {
   headerBannerComponent: HeaderBannerComponent;
   dayHeaderComponent: DayHeaderComponent;
   eventComponent: EventComponent;
+  moreEventsIndicatorComponent: MoreEventsIndicatorComponent;
 }

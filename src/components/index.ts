@@ -9,3 +9,4 @@ export * from './defaultDayOfWeek/index';
 export * from './defaultEvent/index';
 export * from './defaultForwardButton/index';
 export * from './defaultHeaderBanner/index';
+export * from './defaultMoreEventsIndicator/index';
