@@ -1,8 +1,7 @@
+import { HighlightEventState } from '@/types/HighlightEventState';
 import { ReactNode, createContext, useState } from 'react';
 
-export const HighlightContext = createContext<HighlightEventContext | null>(
-  null
-);
+export const HighlightContext = createContext<HighlightEventState | null>(null);
 HighlightContext.displayName = 'HighlightContext';
 
 /**
@@ -19,7 +18,7 @@ export const HighlightProvider = ({ children }: { children: ReactNode }) => {
   const clearHighlight = () => setHighlightedEvent(undefined);
   const isHighlighted = (eventId: string) => highlightedEvent === eventId;
 
-  const context: HighlightEventContext = {
+  const context: HighlightEventState = {
     setHighlight,
     clearHighlight,
     isHighlighted,
@@ -31,14 +30,3 @@ export const HighlightProvider = ({ children }: { children: ReactNode }) => {
     </HighlightContext.Provider>
   );
 };
-
-export interface HighlightEventContext {
-  /** Set the ID of the currently highlighted event */
-  setHighlight: (eventId: string) => void;
-
-  /** Clear the currently value for highlightedEvent */
-  clearHighlight: () => void;
-
-  /** Check if the eventId equals the currently highlighted event */
-  isHighlighted: (eventId: string) => boolean;
-}
