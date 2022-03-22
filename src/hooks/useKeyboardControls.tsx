@@ -8,28 +8,28 @@ import { useCallback, useEffect } from 'react';
 const useKeyboardControls = () => {
   const { onNextMonth, onPrevMonth } = useCalendar();
 
-  const keyboardEvent = useCallback(
+  const navigatePrevMonth = useCallback(
     (event: KeyboardEvent) => {
-      switch (event.key) {
-        case 'ArrowLeft': {
-          onPrevMonth();
-          break;
-        }
-        case 'ArrowRight': {
-          onNextMonth();
-          break;
-        }
-      }
+      if (event.key === 'ArrowLeft') onPrevMonth();
     },
-    [onPrevMonth, onNextMonth]
+    [onPrevMonth]
+  );
+
+  const navigateNextMonth = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'ArrowRight') onNextMonth();
+    },
+    [onNextMonth]
   );
 
   useEffect(() => {
-    document.addEventListener('keydown', keyboardEvent);
+    document.addEventListener('keydown', navigatePrevMonth);
+    document.addEventListener('keydown', navigateNextMonth);
     () => {
-      document.removeEventListener('keydown', keyboardEvent);
+      document.removeEventListener('keydown', navigatePrevMonth);
+      document.removeEventListener('keydown', navigateNextMonth);
     };
-  }, [keyboardEvent]);
+  }, [navigatePrevMonth, navigateNextMonth]);
 };
 
 export default useKeyboardControls;
