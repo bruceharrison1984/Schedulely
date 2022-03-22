@@ -54,6 +54,10 @@ const config: webpack.Configuration = {
     ],
   },
   resolve: {
+    // alias: {
+    //   'react-dom$': 'react-dom/profiling',
+    //   'scheduler/tracing': 'scheduler/tracing-profiling',
+    // },
     plugins: [
       new TsconfigPathsPlugin() as unknown as webpack.ResolvePluginInstance /* fix for unfinished typings */,
     ],
