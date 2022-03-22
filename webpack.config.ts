@@ -2,7 +2,10 @@ import * as webpack from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import LicensePlugin from 'webpack-license-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import path from 'path';
 
 const config: webpack.Configuration = {
@@ -17,6 +20,7 @@ const config: webpack.Configuration = {
     new BundleAnalyzerPlugin({
       analyzerMode: process.env.ANALYZE ? 'server' : 'disabled',
     }),
+    new LicensePlugin(),
   ],
   devtool: 'source-map',
   module: {
@@ -39,6 +43,14 @@ const config: webpack.Configuration = {
           'css-loader',
         ],
       },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+      new CssMinimizerPlugin(),
     ],
   },
   resolve: {
