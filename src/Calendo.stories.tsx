@@ -1,4 +1,4 @@
-import './Calendo.scss';
+import './Calendo.css';
 
 import { CalendarEvent } from '@/types/index';
 import { Calendo } from './Calendo';

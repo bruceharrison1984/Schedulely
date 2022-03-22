@@ -8,7 +8,7 @@ import path from 'path';
 const config: webpack.Configuration = {
   entry: [
     path.resolve(__dirname, 'src/index.ts'),
-    path.resolve(__dirname, 'src/Calendo.scss'),
+    path.resolve(__dirname, 'src/Calendo.css'),
   ],
   mode: process.env.NODE_ENV !== 'production' ? 'development' : 'production',
   plugins: [
@@ -31,13 +31,12 @@ const config: webpack.Configuration = {
         ],
       },
       {
-        test: /\.scss$/i,
+        test: /\.css$/i,
         use: [
           process.env.NODE_ENV !== 'production'
             ? 'style-loader'
             : MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader',
         ],
       },
     ],

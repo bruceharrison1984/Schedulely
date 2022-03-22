@@ -7,9 +7,10 @@
   box-shadow: dimgray 2px 2px 3px;
   text-overflow: ellipsis;
   overflow: hidden;
-  &:hover {
-    cursor: pointer;
-  }
+}
+
+.calendo--event:hover {
+  cursor: pointer;
 }
 
 .calendo--event-selected {
