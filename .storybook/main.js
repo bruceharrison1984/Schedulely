@@ -7,6 +7,9 @@ module.exports = {
     '@storybook/addon-essentials',
     'storybook-dark-mode',
   ],
+  core: {
+    builder: 'webpack5',
+  },
   features: {
     storyStoreV7: true,
     babelModeV7: true,

@@ -42,7 +42,9 @@ const config: webpack.Configuration = {
     ],
   },
   resolve: {
-    plugins: [new TsconfigPathsPlugin()],
+    plugins: [
+      new TsconfigPathsPlugin() as unknown as webpack.ResolvePluginInstance /* fix for unfinished typings */,
+    ],
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
