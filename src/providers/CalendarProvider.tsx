@@ -9,7 +9,6 @@ import {
   ReactNode,
   createContext,
   useCallback,
-  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -98,31 +97,6 @@ export const CalendarProvider = ({
     () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -1)),
     [dateAdapter]
   );
-
-  /**
-   * TODO: basic keyboard controls. This could be easily exposed so custom key bindings could be passed in.
-   * It also probably doesn't belong in this context.
-   */
-  const keyboardEvent = useCallback(
-    (event: KeyboardEvent) => {
-      switch (event.key) {
-        case 'ArrowLeft': {
-          onPrevMonth();
-          break;
-        }
-        case 'ArrowRight': {
-          onNextMonth();
-          break;
-        }
-      }
-    },
-    [onPrevMonth, onNextMonth]
-  );
-
-  useEffect(() => {
-    document.addEventListener('keydown', keyboardEvent);
-    () => document.removeEventListener('keydown', keyboardEvent);
-  }, [keyboardEvent]);
 
   const contextValue: CalendarState = {
     currentMonth,

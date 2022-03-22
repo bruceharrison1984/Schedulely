@@ -1,4 +1,5 @@
 import { useCalendar, useComponents } from '@/hooks/index';
+import useKeyboardControls from '@/hooks/useKeyboardControls';
 
 /**
  * This component controls the layout of the header that display the controls and the current month/year description
@@ -17,6 +18,8 @@ export const HeaderLayout = () => {
     backwardNavigationButtonComponent: BackNavigationButton,
     headerBannerComponent: HeaderBanner,
   } = useComponents();
+
+  useKeyboardControls();
 
   return (
     <div className="calendo--header-layout">
