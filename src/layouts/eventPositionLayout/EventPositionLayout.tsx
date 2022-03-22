@@ -22,11 +22,11 @@ export const EventPositionLayout = ({
 
   return (
     <div
+      className="calendo--event-position-layout"
       data-eventid={event.id}
       style={{
         gridColumnStart: startIndex,
         gridColumnEnd: endIndex,
-        minWidth: 0, // this must be zero otherwise events can break out of grid on small displays
       }}
       onMouseOver={() => setHighlight(event.id)}
       onMouseLeave={clearHighlight}
