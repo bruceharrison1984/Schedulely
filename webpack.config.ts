@@ -31,7 +31,7 @@ const config: webpack.Configuration = {
         ],
       },
       {
-        test: /\.scss$/i,
+        test: /\.css$/i,
         use: [
           process.env.NODE_ENV !== 'production'
             ? 'style-loader'
