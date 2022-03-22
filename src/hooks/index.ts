@@ -5,4 +5,5 @@
 export * from './useCalendar';
 export * from './useComponents';
 export * from './useEventHighlight';
+export * from './useKeyboardControls';
 export * from './useScreenSize';
