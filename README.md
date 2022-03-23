@@ -9,6 +9,8 @@ _This component is still very early in development. Everything is currently stil
 
 ---
 
+[![npm version](https://badge.fury.io/js/schedulely.svg)](https://badge.fury.io/js/schedulely) [![bundlephobia](https://badgen.net/bundlephobia/minzip/schedulely)](https://bundlephobia.com/package/schedulely)
+
 ## 📃 Description
 
 A react-based, light-weight, highly customizable Month calendar for React-based applications.
