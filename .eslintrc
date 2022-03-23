@@ -1,0 +1,28 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "plugins": [
+    "sort-imports-es6-autofix",
+    "unused-imports",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "sort-imports-es6-autofix/sort-imports-es6": [
+      2,
+      {
+        "ignoreCase": false,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+      }
+    ],
+    "unused-imports/no-unused-imports": "error"
+  },
+  "ignorePatterns": ["node_modules", "dist"]
+}
