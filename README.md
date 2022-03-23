@@ -89,7 +89,7 @@ Schedulely doesn't force a particular DateTime library on you. By implementing t
 
 _By default, the calendar will use the NativeJs DateAdapter for dealing with dates._
 
-The long term plan is to implement a default DateAdapter based on `Temporal` when it is finally approved. Until then, you are required to bring-your-own-date-lib.
+The long term plan is to implement a default DateAdapter based on `Temporal` when it is finally approved. Until then, the default adapter is based on native JS `Date` objects.
 
 ## 👓 Themes
 
