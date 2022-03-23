@@ -9,3 +9,11 @@
   border-color: var(--schedulely-border-color);
   position: relative;
 }
+
+.schedulely--week-layout-additional-events {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  z-index: 100;
+}
