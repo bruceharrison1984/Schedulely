@@ -23,12 +23,25 @@ The ultimate goal for this library was to create a blank canvas that allowed for
 
 The included default calendar components can be simply used as is, but the real power is being able to easily override these components. This allows consumers to use any state-management, styles, UX, or _whatever_ without needing them included in this library, and without interfering with it's behavior.
 
+## 📦 Installation
+
+NPM:
+
+```sh
+npm install schedulely
+```
+
+Yarn:
+
+```sh
+yarn install schedulely
+```
+
 ## 🔨 Basic Usage
 
 This example initializes the calendar with default components, using the included NativeJS DateAdapter as the date library.
 
 ```js
-import './Schedulely.css';
 import { Schedulely } from './Schedulely';
 
 ...
@@ -80,6 +93,7 @@ The long term plan is to implement a default DateAdapter based on `Temporal` whe
 
 ## 👓 Themes
 
+CSS usage is currently up in the air due to how Rollup deals with it. Tread carefully here. This will be resolved in the future.
 [See Theme Docs](src/themes/README.md)
 
 ## Alternatives
