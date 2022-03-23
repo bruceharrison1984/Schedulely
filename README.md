@@ -42,6 +42,7 @@ yarn install schedulely
 This example initializes the calendar with default components, using the included NativeJS DateAdapter as the date library.
 
 ```js
+import 'schedulely/dist/index.css';
 import { Schedulely } from './Schedulely';
 
 ...
@@ -93,7 +94,8 @@ The long term plan is to implement a default DateAdapter based on `Temporal` whe
 
 ## 👓 Themes
 
-CSS usage is currently up in the air due to how Rollup deals with it. Tread carefully here. This will be resolved in the future.
+Schedulely is themed via standard CSS files. Importing `schedulely/dist/index.css` will give access to the base themes, but custom themes are supported via custom CSS files as well.
+
 [See Theme Docs](src/themes/README.md)
 
 ## Alternatives
