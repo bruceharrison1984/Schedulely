@@ -1,5 +1,5 @@
 import { useCalendar, useComponents } from '@/hooks/index';
-import useKeyboardControls from '@/hooks/useKeyboardControls';
+import { useKeyboardControls } from '@/hooks/index';
 
 /**
  * This component controls the layout of the header that display the controls and the current month/year description
