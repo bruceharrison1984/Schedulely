@@ -1,10 +1,8 @@
 import 'schedulely/dist/index.css';
 
-// import { CalendarEvent } from '@/types/index';
+import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-// import { Schedulely } from './Schedulely';
-import { CalendarEvent, Schedulely } from 'schedulely';
-
+import { Schedulely } from './Schedulely';
 import { addDays } from 'date-fns';
 import chance from 'chance';
 
