@@ -2,6 +2,7 @@
 import { babel } from '@rollup/plugin-babel';
 import { defineConfig } from 'rollup';
 import { terser } from 'rollup-plugin-terser';
+import analyze from 'rollup-plugin-analyzer';
 import styles from 'rollup-plugin-styles';
 import typescript from '@rollup/plugin-typescript';
 
@@ -31,6 +32,7 @@ const options = defineConfig({
       include: ['src/**/*.ts', 'src/**/*.tsx'],
     }),
     terser(),
+    analyze({ summaryOnly: true, hideDeps: true, filter: 'hide-all' }),
   ],
 });
 
