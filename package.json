@@ -1,6 +1,6 @@
 {
   "name": "schedulely",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "schedule",
     "calendar",
@@ -10,9 +10,6 @@
   "description": "A React calendar using modern CSS practices",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "sideEffects": [
-    "*.css"
-  ],
   "scripts": {
     "analyze": "NODE_ENV=production ANALYZE=true webpack",
     "barrels": "barrelsby -c .barrelsby.json",
@@ -133,5 +130,8 @@
     "tabWidth": 2,
     "semi": true,
     "singleQuote": true
+  },
+  "dependencies": {
+    "schedulely": "^0.0.2"
   }
 }

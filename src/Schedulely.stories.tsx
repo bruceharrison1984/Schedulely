@@ -1,8 +1,10 @@
-import './Schedulely.css';
+import 'schedulely/dist/styles/Schedulely.css';
 
-import { CalendarEvent } from '@/types/index';
+// import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Schedulely } from './Schedulely';
+// import { Schedulely } from './Schedulely';
+import { CalendarEvent, Schedulely, createDefaultAdapter } from 'schedulely';
+
 import {
   addDays,
   // addMonths,
@@ -14,7 +16,7 @@ import {
   // startOfWeek,
 } from 'date-fns';
 // import { createDateFnsConvertor } from './dateConvertors/dateFns';
-import { createDefaultAdapter } from './dateAdapters';
+// import { createDefaultAdapter } from './dateAdapters';
 import chance from 'chance';
 
 export default {
