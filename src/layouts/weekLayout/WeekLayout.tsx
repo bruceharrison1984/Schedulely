@@ -20,7 +20,10 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
     moreEventsIndicatorComponent: MoreEventsIndicatorComponent,
   } = useComponents();
 
-  /** Display 'more events' indicator */
+  /**
+   * Display 'more events' indicator.
+   * This feels like it doesn't belong here, not sure where to move it
+   */
   const hasEventOverflow = useCallback(
     (date: Date, overflowLimit = 3) => {
       const events = eventsOnDays.find((x) => x.date === date)?.events;
@@ -47,9 +50,11 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
             />
           </DayComponent>
           {hasEventOverflow(day) && (
-            <MoreEventsIndicatorComponent
-              events={eventsOnDays.find((x) => x.date === day)?.events || []}
-            />
+            <div className="schedulely--week-layout-additional-events">
+              <MoreEventsIndicatorComponent
+                events={eventsOnDays.find((x) => x.date === day)?.events || []}
+              />
+            </div>
           )}
         </div>
       ))}
