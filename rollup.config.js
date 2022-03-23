@@ -12,6 +12,7 @@ const options = defineConfig({
     format: 'esm',
     assetFileNames: '[name].css',
   },
+  external: ['react/jsx-runtime', 'react'],
   plugins: [
     styles({ mode: ['extract'], minimize: true }),
     typescript({
