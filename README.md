@@ -9,7 +9,7 @@ _This component is still very early in development. Everything is currently stil
 
 ---
 
-[![npm version](https://badge.fury.io/js/schedulely.svg)](https://badge.fury.io/js/schedulely) [![bundlephobia](https://badgen.net/bundlephobia/minzip/schedulely)](https://bundlephobia.com/package/schedulely)
+[![npm version](https://badge.fury.io/js/schedulely.svg)](https://badge.fury.io/js/schedulely) [![bundlephobia](https://badgen.net/bundlephobia/minzip/schedulely)](https://bundlephobia.com/package/schedulely) [![install size](https://packagephobia.com/badge?p=schedulely)](https://packagephobia.com/result?p=schedulely)
 
 ## 📃 Description
 
