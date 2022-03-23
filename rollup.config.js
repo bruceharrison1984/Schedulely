@@ -24,7 +24,11 @@ const options = defineConfig({
         '**/*.stories.tsx',
       ],
     }),
-    babel({ babelHelpers: 'bundled' }),
+    babel({
+      babelHelpers: 'bundled',
+      extensions: ['.ts', '.tsx'],
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
+    }),
   ],
 });
 
