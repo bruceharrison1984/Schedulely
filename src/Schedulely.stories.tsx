@@ -1,5 +1,3 @@
-import 'schedulely/dist/index.css';
-
 import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Schedulely } from './Schedulely';
