@@ -1,6 +1,7 @@
 // rollup.config.js
 import { babel } from '@rollup/plugin-babel';
 import { defineConfig } from 'rollup';
+import { terser } from 'rollup-plugin-terser';
 import styles from 'rollup-plugin-styles';
 import typescript from '@rollup/plugin-typescript';
 
@@ -29,6 +30,7 @@ const options = defineConfig({
       extensions: ['.ts', '.tsx'],
       include: ['src/**/*.ts', 'src/**/*.tsx'],
     }),
+    terser(),
   ],
 });
 
