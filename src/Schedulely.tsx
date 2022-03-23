@@ -1,3 +1,5 @@
+import './Schedulely.css';
+
 import { CalendarProvider, ComponentProvider } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';

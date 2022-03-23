@@ -1,16 +1,30 @@
 // rollup.config.js
+import { babel } from '@rollup/plugin-babel';
 import { defineConfig } from 'rollup';
-import css from 'rollup-plugin-import-css';
+import styles from 'rollup-plugin-styles';
 import typescript from '@rollup/plugin-typescript';
 
 const options = defineConfig({
-  input: ['src/Schedulely.tsx', 'src/Schedulely.css'],
+  input: 'src/index.ts',
   output: {
-    sourcemapFile: 'Schedulely.map.js',
+    sourcemap: 'hidden',
     dir: 'dist',
     format: 'esm',
+    assetFileNames: '[name].css',
   },
-  plugins: [typescript(), css({ include: ['./src/Schedulely.css'] })],
+  plugins: [
+    styles({ mode: ['extract'], minimize: true }),
+    typescript({
+      removeComments: true,
+      exclude: [
+        '**/__tests__',
+        '**/*.spec.ts',
+        '**/*.util.ts',
+        '**/*.stories.tsx',
+      ],
+    }),
+    babel({ babelHelpers: 'bundled' }),
+  ],
 });
 
 export default options;

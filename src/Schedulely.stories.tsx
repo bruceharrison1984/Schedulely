@@ -1,15 +1,12 @@
-// import 'schedulely/dist/styles/Schedulely.css';
+import 'schedulely/dist/index.css';
 
 // import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 // import { Schedulely } from './Schedulely';
-import S, { CalendarEvent, Schedulely } from 'schedulely';
+import { CalendarEvent, Schedulely } from 'schedulely';
 
 import { addDays } from 'date-fns';
 import chance from 'chance';
-
-console.log(Schedulely);
-console.log(S);
 
 export default {
   title: 'Schedulely',
