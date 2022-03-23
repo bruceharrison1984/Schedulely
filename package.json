@@ -1,6 +1,6 @@
 {
   "name": "schedulely",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "keywords": [
     "schedule",
     "calendar",
@@ -10,6 +10,7 @@
   "description": "A React calendar using modern CSS practices",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "barrels": "barrelsby -c .barrelsby.json",
     "build": "rm -rf dist && NODE_ENV=production rollup -c",
