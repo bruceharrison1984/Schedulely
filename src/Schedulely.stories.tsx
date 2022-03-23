@@ -1,31 +1,20 @@
-import 'schedulely/dist/styles/Schedulely.css';
+import 'schedulely/dist/index.css';
 
 // import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 // import { Schedulely } from './Schedulely';
-import Schedulely from 'schedulely';
+import { CalendarEvent, Schedulely } from 'schedulely';
 
-import {
-  addDays,
-  // addMonths,
-  // eachDayOfInterval,
-  // eachWeekOfInterval,
-  // format,
-  // isSameWeek,
-  // startOfMonth,
-  // startOfWeek,
-} from 'date-fns';
-// import { createDateFnsConvertor } from './dateConvertors/dateFns';
-// import { createDefaultAdapter } from './dateAdapters';
+import { addDays } from 'date-fns';
 import chance from 'chance';
 
 export default {
   title: 'Schedulely',
-  component: Schedulely.Schedulely,
-} as ComponentMeta<typeof Schedulely.Schedulely>;
+  component: Schedulely,
+} as ComponentMeta<typeof Schedulely>;
 
-const Template: ComponentStory<typeof Schedulely.Schedulely> = (props) => (
-  <Schedulely.Schedulely {...props}></Schedulely.Schedulely>
+const Template: ComponentStory<typeof Schedulely> = (props) => (
+  <Schedulely {...props}></Schedulely>
 );
 
 const chanceSeed = chance(1);
@@ -36,7 +25,7 @@ const generateEvents = (
   maxLength = 15,
   idOffset = 0
 ) => {
-  const events: Schedulely.CalendarEvent[] = [];
+  const events: CalendarEvent[] = [];
   const today = new Date();
   for (let index = 0; index < numberOfEvents; index++) {
     const id = (index + idOffset).toString();
@@ -128,13 +117,10 @@ const events = [
 //   }),
 // };
 
-console.log(Schedulely.createDefaultAdapter);
-console.log(Schedulely);
-
 export const nativeJs = Template.bind({});
 nativeJs.storyName = 'NativeJS Date';
 nativeJs.args = {
   events,
-  // dateAdapter: Schedulely.createDefaultAdapter(),
+  // dateAdapter: createDefaultAdapter(),
   theme: 'light',
 };
