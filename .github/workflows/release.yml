@@ -21,12 +21,25 @@ jobs:
         with:
           node-version: 16.x
           cache: 'npm'
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run prettier
-      - run: npm run test
+      - name: NPM Install
+        run: npm ci
 
-      ## publish NPM package here
+      - name: Lint
+        run: npm run lint
+
+      - name: Prettier
+        run: npm run prettier
+
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish to NPM
+        run: npm publish
+        env:
+          NPM_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
       ## Checkout so we can apply the new tag
       - uses: actions/checkout@v2
