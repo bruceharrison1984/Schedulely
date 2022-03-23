@@ -1,6 +1,6 @@
 {
   "name": "schedulely",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "keywords": [
     "schedule",
     "calendar",
@@ -8,7 +8,7 @@
     "month"
   ],
   "description": "A React calendar using modern CSS practices",
-  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "barrels": "barrelsby -c .barrelsby.json",
@@ -124,5 +124,8 @@
     "tabWidth": 2,
     "semi": true,
     "singleQuote": true
+  },
+  "dependencies": {
+    "schedulely": "file:schedulely-0.0.11.tgz"
   }
 }
