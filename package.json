@@ -1,6 +1,6 @@
 {
   "name": "schedulely",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "keywords": [
     "schedule",
     "calendar",
@@ -8,8 +8,8 @@
     "month"
   ],
   "description": "A React calendar using modern CSS practices",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/Schedulely.js",
+  "types": "dist/Schedulely.d.ts",
   "scripts": {
     "analyze": "NODE_ENV=production ANALYZE=true webpack",
     "barrels": "barrelsby -c .barrelsby.json",
@@ -35,6 +35,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@rollup/plugin-typescript": "^8.3.1",
     "@storybook/addon-actions": "^6.5.0-alpha.49",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "^6.5.0-alpha.49",
@@ -73,17 +74,17 @@
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
     "regenerator-runtime": "^0.13.9",
+    "rollup": "^2.70.1",
+    "rollup-plugin-import-css": "^3.0.3",
     "storybook-addon-performance": "^0.16.1",
     "storybook-dark-mode": "^1.0.10-canary.177.3666.0",
     "style-loader": "^3.3.1",
-    "terser-webpack-plugin": "^5.3.1",
     "ts-node": "^10.7.0",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "^4.6.2",
     "webpack": "^5.70.0",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-license-plugin": "^4.2.2"
+    "webpack-cli": "^4.9.2"
   },
   "peerDependencies": {
     "react": "17.0.2",
@@ -132,6 +133,6 @@
     "singleQuote": true
   },
   "dependencies": {
-    "schedulely": "^0.0.6"
+    "schedulely": "file:schedulely-0.0.8.tgz"
   }
 }

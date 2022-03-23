@@ -43,7 +43,7 @@ const config: webpack.Configuration = {
     ],
   },
   optimization: {
-    minimizer: [`...`, new CssMinimizerPlugin()],
+    minimizer: [new CssMinimizerPlugin()],
   },
   resolve: {
     // alias: {
@@ -58,7 +58,8 @@ const config: webpack.Configuration = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
-    libraryTarget: 'commonjs2',
+    library: 'Schedulely',
+    libraryTarget: 'umd',
   },
 };
 
