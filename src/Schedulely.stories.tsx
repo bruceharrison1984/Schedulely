@@ -3,7 +3,7 @@ import 'schedulely/dist/styles/Schedulely.css';
 // import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 // import { Schedulely } from './Schedulely';
-import { CalendarEvent, Schedulely, createDefaultAdapter } from 'schedulely';
+import Schedulely from 'schedulely';
 
 import {
   addDays,
@@ -21,11 +21,11 @@ import chance from 'chance';
 
 export default {
   title: 'Schedulely',
-  component: Schedulely,
-} as ComponentMeta<typeof Schedulely>;
+  component: Schedulely.Schedulely,
+} as ComponentMeta<typeof Schedulely.Schedulely>;
 
-const Template: ComponentStory<typeof Schedulely> = (props) => (
-  <Schedulely {...props}></Schedulely>
+const Template: ComponentStory<typeof Schedulely.Schedulely> = (props) => (
+  <Schedulely.Schedulely {...props}></Schedulely.Schedulely>
 );
 
 const chanceSeed = chance(1);
@@ -36,7 +36,7 @@ const generateEvents = (
   maxLength = 15,
   idOffset = 0
 ) => {
-  const events: CalendarEvent[] = [];
+  const events: Schedulely.CalendarEvent[] = [];
   const today = new Date();
   for (let index = 0; index < numberOfEvents; index++) {
     const id = (index + idOffset).toString();
@@ -128,10 +128,13 @@ const events = [
 //   }),
 // };
 
+console.log(Schedulely.createDefaultAdapter);
+console.log(Schedulely);
+
 export const nativeJs = Template.bind({});
 nativeJs.storyName = 'NativeJS Date';
 nativeJs.args = {
   events,
-  dateAdapter: createDefaultAdapter(),
+  // dateAdapter: Schedulely.createDefaultAdapter(),
   theme: 'light',
 };

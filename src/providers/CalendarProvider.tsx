@@ -12,7 +12,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import useScreenSize from '@/hooks/useScreenSize';
+import { useScreenSize } from '@/hooks/index';
 
 export const CalendarContext = createContext<CalendarState | null>(null);
 CalendarContext.displayName = 'CalendarContext';

@@ -5,7 +5,7 @@ import { useCallback, useEffect } from 'react';
  * Enables keyboard controls.
  * TODO: This could be expanded to allow for users to pass in their own keybindings
  */
-const useKeyboardControls = () => {
+export const useKeyboardControls = () => {
   const { onNextMonth, onPrevMonth } = useCalendar();
 
   const navigatePrevMonth = useCallback(
@@ -31,5 +31,3 @@ const useKeyboardControls = () => {
     };
   }, [navigatePrevMonth, navigateNextMonth]);
 };
-
-export default useKeyboardControls;

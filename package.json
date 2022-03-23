@@ -1,6 +1,6 @@
 {
   "name": "schedulely",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "keywords": [
     "schedule",
     "calendar",
@@ -132,6 +132,6 @@
     "singleQuote": true
   },
   "dependencies": {
-    "schedulely": "^0.0.2"
+    "schedulely": "^0.0.6"
   }
 }

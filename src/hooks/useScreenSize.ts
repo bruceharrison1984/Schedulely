@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
  * Watch the size of the screen and make it available as the DisplaySize enum.
  * @returns Current display size
  */
-const useScreenSize = () => {
+export const useScreenSize = () => {
   const [screenSize, setScreenSize] = useState<DisplaySize>(DisplaySize.large);
 
   const createQueryListener = useCallback(
@@ -45,5 +45,3 @@ const useScreenSize = () => {
 
   return screenSize;
 };
-
-export default useScreenSize;
