@@ -43,7 +43,7 @@ This example initializes the calendar with default components, using the include
 
 ```js
 import 'schedulely/dist/index.css';
-import { Schedulely } from './Schedulely';
+import { Schedulely, CalendarEvent } from './Schedulely';
 
 ...
   export const MyApp = () => {
