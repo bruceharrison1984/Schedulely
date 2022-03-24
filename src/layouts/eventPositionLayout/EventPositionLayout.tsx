@@ -1,5 +1,6 @@
-import { InternalCalendarEvent, useEventHighlight } from 'src';
+import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { ReactNode } from 'react';
+import { useEventHighlight } from '@/hooks/useEventHighlight';
 
 interface EventPositionLayoutProps {
   event: InternalCalendarEvent;

@@ -1,5 +1,5 @@
 import { useCalendar } from '@/hooks/useCalendar';
-import { useComponents } from 'src';
+import { useComponents } from '@/hooks/useComponents';
 
 /**
  * This component controls the layout of the names of the days of the week at the top of the calendar

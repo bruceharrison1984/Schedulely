@@ -1,9 +1,7 @@
-import {
-  EventPositionLayout,
-  InternalCalendarEvent,
-  useCalendar,
-  useComponents,
-} from 'src';
+import { EventPositionLayout } from '@/layouts/eventPositionLayout';
+import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
+import { useCalendar } from '@/hooks/useCalendar';
+import { useComponents } from '@/hooks/useComponents';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
 
 interface EventLayoutProps {

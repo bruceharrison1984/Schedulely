@@ -1,6 +1,7 @@
-import { EventWeekLayout, WeekLayout } from '@/layouts/index';
+import { EventWeekLayout } from '@/layouts/eventWeekLayout';
 import { HighlightProvider } from '@/providers/HightlightProvider';
-import { useCalendar } from '@/hooks/index';
+import { WeekLayout } from '@/layouts/weekLayout';
+import { useCalendar } from '@/hooks/useCalendar';
 
 /**
  * This component controls the layout of the weeks of the calendar
