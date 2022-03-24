@@ -8,13 +8,6 @@ module.exports = {
     'storybook-dark-mode',
     'storybook-addon-performance/register',
   ],
-  core: {
-    builder: 'webpack5',
-  },
-  features: {
-    // storyStoreV7: true,
-    babelModeV7: true,
-  },
   framework: '@storybook/react',
   webpackFinal: async (config) => {
     config.resolve.plugins = [

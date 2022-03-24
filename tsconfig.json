@@ -8,6 +8,7 @@
     "jsx": "react-jsx",
     "sourceMap": true,
     "outDir": "dist",
+    "declaration": true,
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": false,
