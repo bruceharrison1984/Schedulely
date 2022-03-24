@@ -1,6 +1,12 @@
 {
   "directory": [
-    "./src"
+    "./src/components",
+    "./src/dateAdapters",
+    "./src/hooks",
+    "./src/layouts",
+    "./src/providers",
+    "./src/themes",
+    "./src/types"
   ],
   "delete": true,
   "location": "all",
