@@ -1,3 +1,4 @@
+/* This file is still needed for tests */
 {
   "presets": [
     "@babel/preset-env",
