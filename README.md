@@ -47,7 +47,7 @@ import { Schedulely } from './Schedulely';
 
 ...
   export const MyApp = () => {
-    const events = [
+    const events: CalendarEvent[] = [
       {
         id: '1',
         start: '2022-02-07T06:00:00.000Z', // ISO formatted
