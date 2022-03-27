@@ -22,7 +22,8 @@
       "@/providers/*": ["src/providers/*"],
       "@/types/*": ["src/types/*"],
       "@/components/*": ["src/components/*"],
-      "@/theme/*": ["src/theme/*"]
+      "@/theme/*": ["src/theme/*"],
+      "@/dateAdapters/*": ["src/dateAdapters/*"]
     }
   },
   "include": ["src"],
