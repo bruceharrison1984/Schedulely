@@ -5,7 +5,7 @@
   grid-template-rows: repeat(4, 1fr);
   z-index: 100;
   gap: 0.3em; /* space between events */
-  margin-top: 1.5em;
+  margin-top: 1.7em;
   white-space: nowrap;
   grid-auto-flow: dense;
 }
