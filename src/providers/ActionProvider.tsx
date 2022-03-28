@@ -1,13 +1,12 @@
 import { ActionState } from '@/types/ActionState';
-import { CalendarEvent } from '@/types/InternalCalendarEvent';
+import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { ReactNode, createContext, useCallback } from 'react';
 
 export const ActionContext = createContext<ActionState | null>(null);
 ActionContext.displayName = 'ActionContext';
 
 interface ActionProviderProps {
-  onEventClick?: (event: CalendarEvent) => void;
-  onMoreEventClick?: (events: CalendarEvent[]) => void;
+  actions?: Partial<ActionState>;
   children: ReactNode;
 }
 
@@ -18,20 +17,20 @@ interface ActionProviderProps {
  * @param onMoreEventClick function that will run when the 'more events' indicator is clicked on
  * @returns ActionProvider component
  */
-export const ActionProvider = ({
-  children,
-  onEventClick = (event: CalendarEvent) => console.log(event),
-  onMoreEventClick = (events: CalendarEvent[]) => console.log(events),
-}: ActionProviderProps) => {
-  const memoizedOnEventClick = useCallback(
-    (event: CalendarEvent) => onEventClick(event),
-    [onEventClick]
-  );
+export const ActionProvider = ({ children, actions }: ActionProviderProps) => {
+  const onEventClick = actions?.onEventClick
+    ? actions?.onEventClick
+    : (event: InternalCalendarEvent) => console.log(event);
 
-  const memoizedOnMoreEventClick = useCallback(
-    (events: CalendarEvent[]) => onMoreEventClick(events),
-    [onMoreEventClick]
-  );
+  const onMoreEventClick = actions?.onMoreEventClick
+    ? actions?.onMoreEventClick
+    : (events: InternalCalendarEvent[]) => console.log(events);
+
+  const memoizedOnEventClick = useCallback(onEventClick, [onEventClick]);
+
+  const memoizedOnMoreEventClick = useCallback(onMoreEventClick, [
+    onMoreEventClick,
+  ]);
 
   const context: ActionState = {
     onEventClick: memoizedOnEventClick,

@@ -21,6 +21,7 @@ export const Schedulely = ({
   events,
   theme,
   additionalClassNames = [],
+  actions,
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
   additionalClassNames?.push('schedulely');
@@ -31,7 +32,7 @@ export const Schedulely = ({
         className={additionalClassNames?.join(' ')}
         data-theme={theme}
       >
-        <ActionProvider>
+        <ActionProvider actions={actions}>
           <ComponentProvider calendarComponents={schedulelyComponents}>
             <CalendarProvider dateAdapter={dateAdapter} calendarEvents={events}>
               <HeaderLayout />

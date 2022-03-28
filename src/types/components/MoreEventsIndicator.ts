@@ -6,6 +6,9 @@ import { JSXElementConstructor } from 'react';
  */
 export interface MoreEventsIndicatorProps {
   events: InternalCalendarEvent[];
+
+  /** Function executes when the indicator is clicked */
+  onClick: (event: InternalCalendarEvent[]) => void;
 }
 
 /**

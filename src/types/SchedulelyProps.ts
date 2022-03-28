@@ -1,3 +1,4 @@
+import { ActionState } from './ActionState';
 import { CalendarEvent } from './InternalCalendarEvent';
 import { DateTimeAdapter } from './DateAdapter';
 import { SchedulelyComponents } from './components';
@@ -18,4 +19,6 @@ export interface SchedulelyProps {
 
   /** Name of theme to display */
   theme?: string;
+
+  actions?: Partial<ActionState>;
 }

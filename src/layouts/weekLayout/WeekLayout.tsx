@@ -1,4 +1,5 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
+import { useActions } from '@/hooks/useActions';
 import { useCalendar, useComponents } from '@/hooks/index';
 import { useCallback } from 'react';
 
@@ -19,6 +20,8 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
     dayHeaderComponent: DayHeader,
     moreEventsIndicatorComponent: MoreEventsIndicatorComponent,
   } = useComponents();
+
+  const { onMoreEventClick } = useActions();
 
   /**
    * Display 'more events' indicator.
@@ -53,6 +56,7 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
             <div className="schedulely--week-layout-additional-events">
               <MoreEventsIndicatorComponent
                 events={eventsOnDays.find((x) => x.date === day)?.events || []}
+                onClick={onMoreEventClick}
               />
             </div>
           )}
