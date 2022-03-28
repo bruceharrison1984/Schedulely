@@ -2,8 +2,8 @@ import {
   CalendarEvent,
   CalendarState,
   DateTimeAdapter,
-  EventWeek,
   InternalCalendarEvent,
+  InternalEventWeek,
 } from '@/types/index';
 import {
   ReactNode,
@@ -69,9 +69,9 @@ export const CalendarProvider = ({
     [currentMonth, calendarEvents, dateAdapter]
   );
 
-  const calendarWithEvents = useMemo<EventWeek[]>(
+  const calendarWithEvents = useMemo<InternalEventWeek[]>(
     () =>
-      calendarView.map<EventWeek>((week) => ({
+      calendarView.map<InternalEventWeek>((week) => ({
         weekStart: week[0],
         weekEnd: week[6],
         daysInWeek: week,

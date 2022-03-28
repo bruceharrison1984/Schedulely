@@ -1,6 +1,10 @@
 import './Schedulely.css';
 
-import { CalendarProvider, ComponentProvider } from '@/providers/index';
+import {
+  ActionProvider,
+  CalendarProvider,
+  ComponentProvider,
+} from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';
 import { createDefaultAdapter } from './dateAdapters';
@@ -27,13 +31,15 @@ export const Schedulely = ({
         className={additionalClassNames?.join(' ')}
         data-theme={theme}
       >
-        <ComponentProvider calendarComponents={schedulelyComponents}>
-          <CalendarProvider dateAdapter={dateAdapter} calendarEvents={events}>
-            <HeaderLayout />
-            <DayOfWeekLayout />
-            <MonthLayout />
-          </CalendarProvider>
-        </ComponentProvider>
+        <ActionProvider>
+          <ComponentProvider calendarComponents={schedulelyComponents}>
+            <CalendarProvider dateAdapter={dateAdapter} calendarEvents={events}>
+              <HeaderLayout />
+              <DayOfWeekLayout />
+              <MonthLayout />
+            </CalendarProvider>
+          </ComponentProvider>
+        </ActionProvider>
       </div>
     </React.StrictMode>
   );

@@ -1,5 +1,5 @@
 import { DateTimeAdapter } from '.';
-import { EventWeek } from './EventWeek';
+import { InternalEventWeek } from './InternalEventWeek';
 
 export type CalendarState = {
   /** The current visible month */
@@ -18,5 +18,5 @@ export type CalendarState = {
   onPrevMonth: () => void;
 
   /** Calendar with events that will be displayed */
-  calendarWithEvents: EventWeek[];
+  calendarWithEvents: InternalEventWeek[];
 };
