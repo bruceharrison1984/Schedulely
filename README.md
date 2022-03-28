@@ -25,4 +25,4 @@ The included default calendar components can be simply used as is, but the real 
 ## 📚 Documentation
 
 - Documentation can be found [**here**](https://bruceharrison1984.github.io/Schedulely-docs/)
-- Storyboom demo can be found [**here**](https://bruceharrison1984.github.io/Schedulely)
+- Storybook demo can be found [**here**](https://bruceharrison1984.github.io/Schedulely)
