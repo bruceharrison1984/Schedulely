@@ -1,10 +1,11 @@
 .schedulely--additional-events-indicator {
-  display: inline-block;
   opacity: 0.5;
-  font-size: 1em;
   cursor: pointer;
   font-weight: bolder;
   color: var(--schedulely-font-color);
+  text-align: center;
+  width: fit-content;
+  margin: auto;
 }
 
 .schedulely--additional-events-indicator:hover {

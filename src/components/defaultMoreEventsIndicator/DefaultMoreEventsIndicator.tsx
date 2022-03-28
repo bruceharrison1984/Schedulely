@@ -10,7 +10,7 @@ export const DefaultMoreEventsIndicator: MoreEventsIndicatorComponent = ({
         title={`(${events.length}) total events`}
         onClick={() => console.log(events)}
       >
-        . . .
+        ...
       </div>
     </div>
   );
