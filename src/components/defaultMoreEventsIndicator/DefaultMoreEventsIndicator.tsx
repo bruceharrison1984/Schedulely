@@ -1,4 +1,4 @@
-import { MoreEventsIndicatorComponent } from '@/types/components/MoreEventsIndicator';
+import { MoreEventsIndicatorComponent } from '@/types/components/MoreEventsIndicatorComponent';
 
 export const DefaultMoreEventsIndicator: MoreEventsIndicatorComponent = ({
   events,

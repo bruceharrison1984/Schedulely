@@ -6,7 +6,7 @@ import {
   HeaderBannerComponent,
   NavigationButtonComponent,
 } from '@/types/index';
-import { MoreEventsIndicatorComponent } from './MoreEventsIndicator';
+import { MoreEventsIndicatorComponent } from './MoreEventsIndicatorComponent';
 
 export interface SchedulelyComponents {
   dayOfWeekComponent: DayOfWeekComponent;
