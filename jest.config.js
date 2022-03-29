@@ -9,9 +9,9 @@ module.exports = {
     '^@/providers/(.*)$': '<rootDir>/src/providers/$1',
     '^@/types/(.*)$': '<rootDir>/src/types/$1',
   },
-  preset: 'ts-jest',
   testEnvironment: 'node',
   transform: {
+    '^.+\\.(t|j)sx?$': ['@swc/jest'],
     '^.+\\.css$': 'jest-transform-css',
   },
 };
