@@ -34,6 +34,7 @@
     "@babel/core": "^7.17.8",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.17.8",
     "@rollup/plugin-alias": "^3.1.9",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-typescript": "^8.3.1",
@@ -77,8 +78,5 @@
   "peerDependencies": {
     "react": "17.0.2",
     "react-dom": "17.0.2"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.17.8"
   }
 }
