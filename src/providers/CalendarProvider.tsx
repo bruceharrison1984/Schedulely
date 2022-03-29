@@ -93,8 +93,18 @@ export const CalendarProvider = ({
     [dateAdapter]
   );
 
+  const onNextYear = useCallback(
+    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, 12)),
+    [dateAdapter]
+  );
+
   const onPrevMonth = useCallback(
     () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -1)),
+    [dateAdapter]
+  );
+
+  const onPrevYear = useCallback(
+    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -12)),
     [dateAdapter]
   );
 
@@ -103,7 +113,9 @@ export const CalendarProvider = ({
     dateAdapter: dateAdapter,
     daysOfWeek: daysOfWeek,
     onNextMonth,
+    onNextYear,
     onPrevMonth,
+    onPrevYear,
     calendarWithEvents,
   };
 

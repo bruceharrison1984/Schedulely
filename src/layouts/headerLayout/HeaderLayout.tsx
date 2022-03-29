@@ -8,27 +8,25 @@ import { useKeyboardControls } from '@/hooks/index';
 export const HeaderLayout = () => {
   const {
     currentMonth,
-    onNextMonth: onSchedulely,
+    onNextMonth,
+    onNextYear,
+    onPrevYear,
     onPrevMonth,
     dateAdapter,
   } = useCalendar();
 
-  const {
-    forwardNavigationButtonComponent: ForwardNavigationButton,
-    backwardNavigationButtonComponent: BackNavigationButton,
-    headerBannerComponent: HeaderBanner,
-  } = useComponents();
+  const { headerComponent: Header } = useComponents();
 
   useKeyboardControls();
 
   return (
-    <div className="schedulely--header-layout">
-      <BackNavigationButton onClick={onPrevMonth} />
-      <HeaderBanner
-        month={dateAdapter.getMonthName(currentMonth)}
-        year={dateAdapter.getYear(currentMonth)}
-      />
-      <ForwardNavigationButton onClick={onSchedulely} />
-    </div>
+    <Header
+      month={dateAdapter.getMonthName(currentMonth)}
+      year={dateAdapter.getYear(currentMonth)}
+      onNextMonth={onNextMonth}
+      onNextYear={onNextYear}
+      onPrevMonth={onPrevMonth}
+      onPrevYear={onPrevYear}
+    />
   );
 };

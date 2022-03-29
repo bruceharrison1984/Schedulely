@@ -17,6 +17,12 @@ export type CalendarState = {
   /** Decrease the calendar by one month */
   onPrevMonth: () => void;
 
+  /** Advance the calendar one year */
+  onNextYear: () => void;
+
+  /** Decrease the calendar by one year */
+  onPrevYear: () => void;
+
   /** Calendar with events that will be displayed */
   calendarWithEvents: InternalEventWeek[];
 };

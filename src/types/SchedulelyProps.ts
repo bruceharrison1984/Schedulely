@@ -1,7 +1,7 @@
 import { ActionState } from './ActionState';
 import { CalendarEvent } from './InternalCalendarEvent';
 import { DateTimeAdapter } from './DateAdapter';
-import { SchedulelyComponents } from './components';
+import { SchedulelyComponents } from './SchedulelyComponents';
 
 /** Properties used to initialize Schedulely */
 export interface SchedulelyProps {
