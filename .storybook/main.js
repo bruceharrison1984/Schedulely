@@ -7,6 +7,7 @@ module.exports = {
     '@storybook/addon-essentials',
     'storybook-dark-mode',
     'storybook-addon-performance/register',
+    'storybook-addon-swc',
   ],
   framework: '@storybook/react',
   webpackFinal: async (config) => {
