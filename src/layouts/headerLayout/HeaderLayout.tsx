@@ -23,6 +23,10 @@ export const HeaderLayout = () => {
     <Header
       month={dateAdapter.getMonthName(currentMonth)}
       year={dateAdapter.getYear(currentMonth)}
+      onNextMonth={onNextMonth}
+      onNextYear={onNextYear}
+      onPrevMonth={onPrevMonth}
+      onPrevYear={onPrevYear}
     />
   );
 };

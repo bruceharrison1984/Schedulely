@@ -8,5 +8,6 @@ export * from './DateAdapter';
 export * from './HighlightEventState';
 export * from './InternalCalendarEvent';
 export * from './InternalEventWeek';
+export * from './SchedulelyComponents';
 export * from './SchedulelyProps';
 export * from './components/index';

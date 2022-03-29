@@ -1,9 +1,6 @@
-@import './defaultBackButton/DefaultBackButton.css';
 @import './defaultDay/DefaultDay.css';
 @import './defaultDayHeader/DefaultDayHeader.css';
 @import './defaultDayOfWeek/DefaultDayOfWeek.css';
 @import './defaultEvent/DefaultEvent.css';
-@import './defaultForwardButton/DefaultForwardButton.css';
-@import './defaultHeaderBanner/DefaultHeaderBanner.css';
 @import './defaultMoreEventsIndicator/DefaultMoreEventsIndicator.css';
 @import './defaultHeader/DefaultHeader.css';

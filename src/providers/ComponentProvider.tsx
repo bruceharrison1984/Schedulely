@@ -1,11 +1,9 @@
 import {
-  DefaultBackButton,
   DefaultDay,
   DefaultDayHeader,
   DefaultDayOfWeek,
   DefaultEvent,
-  DefaultForwardButton,
-  DefaultHeaderBanner,
+  DefaultHeader,
   DefaultMoreEventsIndicator,
 } from '../components';
 import { ReactNode, createContext, useMemo } from 'react';
@@ -39,13 +37,7 @@ export const ComponentProvider = ({
   const contextValue: SchedulelyComponents = {
     dayOfWeekComponent: React.memo(components.dayOfWeekComponent),
     dayComponent: React.memo(components.dayComponent),
-    forwardNavigationButtonComponent: React.memo(
-      components.forwardNavigationButtonComponent
-    ),
-    backwardNavigationButtonComponent: React.memo(
-      components.backwardNavigationButtonComponent
-    ),
-    headerBannerComponent: React.memo(components.headerBannerComponent),
+    headerComponent: React.memo(components.headerComponent),
     dayHeaderComponent: React.memo(components.dayHeaderComponent),
     eventComponent: React.memo(components.eventComponent),
     moreEventsIndicatorComponent: React.memo(
@@ -63,9 +55,7 @@ export const ComponentProvider = ({
 const defaultComponents: SchedulelyComponents = {
   dayOfWeekComponent: DefaultDayOfWeek,
   dayComponent: DefaultDay,
-  forwardNavigationButtonComponent: DefaultForwardButton,
-  backwardNavigationButtonComponent: DefaultBackButton,
-  headerBannerComponent: DefaultHeaderBanner,
+  headerComponent: DefaultHeader,
   dayHeaderComponent: DefaultDayHeader,
   eventComponent: DefaultEvent,
   moreEventsIndicatorComponent: DefaultMoreEventsIndicator,
