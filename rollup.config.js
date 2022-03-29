@@ -1,4 +1,3 @@
-// rollup.config.js
 import { defineConfig } from 'rollup';
 import { terser } from 'rollup-plugin-terser';
 import styles from 'rollup-plugin-styles';

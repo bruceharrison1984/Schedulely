@@ -1,3 +1,4 @@
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 // eslint-disable-next-line no-undef
 module.exports = {
   moduleNameMapper: {
@@ -8,8 +9,9 @@ module.exports = {
     '^@/providers/(.*)$': '<rootDir>/src/providers/$1',
     '^@/types/(.*)$': '<rootDir>/src/types/$1',
   },
+  preset: 'ts-jest',
+  testEnvironment: 'node',
   transform: {
-    '^.+\\.ts(x)?$': 'babel-jest',
     '^.+\\.css$': 'jest-transform-css',
   },
 };
