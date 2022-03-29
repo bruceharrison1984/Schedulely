@@ -31,7 +31,6 @@
     "type": "git"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.3.1",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-essentials": "^6.4.19",

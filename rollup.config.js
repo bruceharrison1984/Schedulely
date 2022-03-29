@@ -1,5 +1,4 @@
 import { defineConfig } from 'rollup';
-import { terser } from 'rollup-plugin-terser';
 import styles from 'rollup-plugin-styles';
 import ts from 'rollup-plugin-ts';
 
@@ -16,8 +15,16 @@ const options = defineConfig({
     styles({ mode: ['extract'], minimize: true }),
     ts({
       transpiler: 'swc',
+      swcConfig: {
+        jsc: {
+          minify: {
+            compress: true,
+            mangle: true,
+          },
+        },
+        minify: true,
+      },
     }),
-    terser(),
   ],
 });
 
