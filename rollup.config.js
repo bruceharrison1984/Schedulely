@@ -11,14 +11,11 @@ const options = defineConfig({
     format: 'esm',
     assetFileNames: '[name].css',
   },
-  external: ['react/jsx-runtime', 'react', /@babel\/runtime/],
+  external: ['react/jsx-runtime', 'react', /@swc\/helpers/],
   plugins: [
     styles({ mode: ['extract'], minimize: true }),
     ts({
-      transpiler: 'babel',
-      babelConfig: {
-        plugins: [['@babel/plugin-transform-runtime', { corejs: 3 }]],
-      },
+      transpiler: 'swc',
     }),
     terser(),
   ],
