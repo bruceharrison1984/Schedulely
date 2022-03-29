@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
 // import {
 //   addDays,
