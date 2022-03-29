@@ -1,0 +1,23 @@
+.schedulely--default-button {
+  border: none;
+  background-color: transparent;
+  color: var(--schedulely-font-color);
+  font-size: 2em;
+  opacity: 50%;
+}
+
+.schedulely--default-button:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
+
+.schedulely--header-layout {
+  display: flex;
+  width: 100%;
+}
+
+.schedulely--default-header-banner {
+  flex-grow: 2;
+  text-align: center;
+  color: var(--schedulely-font-color);
+}

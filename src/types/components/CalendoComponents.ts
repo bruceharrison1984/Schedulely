@@ -4,9 +4,10 @@ import {
   DayOfWeekComponent,
   EventComponent,
   HeaderBannerComponent,
+  HeaderComponent,
+  MoreEventsIndicatorComponent,
   NavigationButtonComponent,
 } from '@/types/index';
-import { MoreEventsIndicatorComponent } from './MoreEventsIndicatorComponent';
 
 export interface SchedulelyComponents {
   dayOfWeekComponent: DayOfWeekComponent;
@@ -15,6 +16,7 @@ export interface SchedulelyComponents {
   backwardNavigationButtonComponent: NavigationButtonComponent;
   headerBannerComponent: HeaderBannerComponent;
   dayHeaderComponent: DayHeaderComponent;
+  headerComponent: HeaderComponent;
   eventComponent: EventComponent;
   moreEventsIndicatorComponent: MoreEventsIndicatorComponent;
 }
