@@ -75,7 +75,7 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
     addMonths(date, amount);
 
   const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
-    eventDate <= startOfWeek ? 1 : df_getDay(eventDate) + 1;
+    eventDate <= startOfWeek ? 1 : df_getDay(eventDate) + 1; //add one because css-grid isn't zero-index'd
 
   const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate >= endOfWeek) return 8;
