@@ -6,6 +6,7 @@
   text-align: center;
   width: fit-content;
   margin: auto;
+  z-index: 100;
 }
 
 .schedulely--additional-events-indicator:hover {

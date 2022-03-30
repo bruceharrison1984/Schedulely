@@ -48,19 +48,23 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
           <DayComponent
             isCurrentMonth={dateAdapter.isSameMonth(day, currentMonth)}
           >
-            <DayHeader
-              isToday={dateAdapter.isDateToday(day)}
-              dateNumber={dateAdapter.getDayNumber(day)}
-            />
-          </DayComponent>
-          {hasEventOverflow(day) && (
-            <div className="schedulely--week-layout-additional-events">
-              <MoreEventsIndicatorComponent
-                events={eventsOnDays.find((x) => x.date === day)?.events || []}
-                onClick={onMoreEventClick}
+            <div className="schedulely--week-day-layout">
+              <DayHeader
+                isToday={dateAdapter.isDateToday(day)}
+                dateNumber={dateAdapter.getDayNumber(day)}
               />
+              {/* empty div to maintain space within grid */}
+              <div></div>
+              {hasEventOverflow(day) && (
+                <MoreEventsIndicatorComponent
+                  events={
+                    eventsOnDays.find((x) => x.date === day)?.events || []
+                  }
+                  onClick={onMoreEventClick}
+                />
+              )}
             </div>
-          )}
+          </DayComponent>
         </div>
       ))}
     </div>
