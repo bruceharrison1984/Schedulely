@@ -26,6 +26,7 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
   /**
    * Display 'more events' indicator.
    * This feels like it doesn't belong here, not sure where to move it
+   * Also not a great solution because it forces Day to be 7em, rather than detect overflow
    */
   const hasEventOverflow = useCallback(
     (date: Date, overflowLimit = 3) => {
