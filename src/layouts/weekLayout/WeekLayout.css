@@ -4,15 +4,15 @@
   grid-template-columns: repeat(7, 1fr);
 }
 
+.schedulely--week-day-layout {
+  display: grid;
+  /* Hardcoded layout here could cause issues later */
+  grid-template-rows: auto 6fr auto;
+  height: 100%;
+}
+
 .schedulely--week-layout > div {
   border: 1px solid;
   border-color: var(--schedulely-border-color);
   position: relative;
-}
-
-.schedulely--week-layout-additional-events {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  z-index: 100;
 }
