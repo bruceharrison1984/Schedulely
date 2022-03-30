@@ -1,22 +1,18 @@
-import { DateFnsFunctions } from './datefnsInterface';
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
+import {
+  addDays,
+  addMonths,
+  eachDayOfInterval,
+  eachWeekOfInterval,
+  format,
+  startOfMonth,
+  startOfWeek,
+} from 'date-fns';
 
 /**
  * Create a Schedulely compatible DateConvertor from date-fns.
  */
-export const createDateFnsConvertor = (
-  datefns: DateFnsFunctions
-): DateTimeAdapter => {
-  const {
-    addDays,
-    addMonths,
-    eachDayOfInterval,
-    eachWeekOfInterval,
-    format,
-    startOfMonth,
-    startOfWeek,
-  } = datefns;
-
+export const createDateFnsConvertor = (): DateTimeAdapter => {
   // This returns the ISO day - Mon: 1 / Sun: 7
   const _getDayOfWeek = (date: Date) => parseInt(format(date, 'i'));
 
