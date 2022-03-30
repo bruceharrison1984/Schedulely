@@ -1,15 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
-// import {
-//   addDays,
-//   addMonths,
-//   eachDayOfInterval,
-//   eachWeekOfInterval,
-//   format,
-//   isSameWeek,
-//   startOfMonth,
-//   startOfWeek,
-// } from 'date-fns';
-// import { createDateFnsConvertor } from '.';
+import { createDateFnsAdapter } from '.';
 import { createDefaultAdapter } from '.';
 import {
   getAddMonthsToDateTestCases,
@@ -29,19 +19,10 @@ import {
  * All tests presume US/eng units
  */
 const adapters = [
-  // {
-  //   name: 'DateFns',
-  //   adapter: createDateFnsConvertor({
-  //     addDays,
-  //     eachDayOfInterval,
-  //     eachWeekOfInterval,
-  //     format,
-  //     startOfMonth,
-  //     startOfWeek,
-  //     addMonths,
-  //     isSameWeek,
-  //   }),
-  // },
+  {
+    name: 'DateFns',
+    adapter: createDateFnsAdapter(),
+  },
   {
     name: 'NativeJs',
     adapter: createDefaultAdapter(),

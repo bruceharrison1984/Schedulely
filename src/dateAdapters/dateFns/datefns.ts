@@ -2,6 +2,12 @@ import { DateTimeAdapter, DisplaySize } from '@/types/index';
 import {
   addDays,
   addMonths,
+  endOfMonth as df_endOfMonth,
+  endOfWeek as df_endOfWeek,
+  getDate as df_getDate,
+  getDay as df_getDay,
+  getYear as df_getYear,
+  parseISO as df_parseISO,
   eachDayOfInterval,
   eachWeekOfInterval,
   format,
@@ -10,23 +16,13 @@ import {
 } from 'date-fns';
 
 /**
- * Create a Schedulely compatible DateConvertor from date-fns.
+ * Create a Schedulely compatible DateAdapter from date-fns.
  */
-export const createDateFnsConvertor = (): DateTimeAdapter => {
-  // This returns the ISO day - Mon: 1 / Sun: 7
-  const _getDayOfWeek = (date: Date) => parseInt(format(date, 'i'));
-
-  /** Use some creative math to avoid importing more than we need to */
-  const _endOfWeek = (date: Date) => addDays(startOfWeek(date), 6);
-
-  /** Use some creative math to avoid importing more than we need to */
-  const _endOfMonth = (date: Date) =>
-    addDays(startOfMonth(addMonthsToDate(date, 1)), -1);
-
+export const createDateFnsAdapter = (): DateTimeAdapter => {
   const _getCalendarRangeForDate = (date: Date) => {
     const monthStart = startOfMonth(date);
     const startDayOfWeek = monthStart.getDay();
-    const monthEnd = _endOfMonth(date);
+    const monthEnd = df_endOfMonth(date);
     const endDayOfWeek = monthEnd.getDay();
 
     // subtract leading days so a full row fits
@@ -45,13 +41,13 @@ export const createDateFnsConvertor = (): DateTimeAdapter => {
     _getWeeksInMonth(date).map((week) => _getDaysInWeek(week));
 
   const _getDaysInWeek = (date: Date) =>
-    eachDayOfInterval({ start: date, end: _endOfWeek(date) });
+    eachDayOfInterval({ start: date, end: df_endOfWeek(date) });
 
   const getDaysOfWeek = (displaySize: DisplaySize) => {
     const today = new Date();
     const weekDays = eachDayOfInterval({
       start: startOfWeek(today),
-      end: _endOfWeek(today),
+      end: df_endOfWeek(today),
     });
 
     let template = 'EEEE'; //default large
@@ -63,9 +59,9 @@ export const createDateFnsConvertor = (): DateTimeAdapter => {
 
   const getMonthName = (date: Date) => format(date, 'MMMM');
 
-  const getYear = (date: Date) => parseInt(format(date, 'yyyy'));
+  const getYear = (date: Date) => df_getYear(date);
 
-  const getDayNumber = (date: Date) => parseInt(format(date, 'dd'));
+  const getDayNumber = (date: Date) => df_getDate(date);
 
   /** This comparison is easy, no need for a library */
   const isSameMonth = (firstDate: Date, secondDate: Date) =>
@@ -82,11 +78,11 @@ export const createDateFnsConvertor = (): DateTimeAdapter => {
     addMonths(date, amount);
 
   const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
-    eventDate <= startOfWeek ? 1 : _getDayOfWeek(eventDate) + 1;
+    eventDate <= startOfWeek ? 1 : df_getDay(eventDate) + 1;
 
   const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
     if (eventEndDate >= endOfWeek) return 8;
-    const end = _getDayOfWeek(eventEndDate) + 2; //offset for zero-index, add additional so event ends at correct line
+    const end = df_getDay(eventEndDate) + 2; //offset for zero-index, add additional so event ends at correct line
     return end;
   };
 
@@ -95,12 +91,15 @@ export const createDateFnsConvertor = (): DateTimeAdapter => {
     eventEndDate: Date,
     week: Date[]
   ) => {
-    throw new Error('not implemented');
+    if (week.length !== 7) throw new Error('Week length must be 7');
+    const eventStartInWeek =
+      eventStartDate >= week[0] && eventStartDate <= week[6];
+    const eventEndsInWeek = eventEndDate >= week[0] && eventEndDate <= week[6];
+    const eventSpansWeek = eventStartDate <= week[0] && eventEndDate >= week[6];
+    return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
-  const convertIsoToDate = (isoDate: string) => {
-    throw new Error('not implemented');
-  };
+  const convertIsoToDate = (isoDate: string) => df_parseISO(isoDate);
 
   return {
     getCalendarView,
