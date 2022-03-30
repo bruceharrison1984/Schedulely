@@ -1,19 +1,16 @@
 .schedulely--default-day-header {
-  text-align: center;
+  margin: auto;
 }
 
 .schedulely--default-day-header--text {
+  position: absolute;
   margin-top: 3px;
   font-weight: bold;
 }
 
 .schedulely--default-day-header--indicator {
-  position: absolute;
-  top: 0px;
-  left: 3.9em;
-  height: 22px;
-  width: 22px;
+  height: 25px;
+  width: 25px;
   background-color: salmon;
   border-radius: 50%;
-  display: inline-block;
 }
