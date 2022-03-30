@@ -2,15 +2,18 @@ import { DateTimeAdapter, DisplaySize } from '@/types/index';
 import {
   addDays,
   addMonths,
-  endOfMonth as df_endOfMonth,
-  endOfWeek as df_endOfWeek,
-  getDate as df_getDate,
   getDay as df_getDay,
   getYear as df_getYear,
-  parseISO as df_parseISO,
+  isSameMonth as df_isSameMonth,
   eachDayOfInterval,
   eachWeekOfInterval,
+  endOfMonth,
+  endOfWeek,
   format,
+  getDate,
+  isToday,
+  isWithinInterval,
+  parseISO,
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
@@ -22,7 +25,7 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
   const _getCalendarRangeForDate = (date: Date) => {
     const monthStart = startOfMonth(date);
     const startDayOfWeek = monthStart.getDay();
-    const monthEnd = df_endOfMonth(date);
+    const monthEnd = endOfMonth(date);
     const endDayOfWeek = monthEnd.getDay();
 
     // subtract leading days so a full row fits
@@ -41,13 +44,13 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
     _getWeeksInMonth(date).map((week) => _getDaysInWeek(week));
 
   const _getDaysInWeek = (date: Date) =>
-    eachDayOfInterval({ start: date, end: df_endOfWeek(date) });
+    eachDayOfInterval({ start: date, end: endOfWeek(date) });
 
   const getDaysOfWeek = (displaySize: DisplaySize) => {
     const today = new Date();
     const weekDays = eachDayOfInterval({
       start: startOfWeek(today),
-      end: df_endOfWeek(today),
+      end: endOfWeek(today),
     });
 
     let template = 'EEEE'; //default large
@@ -61,18 +64,12 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
 
   const getYear = (date: Date) => df_getYear(date);
 
-  const getDayNumber = (date: Date) => df_getDate(date);
+  const getDayNumber = (date: Date) => getDate(date);
 
-  /** This comparison is easy, no need for a library */
   const isSameMonth = (firstDate: Date, secondDate: Date) =>
-    firstDate.getFullYear() === secondDate.getFullYear() &&
-    firstDate.getMonth() === secondDate.getMonth();
+    df_isSameMonth(firstDate, secondDate);
 
-  /** This comparison is easy, no need for a library */
-  const isDateToday = (date: Date) => {
-    const today = new Date();
-    return isSameMonth(date, today) && date.getDate() === today.getDate();
-  };
+  const isDateToday = (date: Date) => isToday(date);
 
   const addMonthsToDate = (date: Date, amount: number) =>
     addMonths(date, amount);
@@ -92,14 +89,17 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
     week: Date[]
   ) => {
     if (week.length !== 7) throw new Error('Week length must be 7');
-    const eventStartInWeek =
-      eventStartDate >= week[0] && eventStartDate <= week[6];
-    const eventEndsInWeek = eventEndDate >= week[0] && eventEndDate <= week[6];
+    const weekInterval: Interval = {
+      start: week[0],
+      end: week[6],
+    };
+    const eventStartInWeek = isWithinInterval(eventStartDate, weekInterval);
+    const eventEndsInWeek = isWithinInterval(eventEndDate, weekInterval);
     const eventSpansWeek = eventStartDate <= week[0] && eventEndDate >= week[6];
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
-  const convertIsoToDate = (isoDate: string) => df_parseISO(isoDate);
+  const convertIsoToDate = (isoDate: string) => parseISO(isoDate);
 
   return {
     getCalendarView,
