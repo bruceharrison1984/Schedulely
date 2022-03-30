@@ -12,7 +12,7 @@
 }
 
 .schedulely--week-layout > div {
-  border: 1px solid;
+  border: 0.1em solid;
   border-color: var(--schedulely-border-color);
   position: relative;
 }

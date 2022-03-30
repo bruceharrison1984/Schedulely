@@ -4,5 +4,5 @@
 }
 
 .schedulely--day-of-week-layout > div {
-  border: 1px solid var(--schedulely-border-color);
+  border: 0.2em solid var(--schedulely-border-color);
 }
