@@ -4,6 +4,7 @@ import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Schedulely } from './Schedulely';
 import { addDays } from 'date-fns';
+import { createDateFnsAdapter } from './dateAdapters';
 import chance from 'chance';
 
 export default {
@@ -99,26 +100,18 @@ const events = [
   },
 ];
 
-// export const datefns = Template.bind({});
-// datefns.storyName = 'DateFns';
-// datefns.args = {
-//   events,
-//   dateConvertor: createDateFnsConvertor({
-//     addDays,
-//     eachDayOfInterval,
-//     eachWeekOfInterval,
-//     format,
-//     startOfMonth,
-//     startOfWeek,
-//     addMonths,
-//     isSameWeek,
-//   }),
-// };
-
 export const nativeJs = Template.bind({});
 nativeJs.storyName = 'NativeJS Date';
 nativeJs.args = {
   events,
   // dateAdapter: createDefaultAdapter(),
+  theme: 'light',
+};
+
+export const datefns = Template.bind({});
+datefns.storyName = 'date-fns';
+datefns.args = {
+  events,
+  dateAdapter: createDateFnsAdapter(),
   theme: 'light',
 };
