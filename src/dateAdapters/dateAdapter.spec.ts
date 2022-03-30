@@ -31,7 +31,7 @@ import {
 const adapters = [
   // {
   //   name: 'DateFns',
-  //   convertor: createDateFnsConvertor({
+  //   adapter: createDateFnsConvertor({
   //     addDays,
   //     eachDayOfInterval,
   //     eachWeekOfInterval,
