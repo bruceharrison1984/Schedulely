@@ -122,7 +122,7 @@ describe('Date Adapter', () => {
           .flat()
           .map((x) => x.toLocaleString());
 
-        expect(stringyResults).toBe(expected);
+        expect(stringyResults).toEqual(expected);
       });
     });
 

@@ -30,6 +30,10 @@ export const createTemporalAdapter = (
     );
   };
 
+  /** TODO: This needs refactored based on Temporal
+   * Ideally, we could gather the  StartOfWeek day for the locale and display accordingly
+   * Right now, we always start on Sunday
+   */
   const getCalendarView = (date: ZonedDateTime) => {
     const startOfMonth = ZonedDateTime.from({
       year: date.year,
@@ -40,16 +44,16 @@ export const createTemporalAdapter = (
     const endOfMonth = ZonedDateTime.from({
       year: date.year,
       month: date.month + 1,
-      day: 0,
+      day: 1,
       timeZone,
-    });
+    }).subtract({ days: 1 });
 
     const trailingDaysFromPrevMonth = [];
     const currentMonth = [];
     const leadingDaysofNextMonth = [];
 
     let iteratedDate = startOfMonth;
-    while (iteratedDate.dayOfWeek !== 1) {
+    while (iteratedDate.dayOfWeek !== 7) {
       iteratedDate = iteratedDate.subtract({ days: 1 });
       trailingDaysFromPrevMonth.push(iteratedDate);
     }
