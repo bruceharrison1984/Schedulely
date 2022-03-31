@@ -1,6 +1,6 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
-import { createDateFnsAdapter } from '.';
-import { createDefaultAdapter } from '.';
+import { createTemporalAdapter } from './temporal';
+
 import {
   getAddMonthsToDateTestCases,
   getDayNumberFromDateTestCases,
@@ -20,12 +20,8 @@ import {
  */
 const adapters = [
   {
-    name: 'DateFns',
-    adapter: createDateFnsAdapter(),
-  },
-  {
-    name: 'NativeJs',
-    adapter: createDefaultAdapter(),
+    name: 'Temporal Adapter',
+    adapter: createTemporalAdapter(),
   },
 ];
 
