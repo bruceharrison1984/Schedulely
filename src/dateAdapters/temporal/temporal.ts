@@ -1,4 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
+import { PlainDate } from 'temporal-polyfill';
 
 /**
  * Create an instance of the default date adapter
@@ -14,11 +15,10 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
   ]);
 
   const getDaysOfWeek = (displaySize: DisplaySize) => {
-    const formatter = new Intl.DateTimeFormat(locale, {
-      weekday: map.get(displaySize),
-    });
-    return [0, 1, 2, 3, 4, 5, 6].map((x) =>
-      formatter.format(new Date(2012, 0, x + 1))
+    return [1, 2, 3, 4, 5, 6, 7].map((x) =>
+      PlainDate.from({ year: 2012, month: 1, day: x }).toLocaleString('en-us', {
+        weekday: map.get(displaySize),
+      })
     );
   };
 
