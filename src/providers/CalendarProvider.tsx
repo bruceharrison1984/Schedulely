@@ -32,7 +32,7 @@ interface CalendarProviderProps {
  */
 export const CalendarProvider = ({
   dateAdapter,
-  initialDate = Now.zonedDateTimeISO(),
+  initialDate = Now.zonedDateTimeISO('America/Chicago'),
   calendarEvents,
   children,
 }: CalendarProviderProps) => {

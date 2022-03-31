@@ -94,7 +94,7 @@ export const createTemporalAdapter = (
     firstDate.month === secondDate.month;
 
   const isDateToday = (date: ZonedDateTime) => {
-    const today = Now.zonedDateTimeISO();
+    const today = Now.zonedDateTimeISO(timeZone);
     return isSameMonth(date, today) && date.day === today.day;
   };
 
