@@ -51,7 +51,7 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
         year: iteratedDate.year,
         month: iteratedDate.month,
         day: iteratedDate.day - 1,
-        timeZone: locale,
+        timeZone: 'America/Chicago',
       });
       finalsOfPrevMonth.push(iteratedDate);
     }
@@ -63,7 +63,7 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
         year: iteratedDate.year,
         month: iteratedDate.month,
         day: iteratedDate.day + 1,
-        timeZone: locale,
+        timeZone: 'America/Chicago',
       });
     }
 
@@ -74,7 +74,7 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
         year: iteratedDate.year,
         month: iteratedDate.month,
         day: iteratedDate.day + 1,
-        timeZone: locale,
+        timeZone: 'America/Chicago',
       });
       startsOfSchedulely.push(iteratedDate);
     }
