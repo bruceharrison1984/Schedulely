@@ -1,11 +1,12 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
+import { ZonedDateTime } from 'temporal-polyfill';
 import { useActions } from '@/hooks/useActions';
 import { useCalendar, useComponents } from '@/hooks/index';
 import { useCallback } from 'react';
 
 interface WeekLayoutProps {
-  dates: Date[];
-  eventsOnDays: { date: Date; events: InternalCalendarEvent[] }[];
+  dates: ZonedDateTime[];
+  eventsOnDays: { date: ZonedDateTime; events: InternalCalendarEvent[] }[];
 }
 
 /**
@@ -29,8 +30,8 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
    * Also not a great solution because it forces Day to be 7em, rather than detect overflow
    */
   const hasEventOverflow = useCallback(
-    (date: Date, overflowLimit = 3) => {
-      const events = eventsOnDays.find((x) => x.date === date)?.events;
+    (date: ZonedDateTime, overflowLimit = 3) => {
+      const events = eventsOnDays.find((x) => x.date.day === date.day)?.events;
       if (!events) return false;
       if (events.length > overflowLimit) return true;
     },
@@ -41,8 +42,8 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
     <div className="schedulely--week-layout">
       {dates.map((day) => (
         <div
-          key={day.getDate()}
-          data-day={day.getDate()}
+          key={day.day}
+          data-day={day.day}
           data-istoday={dateAdapter.isDateToday(day) ? true : undefined}
         >
           <DayComponent

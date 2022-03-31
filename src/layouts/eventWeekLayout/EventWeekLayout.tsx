@@ -1,5 +1,6 @@
 import { EventPositionLayout } from '@/layouts/eventPositionLayout';
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
+import { ZonedDateTime } from 'temporal-polyfill';
 import { useActions } from '@/hooks/useActions';
 import { useCalendar } from '@/hooks/useCalendar';
 import { useComponents } from '@/hooks/useComponents';
@@ -7,7 +8,7 @@ import { useEventHighlight } from '@/hooks/useEventHighlight';
 
 interface EventLayoutProps {
   events: InternalCalendarEvent[];
-  daysInweek: Date[];
+  daysInweek: ZonedDateTime[];
 }
 
 /**
