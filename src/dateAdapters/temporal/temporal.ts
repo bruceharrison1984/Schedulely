@@ -78,14 +78,8 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
     // );
   };
 
-  const getMonthName = (date: ZonedDateTime) => {
-    return new Error('Not Implemented');
-
-    // const formatter = new Intl.DateTimeFormat(locale, {
-    //   month: 'long',
-    // });
-    // return formatter.format(date);
-  };
+  const getMonthName = (date: ZonedDateTime) =>
+    date.toLocaleString(locale, { month: 'long' });
 
   const getYear = (date: ZonedDateTime) => date.year;
 
@@ -106,14 +100,15 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
   const getGridStartIndex = (
     eventDate: ZonedDateTime,
     startOfWeek: ZonedDateTime
-  ) => (eventDate <= startOfWeek ? 1 : eventDate.day + 1); //add one because css-grid isn't zero-index'd
+  ) =>
+    eventDate.epochSeconds <= startOfWeek.epochSeconds ? 1 : eventDate.day + 1; //add one because css-grid isn't zero-index'd
 
   const getGridEndIndex = (
     eventEndDate: ZonedDateTime,
     endOfWeek: ZonedDateTime
   ) => {
-    if (eventEndDate > endOfWeek) return 8;
-    const end = eventEndDate.day + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
+    if (eventEndDate.epochSeconds > endOfWeek.epochSeconds) return 8;
+    const end = eventEndDate.dayOfWeek + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
     return end;
   };
 
@@ -124,9 +119,14 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
   ) => {
     if (week.length !== 7) throw new Error('Week length must be 7');
     const eventStartInWeek =
-      eventStartDate >= week[0] && eventStartDate <= week[6];
-    const eventEndsInWeek = eventEndDate >= week[0] && eventEndDate <= week[6];
-    const eventSpansWeek = eventStartDate <= week[0] && eventEndDate >= week[6];
+      eventStartDate.epochSeconds >= week[0].epochSeconds &&
+      eventStartDate.epochSeconds <= week[6].epochSeconds;
+    const eventEndsInWeek =
+      eventEndDate.epochSeconds >= week[0].epochSeconds &&
+      eventEndDate.epochSeconds <= week[6].epochSeconds;
+    const eventSpansWeek =
+      eventStartDate.epochSeconds <= week[0].epochSeconds &&
+      eventEndDate.epochSeconds >= week[6].epochSeconds;
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
