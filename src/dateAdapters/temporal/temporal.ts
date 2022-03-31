@@ -16,7 +16,7 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
 
   const getDaysOfWeek = (displaySize: DisplaySize) => {
     return [1, 2, 3, 4, 5, 6, 7].map((x) =>
-      PlainDate.from({ year: 2012, month: 1, day: x }).toLocaleString('en-us', {
+      PlainDate.from({ year: 2012, month: 1, day: x }).toLocaleString(locale, {
         weekday: map.get(displaySize),
       })
     );

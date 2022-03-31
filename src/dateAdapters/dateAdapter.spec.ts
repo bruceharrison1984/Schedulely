@@ -20,7 +20,7 @@ import {
  */
 const adapters = [
   {
-    name: 'Temporal Adapter',
+    name: 'TemporalAdapter',
     adapter: createTemporalAdapter(),
   },
 ];
