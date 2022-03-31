@@ -28,54 +28,66 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
   };
 
   const getCalendarView = (date: ZonedDateTime) => {
-    return new Error('Not Implemented');
-    // const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    // const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const startOfMonth = ZonedDateTime.from({
+      year: date.year,
+      month: date.month,
+      day: 1,
+      timeZone: locale,
+    });
+    const endOfMonth = ZonedDateTime.from({
+      year: date.year,
+      month: date.month + 1,
+      day: 0,
+      timeZone: locale,
+    });
 
-    // const finalsOfPrevMonth = [];
-    // const currentMonth = [];
-    // const startsOfSchedulely = [];
+    const finalsOfPrevMonth = [];
+    const currentMonth = [];
+    const startsOfSchedulely = [];
 
-    // let iteratedDate = startOfMonth;
-    // while (iteratedDate.getDay() !== 0) {
-    //   iteratedDate = new Date(
-    //     iteratedDate.getFullYear(),
-    //     iteratedDate.getMonth(),
-    //     iteratedDate.getDate() - 1
-    //   );
-    //   finalsOfPrevMonth.push(iteratedDate);
-    // }
+    let iteratedDate = startOfMonth;
+    while (iteratedDate.dayOfWeek !== 0) {
+      iteratedDate = ZonedDateTime.from({
+        year: iteratedDate.year,
+        month: iteratedDate.month,
+        day: iteratedDate.day - 1,
+        timeZone: locale,
+      });
+      finalsOfPrevMonth.push(iteratedDate);
+    }
 
-    // iteratedDate = startOfMonth;
-    // while (iteratedDate.getMonth() === startOfMonth.getMonth()) {
-    //   currentMonth.push(iteratedDate);
-    //   iteratedDate = new Date(
-    //     iteratedDate.getFullYear(),
-    //     iteratedDate.getMonth(),
-    //     iteratedDate.getDate() + 1
-    //   );
-    // }
+    iteratedDate = startOfMonth;
+    while (iteratedDate.month === startOfMonth.month) {
+      currentMonth.push(iteratedDate);
+      iteratedDate = ZonedDateTime.from({
+        year: iteratedDate.year,
+        month: iteratedDate.month,
+        day: iteratedDate.day + 1,
+        timeZone: locale,
+      });
+    }
 
-    // iteratedDate = endOfMonth;
-    // //only gather enough days until sunday
-    // while (iteratedDate.getDay() + 1 !== 7) {
-    //   iteratedDate = new Date(
-    //     iteratedDate.getFullYear(),
-    //     iteratedDate.getMonth(),
-    //     iteratedDate.getDate() + 1
-    //   );
-    //   startsOfSchedulely.push(iteratedDate);
-    // }
+    iteratedDate = endOfMonth;
+    //only gather enough days until sunday
+    while (iteratedDate.day + 1 !== 7) {
+      iteratedDate = ZonedDateTime.from({
+        year: iteratedDate.year,
+        month: iteratedDate.month,
+        day: iteratedDate.day + 1,
+        timeZone: locale,
+      });
+      startsOfSchedulely.push(iteratedDate);
+    }
 
-    // const flatMonthView = [
-    //   ...finalsOfPrevMonth.reverse(),
-    //   ...currentMonth,
-    //   ...startsOfSchedulely,
-    // ];
+    const flatMonthView = [
+      ...finalsOfPrevMonth.reverse(),
+      ...currentMonth,
+      ...startsOfSchedulely,
+    ];
 
-    // return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>
-    //   flatMonthView.splice(0, 7)
-    // );
+    return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>
+      flatMonthView.splice(0, 7)
+    );
   };
 
   const getMonthName = (date: ZonedDateTime) =>
