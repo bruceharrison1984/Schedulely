@@ -1,5 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
-import { Now, ZonedDateTime } from 'temporal-polyfill';
+import { Now, PlainDate, ZonedDateTime } from 'temporal-polyfill';
 
 /**
  * Create an instance of the default date adapter
@@ -134,7 +134,8 @@ export const createTemporalAdapter = (
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
-  const convertIsoToDate = (isoDate: string) => ZonedDateTime.from(isoDate);
+  const convertIsoToDate = (isoDate: string) =>
+    PlainDate.from(isoDate).toZonedDateTime({ timeZone });
 
   return {
     getCalendarView,
