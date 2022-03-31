@@ -1,4 +1,5 @@
 import { DisplaySize } from '@/types/index';
+import { Now, ZonedDateTime } from 'temporal-polyfill';
 import chance from 'chance';
 
 const DEFAULT_ITERATIONS = 30;
@@ -10,18 +11,27 @@ export const randomDate = () =>
     1
   );
 
+const randomZonedDateTime = () =>
+  ZonedDateTime.from({
+    year: chance().integer({ min: 2000, max: 2021 }),
+    month: chance().integer({ min: 1, max: 12 }),
+    day: 1,
+    timeZone: 'America/Chicago',
+  });
+
 export const getAddMonthsToDateTestCases = (
   iterations = DEFAULT_ITERATIONS
 ) => {
   const testCases = [];
   for (let index = 0; index < iterations; index++) {
-    const originalDate = randomDate();
+    const originalDate = randomZonedDateTime();
     const amount = chance().integer({ min: -48, max: 48 });
-    const expectedDate = new Date(
-      originalDate.getFullYear(),
-      originalDate.getMonth() + amount,
-      1
-    );
+    const expectedDate = ZonedDateTime.from({
+      year: originalDate.year,
+      month: originalDate.month + amount,
+      day: 1,
+      timeZone: 'America/Chicago',
+    });
     testCases.push({
       originalDate,
       amount,
@@ -73,12 +83,12 @@ export const getIsSameMonthMonthTestCases = (
 export const getIsTodayTestCases = (iterations = DEFAULT_ITERATIONS) => {
   const testCases = [
     {
-      date: new Date(), //make sure we actually test today
+      date: Now.zonedDateTimeISO(), //make sure we actually test today
       expected: true,
     },
   ];
   for (let index = 0; index < iterations; index++) {
-    const date = randomDate();
+    const date = randomZonedDateTime();
     testCases.push({
       date,
       expected: false,
@@ -92,14 +102,15 @@ export const getDayNumberFromDateTestCases = (
 ) => {
   const testCases = [];
   for (let index = 0; index < iterations; index++) {
-    const date = new Date(
-      chance().integer({ min: 2000, max: 2022 }),
-      chance().integer({ min: 0, max: 11 }),
-      chance().integer({ min: 1, max: 28 })
-    );
+    const date = ZonedDateTime.from({
+      year: chance().integer({ min: 2000, max: 2022 }),
+      month: chance().integer({ min: 0, max: 11 }),
+      day: chance().integer({ min: 1, max: 28 }),
+      timeZone: 'America/Chicago',
+    });
     testCases.push({
       date,
-      expected: date.getDate(),
+      expected: date.day,
     });
   }
   return testCases;
@@ -108,14 +119,15 @@ export const getDayNumberFromDateTestCases = (
 export const getYearFromDateTestCases = (iterations = DEFAULT_ITERATIONS) => {
   const testCases = [];
   for (let index = 0; index < iterations; index++) {
-    const date = new Date(
-      chance().integer({ min: 2000, max: 2022 }),
-      chance().integer({ min: 0, max: 11 }),
-      chance().integer({ min: 1, max: 28 })
-    );
+    const date = ZonedDateTime.from({
+      year: chance().integer({ min: 2000, max: 2022 }),
+      month: chance().integer({ min: 0, max: 11 }),
+      day: chance().integer({ min: 1, max: 28 }),
+      timeZone: 'America/Chicago',
+    });
     testCases.push({
       date,
-      expected: date.getFullYear(),
+      expected: date.year,
     });
   }
   return testCases;

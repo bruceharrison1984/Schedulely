@@ -1,5 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
-import { PlainDate } from 'temporal-polyfill';
+import { Now, ZonedDateTime } from 'temporal-polyfill';
 
 /**
  * Create an instance of the default date adapter
@@ -16,98 +16,111 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
 
   const getDaysOfWeek = (displaySize: DisplaySize) => {
     return [1, 2, 3, 4, 5, 6, 7].map((x) =>
-      PlainDate.from({ year: 2012, month: 1, day: x }).toLocaleString(locale, {
+      ZonedDateTime.from({
+        year: 2012,
+        month: 1,
+        day: x,
+        timeZone: 'America/Chicago',
+      }).toLocaleString(locale, {
         weekday: map.get(displaySize),
       })
     );
   };
 
-  const getCalendarView = (date: Date) => {
-    const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  const getCalendarView = (date: ZonedDateTime) => {
+    return new Error('Not Implemented');
+    // const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    // const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-    const finalsOfPrevMonth = [];
-    const currentMonth = [];
-    const startsOfSchedulely = [];
+    // const finalsOfPrevMonth = [];
+    // const currentMonth = [];
+    // const startsOfSchedulely = [];
 
-    let iteratedDate = startOfMonth;
-    while (iteratedDate.getDay() !== 0) {
-      iteratedDate = new Date(
-        iteratedDate.getFullYear(),
-        iteratedDate.getMonth(),
-        iteratedDate.getDate() - 1
-      );
-      finalsOfPrevMonth.push(iteratedDate);
-    }
+    // let iteratedDate = startOfMonth;
+    // while (iteratedDate.getDay() !== 0) {
+    //   iteratedDate = new Date(
+    //     iteratedDate.getFullYear(),
+    //     iteratedDate.getMonth(),
+    //     iteratedDate.getDate() - 1
+    //   );
+    //   finalsOfPrevMonth.push(iteratedDate);
+    // }
 
-    iteratedDate = startOfMonth;
-    while (iteratedDate.getMonth() === startOfMonth.getMonth()) {
-      currentMonth.push(iteratedDate);
-      iteratedDate = new Date(
-        iteratedDate.getFullYear(),
-        iteratedDate.getMonth(),
-        iteratedDate.getDate() + 1
-      );
-    }
+    // iteratedDate = startOfMonth;
+    // while (iteratedDate.getMonth() === startOfMonth.getMonth()) {
+    //   currentMonth.push(iteratedDate);
+    //   iteratedDate = new Date(
+    //     iteratedDate.getFullYear(),
+    //     iteratedDate.getMonth(),
+    //     iteratedDate.getDate() + 1
+    //   );
+    // }
 
-    iteratedDate = endOfMonth;
-    //only gather enough days until sunday
-    while (iteratedDate.getDay() + 1 !== 7) {
-      iteratedDate = new Date(
-        iteratedDate.getFullYear(),
-        iteratedDate.getMonth(),
-        iteratedDate.getDate() + 1
-      );
-      startsOfSchedulely.push(iteratedDate);
-    }
+    // iteratedDate = endOfMonth;
+    // //only gather enough days until sunday
+    // while (iteratedDate.getDay() + 1 !== 7) {
+    //   iteratedDate = new Date(
+    //     iteratedDate.getFullYear(),
+    //     iteratedDate.getMonth(),
+    //     iteratedDate.getDate() + 1
+    //   );
+    //   startsOfSchedulely.push(iteratedDate);
+    // }
 
-    const flatMonthView = [
-      ...finalsOfPrevMonth.reverse(),
-      ...currentMonth,
-      ...startsOfSchedulely,
-    ];
+    // const flatMonthView = [
+    //   ...finalsOfPrevMonth.reverse(),
+    //   ...currentMonth,
+    //   ...startsOfSchedulely,
+    // ];
 
-    return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>
-      flatMonthView.splice(0, 7)
-    );
+    // return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>
+    //   flatMonthView.splice(0, 7)
+    // );
   };
 
-  const getMonthName = (date: Date) => {
-    const formatter = new Intl.DateTimeFormat(locale, {
-      month: 'long',
-    });
-    return formatter.format(date);
+  const getMonthName = (date: ZonedDateTime) => {
+    return new Error('Not Implemented');
+
+    // const formatter = new Intl.DateTimeFormat(locale, {
+    //   month: 'long',
+    // });
+    // return formatter.format(date);
   };
 
-  const getYear = (date: Date) => date.getFullYear();
+  const getYear = (date: ZonedDateTime) => date.year;
 
-  const getDayNumber = (date: Date) => date.getDate();
+  const getDayNumber = (date: ZonedDateTime) => date.day;
 
-  const isSameMonth = (firstDate: Date, secondDate: Date) =>
+  const isSameMonth = (firstDate: ZonedDateTime, secondDate: ZonedDateTime) =>
     getYear(firstDate) === getYear(secondDate) &&
-    firstDate.getMonth() === secondDate.getMonth();
+    firstDate.month === secondDate.month;
 
-  const isDateToday = (date: Date) => {
-    const today = new Date();
-    return isSameMonth(date, today) && date.getDate() === today.getDate();
+  const isDateToday = (date: ZonedDateTime) => {
+    const today = Now.zonedDateTimeISO();
+    return isSameMonth(date, today) && date.day === today.day;
   };
 
-  const addMonthsToDate = (date: Date, amount: number) =>
-    new Date(date.getFullYear(), date.getMonth() + amount, 1);
+  const addMonthsToDate = (date: ZonedDateTime, amount: number) =>
+    date.add({ months: amount });
 
-  const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
-    eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one because css-grid isn't zero-index'd
+  const getGridStartIndex = (
+    eventDate: ZonedDateTime,
+    startOfWeek: ZonedDateTime
+  ) => (eventDate <= startOfWeek ? 1 : eventDate.day + 1); //add one because css-grid isn't zero-index'd
 
-  const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
+  const getGridEndIndex = (
+    eventEndDate: ZonedDateTime,
+    endOfWeek: ZonedDateTime
+  ) => {
     if (eventEndDate > endOfWeek) return 8;
-    const end = eventEndDate.getDay() + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
+    const end = eventEndDate.day + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
     return end;
   };
 
   const isEventInWeek = (
-    eventStartDate: Date,
-    eventEndDate: Date,
-    week: Date[]
+    eventStartDate: ZonedDateTime,
+    eventEndDate: ZonedDateTime,
+    week: ZonedDateTime[]
   ) => {
     if (week.length !== 7) throw new Error('Week length must be 7');
     const eventStartInWeek =
@@ -117,7 +130,7 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
-  const convertIsoToDate = (isoDate: string) => new Date(isoDate);
+  const convertIsoToDate = (isoDate: string) => ZonedDateTime.from(isoDate);
 
   return {
     getCalendarView,
