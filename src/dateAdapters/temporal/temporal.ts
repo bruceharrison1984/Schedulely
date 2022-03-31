@@ -6,7 +6,10 @@ import { Now, ZonedDateTime } from 'temporal-polyfill';
  * @param locale Locale override
  * @returns DateTimeAdapter
  */
-export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
+export const createTemporalAdapter = (
+  locale = 'en',
+  timeZone = 'America/Chicago'
+): DateTimeAdapter => {
   /** Map used to translate DisplaySize in to Intl day name format */
   const map = new Map<DisplaySize, 'long' | 'narrow' | 'short'>([
     [DisplaySize.large, 'long'],
@@ -20,7 +23,7 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
         year: 2012,
         month: 1,
         day: x,
-        timeZone: 'America/Chicago',
+        timeZone,
       }).toLocaleString(locale, {
         weekday: map.get(displaySize),
       })
@@ -51,7 +54,7 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
         year: iteratedDate.year,
         month: iteratedDate.month,
         day: iteratedDate.day - 1,
-        timeZone: 'America/Chicago',
+        timeZone,
       });
       finalsOfPrevMonth.push(iteratedDate);
     }
@@ -63,7 +66,7 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
         year: iteratedDate.year,
         month: iteratedDate.month,
         day: iteratedDate.day + 1,
-        timeZone: 'America/Chicago',
+        timeZone,
       });
     }
 
@@ -74,7 +77,7 @@ export const createTemporalAdapter = (locale = 'en'): DateTimeAdapter => {
         year: iteratedDate.year,
         month: iteratedDate.month,
         day: iteratedDate.day + 1,
-        timeZone: 'America/Chicago',
+        timeZone,
       });
       startsOfSchedulely.push(iteratedDate);
     }

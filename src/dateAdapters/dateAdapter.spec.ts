@@ -20,7 +20,7 @@ import {
  *
  * All tests presume US/eng units
  */
-const adapters = [
+const adapters: { name: string; adapter: DateTimeAdapter }[] = [
   {
     name: 'TemporalAdapter',
     adapter: createTemporalAdapter(),
@@ -28,10 +28,7 @@ const adapters = [
 ];
 
 describe('Date Adapter', () => {
-  describe.each<{
-    name: string;
-    adapter: DateTimeAdapter;
-  }>(adapters)('$name', ({ adapter }) => {
+  describe.each(adapters)('$name', ({ adapter }) => {
     describe('addMonthsToDate', () => {
       it.each<{
         originalDate: ZonedDateTime;
