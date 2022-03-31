@@ -35,57 +35,42 @@ export const createTemporalAdapter = (
       year: date.year,
       month: date.month,
       day: 1,
-      timeZone: locale,
+      timeZone,
     });
     const endOfMonth = ZonedDateTime.from({
       year: date.year,
       month: date.month + 1,
       day: 0,
-      timeZone: locale,
+      timeZone,
     });
 
-    const finalsOfPrevMonth = [];
+    const trailingDaysFromPrevMonth = [];
     const currentMonth = [];
-    const startsOfSchedulely = [];
+    const leadingDaysofNextMonth = [];
 
     let iteratedDate = startOfMonth;
-    while (iteratedDate.dayOfWeek !== 0) {
-      iteratedDate = ZonedDateTime.from({
-        year: iteratedDate.year,
-        month: iteratedDate.month,
-        day: iteratedDate.day - 1,
-        timeZone,
-      });
-      finalsOfPrevMonth.push(iteratedDate);
+    while (iteratedDate.dayOfWeek !== 1) {
+      iteratedDate = iteratedDate.subtract({ days: 1 });
+      trailingDaysFromPrevMonth.push(iteratedDate);
     }
 
     iteratedDate = startOfMonth;
     while (iteratedDate.month === startOfMonth.month) {
       currentMonth.push(iteratedDate);
-      iteratedDate = ZonedDateTime.from({
-        year: iteratedDate.year,
-        month: iteratedDate.month,
-        day: iteratedDate.day + 1,
-        timeZone,
-      });
+      iteratedDate = iteratedDate.add({ days: 1 });
     }
 
     iteratedDate = endOfMonth;
     //only gather enough days until sunday
     while (iteratedDate.day + 1 !== 7) {
-      iteratedDate = ZonedDateTime.from({
-        year: iteratedDate.year,
-        month: iteratedDate.month,
-        day: iteratedDate.day + 1,
-        timeZone,
-      });
-      startsOfSchedulely.push(iteratedDate);
+      iteratedDate = iteratedDate.add({ days: 1 });
+      leadingDaysofNextMonth.push(iteratedDate);
     }
 
     const flatMonthView = [
-      ...finalsOfPrevMonth.reverse(),
+      ...trailingDaysFromPrevMonth.reverse(),
       ...currentMonth,
-      ...startsOfSchedulely,
+      ...leadingDaysofNextMonth,
     ];
 
     return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>

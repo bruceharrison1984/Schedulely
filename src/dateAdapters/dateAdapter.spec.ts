@@ -57,69 +57,74 @@ describe('Date Adapter', () => {
       );
     });
 
-    // describe('getCalendarView', () => {
-    //   it('returns correct values (including sibling days)', () => {
-    //     const result = adapter.getCalendarView(
-    //       createZonedDateTime(2021, 0, 10)
-    //     );
-    //     expect(result).toEqual([
-    //       [
-    //         createZonedDateTime(2020, 11, 27),
-    //         createZonedDateTime(2020, 11, 28),
-    //         createZonedDateTime(2020, 11, 29),
-    //         createZonedDateTime(2020, 11, 30),
-    //         createZonedDateTime(2020, 11, 31),
-    //         createZonedDateTime(2021, 0, 1),
-    //         createZonedDateTime(2021, 0, 2),
-    //       ],
-    //       [
-    //         createZonedDateTime(2021, 0, 3),
-    //         createZonedDateTime(2021, 0, 4),
-    //         createZonedDateTime(2021, 0, 5),
-    //         createZonedDateTime(2021, 0, 6),
-    //         createZonedDateTime(2021, 0, 7),
-    //         createZonedDateTime(2021, 0, 8),
-    //         createZonedDateTime(2021, 0, 9),
-    //       ],
-    //       [
-    //         createZonedDateTime(2021, 0, 10),
-    //         createZonedDateTime(2021, 0, 11),
-    //         createZonedDateTime(2021, 0, 12),
-    //         createZonedDateTime(2021, 0, 13),
-    //         createZonedDateTime(2021, 0, 14),
-    //         createZonedDateTime(2021, 0, 15),
-    //         createZonedDateTime(2021, 0, 16),
-    //       ],
-    //       [
-    //         createZonedDateTime(2021, 0, 17),
-    //         createZonedDateTime(2021, 0, 18),
-    //         createZonedDateTime(2021, 0, 19),
-    //         createZonedDateTime(2021, 0, 20),
-    //         createZonedDateTime(2021, 0, 21),
-    //         createZonedDateTime(2021, 0, 22),
-    //         createZonedDateTime(2021, 0, 23),
-    //       ],
-    //       [
-    //         createZonedDateTime(2021, 0, 24),
-    //         createZonedDateTime(2021, 0, 25),
-    //         createZonedDateTime(2021, 0, 26),
-    //         createZonedDateTime(2021, 0, 27),
-    //         createZonedDateTime(2021, 0, 28),
-    //         createZonedDateTime(2021, 0, 29),
-    //         createZonedDateTime(2021, 0, 30),
-    //       ],
-    //       [
-    //         createZonedDateTime(2021, 0, 31),
-    //         createZonedDateTime(2021, 1, 1),
-    //         createZonedDateTime(2021, 1, 2),
-    //         createZonedDateTime(2021, 1, 3),
-    //         createZonedDateTime(2021, 1, 4),
-    //         createZonedDateTime(2021, 1, 5),
-    //         createZonedDateTime(2021, 1, 6),
-    //       ],
-    //     ]);
-    //   });
-    // });
+    describe('getCalendarView', () => {
+      it('returns correct values (including sibling days)', () => {
+        const results = adapter.getCalendarView(
+          createZonedDateTime(2021, 1, 10)
+        );
+        const stringyResults = results.flat().map((x) => x.toLocaleString());
+        const expected = [
+          [
+            createZonedDateTime(2020, 12, 27),
+            createZonedDateTime(2020, 12, 28),
+            createZonedDateTime(2020, 12, 29),
+            createZonedDateTime(2020, 12, 30),
+            createZonedDateTime(2020, 12, 31),
+            createZonedDateTime(2021, 1, 1),
+            createZonedDateTime(2021, 1, 2),
+          ],
+          [
+            createZonedDateTime(2021, 1, 3),
+            createZonedDateTime(2021, 1, 4),
+            createZonedDateTime(2021, 1, 5),
+            createZonedDateTime(2021, 1, 6),
+            createZonedDateTime(2021, 1, 7),
+            createZonedDateTime(2021, 1, 8),
+            createZonedDateTime(2021, 1, 9),
+          ],
+          [
+            createZonedDateTime(2021, 1, 10),
+            createZonedDateTime(2021, 1, 11),
+            createZonedDateTime(2021, 1, 12),
+            createZonedDateTime(2021, 1, 13),
+            createZonedDateTime(2021, 1, 14),
+            createZonedDateTime(2021, 1, 15),
+            createZonedDateTime(2021, 1, 16),
+          ],
+          [
+            createZonedDateTime(2021, 1, 17),
+            createZonedDateTime(2021, 1, 18),
+            createZonedDateTime(2021, 1, 19),
+            createZonedDateTime(2021, 1, 20),
+            createZonedDateTime(2021, 1, 21),
+            createZonedDateTime(2021, 1, 22),
+            createZonedDateTime(2021, 1, 23),
+          ],
+          [
+            createZonedDateTime(2021, 1, 24),
+            createZonedDateTime(2021, 1, 25),
+            createZonedDateTime(2021, 1, 26),
+            createZonedDateTime(2021, 1, 27),
+            createZonedDateTime(2021, 1, 28),
+            createZonedDateTime(2021, 1, 29),
+            createZonedDateTime(2021, 1, 30),
+          ],
+          [
+            createZonedDateTime(2021, 1, 31),
+            createZonedDateTime(2021, 2, 1),
+            createZonedDateTime(2021, 2, 2),
+            createZonedDateTime(2021, 2, 3),
+            createZonedDateTime(2021, 2, 4),
+            createZonedDateTime(2021, 2, 5),
+            createZonedDateTime(2021, 2, 6),
+          ],
+        ]
+          .flat()
+          .map((x) => x.toLocaleString());
+
+        expect(stringyResults).toBe(expected);
+      });
+    });
 
     describe('getDaysOfWeek', () => {
       it.each<{ format: DisplaySize; expected: string[] }>(
