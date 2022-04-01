@@ -150,7 +150,7 @@ describe('Date Adapter', () => {
           expected: 2,
         },
       ])(
-        '$eventEnd with $endOfWeek returns $expected',
+        'eventEnd: $eventEnd with endOfWeek: $endOfWeek returns $expected',
         ({ eventEnd, endOfWeek, expected }) => {
           const result = adapter.getGridEndIndex(eventEnd, endOfWeek);
           expect(result).toBe(expected);
