@@ -1,4 +1,4 @@
-import { ZonedDateTime } from 'temporal-polyfill';
+import { Temporal } from '@js-temporal/polyfill';
 
 /**
  * This object represents an event that is supplied by the client
@@ -28,10 +28,10 @@ export interface InternalCalendarEvent {
   id: string;
 
   /** Start date of the event */
-  start: ZonedDateTime;
+  start: Temporal.ZonedDateTime;
 
   /** End date of the event */
-  end: ZonedDateTime;
+  end: Temporal.ZonedDateTime;
 
   /** Text that will be visible on the event */
   summary: string;

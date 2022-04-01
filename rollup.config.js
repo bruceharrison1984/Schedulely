@@ -14,7 +14,7 @@ const options = defineConfig({
     'react/jsx-runtime',
     'react',
     /@swc\/helpers/,
-    /temporal-polyfill/,
+    /@js-temporal\/polyfill/,
   ],
   plugins: [
     styles({ mode: ['extract'], minimize: true }),

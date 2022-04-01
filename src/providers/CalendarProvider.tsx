@@ -5,7 +5,6 @@ import {
   InternalCalendarEvent,
   InternalEventWeek,
 } from '@/types/index';
-import { Now, ZonedDateTime } from 'temporal-polyfill';
 import {
   ReactNode,
   createContext,
@@ -13,6 +12,7 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { Temporal } from '@js-temporal/polyfill';
 import { useScreenSize } from '@/hooks/useScreenSize';
 
 export const CalendarContext = createContext<CalendarState | null>(null);
@@ -20,7 +20,7 @@ CalendarContext.displayName = 'CalendarContext';
 
 interface CalendarProviderProps {
   dateAdapter: DateTimeAdapter;
-  initialDate?: ZonedDateTime;
+  initialDate?: Temporal.ZonedDateTime;
   calendarEvents: CalendarEvent[];
   children: ReactNode;
 }
@@ -32,7 +32,7 @@ interface CalendarProviderProps {
  */
 export const CalendarProvider = ({
   dateAdapter,
-  initialDate = Now.zonedDateTimeISO('America/Chicago'),
+  initialDate = Temporal.Now.zonedDateTimeISO('America/Chicago'),
   calendarEvents,
   children,
 }: CalendarProviderProps) => {
@@ -83,8 +83,8 @@ export const CalendarProvider = ({
           date: day,
           events: events.filter(
             (event) =>
-              ZonedDateTime.compare(event.start, day) <= 0 &&
-              ZonedDateTime.compare(event.end, day) >= 0
+              Temporal.ZonedDateTime.compare(event.start, day) <= 0 &&
+              Temporal.ZonedDateTime.compare(event.end, day) >= 0
           ),
         })),
       })),

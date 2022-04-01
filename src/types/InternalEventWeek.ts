@@ -1,10 +1,13 @@
 import { InternalCalendarEvent } from '@/types/index';
-import { ZonedDateTime } from 'temporal-polyfill';
+import { Temporal } from '@js-temporal/polyfill';
 
 export interface InternalEventWeek {
-  weekStart: ZonedDateTime;
-  weekEnd: ZonedDateTime;
-  daysInWeek: ZonedDateTime[];
+  weekStart: Temporal.ZonedDateTime;
+  weekEnd: Temporal.ZonedDateTime;
+  daysInWeek: Temporal.ZonedDateTime[];
   events: InternalCalendarEvent[];
-  eventsOnDays: { date: ZonedDateTime; events: InternalCalendarEvent[] }[];
+  eventsOnDays: {
+    date: Temporal.ZonedDateTime;
+    events: InternalCalendarEvent[];
+  }[];
 }
