@@ -105,15 +105,14 @@ export const createTemporalAdapter = (
     eventDate: ZonedDateTime,
     startOfWeek: ZonedDateTime
   ) =>
-    eventDate.epochSeconds <= startOfWeek.epochSeconds ? 1 : eventDate.day + 1; //add one because css-grid isn't zero-index'd
+    ZonedDateTime.compare(eventDate, startOfWeek) <= 0 ? 1 : eventDate.day + 1; //add one because css-grid isn't zero-index'd
 
   const getGridEndIndex = (
     eventEndDate: ZonedDateTime,
     endOfWeek: ZonedDateTime
   ) => {
-    if (eventEndDate.epochSeconds > endOfWeek.epochSeconds) return 8;
-    const end = eventEndDate.dayOfWeek + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
-    return end;
+    if (ZonedDateTime.compare(eventEndDate, endOfWeek) > 0) return 8;
+    return eventEndDate.dayOfWeek + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
   };
 
   const isEventInWeek = (
@@ -123,14 +122,14 @@ export const createTemporalAdapter = (
   ) => {
     if (week.length !== 7) throw new Error('Week length must be 7');
     const eventStartInWeek =
-      eventStartDate.epochSeconds >= week[0].epochSeconds &&
-      eventStartDate.epochSeconds <= week[6].epochSeconds;
+      ZonedDateTime.compare(eventStartDate, week[0]) >= 0 &&
+      ZonedDateTime.compare(eventStartDate, week[6]) <= 0;
     const eventEndsInWeek =
-      eventEndDate.epochSeconds >= week[0].epochSeconds &&
-      eventEndDate.epochSeconds <= week[6].epochSeconds;
+      ZonedDateTime.compare(eventEndDate, week[0]) >= 0 &&
+      ZonedDateTime.compare(eventEndDate, week[6]) <= 0;
     const eventSpansWeek =
-      eventStartDate.epochSeconds <= week[0].epochSeconds &&
-      eventEndDate.epochSeconds >= week[6].epochSeconds;
+      ZonedDateTime.compare(eventStartDate, week[0]) <= 0 &&
+      ZonedDateTime.compare(eventEndDate, week[6]) >= 0;
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 

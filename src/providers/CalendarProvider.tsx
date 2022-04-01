@@ -82,7 +82,9 @@ export const CalendarProvider = ({
         eventsOnDays: week.map((day) => ({
           date: day,
           events: events.filter(
-            (event) => event.start <= day && event.end >= day
+            (event) =>
+              ZonedDateTime.compare(event.start, day) <= 0 &&
+              ZonedDateTime.compare(event.end, day) >= 0
           ),
         })),
       })),
