@@ -101,7 +101,7 @@ export const createTemporalAdapter = (
   ) =>
     ZonedDateTime.compare(eventDate, startOfWeek) <= 0
       ? 1
-      : eventDate.dayOfWeek + 1; //add one because css-grid isn't zero-index'd
+      : eventDate.dayOfWeek; //add one because css-grid isn't zero-index'd
 
   const getGridEndIndex = (
     eventEndDate: ZonedDateTime,
