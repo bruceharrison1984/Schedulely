@@ -41,12 +41,7 @@ export const createTemporalAdapter = (
       day: 1,
       timeZone,
     });
-    const endOfMonth = ZonedDateTime.from({
-      year: date.year,
-      month: date.month,
-      day: 1,
-      timeZone,
-    }).add({ months: 1 });
+    const endOfMonth = startOfMonth.add({ months: 1 });
 
     const trailingDaysFromPrevMonth = [];
     const currentMonth = [];
