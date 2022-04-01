@@ -57,9 +57,9 @@ const events = [
   ...generateEvents(100, 0, 1, 100),
   {
     color: '#4b578a',
-    end: new Date(2022, 1, 2).toISOString(),
+    end: new Date(2021, 8, 25).toISOString(),
     id: '1',
-    start: new Date(2022, 1, 2).toISOString(),
+    start: new Date(2021, 8, 11).toISOString(),
     summary: '*Cross Week Test*',
   },
 ];

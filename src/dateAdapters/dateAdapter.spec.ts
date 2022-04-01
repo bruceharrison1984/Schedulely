@@ -142,7 +142,7 @@ describe('Date Adapter', () => {
           // event ends on Sunday
           eventEnd: createZonedDateTime(2021, 9, 25),
           endOfWeek: createZonedDateTime(2021, 10, 1),
-          expected: 2,
+          expected: 8,
         },
         {
           // event that starts and ends on Sunday

@@ -109,22 +109,8 @@ export const createTemporalAdapter = (
   ) => {
     const endDiff = ZonedDateTime.compare(eventEndDate, endOfWeek);
     if (endDiff > 0) return 8;
-    switch (eventEndDate.dayOfWeek) {
-      case 1:
-        return 3;
-      case 2:
-        return 4;
-      case 3:
-        return 5;
-      case 4:
-        return 6;
-      case 5:
-        return 7;
-      case 6:
-        return 2;
-      case 7:
-        return 2;
-    }
+    if (eventEndDate.dayOfWeek === 7) return 2; // TODO: sunday starts the calendar, but is 7 in ISO8601... this needs to be addressed better than this.
+    return eventEndDate.dayOfWeek + 2;
   };
 
   const isEventInWeek = (
