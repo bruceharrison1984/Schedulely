@@ -1,5 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
-import { Now, PlainDate, ZonedDateTime } from 'temporal-polyfill';
+import { Now, PlainDateTime, ZonedDateTime } from 'temporal-polyfill';
 
 /**
  * Create an instance of the default date adapter
@@ -43,10 +43,10 @@ export const createTemporalAdapter = (
     });
     const endOfMonth = ZonedDateTime.from({
       year: date.year,
-      month: date.month + 1,
+      month: date.month,
       day: 1,
       timeZone,
-    }).subtract({ days: 1 });
+    }).add({ months: 1 });
 
     const trailingDaysFromPrevMonth = [];
     const currentMonth = [];
@@ -66,9 +66,9 @@ export const createTemporalAdapter = (
 
     iteratedDate = endOfMonth;
     //only gather enough days until sunday
-    while (iteratedDate.dayOfWeek + 1 !== 7) {
-      iteratedDate = iteratedDate.add({ days: 1 });
+    while (iteratedDate.dayOfWeek !== 7) {
       leadingDaysofNextMonth.push(iteratedDate);
+      iteratedDate = iteratedDate.add({ days: 1 });
     }
 
     const flatMonthView = [
@@ -122,20 +122,22 @@ export const createTemporalAdapter = (
     week: ZonedDateTime[]
   ) => {
     if (week.length !== 7) throw new Error('Week length must be 7');
+    const startOfWeek = week[0];
+    const endOfWeek = week[6];
     const eventStartInWeek =
-      ZonedDateTime.compare(eventStartDate, week[0]) >= 0 &&
-      ZonedDateTime.compare(eventStartDate, week[6]) <= 0;
+      ZonedDateTime.compare(eventStartDate, startOfWeek) >= 0 &&
+      ZonedDateTime.compare(eventStartDate, endOfWeek) <= 0;
     const eventEndsInWeek =
-      ZonedDateTime.compare(eventEndDate, week[0]) >= 0 &&
-      ZonedDateTime.compare(eventEndDate, week[6]) <= 0;
+      ZonedDateTime.compare(eventEndDate, startOfWeek) >= 0 &&
+      ZonedDateTime.compare(eventEndDate, endOfWeek) <= 0;
     const eventSpansWeek =
-      ZonedDateTime.compare(eventStartDate, week[0]) <= 0 &&
-      ZonedDateTime.compare(eventEndDate, week[6]) >= 0;
+      ZonedDateTime.compare(eventStartDate, startOfWeek) <= 0 &&
+      ZonedDateTime.compare(eventEndDate, endOfWeek) >= 0;
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
   const convertIsoToDate = (isoDate: string) =>
-    PlainDate.from(isoDate).toZonedDateTime({ timeZone });
+    PlainDateTime.from(isoDate).toZonedDateTime({ timeZone });
 
   return {
     getCalendarView,

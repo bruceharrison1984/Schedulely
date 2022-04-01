@@ -186,7 +186,7 @@ describe('Date Adapter', () => {
           expected: 1,
         },
       ])(
-        '$eventStart with $startOfWeek returns $expected',
+        'eventStart: $eventStart with startOfWeek: $startOfWeek returns $expected',
         ({ eventStart, startOfWeek, expected }) => {
           const result = adapter.getGridStartIndex(eventStart, startOfWeek);
           expect(result).toBe(expected);
