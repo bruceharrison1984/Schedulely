@@ -30,7 +30,7 @@ export const createTemporalAdapter = (
     );
   };
 
-  /** TODO: This needs refactored based on Temporal
+  /** //TODO: This needs refactored based on Temporal
    * Ideally, we could gather the  StartOfWeek day for the locale and display accordingly
    * Right now, we always start on Sunday
    */
@@ -118,7 +118,7 @@ export const createTemporalAdapter = (
     eventEndDate: ZonedDateTime,
     week: ZonedDateTime[]
   ) => {
-    if (week.length !== 7) throw new Error('Week length must be 7');
+    if (week.length !== 7) throw new Error('Week length is not equal to 7');
     const startOfWeek = week[0];
     const endOfWeek = week[6];
     const eventStartInWeek =
