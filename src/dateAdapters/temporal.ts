@@ -1,5 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
-import { Instant, Now, ZonedDateTime } from 'temporal-polyfill';
+import { Temporal } from '@js-temporal/polyfill';
 
 /**
  * Create an instance of the default date adapter
@@ -19,7 +19,7 @@ export const createTemporalAdapter = (
 
   const getDaysOfWeek = (displaySize: DisplaySize) => {
     return [1, 2, 3, 4, 5, 6, 7].map((x) =>
-      ZonedDateTime.from({
+      Temporal.ZonedDateTime.from({
         year: 2012,
         month: 1,
         day: x,
@@ -34,8 +34,8 @@ export const createTemporalAdapter = (
    * Ideally, we could gather the  StartOfWeek day for the locale and display accordingly
    * Right now, we always start on Sunday
    */
-  const getCalendarView = (date: ZonedDateTime) => {
-    const startOfMonth = ZonedDateTime.from({
+  const getCalendarView = (date: Temporal.ZonedDateTime) => {
+    const startOfMonth = Temporal.ZonedDateTime.from({
       year: date.year,
       month: date.month,
       day: 1,
@@ -77,64 +77,67 @@ export const createTemporalAdapter = (
     );
   };
 
-  const getMonthName = (date: ZonedDateTime) =>
+  const getMonthName = (date: Temporal.ZonedDateTime) =>
     date.toLocaleString(locale, { month: 'long' });
 
-  const getYear = (date: ZonedDateTime) => date.year;
+  const getYear = (date: Temporal.ZonedDateTime) => date.year;
 
-  const getDayNumber = (date: ZonedDateTime) => date.day;
+  const getDayNumber = (date: Temporal.ZonedDateTime) => date.day;
 
-  const isSameMonth = (firstDate: ZonedDateTime, secondDate: ZonedDateTime) =>
+  const isSameMonth = (
+    firstDate: Temporal.ZonedDateTime,
+    secondDate: Temporal.ZonedDateTime
+  ) =>
     firstDate.year === secondDate.year && firstDate.month === secondDate.month;
 
-  const isDateToday = (date: ZonedDateTime) => {
-    const today = Now.zonedDateTimeISO(timeZone);
+  const isDateToday = (date: Temporal.ZonedDateTime) => {
+    const today = Temporal.Now.zonedDateTimeISO(timeZone);
     return isSameMonth(date, today) && date.day === today.day;
   };
 
-  const addMonthsToDate = (date: ZonedDateTime, amount: number) =>
+  const addMonthsToDate = (date: Temporal.ZonedDateTime, amount: number) =>
     date.add({ months: amount });
 
   const getGridStartIndex = (
-    eventDate: ZonedDateTime,
-    startOfWeek: ZonedDateTime
+    eventDate: Temporal.ZonedDateTime,
+    startOfWeek: Temporal.ZonedDateTime
   ) =>
-    ZonedDateTime.compare(eventDate, startOfWeek) <= 0
+    Temporal.ZonedDateTime.compare(eventDate, startOfWeek) <= 0
       ? 1
       : eventDate.dayOfWeek + 1; //add one because css-grid isn't zero-index'd
 
   const getGridEndIndex = (
-    eventEndDate: ZonedDateTime,
-    endOfWeek: ZonedDateTime
+    eventEndDate: Temporal.ZonedDateTime,
+    endOfWeek: Temporal.ZonedDateTime
   ) => {
-    const endDiff = ZonedDateTime.compare(eventEndDate, endOfWeek);
+    const endDiff = Temporal.ZonedDateTime.compare(eventEndDate, endOfWeek);
     if (endDiff > 0) return 8;
     if (eventEndDate.dayOfWeek === 7) return 2; // TODO: sunday starts the calendar, but is 7 in ISO8601... this needs to be addressed better than this.
     return eventEndDate.dayOfWeek + 2;
   };
 
   const isEventInWeek = (
-    eventStartDate: ZonedDateTime,
-    eventEndDate: ZonedDateTime,
-    week: ZonedDateTime[]
+    eventStartDate: Temporal.ZonedDateTime,
+    eventEndDate: Temporal.ZonedDateTime,
+    week: Temporal.ZonedDateTime[]
   ) => {
     if (week.length !== 7) throw new Error('Week length is not equal to 7');
     const startOfWeek = week[0];
     const endOfWeek = week[6];
     const eventStartInWeek =
-      ZonedDateTime.compare(eventStartDate, startOfWeek) >= 0 &&
-      ZonedDateTime.compare(eventStartDate, endOfWeek) <= 0;
+      Temporal.ZonedDateTime.compare(eventStartDate, startOfWeek) >= 0 &&
+      Temporal.ZonedDateTime.compare(eventStartDate, endOfWeek) <= 0;
     const eventEndsInWeek =
-      ZonedDateTime.compare(eventEndDate, startOfWeek) >= 0 &&
-      ZonedDateTime.compare(eventEndDate, endOfWeek) <= 0;
+      Temporal.ZonedDateTime.compare(eventEndDate, startOfWeek) >= 0 &&
+      Temporal.ZonedDateTime.compare(eventEndDate, endOfWeek) <= 0;
     const eventSpansWeek =
-      ZonedDateTime.compare(eventStartDate, startOfWeek) <= 0 &&
-      ZonedDateTime.compare(eventEndDate, endOfWeek) >= 0;
+      Temporal.ZonedDateTime.compare(eventStartDate, startOfWeek) <= 0 &&
+      Temporal.ZonedDateTime.compare(eventEndDate, endOfWeek) >= 0;
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
   const convertIsoToDate = (isoDate: string) =>
-    Instant.from(isoDate).toZonedDateTimeISO({ timeZone });
+    Temporal.Instant.from(isoDate).toZonedDateTimeISO({ timeZone });
 
   return {
     getCalendarView,

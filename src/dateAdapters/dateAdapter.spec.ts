@@ -1,5 +1,5 @@
 import { DisplaySize } from '@/types/DateAdapter';
-import { ZonedDateTime } from 'temporal-polyfill';
+import { Temporal } from '@js-temporal/polyfill';
 import { createTemporalAdapter } from './temporal';
 
 import {
@@ -19,9 +19,9 @@ describe('Temporal Date Adapter', () => {
 
   describe('addMonthsToDate', () => {
     it.each<{
-      originalDate: ZonedDateTime;
+      originalDate: Temporal.ZonedDateTime;
       amount: number;
-      expectedDate: ZonedDateTime;
+      expectedDate: Temporal.ZonedDateTime;
     }>(getAddMonthsToDateTestCases())(
       '$originalDate and $amount returns $expectedDate',
       ({ originalDate, amount, expectedDate }) => {
@@ -33,8 +33,8 @@ describe('Temporal Date Adapter', () => {
 
   describe('isSameMonth', () => {
     it.each<{
-      firstDate: ZonedDateTime;
-      secondDate: ZonedDateTime;
+      firstDate: Temporal.ZonedDateTime;
+      secondDate: Temporal.ZonedDateTime;
       expected: boolean;
     }>(getIsSameMonthMonthTestCases())(
       '$firstDate and $secondDate returns $expected',
@@ -67,7 +67,7 @@ describe('Temporal Date Adapter', () => {
   });
 
   describe('getMonthName', () => {
-    it.each<{ date: ZonedDateTime; expected: string }>(
+    it.each<{ date: Temporal.ZonedDateTime; expected: string }>(
       getMonthNameFromDateTestCases()
     )('$date returns $expected', ({ date, expected }) => {
       const result = adapter.getMonthName(date);
@@ -76,7 +76,7 @@ describe('Temporal Date Adapter', () => {
   });
 
   describe('getYear', () => {
-    it.each<{ date: ZonedDateTime; expected: number }>(
+    it.each<{ date: Temporal.ZonedDateTime; expected: number }>(
       getYearFromDateTestCases()
     )('$date returns $expected', ({ date, expected }) => {
       const result = adapter.getYear(date);
@@ -85,7 +85,7 @@ describe('Temporal Date Adapter', () => {
   });
 
   describe('getDayNumber', () => {
-    it.each<{ date: ZonedDateTime; expected: number }>(
+    it.each<{ date: Temporal.ZonedDateTime; expected: number }>(
       getDayNumberFromDateTestCases()
     )('$date returns $expected', ({ date, expected }) => {
       const result = adapter.getDayNumber(date);
@@ -94,19 +94,18 @@ describe('Temporal Date Adapter', () => {
   });
 
   describe('isDateToday', () => {
-    it.each<{ date: ZonedDateTime; expected: boolean }>(getIsTodayTestCases())(
-      '$date returns $expected',
-      ({ date, expected }) => {
-        const result = adapter.isDateToday(date);
-        expect(result).toBe(expected);
-      }
-    );
+    it.each<{ date: Temporal.ZonedDateTime; expected: boolean }>(
+      getIsTodayTestCases()
+    )('$date returns $expected', ({ date, expected }) => {
+      const result = adapter.isDateToday(date);
+      expect(result).toBe(expected);
+    });
   });
 
   describe('getGridEndIndex', () => {
     it.each<{
-      eventEnd: ZonedDateTime;
-      endOfWeek: ZonedDateTime;
+      eventEnd: Temporal.ZonedDateTime;
+      endOfWeek: Temporal.ZonedDateTime;
       expected: number;
     }>([
       {
@@ -149,8 +148,8 @@ describe('Temporal Date Adapter', () => {
 
   describe('getGridStartIndex', () => {
     it.each<{
-      eventStart: ZonedDateTime;
-      startOfWeek: ZonedDateTime;
+      eventStart: Temporal.ZonedDateTime;
+      startOfWeek: Temporal.ZonedDateTime;
       expected: number;
     }>([
       {
@@ -170,8 +169,8 @@ describe('Temporal Date Adapter', () => {
       },
       {
         // event that starts and ends on Sunday
-        eventStart: createZonedDateTime(2022, 0, 2),
-        startOfWeek: createZonedDateTime(2022, 0, 2),
+        eventStart: createZonedDateTime(2022, 1, 2),
+        startOfWeek: createZonedDateTime(2022, 1, 2),
         expected: 1,
       },
     ])(
@@ -186,9 +185,9 @@ describe('Temporal Date Adapter', () => {
   describe('isEventInWeek', () => {
     it.each<{
       message: string;
-      eventStartDate: ZonedDateTime;
-      eventEndDate: ZonedDateTime;
-      week: ZonedDateTime[];
+      eventStartDate: Temporal.ZonedDateTime;
+      eventEndDate: Temporal.ZonedDateTime;
+      week: Temporal.ZonedDateTime[];
       expected: boolean;
     }>([
       {

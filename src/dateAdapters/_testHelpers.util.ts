@@ -1,5 +1,5 @@
 import { DisplaySize } from '@/types/index';
-import { Now, ZonedDateTime } from 'temporal-polyfill';
+import { Temporal } from '@js-temporal/polyfill';
 import chance from 'chance';
 
 const DEFAULT_ITERATIONS = 30;
@@ -17,7 +17,7 @@ export const createZonedDateTime = (
   day: number,
   timeZone = 'America/Chicago'
 ) =>
-  ZonedDateTime.from({
+  Temporal.ZonedDateTime.from({
     year,
     month,
     day,
@@ -25,7 +25,7 @@ export const createZonedDateTime = (
   });
 
 const randomZonedDateTime = () =>
-  ZonedDateTime.from({
+  Temporal.ZonedDateTime.from({
     year: chance().integer({ min: 2000, max: 2021 }),
     month: chance().integer({ min: 1, max: 12 }),
     day: 1,
@@ -38,8 +38,8 @@ export const getAddMonthsToDateTestCases = (
   const testCases = [];
   for (let index = 0; index < iterations; index++) {
     const originalDate = randomZonedDateTime();
-    const amount = chance().integer({ min: -48, max: 48 });
-    const expectedDate = ZonedDateTime.from({
+    const amount = chance().integer({ min: 1, max: 48 });
+    const expectedDate = Temporal.ZonedDateTime.from({
       year: originalDate.year,
       month: originalDate.month + amount,
       day: 1,
@@ -156,7 +156,7 @@ export const getIsSameMonthMonthTestCases = (
 export const getIsTodayTestCases = (iterations = DEFAULT_ITERATIONS) => {
   const testCases = [
     {
-      date: Now.zonedDateTimeISO(), //make sure we actually test today
+      date: Temporal.Now.zonedDateTimeISO(), //make sure we actually test today
       expected: true,
     },
   ];
@@ -175,9 +175,9 @@ export const getDayNumberFromDateTestCases = (
 ) => {
   const testCases = [];
   for (let index = 0; index < iterations; index++) {
-    const date = ZonedDateTime.from({
+    const date = Temporal.ZonedDateTime.from({
       year: chance().integer({ min: 2000, max: 2022 }),
-      month: chance().integer({ min: 0, max: 11 }),
+      month: chance().integer({ min: 1, max: 12 }),
       day: chance().integer({ min: 1, max: 28 }),
       timeZone: 'America/Chicago',
     });
@@ -192,9 +192,9 @@ export const getDayNumberFromDateTestCases = (
 export const getYearFromDateTestCases = (iterations = DEFAULT_ITERATIONS) => {
   const testCases = [];
   for (let index = 0; index < iterations; index++) {
-    const date = ZonedDateTime.from({
+    const date = Temporal.ZonedDateTime.from({
       year: chance().integer({ min: 2000, max: 2022 }),
-      month: chance().integer({ min: 0, max: 11 }),
+      month: chance().integer({ min: 1, max: 12 }),
       day: chance().integer({ min: 1, max: 28 }),
       timeZone: 'America/Chicago',
     });
