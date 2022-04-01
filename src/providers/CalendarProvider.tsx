@@ -5,6 +5,7 @@ import {
   InternalCalendarEvent,
   InternalEventWeek,
 } from '@/types/index';
+import { Now, ZonedDateTime } from 'temporal-polyfill';
 import {
   ReactNode,
   createContext,
@@ -19,7 +20,7 @@ CalendarContext.displayName = 'CalendarContext';
 
 interface CalendarProviderProps {
   dateAdapter: DateTimeAdapter;
-  initialDate?: Date;
+  initialDate?: ZonedDateTime;
   calendarEvents: CalendarEvent[];
   children: ReactNode;
 }
@@ -31,7 +32,7 @@ interface CalendarProviderProps {
  */
 export const CalendarProvider = ({
   dateAdapter,
-  initialDate = new Date(),
+  initialDate = Now.zonedDateTimeISO('America/Chicago'),
   calendarEvents,
   children,
 }: CalendarProviderProps) => {
@@ -81,7 +82,9 @@ export const CalendarProvider = ({
         eventsOnDays: week.map((day) => ({
           date: day,
           events: events.filter(
-            (event) => event.start <= day && event.end >= day
+            (event) =>
+              ZonedDateTime.compare(event.start, day) <= 0 &&
+              ZonedDateTime.compare(event.end, day) >= 0
           ),
         })),
       })),

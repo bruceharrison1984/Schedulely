@@ -9,6 +9,9 @@ module.exports = {
     'storybook-addon-performance/register',
     'storybook-addon-swc',
   ],
+  core: {
+    builder: 'webpack5',
+  },
   framework: '@storybook/react',
   webpackFinal: async (config) => {
     config.resolve.plugins = [

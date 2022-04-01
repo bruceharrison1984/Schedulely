@@ -1,9 +1,10 @@
 import { DateTimeAdapter } from '.';
 import { InternalEventWeek } from './InternalEventWeek';
+import { ZonedDateTime } from 'temporal-polyfill';
 
 export type CalendarState = {
   /** The current visible month */
-  currentMonth: Date;
+  currentMonth: ZonedDateTime;
 
   /** The DateTimeAdapter that is being utilized */
   dateAdapter: DateTimeAdapter;

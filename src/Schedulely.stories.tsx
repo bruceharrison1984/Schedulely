@@ -4,7 +4,6 @@ import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Schedulely } from './Schedulely';
 import { addDays } from 'date-fns';
-import { createDateFnsAdapter } from './dateAdapters';
 import chance from 'chance';
 
 export default {
@@ -58,60 +57,16 @@ const events = [
   ...generateEvents(100, 0, 1, 100),
   {
     color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    id: 'f147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    summary: 'Craig Bishop',
-  },
-  {
-    color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    id: 'a147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    summary: 'Craig Bishop',
-  },
-  {
-    color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    id: 'b147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    summary: 'Craig Bishop',
-  },
-  {
-    color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    id: 'c147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    summary: 'Craig Bishop',
-  },
-  {
-    color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    id: 'd147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    summary: 'Craig Bishop',
-  },
-  {
-    color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    id: 'e147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-    summary: 'Craig Bishop',
+    end: new Date(2021, 8, 25).toISOString(),
+    id: '1',
+    start: new Date(2021, 8, 11).toISOString(),
+    summary: '*Cross Week Test*',
   },
 ];
 
 export const nativeJs = Template.bind({});
-nativeJs.storyName = 'NativeJS Date';
+nativeJs.storyName = 'Temporal';
 nativeJs.args = {
   events,
-  // dateAdapter: createDefaultAdapter(),
-  theme: 'light',
-};
-
-export const datefns = Template.bind({});
-datefns.storyName = 'date-fns';
-datefns.args = {
-  events,
-  dateAdapter: createDateFnsAdapter(),
   theme: 'light',
 };
