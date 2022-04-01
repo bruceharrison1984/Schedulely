@@ -75,6 +75,66 @@ export const getSubMonthsToDateTestCases = (
   return testCases;
 };
 
+export const getCalendarViewTestCase = () =>
+  [
+    [
+      createZonedDateTime(2020, 12, 27),
+      createZonedDateTime(2020, 12, 28),
+      createZonedDateTime(2020, 12, 29),
+      createZonedDateTime(2020, 12, 30),
+      createZonedDateTime(2020, 12, 31),
+      createZonedDateTime(2021, 1, 1),
+      createZonedDateTime(2021, 1, 2),
+    ],
+    [
+      createZonedDateTime(2021, 1, 3),
+      createZonedDateTime(2021, 1, 4),
+      createZonedDateTime(2021, 1, 5),
+      createZonedDateTime(2021, 1, 6),
+      createZonedDateTime(2021, 1, 7),
+      createZonedDateTime(2021, 1, 8),
+      createZonedDateTime(2021, 1, 9),
+    ],
+    [
+      createZonedDateTime(2021, 1, 10),
+      createZonedDateTime(2021, 1, 11),
+      createZonedDateTime(2021, 1, 12),
+      createZonedDateTime(2021, 1, 13),
+      createZonedDateTime(2021, 1, 14),
+      createZonedDateTime(2021, 1, 15),
+      createZonedDateTime(2021, 1, 16),
+    ],
+    [
+      createZonedDateTime(2021, 1, 17),
+      createZonedDateTime(2021, 1, 18),
+      createZonedDateTime(2021, 1, 19),
+      createZonedDateTime(2021, 1, 20),
+      createZonedDateTime(2021, 1, 21),
+      createZonedDateTime(2021, 1, 22),
+      createZonedDateTime(2021, 1, 23),
+    ],
+    [
+      createZonedDateTime(2021, 1, 24),
+      createZonedDateTime(2021, 1, 25),
+      createZonedDateTime(2021, 1, 26),
+      createZonedDateTime(2021, 1, 27),
+      createZonedDateTime(2021, 1, 28),
+      createZonedDateTime(2021, 1, 29),
+      createZonedDateTime(2021, 1, 30),
+    ],
+    [
+      createZonedDateTime(2021, 1, 31),
+      createZonedDateTime(2021, 2, 1),
+      createZonedDateTime(2021, 2, 2),
+      createZonedDateTime(2021, 2, 3),
+      createZonedDateTime(2021, 2, 4),
+      createZonedDateTime(2021, 2, 5),
+      createZonedDateTime(2021, 2, 6),
+    ],
+  ]
+    .flat()
+    .map((x) => x.toLocaleString());
+
 export const getIsSameMonthMonthTestCases = (
   iterations = DEFAULT_ITERATIONS
 ) => {
