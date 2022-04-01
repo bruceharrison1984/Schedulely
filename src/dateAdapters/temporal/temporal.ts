@@ -66,7 +66,7 @@ export const createTemporalAdapter = (
 
     iteratedDate = endOfMonth;
     //only gather enough days until sunday
-    while (iteratedDate.day + 1 !== 7) {
+    while (iteratedDate.dayOfWeek + 1 !== 7) {
       iteratedDate = iteratedDate.add({ days: 1 });
       leadingDaysofNextMonth.push(iteratedDate);
     }
