@@ -122,12 +122,13 @@ describe('Date Adapter', () => {
         expected: number;
       }>([
         {
+          // event starts on friday and ends on saturday
           eventEnd: createZonedDateTime(2022, 2, 11),
           endOfWeek: createZonedDateTime(2022, 2, 12),
           expected: 7,
         },
         {
-          // event ends after end of week
+          // event ends after end of week, so it should span entire week
           eventEnd: createZonedDateTime(2022, 2, 13),
           endOfWeek: createZonedDateTime(2022, 2, 12),
           expected: 8,
@@ -139,8 +140,8 @@ describe('Date Adapter', () => {
         },
         {
           // event ends on Sunday
-          eventEnd: createZonedDateTime(2021, 9, 26),
-          endOfWeek: createZonedDateTime(2021, 10, 2),
+          eventEnd: createZonedDateTime(2021, 9, 25),
+          endOfWeek: createZonedDateTime(2021, 10, 1),
           expected: 2,
         },
         {
@@ -165,13 +166,13 @@ describe('Date Adapter', () => {
         expected: number;
       }>([
         {
-          eventStart: createZonedDateTime(2022, 1, 7),
-          startOfWeek: createZonedDateTime(2022, 1, 6),
+          eventStart: createZonedDateTime(2022, 2, 7),
+          startOfWeek: createZonedDateTime(2022, 2, 6),
           expected: 2,
         },
         {
-          eventStart: createZonedDateTime(2022, 1, 9),
-          startOfWeek: createZonedDateTime(2022, 1, 6),
+          eventStart: createZonedDateTime(2022, 2, 9),
+          startOfWeek: createZonedDateTime(2022, 2, 6),
           expected: 4,
         },
         {

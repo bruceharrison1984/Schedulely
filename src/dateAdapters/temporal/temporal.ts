@@ -1,5 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
-import { Now, PlainDateTime, ZonedDateTime } from 'temporal-polyfill';
+import { Instant, Now, ZonedDateTime } from 'temporal-polyfill';
 
 /**
  * Create an instance of the default date adapter
@@ -101,15 +101,31 @@ export const createTemporalAdapter = (
   ) =>
     ZonedDateTime.compare(eventDate, startOfWeek) <= 0
       ? 1
-      : eventDate.dayOfWeek; //add one because css-grid isn't zero-index'd
+      : eventDate.dayOfWeek + 1; //add one because css-grid isn't zero-index'd
 
   const getGridEndIndex = (
     eventEndDate: ZonedDateTime,
     endOfWeek: ZonedDateTime
-  ) =>
-    ZonedDateTime.compare(eventEndDate, endOfWeek) > 0
-      ? 8
-      : eventEndDate.dayOfWeek + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'
+  ) => {
+    const endDiff = ZonedDateTime.compare(eventEndDate, endOfWeek);
+    if (endDiff > 0) return 8;
+    switch (eventEndDate.dayOfWeek) {
+      case 1:
+        return 3;
+      case 2:
+        return 4;
+      case 3:
+        return 5;
+      case 4:
+        return 6;
+      case 5:
+        return 7;
+      case 6:
+        return 2;
+      case 7:
+        return 2;
+    }
+  };
 
   const isEventInWeek = (
     eventStartDate: ZonedDateTime,
@@ -132,7 +148,7 @@ export const createTemporalAdapter = (
   };
 
   const convertIsoToDate = (isoDate: string) =>
-    PlainDateTime.from(isoDate).toZonedDateTime({ timeZone });
+    Instant.from(isoDate).toZonedDateTimeISO({ timeZone });
 
   return {
     getCalendarView,

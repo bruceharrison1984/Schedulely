@@ -55,48 +55,13 @@ const generateEvents = (
 const events = [
   ...generateEvents(100),
   ...generateEvents(100, 0, 1, 100),
-  // {
-  //   color: '#4b578a',
-  //   end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   id: 'f147',
-  //   start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   summary: 'Craig Bishop',
-  // },
-  // {
-  //   color: '#4b578a',
-  //   end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   id: 'a147',
-  //   start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   summary: 'Craig Bishop',
-  // },
-  // {
-  //   color: '#4b578a',
-  //   end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   id: 'b147',
-  //   start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   summary: 'Craig Bishop',
-  // },
-  // {
-  //   color: '#4b578a',
-  //   end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   id: 'c147',
-  //   start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   summary: 'Craig Bishop',
-  // },
-  // {
-  //   color: '#4b578a',
-  //   end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   id: 'd147',
-  //   start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   summary: 'Craig Bishop',
-  // },
-  // {
-  //   color: '#4b578a',
-  //   end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   id: 'e147',
-  //   start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
-  //   summary: 'Craig Bishop',
-  // },
+  {
+    color: '#4b578a',
+    end: new Date(2022, 1, 2).toISOString(),
+    id: '1',
+    start: new Date(2022, 1, 2).toISOString(),
+    summary: '*Cross Week Test*',
+  },
 ];
 
 export const nativeJs = Template.bind({});
