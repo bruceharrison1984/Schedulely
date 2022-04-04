@@ -16,14 +16,7 @@
     "noEmit": false,
     "noEmitOnError": true,
     "paths": {
-      "@/utils/*": ["src/utils/*"],
-      "@/hooks/*": ["src/hooks/*"],
-      "@/layouts/*": ["src/layouts/*"],
-      "@/providers/*": ["src/providers/*"],
-      "@/types/*": ["src/types/*"],
-      "@/components/*": ["src/components/*"],
-      "@/theme/*": ["src/theme/*"],
-      "@/dateAdapters/*": ["src/dateAdapters/*"]
+      "@/*": ["src/*"],
     }
   },
   "include": ["src", "__tests__"],
