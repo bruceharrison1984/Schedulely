@@ -21,10 +21,9 @@ describe('schedulely event display', () => {
         initialDate={'2022-04-04T18:07:22.371Z'}
       />
     );
-    it('appears correctly', async () => {
-      const testItems = await component.container.querySelectorAll(
-        '[data-eventid="1"]'
-      );
+    it('appears correctly', () => {
+      const testItems =
+        component.container.querySelectorAll('[data-eventid="1"]');
       expect(testItems[0]).toHaveStyle(
         'grid-column-start: 3; grid-column-end: 8'
       );
