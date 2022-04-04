@@ -6,7 +6,7 @@ import {
   InternalEventWeek,
 } from '@/types/index';
 import {
-  ReactNode,
+  PropsWithChildren,
   createContext,
   useCallback,
   useMemo,
@@ -21,7 +21,6 @@ interface CalendarProviderProps {
   dateAdapter: DateTimeAdapter;
   initialDate?: Date;
   calendarEvents: CalendarEvent[];
-  children: ReactNode;
 }
 
 /**
@@ -34,7 +33,7 @@ export const CalendarProvider = ({
   initialDate = new Date(),
   calendarEvents,
   children,
-}: CalendarProviderProps) => {
+}: PropsWithChildren<CalendarProviderProps>) => {
   const [currentMonth, setCurrentMonth] = useState(initialDate);
   const screenSize = useScreenSize();
 

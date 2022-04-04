@@ -1,13 +1,12 @@
 import { ActionState } from '@/types/ActionState';
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
-import { ReactNode, createContext, useCallback } from 'react';
+import { PropsWithChildren, createContext, useCallback } from 'react';
 
 export const ActionContext = createContext<ActionState | null>(null);
 ActionContext.displayName = 'ActionContext';
 
 interface ActionProviderProps {
   actions?: Partial<ActionState>;
-  children: ReactNode;
 }
 
 /**
@@ -17,7 +16,10 @@ interface ActionProviderProps {
  * @param onMoreEventClick function that will run when the 'more events' indicator is clicked on
  * @returns ActionProvider component
  */
-export const ActionProvider = ({ children, actions }: ActionProviderProps) => {
+export const ActionProvider = ({
+  children,
+  actions,
+}: PropsWithChildren<ActionProviderProps>) => {
   const onEventClick = actions?.onEventClick
     ? actions?.onEventClick
     : (event: InternalCalendarEvent) => console.log(event);

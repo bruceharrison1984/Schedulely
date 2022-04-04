@@ -1,12 +1,11 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
 
 interface EventPositionLayoutProps {
   event: InternalCalendarEvent;
   startIndex: number;
   endIndex: number;
-  children: ReactNode;
 }
 
 /**
@@ -18,7 +17,7 @@ export const EventPositionLayout = ({
   startIndex,
   endIndex,
   children,
-}: EventPositionLayoutProps) => {
+}: PropsWithChildren<EventPositionLayoutProps>) => {
   const { setHighlight, clearHighlight } = useEventHighlight();
 
   return (

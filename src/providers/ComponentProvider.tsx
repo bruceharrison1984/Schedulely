@@ -6,7 +6,7 @@ import {
   DefaultHeader,
   DefaultMoreEventsIndicator,
 } from '../components';
-import { ReactNode, createContext, useMemo } from 'react';
+import { PropsWithChildren, createContext, useMemo } from 'react';
 import { SchedulelyComponents } from '@/types/index';
 import React from 'react';
 
@@ -17,7 +17,6 @@ ComponentContext.displayName = 'ComponentContext';
 
 interface ComponentProviderProps {
   calendarComponents?: Partial<SchedulelyComponents>;
-  children: ReactNode;
 }
 
 /**
@@ -28,7 +27,7 @@ interface ComponentProviderProps {
 export const ComponentProvider = ({
   calendarComponents,
   children,
-}: ComponentProviderProps) => {
+}: PropsWithChildren<ComponentProviderProps>) => {
   const components = useMemo(() => {
     if (!calendarComponents) return defaultComponents;
     return { ...defaultComponents, ...calendarComponents };
