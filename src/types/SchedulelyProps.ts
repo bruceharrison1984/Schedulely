@@ -21,4 +21,6 @@ export interface SchedulelyProps {
   theme?: string;
 
   actions?: Partial<ActionState>;
+
+  initialDate?: string;
 }

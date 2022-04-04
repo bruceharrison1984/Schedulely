@@ -19,7 +19,7 @@ CalendarContext.displayName = 'CalendarContext';
 
 interface CalendarProviderProps {
   dateAdapter: DateTimeAdapter;
-  initialDate?: Date;
+  initialDate: string;
   calendarEvents: CalendarEvent[];
 }
 
@@ -30,11 +30,13 @@ interface CalendarProviderProps {
  */
 export const CalendarProvider = ({
   dateAdapter,
-  initialDate = new Date(),
+  initialDate,
   calendarEvents,
   children,
 }: PropsWithChildren<CalendarProviderProps>) => {
-  const [currentMonth, setCurrentMonth] = useState(initialDate);
+  const [currentMonth, setCurrentMonth] = useState(
+    dateAdapter.convertIsoToDate(initialDate)
+  );
   const screenSize = useScreenSize();
 
   const daysOfWeek = useMemo(

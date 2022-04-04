@@ -10,5 +10,8 @@ module.exports = {
     '^.+\\.css$': 'jest-transform-css',
   },
   modulePathIgnorePatterns: ['.*.testHelper.ts'],
-  setupFilesAfterEnv: ['./jest.env.js'],
+  setupFilesAfterEnv: [
+    './jest.env.js',
+    '@testing-library/jest-dom/extend-expect',
+  ],
 };
