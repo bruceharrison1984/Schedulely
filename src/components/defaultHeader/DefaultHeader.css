@@ -13,6 +13,7 @@
 
 .schedulely--header-layout {
   display: flex;
+  gap: 0.5em;
   width: 100%;
 }
 
