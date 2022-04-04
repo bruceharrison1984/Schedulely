@@ -1,5 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
-import { createDateFnsAdapter } from '.';
+import { createDateFnsAdapter } from '@/dateAdapters/index';
 import {
   getAddMonthsToDateTestCases,
   getDayNumberFromDateTestCases,
