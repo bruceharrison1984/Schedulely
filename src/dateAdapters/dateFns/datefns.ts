@@ -11,6 +11,8 @@ import {
   endOfWeek,
   format,
   getDate,
+  isAfter,
+  isBefore,
   isToday,
   isWithinInterval,
   parseISO,
@@ -75,13 +77,10 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
     addMonths(date, amount);
 
   const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
-    eventDate <= startOfWeek ? 1 : df_getDay(eventDate) + 1; //add one because css-grid isn't zero-index'd
+    isBefore(eventDate, startOfWeek) ? 1 : df_getDay(eventDate) + 1; //add one because css-grid isn't zero-index'd
 
-  const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
-    if (eventEndDate >= endOfWeek) return 8;
-    const end = df_getDay(eventEndDate) + 2; //offset for zero-index, add additional so event ends at correct line
-    return end;
-  };
+  const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) =>
+    isAfter(eventEndDate, endOfWeek) ? 8 : df_getDay(eventEndDate) + 2; //offset for zero-index, add additional so event ends at correct line
 
   const isEventInWeek = (
     eventStartDate: Date,
@@ -95,7 +94,8 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
     };
     const eventStartInWeek = isWithinInterval(eventStartDate, weekInterval);
     const eventEndsInWeek = isWithinInterval(eventEndDate, weekInterval);
-    const eventSpansWeek = eventStartDate <= week[0] && eventEndDate >= week[6];
+    const eventSpansWeek =
+      isBefore(eventStartDate, week[0]) && isAfter(eventEndDate, week[6]);
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 

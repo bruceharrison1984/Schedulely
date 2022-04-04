@@ -1,6 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
 import { createDateFnsAdapter } from '.';
-import { createDefaultAdapter } from '.';
 import {
   getAddMonthsToDateTestCases,
   getDayNumberFromDateTestCases,
@@ -22,10 +21,6 @@ const adapters = [
   {
     name: 'DateFns',
     adapter: createDateFnsAdapter(),
-  },
-  {
-    name: 'NativeJs',
-    adapter: createDefaultAdapter(),
   },
 ];
 

@@ -4,7 +4,6 @@ import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Schedulely } from './Schedulely';
 import { addDays } from 'date-fns';
-import { createDateFnsAdapter } from './dateAdapters';
 import chance from 'chance';
 
 export default {
@@ -100,18 +99,16 @@ const events = [
   },
 ];
 
-export const nativeJs = Template.bind({});
-nativeJs.storyName = 'NativeJS Date';
-nativeJs.args = {
+export const datefns = Template.bind({});
+datefns.storyName = 'Default';
+datefns.args = {
   events,
-  // dateAdapter: createDefaultAdapter(),
   theme: 'light',
 };
 
-export const datefns = Template.bind({});
-datefns.storyName = 'date-fns';
-datefns.args = {
+export const minimum = Template.bind({});
+minimum.storyName = 'Minimal';
+minimum.args = {
   events,
-  dateAdapter: createDateFnsAdapter(),
-  theme: 'light',
+  theme: 'minimal',
 };

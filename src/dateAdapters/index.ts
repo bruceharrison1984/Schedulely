@@ -3,4 +3,3 @@
  */
 
 export * from './dateFns/index';
-export * from './default/index';
