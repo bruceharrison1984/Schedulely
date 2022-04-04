@@ -20,7 +20,9 @@ export interface SchedulelyProps {
   /** Name of theme to display */
   theme?: string;
 
+  /** Schedulely actions */
   actions?: Partial<ActionState>;
 
+  /** Initial Date that Schedulely should be opened to */
   initialDate?: string;
 }
