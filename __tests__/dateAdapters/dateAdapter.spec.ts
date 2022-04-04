@@ -1,5 +1,5 @@
 import { DateTimeAdapter, DisplaySize } from '@/types/index';
-import { createDateFnsAdapter } from '@/dateAdapters/index';
+import { createDateFnsAdapter } from '@/dateAdapters/datefns';
 import {
   getAddMonthsToDateTestCases,
   getDayNumberFromDateTestCases,
@@ -8,7 +8,7 @@ import {
   getIsTodayTestCases,
   getMonthNameFromDateTestCases,
   getYearFromDateTestCases,
-} from './_testHelpers.util';
+} from './dateAdapter.testHelper';
 
 /**
  * Additional adapters should just be added to this array

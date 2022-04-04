@@ -26,6 +26,6 @@
       "@/dateAdapters/*": ["src/dateAdapters/*"]
     }
   },
-  "include": ["src"],
-  "exclude": [".stories.tsx$", "node_modules", "*.spec.ts$", "*.util.ts$"]
+  "include": ["src", "__tests__"],
+  "exclude": [".stories.tsx$", "node_modules"]
 }
