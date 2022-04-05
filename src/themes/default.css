@@ -20,21 +20,37 @@
   border-radius: 10px 10px 0 0;
 }
 
-.schedulely
-  > .schedulely--week-container:last-child{
-  border-radius: 0 0 var(--schedulely-border-radius) var(--schedulely-border-radius);
+.schedulely > .schedulely--week-container:last-child {
+  border-radius: 0 0 var(--schedulely-border-radius)
+    var(--schedulely-border-radius);
 }
 
 .schedulely
   > .schedulely--week-container:last-child
   > .schedulely--week-layout
   > div:last-child {
-    border-radius: 0 0 var(--schedulely-border-radius) 0;
+  border-radius: 0 0 var(--schedulely-border-radius) 0;
+}
+
+.schedulely
+  > .schedulely--week-container:last-child
+  > .schedulely--week-layout
+  > div:last-child
+  > .schedulely--default-day {
+  border-radius: 0 0 var(--schedulely-border-radius) 0;
 }
 
 .schedulely
   > .schedulely--week-container:last-child
   > .schedulely--week-layout
   > div:first-child {
-    border-radius: 0 0 0 var(--schedulely-border-radius);
+  border-radius: 0 0 0 var(--schedulely-border-radius);
+}
+
+.schedulely
+  > .schedulely--week-container:last-child
+  > .schedulely--week-layout
+  > div:first-child
+  > .schedulely--default-day {
+  border-radius: 0 0 0 var(--schedulely-border-radius);
 }
