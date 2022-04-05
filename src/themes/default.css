@@ -4,6 +4,7 @@
   /* Custom font must be made available via link tag, etc. */
   font-family: 'Roboto', sans-serif;
   --schedulely-current-month-bg-color: white;
+  --schedulely-today-indicator-color: salmon;
   --schedulely-font-color: black;
   --schedulely-sibling-month-bg-color: #eff2f1;
   --schedulely-sibling-month-font-color: dimgray;

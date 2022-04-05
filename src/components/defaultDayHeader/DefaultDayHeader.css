@@ -13,7 +13,7 @@
 .schedulely--default-day-header--indicator {
   height: 1.5em;
   width: 1.5em;
-  background-color: salmon;
+  background-color: var(--schedulely-today-indicator-color);
   border-radius: 50%;
   display: inline-block;
 }
