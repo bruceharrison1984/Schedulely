@@ -25,4 +25,7 @@ export interface SchedulelyProps {
 
   /** Initial Date that Schedulely should be opened to */
   initialDate?: string;
+
+  /** All dates will be transformed into this timezone before being display */
+  targetTimezone?: string;
 }

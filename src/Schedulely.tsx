@@ -16,7 +16,8 @@ import React from 'react';
  * @returns
  */
 export const Schedulely = ({
-  dateAdapter = createDateFnsAdapter(),
+  targetTimezone,
+  dateAdapter = createDateFnsAdapter(targetTimezone),
   schedulelyComponents,
   events,
   theme,

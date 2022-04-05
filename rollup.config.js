@@ -10,7 +10,13 @@ const options = defineConfig({
     format: 'esm',
     assetFileNames: '[name].css',
   },
-  external: ['react/jsx-runtime', 'react', /@swc\/helpers/, /date-fns/],
+  external: [
+    'react/jsx-runtime',
+    'react',
+    /@swc\/helpers/,
+    /date-fns/,
+    /date-fns-tz/,
+  ],
   plugins: [
     styles({ mode: ['extract'], minimize: true }),
     ts({

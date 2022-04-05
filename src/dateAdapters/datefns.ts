@@ -15,15 +15,21 @@ import {
   isBefore,
   isToday,
   isWithinInterval,
-  parseISO,
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 
 /**
  * Create a Schedulely compatible DateAdapter from date-fns.
  */
-export const createDateFnsAdapter = (): DateTimeAdapter => {
+export const createDateFnsAdapter = (
+  targetTimezone?: string
+): DateTimeAdapter => {
+  const timezone = targetTimezone
+    ? targetTimezone
+    : Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   const _getCalendarRangeForDate = (date: Date) => {
     const monthStart = startOfMonth(date);
     const startDayOfWeek = monthStart.getDay();
@@ -99,7 +105,8 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
-  const convertIsoToDate = (isoDate: string) => parseISO(isoDate);
+  const convertIsoToDate = (isoDate: string) =>
+    utcToZonedTime(isoDate, timezone);
 
   return {
     getCalendarView,
