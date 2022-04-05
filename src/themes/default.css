@@ -16,6 +16,10 @@
   --schedulely-border-radius: 10px;
 }
 
+.schedulely > .schedulely--day-of-week-layout {
+  border-radius: 10px 10px 0 0;
+}
+
 .schedulely
   > .schedulely--week-container:last-child{
   border-radius: 0 0 var(--schedulely-border-radius) var(--schedulely-border-radius);
