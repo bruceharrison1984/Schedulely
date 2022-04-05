@@ -12,11 +12,25 @@
   --schedulely-day-of-week-header-bg-color: black;
   --schedulely-day-of-week-header-text-color: white;
   --schedulely-day-height: 7em;
-  --schedulely-border: 0.1em solid black;
+  --schedulely-border: 1px solid black;
+  --schedulely-border-radius: 10px;
 }
 
-.schedulely[data-theme='minimal']
-  > .schedulely--day-of-week-layout
+.schedulely
+  > .schedulely--week-container:last-child{
+  border-radius: 0 0 var(--schedulely-border-radius) var(--schedulely-border-radius);
+}
+
+.schedulely
+  > .schedulely--week-container:last-child
+  > .schedulely--week-layout
+  > div:last-child {
+    border-radius: 0 0 var(--schedulely-border-radius) 0;
+}
+
+.schedulely
+  > .schedulely--week-container:last-child
+  > .schedulely--week-layout
   > div:first-child {
-  border-radius: 5px;
+    border-radius: 0 0 0 var(--schedulely-border-radius);
 }
