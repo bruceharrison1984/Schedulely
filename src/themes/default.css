@@ -6,9 +6,10 @@
   --schedulely-current-month-bg-color: white;
   --schedulely-font-color: black;
   --schedulely-sibling-month-bg-color: #eff2f1;
+  --schedulely-sibling-month-font-color: dimgray;
   --schedulely-grid-gap: 0em;
   --schedulely-day-of-week-header-bg-color: black;
   --schedulely-day-of-week-header-text-color: white;
   --schedulely-day-height: 7em;
-  --schedulely-border-color: black;
+  --schedulely-border: 0.1em solid black;
 }

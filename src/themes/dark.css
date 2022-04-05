@@ -4,5 +4,6 @@
   --schedulely-day-of-week-header-bg-color: white;
   --schedulely-day-of-week-header-text-color: black;
   --schedulely-font-color: white;
-  --schedulely-border-color: white;
+  --schedulely-border: 0.1em solid white;
+
 }

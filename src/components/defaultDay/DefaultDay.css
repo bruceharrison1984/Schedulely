@@ -9,5 +9,5 @@
 
 .schedulely--default-day-sibling {
   background-color: var(--schedulely-sibling-month-bg-color);
-  color: dimgray;
+  color: var(--schedulely-sibling-month-font-color);
 }

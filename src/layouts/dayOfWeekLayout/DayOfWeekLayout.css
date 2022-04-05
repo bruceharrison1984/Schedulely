@@ -1,8 +1,10 @@
 .schedulely--day-of-week-layout {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  background-color: var(--schedulely-day-of-week-header-bg-color);
+  color: var(--schedulely-day-of-week-header-text-color);
 }
 
 .schedulely--day-of-week-layout > div {
-  border: 0.2em solid var(--schedulely-border-color);
+  border: var(--schedulely-border);
 }
