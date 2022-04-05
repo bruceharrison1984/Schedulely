@@ -13,11 +13,12 @@
   --schedulely-day-of-week-header-text-color: white;
   --schedulely-day-height: 7em;
   --schedulely-border: 1px solid black;
-  --schedulely-border-radius: 10px;
+  --schedulely-border-radius: 0.5em;
 }
 
 .schedulely > .schedulely--day-of-week-layout {
-  border-radius: 10px 10px 0 0;
+  border-radius: var(--schedulely-border-radius) var(--schedulely-border-radius)
+    0 0;
 }
 
 .schedulely > .schedulely--week-container:last-child {
