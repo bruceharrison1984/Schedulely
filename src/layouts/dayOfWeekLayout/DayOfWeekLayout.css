@@ -3,8 +3,5 @@
   grid-template-columns: repeat(7, 1fr);
   background-color: var(--schedulely-day-of-week-header-bg-color);
   color: var(--schedulely-day-of-week-header-text-color);
-}
-
-.schedulely--day-of-week-layout > div {
-  border: var(--schedulely-border);
+  border-radius: 10px 10px 0 0;
 }

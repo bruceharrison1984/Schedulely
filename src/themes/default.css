@@ -14,3 +14,9 @@
   --schedulely-day-height: 7em;
   --schedulely-border: 0.1em solid black;
 }
+
+.schedulely[data-theme='minimal']
+  > .schedulely--day-of-week-layout
+  > div:first-child {
+  border-radius: 5px;
+}
