@@ -1,5 +1,4 @@
 import { HeaderComponent } from '@/types/index';
-import { useMemo } from 'react';
 
 /**
  * The default header representation
@@ -13,13 +12,8 @@ export const DefaultHeader: HeaderComponent = ({
   onNextYear,
   onPrevMonth,
   onPrevYear,
+  isCurrentMonth,
 }) => {
-  const isCurrentMonth = useMemo(
-    () =>
-      new Date().toLocaleString('en-us', { month: 'long' }) === month &&
-      new Date().getFullYear() === year,
-    [month, year]
-  );
   return (
     <div className="schedulely--header-layout">
       <button

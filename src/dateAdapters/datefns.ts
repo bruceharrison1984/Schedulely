@@ -13,6 +13,7 @@ import {
   getDate,
   isAfter,
   isBefore,
+  isThisMonth,
   isToday,
   isWithinInterval,
   parseISO,
@@ -99,6 +100,7 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
   };
 
   const convertIsoToDate = (isoDate: string) => parseISO(isoDate);
+  const isCurrentMonth = (date: Date) => isThisMonth(date);
 
   return {
     getCalendarView,
@@ -113,5 +115,6 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
     getGridEndIndex,
     isEventInWeek,
     convertIsoToDate,
+    isCurrentMonth,
   };
 };

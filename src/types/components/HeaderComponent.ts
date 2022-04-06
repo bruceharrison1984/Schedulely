@@ -6,7 +6,7 @@ export interface HeaderProps {
   month: string;
   /** The current year the calendar is displaying */
   year: number;
-
+  isCurrentMonth: boolean;
   onNextMonth: () => void;
   onNextYear: () => void;
   onPrevMonth: () => void;
