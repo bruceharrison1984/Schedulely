@@ -24,20 +24,20 @@
     --schedulely-border: 1px solid white;
   }
 
-  & > .schedulely--day-of-week-layout {
+  & > .day-of-week-layout {
     border-radius: var(--schedulely-border-radius)
       var(--schedulely-border-radius) 0 0;
   }
 
-  & > .schedulely--week-container:last-child {
+  & > .week-container:last-child {
     border-radius: 0 0 var(--schedulely-border-radius)
       var(--schedulely-border-radius);
 
-    & > .schedulely--week-layout > div {
+    & > .week-layout > div {
       &:first-child {
         border-radius: 0 0 0 var(--schedulely-border-radius);
 
-        & > .schedulely--default-day {
+        & > .default-day {
           border-radius: 0 0 0 var(--schedulely-border-radius);
         }
       }
@@ -45,7 +45,7 @@
       &:last-child {
         border-radius: 0 0 var(--schedulely-border-radius) 0;
 
-        & > .schedulely--default-day {
+        & > .default-day {
           border-radius: 0 0 var(--schedulely-border-radius) 0;
         }
       }

@@ -1,4 +1,4 @@
-.schedulely--additional-events-indicator {
+.schedulely .additional-events-indicator {
   opacity: 0.5;
   cursor: pointer;
   font-weight: bolder;
@@ -9,6 +9,6 @@
   z-index: 100;
 }
 
-.schedulely--additional-events-indicator:hover {
+.schedulely .additional-events-indicator:hover {
   opacity: 1;
 }

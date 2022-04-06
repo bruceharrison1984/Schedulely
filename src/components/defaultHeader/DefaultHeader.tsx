@@ -15,43 +15,36 @@ export const DefaultHeader: HeaderComponent = ({
   isCurrentMonth,
 }) => {
   return (
-    <div className="schedulely--header-layout">
+    <div className="header-layout">
       <button
-        className="schedulely--header-button"
+        className="header-button"
         title="Previous Month"
         onClick={onPrevMonth}
       >
         <strong>{'‹'}</strong>
       </button>
       <button
-        className="schedulely--header-button"
+        className="header-button"
         title="Previous Year"
         onClick={onPrevYear}
       >
         <strong>{'«'}</strong>
       </button>
 
-      <div className="schedulely--header-banner">
+      <div className="header-banner">
         <h2 style={{ display: 'inline-block' }}>
           {month} - {year}
           {isCurrentMonth && (
-            <div
-              className="schedulely--current-month-indicator"
-              title="Current Month"
-            />
+            <div className="current-month-indicator" title="Current Month" />
           )}
         </h2>
       </div>
 
-      <button
-        className="schedulely--header-button"
-        title="Next Year"
-        onClick={onNextYear}
-      >
+      <button className="header-button" title="Next Year" onClick={onNextYear}>
         <strong>{'»'}</strong>
       </button>
       <button
-        className="schedulely--header-button"
+        className="header-button"
         title="Next Month"
         onClick={onNextMonth}
       >

@@ -22,7 +22,7 @@ export const EventPositionLayout = ({
 
   return (
     <div
-      className="schedulely--event-position-layout"
+      className="event-position-layout"
       data-eventid={event.id}
       style={{
         gridColumnStart: startIndex,

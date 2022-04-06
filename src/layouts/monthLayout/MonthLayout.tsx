@@ -13,7 +13,7 @@ export const MonthLayout = () => {
   return (
     <HighlightProvider>
       {calendarWithEvents.map((week, idx) => (
-        <div key={idx} className="schedulely--week-container" data-week={idx}>
+        <div key={idx} className="week-container" data-week={idx}>
           {/* If we have no events, don't bother rendering the event grid */}
           {!!week.events.length && (
             <EventWeekLayout

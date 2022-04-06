@@ -9,7 +9,7 @@
     --schedulely-day-of-week-header-text-color: white;
   }
 
-  & > .schedulely--day-of-week-layout > div {
+  & > .day-of-week-layout > div {
     border-left: var(--schedulely-border);
     border-right: var(--schedulely-border);
 
@@ -22,7 +22,7 @@
     }
   }
 
-  & > .schedulely--week-container > .schedulely--week-layout {
+  & > .week-container > .week-layout {
     & > div {
       &:first-child {
         border-left: none;
@@ -38,7 +38,7 @@
     }
   }
 
-  & > .schedulely--day-of-week-layout > div {
+  & > .day-of-week-layout > div {
     &:first-child {
       border-left: none;
     }

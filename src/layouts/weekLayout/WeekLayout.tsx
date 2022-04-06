@@ -38,7 +38,7 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
   );
 
   return (
-    <div className="schedulely--week-layout">
+    <div className="week-layout">
       {dates.map((day) => (
         <div
           key={day.getDate()}
@@ -48,7 +48,7 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
           <DayComponent
             isCurrentMonth={dateAdapter.isSameMonth(day, currentMonth)}
           >
-            <div className="schedulely--week-day-layout">
+            <div className="week-day-layout">
               <DayHeader
                 isToday={dateAdapter.isDateToday(day)}
                 dateNumber={dateAdapter.getDayNumber(day)}

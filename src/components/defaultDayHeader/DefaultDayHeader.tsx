@@ -4,15 +4,13 @@ export const DefaultDayHeader: DayHeaderComponent = ({
   dateNumber,
   isToday,
 }) => (
-  <div className="schedulely--default-day-header">
+  <div className="default-day-header">
     {isToday ? (
-      <div className="schedulely--default-day-header--indicator">
-        <span className="schedulely--default-day-header--text">
-          {dateNumber}
-        </span>
+      <div className="default-day-header--indicator">
+        <span className="default-day-header--text">{dateNumber}</span>
       </div>
     ) : (
-      <span className="schedulely--default-day-header--text">{dateNumber}</span>
+      <span className="default-day-header--text">{dateNumber}</span>
     )}
   </div>
 );

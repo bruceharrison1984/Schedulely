@@ -6,7 +6,7 @@ export const DefaultMoreEventsIndicator: MoreEventsIndicatorComponent = ({
 }) => {
   return (
     <div
-      className="schedulely--additional-events-indicator"
+      className="additional-events-indicator"
       title={`(${events.length}) total events`}
       onClick={() => onClick(events)}
     >

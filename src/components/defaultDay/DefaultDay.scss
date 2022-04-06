@@ -1,13 +1,13 @@
-.schedulely--default-day {
+.schedulely .default-day {
   height: var(--schedulely-day-height);
 }
 
-.schedulely--default-day-current {
+.schedulely .default-day-current {
   background-color: var(--schedulely-currentMonthBgColor);
   color: var(--schedulely-font-color);
 }
 
-.schedulely--default-day-sibling {
+.schedulely .default-day-sibling {
   background-color: var(--schedulely-sibling-month-bg-color);
   color: var(--schedulely-sibling-month-font-color);
 }

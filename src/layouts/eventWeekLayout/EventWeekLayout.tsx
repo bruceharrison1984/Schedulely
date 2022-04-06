@@ -23,7 +23,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { onEventClick } = useActions();
 
   return (
-    <div className="schedulely--event-week-layout">
+    <div className="event-week-layout">
       {events.map((event) => (
         <EventPositionLayout
           key={event.id}

@@ -1,4 +1,4 @@
-.schedulely--event-week-layout {
+.schedulely .event-week-layout {
   display: grid;
   grid-area: 1 / 1;
   grid-template-columns: repeat(7, 1fr);
@@ -11,6 +11,6 @@
 }
 
 /* we hide any events greater than 3. This works but is kind of opaque and doesn't support scenarios where the day grid is taller than 7m */
-.schedulely--event-week-layout > div:nth-child(n + 4) {
+.schedulely .event-week-layout > div:nth-child(n + 4) {
   display: none;
 }

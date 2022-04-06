@@ -10,7 +10,7 @@ export const DayOfWeekLayout = () => {
   const { dayOfWeekComponent: DayOfWeek } = useComponents();
 
   return (
-    <div className="schedulely--day-of-week-layout">
+    <div className="day-of-week-layout">
       {/* We cheat a bit here and use the index as part of the key. This is because short day names can be identical. */}
       {daysOfWeek.map((dayOfWeek, idx) => (
         <div key={`${dayOfWeek}-${idx}`}>

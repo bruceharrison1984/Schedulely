@@ -6,9 +6,7 @@ import { EventComponent } from '@/types/index';
  */
 export const DefaultEvent: EventComponent = ({ event, isHovered, onClick }) => (
   <div
-    className={`schedulely--event ${
-      isHovered ? 'schedulely--event-selected' : 'schedulely--event-unselected'
-    }`}
+    className={`event ${isHovered ? 'event-selected' : 'event-unselected'}`}
     style={{
       backgroundColor: event.color,
     }}

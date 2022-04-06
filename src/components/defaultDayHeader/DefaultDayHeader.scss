@@ -1,16 +1,16 @@
-.schedulely--default-day-header {
+.schedulely .default-day-header {
   text-align: center;
   width: 100%;
   margin-top: 0.1em;
 }
 
-.schedulely--default-day-header--text {
+.schedulely .default-day-header--text {
   position: relative;
   top: 0.15em;
   font-weight: bold;
 }
 
-.schedulely--default-day-header--indicator {
+.schedulely .default-day-header--indicator {
   height: 1.5em;
   width: 1.5em;
   background-color: var(--schedulely-today-indicator-color);
