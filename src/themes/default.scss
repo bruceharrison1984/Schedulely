@@ -14,44 +14,30 @@
   --schedulely-day-height: 7em;
   --schedulely-border: 1px solid black;
   --schedulely-border-radius: 0.5em;
-}
 
-.schedulely > .schedulely--day-of-week-layout {
-  border-radius: var(--schedulely-border-radius) var(--schedulely-border-radius)
-    0 0;
-}
+  & > .schedulely--day-of-week-layout {
+    border-radius: var(--schedulely-border-radius)
+      var(--schedulely-border-radius) 0 0;
+  }
 
-.schedulely > .schedulely--week-container:last-child {
-  border-radius: 0 0 var(--schedulely-border-radius)
-    var(--schedulely-border-radius);
-}
+  & > .schedulely--week-container:last-child {
+    border-radius: 0 0 var(--schedulely-border-radius)
+      var(--schedulely-border-radius);
 
-.schedulely
-  > .schedulely--week-container:last-child
-  > .schedulely--week-layout
-  > div:last-child {
-  border-radius: 0 0 var(--schedulely-border-radius) 0;
-}
+    & > .schedulely--week-layout > div:first-child {
+      border-radius: 0 0 0 var(--schedulely-border-radius);
 
-.schedulely
-  > .schedulely--week-container:last-child
-  > .schedulely--week-layout
-  > div:last-child
-  > .schedulely--default-day {
-  border-radius: 0 0 var(--schedulely-border-radius) 0;
-}
+      & > .schedulely--default-day {
+        border-radius: 0 0 0 var(--schedulely-border-radius);
+      }
+    }
 
-.schedulely
-  > .schedulely--week-container:last-child
-  > .schedulely--week-layout
-  > div:first-child {
-  border-radius: 0 0 0 var(--schedulely-border-radius);
-}
+    & > .schedulely--week-layout > div:last-child {
+      border-radius: 0 0 var(--schedulely-border-radius) 0;
 
-.schedulely
-  > .schedulely--week-container:last-child
-  > .schedulely--week-layout
-  > div:first-child
-  > .schedulely--default-day {
-  border-radius: 0 0 0 var(--schedulely-border-radius);
+      & > .schedulely--default-day {
+        border-radius: 0 0 var(--schedulely-border-radius) 0;
+      }
+    }
+  }
 }
