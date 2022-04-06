@@ -38,9 +38,8 @@ export const createDateFnsAdapter = (): DateTimeAdapter => {
     return { start, end };
   };
 
-  const _getWeeksInMonth = (date: Date) => {
-    return eachWeekOfInterval(_getCalendarRangeForDate(date));
-  };
+  const _getWeeksInMonth = (date: Date) =>
+    eachWeekOfInterval(_getCalendarRangeForDate(date));
 
   const getCalendarView = (date: Date) =>
     _getWeeksInMonth(date).map((week) => _getDaysInWeek(week));
