@@ -6,7 +6,7 @@ import {
   DefaultHeader,
   DefaultMoreEventsIndicator,
 } from '../components';
-import { PropsWithChildren, createContext, useMemo } from 'react';
+import { PropsWithChildren, createContext } from 'react';
 import { SchedulelyComponents } from '@/types/index';
 import React from 'react';
 
@@ -28,10 +28,9 @@ export const ComponentProvider = ({
   calendarComponents,
   children,
 }: PropsWithChildren<ComponentProviderProps>) => {
-  const components = useMemo(() => {
-    if (!calendarComponents) return defaultComponents;
-    return { ...defaultComponents, ...calendarComponents };
-  }, [calendarComponents]);
+  const components = calendarComponents
+    ? { ...defaultComponents, ...calendarComponents }
+    : defaultComponents;
 
   const contextValue: SchedulelyComponents = {
     dayOfWeekComponent: React.memo(components.dayOfWeekComponent),
