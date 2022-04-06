@@ -4,6 +4,25 @@
   --schedulely-day-of-week-header-text-color: black;
 }
 
+.schedulely[data-theme='minimal'][data-dark] {
+  --schedulely-sibling-month-bg-color: #2b2b2b;
+  --schedulely-day-of-week-header-bg-color: none;
+  --schedulely-day-of-week-header-text-color: white;
+}
+
+.schedulely[data-theme='minimal'] > .schedulely--day-of-week-layout > div:first-child {
+  border-right: var(--schedulely-border);
+}
+
+.schedulely[data-theme='minimal'] > .schedulely--day-of-week-layout > div:last-child {
+  border-left: var(--schedulely-border);
+}
+
+.schedulely[data-theme='minimal'] > .schedulely--day-of-week-layout > div {
+  border-left: var(--schedulely-border);
+  border-right: var(--schedulely-border);
+}
+
 .schedulely[data-theme='minimal']
   > .schedulely--week-container
   > .schedulely--week-layout

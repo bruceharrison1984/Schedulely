@@ -22,6 +22,7 @@ export const Schedulely = ({
   theme,
   additionalClassNames = [],
   actions,
+  dark,
   initialDate = new Date().toISOString(),
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
@@ -32,6 +33,7 @@ export const Schedulely = ({
         id="schedulely"
         className={additionalClassNames?.join(' ')}
         data-theme={theme}
+        data-dark={dark ? '' : undefined}
       >
         <ActionProvider actions={actions}>
           <ComponentProvider calendarComponents={schedulelyComponents}>

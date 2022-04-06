@@ -103,7 +103,6 @@ export const datefns = Template.bind({});
 datefns.storyName = 'Default';
 datefns.args = {
   events,
-  theme: 'light',
 };
 
 export const minimum = Template.bind({});

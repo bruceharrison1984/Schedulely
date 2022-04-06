@@ -20,6 +20,9 @@ export interface SchedulelyProps {
   /** Name of theme to display */
   theme?: string;
 
+  /** Toggle dark theme (if available) */
+  dark?: boolean;
+
   /** Schedulely actions */
   actions?: Partial<ActionState>;
 

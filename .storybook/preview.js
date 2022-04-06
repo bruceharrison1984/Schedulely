@@ -20,10 +20,10 @@ export const decorators = [
   (Story) => {
     const isDarkMode = useDarkMode();
     useEffect(() => {
-      if (document.getElementById('schedulely')) {
-        document.getElementById('schedulely').dataset.theme = isDarkMode
-          ? 'dark'
-          : 'light';
+      if (document.getElementById('schedulely') && isDarkMode) {
+        document.getElementById('schedulely').dataset.dark = '';
+      } else {
+        delete document.getElementById('schedulely').dataset.dark;
       }
     }, [isDarkMode]);
     return <Story />;
