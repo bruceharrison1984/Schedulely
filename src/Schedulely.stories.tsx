@@ -1,4 +1,4 @@
-import './Schedulely.css';
+import './Schedulely.scss';
 
 import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
