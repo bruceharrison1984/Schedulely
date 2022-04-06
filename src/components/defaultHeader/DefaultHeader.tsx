@@ -1,4 +1,5 @@
 import { HeaderComponent } from '@/types/index';
+import { useMemo } from 'react';
 
 /**
  * The default header representation
@@ -12,38 +13,56 @@ export const DefaultHeader: HeaderComponent = ({
   onNextYear,
   onPrevMonth,
   onPrevYear,
-}) => (
-  <div className="schedulely--header-layout">
-    <button
-      className="schedulely--header-button"
-      title="Previous Month"
-      onClick={onPrevMonth}
-    >
-      <strong>{'‹'}</strong>
-    </button>
-    <button
-      className="schedulely--header-button"
-      title="Previous Year"
-      onClick={onPrevYear}
-    >
-      <strong>{'«'}</strong>
-    </button>
-    <h2 className="schedulely--header-banner">
-      {month} - {year}
-    </h2>
-    <button
-      className="schedulely--header-button"
-      title="Next Year"
-      onClick={onNextYear}
-    >
-      <strong>{'»'}</strong>
-    </button>
-    <button
-      className="schedulely--header-button"
-      title="Next Month"
-      onClick={onNextMonth}
-    >
-      <strong>{'›'}</strong>
-    </button>
-  </div>
-);
+}) => {
+  const isCurrentMonth = useMemo(
+    () =>
+      new Date().toLocaleString('en-us', { month: 'long' }) === month &&
+      new Date().getFullYear() === year,
+    [month, year]
+  );
+  return (
+    <div className="schedulely--header-layout">
+      <button
+        className="schedulely--header-button"
+        title="Previous Month"
+        onClick={onPrevMonth}
+      >
+        <strong>{'‹'}</strong>
+      </button>
+      <button
+        className="schedulely--header-button"
+        title="Previous Year"
+        onClick={onPrevYear}
+      >
+        <strong>{'«'}</strong>
+      </button>
+
+      <div className="schedulely--header-banner">
+        <h2 style={{ display: 'inline-block' }}>
+          {month} - {year}
+          {isCurrentMonth && (
+            <div
+              className="schedulely--current-month-indicator"
+              title="Current Month"
+            />
+          )}
+        </h2>
+      </div>
+
+      <button
+        className="schedulely--header-button"
+        title="Next Year"
+        onClick={onNextYear}
+      >
+        <strong>{'»'}</strong>
+      </button>
+      <button
+        className="schedulely--header-button"
+        title="Next Month"
+        onClick={onNextMonth}
+      >
+        <strong>{'›'}</strong>
+      </button>
+    </div>
+  );
+};
