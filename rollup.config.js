@@ -1,5 +1,5 @@
 import { defineConfig } from 'rollup';
-import styles from 'rollup-plugin-styles';
+import postcss from 'rollup-plugin-postcss';
 import ts from 'rollup-plugin-ts';
 
 const options = defineConfig({
@@ -12,7 +12,7 @@ const options = defineConfig({
   },
   external: ['react/jsx-runtime', 'react', /@swc\/helpers/, /date-fns/],
   plugins: [
-    styles({ mode: ['extract'], minimize: true }),
+    postcss({ extract: 'index.css', minimize: true }),
     ts({
       transpiler: 'swc',
       swcConfig: {

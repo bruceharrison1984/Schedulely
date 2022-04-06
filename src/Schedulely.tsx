@@ -1,4 +1,4 @@
-import './Schedulely.css';
+import './Schedulely.scss';
 
 import {
   ActionProvider,
