@@ -15,6 +15,15 @@
   --schedulely-border: 1px solid black;
   --schedulely-border-radius: 0.5em;
 
+  &[data-dark] {
+    --schedulely-current-month-bg-color: rgb(112, 112, 112);
+    --schedulely-sibling-month-bg-color: #2b2b2b;
+    --schedulely-day-of-week-header-bg-color: white;
+    --schedulely-day-of-week-header-text-color: black;
+    --schedulely-font-color: white;
+    --schedulely-border: 1px solid white;
+  }
+
   & > .schedulely--day-of-week-layout {
     border-radius: var(--schedulely-border-radius)
       var(--schedulely-border-radius) 0 0;
@@ -24,19 +33,21 @@
     border-radius: 0 0 var(--schedulely-border-radius)
       var(--schedulely-border-radius);
 
-    & > .schedulely--week-layout > div:first-child {
-      border-radius: 0 0 0 var(--schedulely-border-radius);
-
-      & > .schedulely--default-day {
+    & > .schedulely--week-layout > div {
+      &:first-child {
         border-radius: 0 0 0 var(--schedulely-border-radius);
+
+        & > .schedulely--default-day {
+          border-radius: 0 0 0 var(--schedulely-border-radius);
+        }
       }
-    }
 
-    & > .schedulely--week-layout > div:last-child {
-      border-radius: 0 0 var(--schedulely-border-radius) 0;
-
-      & > .schedulely--default-day {
+      &:last-child {
         border-radius: 0 0 var(--schedulely-border-radius) 0;
+
+        & > .schedulely--default-day {
+          border-radius: 0 0 var(--schedulely-border-radius) 0;
+        }
       }
     }
   }
