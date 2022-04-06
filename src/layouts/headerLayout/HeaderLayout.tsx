@@ -12,7 +12,7 @@ export const HeaderLayout = () => {
     onNextYear,
     onPrevYear,
     onPrevMonth,
-    dateAdapter,
+    dateAdapter: { getMonthName, getYear, isCurrentMonth },
   } = useCalendar();
 
   const { headerComponent: Header } = useComponents();
@@ -21,8 +21,9 @@ export const HeaderLayout = () => {
 
   return (
     <Header
-      month={dateAdapter.getMonthName(currentMonth)}
-      year={dateAdapter.getYear(currentMonth)}
+      isCurrentMonth={isCurrentMonth(currentMonth)}
+      month={getMonthName(currentMonth)}
+      year={getYear(currentMonth)}
       onNextMonth={onNextMonth}
       onNextYear={onNextYear}
       onPrevMonth={onPrevMonth}

@@ -22,3 +22,14 @@
   text-align: center;
   color: var(--schedulely-font-color);
 }
+
+.schedulely--current-month-indicator {
+  background-color: lightgreen;
+  border-radius: 20px;
+  height: 15px;
+  width: 15px;
+  margin-left: 0.5em;
+  margin-top: 0.3em;
+  display: inline-block;
+  position: absolute;
+}

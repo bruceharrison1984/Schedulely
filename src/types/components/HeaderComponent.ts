@@ -7,9 +7,19 @@ export interface HeaderProps {
   /** The current year the calendar is displaying */
   year: number;
 
+  /** True if the selected month is the same as the current month */
+  isCurrentMonth: boolean;
+
+  /** Triggers moving forward one month */
   onNextMonth: () => void;
+
+  /** Triggers moving forward one year */
   onNextYear: () => void;
+
+  /** Triggers moving back one month */
   onPrevMonth: () => void;
+
+  /** Triggers moving back one year */
   onPrevYear: () => void;
 }
 

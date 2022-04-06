@@ -41,6 +41,9 @@ export interface DateTimeAdapter {
 
   /** Compare two dates, returns true if they are in the same month, in the same year */
   isSameMonth: (firstDate: Date, secondDate: Date) => boolean;
+
+  /** Is the supplied month the same as the current month */
+  isCurrentMonth: (date: Date) => boolean;
 }
 
 export enum DisplaySize {
