@@ -7,7 +7,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(t|j)sx?$': ['@swc/jest'],
-    '^.+\\.css$': 'jest-transform-css',
+    '^.+\\.s?css$': 'jest-transform-css',
   },
   modulePathIgnorePatterns: ['.*.testHelper.ts'],
   setupFilesAfterEnv: [

@@ -103,6 +103,7 @@ export const datefns = Template.bind({});
 datefns.storyName = 'Default';
 datefns.args = {
   events,
+  initialDate: new Date().toISOString(),
 };
 
 export const minimum = Template.bind({});
@@ -110,4 +111,5 @@ minimum.storyName = 'Minimal';
 minimum.args = {
   events,
   theme: 'minimal',
+  initialDate: new Date().toISOString(),
 };
