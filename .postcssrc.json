@@ -1,0 +1,5 @@
+{
+  "plugins": {
+    "cssnano": { "preset": "default" }
+  }
+}

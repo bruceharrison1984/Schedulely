@@ -12,7 +12,7 @@ const options = defineConfig({
   },
   external: ['react/jsx-runtime', 'react', /@swc\/helpers/, /date-fns/],
   plugins: [
-    postcss({ extract: 'index.css', minimize: true }),
+    postcss({ extract: 'index.css' }),
     ts({
       transpiler: 'swc',
       swcConfig: {
