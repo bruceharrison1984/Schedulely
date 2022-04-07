@@ -29,11 +29,23 @@
       var(--schedulely-border-radius) 0 0;
   }
 
+  > .week-container > .week-layout {
+    > div {
+      border-left: none;
+      border-bottom: none;
+      &:first-child {
+        border-left: var(--schedulely-border);
+      }
+    }
+  }
+
   > .week-container:last-child {
     border-radius: 0 0 var(--schedulely-border-radius)
       var(--schedulely-border-radius);
 
     > .week-layout > div {
+      border-bottom: var(--schedulely-border);
+
       &:first-child {
         border-radius: 0 0 0 var(--schedulely-border-radius);
 

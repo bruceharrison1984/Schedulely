@@ -22,6 +22,15 @@
     }
   }
 
+  > .day-of-week-layout > div {
+    border-left: none;
+
+    &:last-child {
+      border-left: none;
+      border-right: none;
+    }
+  }
+
   > .week-container > .week-layout {
     > div {
       > .default-day > .week-day-layout > .default-day-header {
@@ -47,15 +56,6 @@
 
     &:last-child > div {
       border-bottom: none;
-    }
-  }
-
-  > .day-of-week-layout > div {
-    border-left: none;
-
-    &:last-child {
-      border-left: none;
-      border-right: none;
     }
   }
 }
