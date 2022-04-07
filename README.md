@@ -14,7 +14,7 @@ _This component is still very early in development. Everything is currently stil
 
 A react-based, light-weight, highly customizable Month calendar for React-based applications.
 
-- Extremely small package size
+- Extremely small deployed package size (~150kb)
 - Entire design is based on CSS-grid, so it is fully responsive and fast
 - Easy to override default components to add unique behavior and styles
 
