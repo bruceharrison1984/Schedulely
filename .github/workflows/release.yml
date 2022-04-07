@@ -22,8 +22,11 @@ jobs:
           node-version: 16.x
           registry-url: https://registry.npmjs.org/
 
+      - name: Update NPM
+        run: npm install -g npm
+
       - name: NPM Install
-        run: npm i
+        run: npm ci
 
       - name: Lint
         run: npm run lint
