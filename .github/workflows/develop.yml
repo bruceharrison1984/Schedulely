@@ -26,6 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - run: npm install -g npm
       - run: npm i
       - run: npm run lint
       - run: npm run prettier
@@ -44,7 +45,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
+      - run: npm install -g npm
+      - run: npm i
       - run: npm run build
   storybook:
     runs-on: ubuntu-latest
