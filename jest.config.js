@@ -3,11 +3,11 @@
 module.exports = {
   moduleNameMapper: {
     '@/(.*)$': '<rootDir>/src/$1',
+    '^.+\\.scss$': 'jest-transform-scss',
   },
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(t|j)sx?$': ['@swc/jest'],
-    '^.+\\.s?css$': 'jest-transform-css',
   },
   modulePathIgnorePatterns: ['.*.testHelper.ts'],
   setupFilesAfterEnv: [
