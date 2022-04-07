@@ -24,6 +24,20 @@
 
   > .week-container > .week-layout {
     > div {
+      > .default-day > .week-day-layout > .default-day-header {
+        text-align: right;
+
+        > .default-day-header--indicator {
+          margin: 1px;
+          text-align: center;
+        }
+
+        > .default-day-header--text {
+          font-weight: normal;
+          margin: 5px;
+        }
+      }
+
       &:first-child {
         border-left: none;
       }
