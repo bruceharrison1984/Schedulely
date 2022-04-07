@@ -3,7 +3,7 @@
 module.exports = {
   moduleNameMapper: {
     '@/(.*)$': '<rootDir>/src/$1',
-    '^.+\\.scss$': 'jest-transform-scss',
+    // '^.+\\.scss$': 'jest-transform-scss',
   },
   testEnvironment: 'jsdom',
   transform: {
