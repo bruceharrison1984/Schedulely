@@ -38,9 +38,7 @@
         }
       }
 
-      &:first-child {
-        border-left: none;
-      }
+      border-left: none;
 
       &:last-child {
         border-right: none;
@@ -53,11 +51,10 @@
   }
 
   > .day-of-week-layout > div {
-    &:first-child {
-      border-left: none;
-    }
+    border-left: none;
 
     &:last-child {
+      border-left: none;
       border-right: none;
     }
   }
