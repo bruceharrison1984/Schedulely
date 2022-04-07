@@ -1,4 +1,4 @@
-.schedulely .event {
+.event {
   border-radius: 0.3em;
   padding-left: 1em;
   font-weight: bold;
@@ -9,14 +9,14 @@
   overflow: hidden;
 }
 
-.schedulely .event:hover {
+.event:hover {
   cursor: pointer;
 }
 
-.schedulely .event-selected {
+.event-selected {
   opacity: 100%;
 }
 
-.schedulely .event-unselected {
+.event-unselected {
   opacity: 80%;
 }

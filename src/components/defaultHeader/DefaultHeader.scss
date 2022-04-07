@@ -1,4 +1,4 @@
-.schedulely .header-button {
+.header-button {
   border: none;
   background-color: transparent;
   color: var(--schedulely-font-color);
@@ -6,24 +6,24 @@
   opacity: 50%;
 }
 
-.schedulely .header-button:hover {
+.header-button:hover {
   opacity: 100%;
   cursor: pointer;
 }
 
-.schedulely .header-layout {
+.header-layout {
   display: flex;
   gap: 0.5em;
   width: 100%;
 }
 
-.schedulely .header-banner {
+.header-banner {
   flex-grow: 2;
   text-align: center;
   color: var(--schedulely-font-color);
 }
 
-.schedulely .current-month-indicator {
+.current-month-indicator {
   background-color: lightgreen;
   border-radius: 20px;
   height: 15px;

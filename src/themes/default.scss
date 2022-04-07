@@ -1,5 +1,5 @@
 /* Default theme */
-.schedulely {
+& {
   gap: 0em;
   /* Custom font must be made available via link tag, etc. */
   font-family: 'Roboto', sans-serif;
@@ -24,20 +24,20 @@
     --schedulely-border: 1px solid white;
   }
 
-  & > .day-of-week-layout {
+  > .day-of-week-layout {
     border-radius: var(--schedulely-border-radius)
       var(--schedulely-border-radius) 0 0;
   }
 
-  & > .week-container:last-child {
+  > .week-container:last-child {
     border-radius: 0 0 var(--schedulely-border-radius)
       var(--schedulely-border-radius);
 
-    & > .week-layout > div {
+    > .week-layout > div {
       &:first-child {
         border-radius: 0 0 0 var(--schedulely-border-radius);
 
-        & > .default-day {
+        > .default-day {
           border-radius: 0 0 0 var(--schedulely-border-radius);
         }
       }
@@ -45,7 +45,7 @@
       &:last-child {
         border-radius: 0 0 var(--schedulely-border-radius) 0;
 
-        & > .default-day {
+        > .default-day {
           border-radius: 0 0 var(--schedulely-border-radius) 0;
         }
       }
