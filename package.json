@@ -15,7 +15,7 @@
     "barrels": "barrelsby -c .barrelsby.json",
     "build": "rm -rf dist && rollup -c",
     "lint": "eslint . --ext .ts --ext .tsx",
-    "prettier": "prettier --check './src/**.(ts|tsx|js)'",
+    "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
     "prepare": "husky install",
     "test": "jest",
     "storybook": "start-storybook -p 6006 --no-open",
