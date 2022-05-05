@@ -13,7 +13,7 @@ export const HeaderLayout = () => {
     onNextYear,
     onPrevYear,
     onPrevMonth,
-    dateAdapter: { getMonthName, getYear, isCurrentMonth, addMonthsToDate },
+    dateAdapter: { getMonthName, getYear, isCurrentMonth },
   } = useCalendar();
 
   const { onMonthChangeClick } = useActions();
