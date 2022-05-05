@@ -28,15 +28,25 @@ export const ActionProvider = ({
     ? actions?.onMoreEventClick
     : (events: InternalCalendarEvent[]) => console.log(events);
 
+  const onMonthChangeClick = actions?.onMonthChangeClick
+    ? actions?.onMonthChangeClick
+    : (firstOfMonth: Date, lastOfMonth: Date) =>
+        console.log({ firstOfMonth, lastOfMonth });
+
   const memoizedOnEventClick = useCallback(onEventClick, [onEventClick]);
 
   const memoizedOnMoreEventClick = useCallback(onMoreEventClick, [
     onMoreEventClick,
   ]);
 
+  const memoizedOnMonthChangeClick = useCallback(onMonthChangeClick, [
+    onMonthChangeClick,
+  ]);
+
   const context: ActionState = {
     onEventClick: memoizedOnEventClick,
     onMoreEventClick: memoizedOnMoreEventClick,
+    onMonthChangeClick: memoizedOnMonthChangeClick,
   };
 
   return (

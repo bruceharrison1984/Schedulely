@@ -7,4 +7,6 @@ export interface ActionState {
 
   /** function that will run when the 'more events' indicator is clicked on */
   onMoreEventClick: (event: InternalCalendarEvent[]) => void;
+
+  onMonthChangeClick: (firstOfMonth: Date, lastOfMonth: Date) => void;
 }

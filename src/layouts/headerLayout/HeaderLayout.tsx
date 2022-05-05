@@ -1,4 +1,5 @@
-import { useCalendar, useComponents } from '@/hooks/index';
+import { useActions, useCalendar, useComponents } from '@/hooks/index';
+import { useEffect } from 'react';
 import { useKeyboardControls } from '@/hooks/index';
 
 /**
@@ -12,10 +13,29 @@ export const HeaderLayout = () => {
     onNextYear,
     onPrevYear,
     onPrevMonth,
-    dateAdapter: { getMonthName, getYear, isCurrentMonth },
+    dateAdapter: { getMonthName, getYear, isCurrentMonth, addMonthsToDate },
   } = useCalendar();
 
+  const { onMonthChangeClick } = useActions();
+
   const { headerComponent: Header } = useComponents();
+
+  useEffect(() => {
+    const firstOfMonth = new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth(),
+      1
+    );
+    const lastOfMonth = new Date(
+      firstOfMonth.getFullYear(),
+      firstOfMonth.getMonth() + 1,
+      1,
+      0,
+      0,
+      -1
+    );
+    onMonthChangeClick(firstOfMonth, lastOfMonth);
+  }, [currentMonth, onMonthChangeClick]);
 
   useKeyboardControls();
 
