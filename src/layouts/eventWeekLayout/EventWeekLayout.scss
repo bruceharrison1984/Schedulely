@@ -2,7 +2,7 @@
   display: grid;
   grid-area: 1 / 1;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
   z-index: 100;
   gap: 0.2em; /* space between events */
   margin-top: 1.7em;

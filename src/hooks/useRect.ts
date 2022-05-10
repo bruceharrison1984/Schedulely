@@ -9,19 +9,11 @@ export const useRect = <T extends Element>(): [
 
   const set = () => setRect(ref.current?.getBoundingClientRect());
 
-  const useEffectInEvent = (
-    event: 'resize' | 'scroll',
-    useCapture?: boolean
-  ) => {
-    useEffect(() => {
-      set();
-      window.addEventListener(event, set, useCapture);
-      return () => window.removeEventListener(event, set, useCapture);
-    }, []);
-  };
-
-  useEffectInEvent('resize');
-  //   useEffectInEvent('scroll', true);
+  useEffect(() => {
+    set();
+    window.addEventListener('resize', set, false);
+    return () => window.removeEventListener('resize', set, false);
+  }, []);
 
   return [rect, ref];
 };
