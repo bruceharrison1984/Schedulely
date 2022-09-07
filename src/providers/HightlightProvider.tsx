@@ -14,24 +14,14 @@ export const HighlightProvider = ({ children }: { children: ReactNode }) => {
     undefined
   );
 
-  const setHighlight = useCallback(
-    (eventId: string) => setHighlightedEvent(eventId),
-    [setHighlightedEvent]
-  );
-
-  const clearHighlight = useCallback(
-    () => setHighlightedEvent(undefined),
-    [setHighlightedEvent]
-  );
-
   const isHighlighted = useCallback(
     (eventId: string) => highlightedEvent === eventId,
     [highlightedEvent]
   );
 
   const context: HighlightEventState = {
-    setHighlight,
-    clearHighlight,
+    setHighlight: (eventId: string) => setHighlightedEvent(eventId),
+    clearHighlight: () => setHighlightedEvent(undefined),
     isHighlighted,
   };
 
