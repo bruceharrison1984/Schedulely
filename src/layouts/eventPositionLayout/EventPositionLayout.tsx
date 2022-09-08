@@ -23,8 +23,8 @@ export const EventPositionLayout = ({
 }: PropsWithChildren<EventPositionLayoutProps>) => {
   const { setHighlight, clearHighlight } = useEventHighlight();
   const { eventContainerRef, isOverlapping } = useEventIntersection({
-    root: parentContainerRef.current,
-    threshold: 0.5,
+    root: parentContainerRef,
+    threshold: 1,
   });
 
   return (

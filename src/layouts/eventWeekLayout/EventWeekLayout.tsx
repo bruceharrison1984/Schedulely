@@ -26,21 +26,22 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
 
   return (
     <div ref={weekLayoutRef} className="event-week-layout">
-      {events.map((event) => (
-        <EventPositionLayout
-          key={event.id}
-          event={event}
-          startIndex={getGridStartIndex(event.start, daysInweek[0])}
-          endIndex={getGridEndIndex(event.end, daysInweek[6])}
-          parentContainerRef={weekLayoutRef}
-        >
-          <EventComponent
+      {weekLayoutRef &&
+        events.map((event) => (
+          <EventPositionLayout
+            key={event.id}
             event={event}
-            isHovered={isHighlighted(event.id)}
-            onClick={onEventClick}
-          />
-        </EventPositionLayout>
-      ))}
+            startIndex={getGridStartIndex(event.start, daysInweek[0])}
+            endIndex={getGridEndIndex(event.end, daysInweek[6])}
+            parentContainerRef={weekLayoutRef}
+          >
+            <EventComponent
+              event={event}
+              isHovered={isHighlighted(event.id)}
+              onClick={onEventClick}
+            />
+          </EventPositionLayout>
+        ))}
     </div>
   );
 };

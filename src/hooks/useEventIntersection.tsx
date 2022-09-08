@@ -1,23 +1,31 @@
-import { useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
-export const useEventIntersection = ({ root }: IntersectionObserverInit) => {
-  const parentContainer = useRef(root);
+type EventIntersectionProps = Omit<IntersectionObserverInit, 'root'> & {
+  root: MutableRefObject<null>;
+};
+
+export const useEventIntersection = ({
+  root,
+  rootMargin,
+  threshold,
+}: EventIntersectionProps) => {
   const eventContainerRef = useRef(null);
   const [isOverlapping, setIsOverlapping] = useState<boolean>(false);
 
-  const checkItersection: IntersectionObserverCallback = (entries) => {
-    const [entry] = entries;
-    if (entry.intersectionRatio > 0 && entry.intersectionRatio < 1) {
-      console.log(entry);
-      setIsOverlapping(entry.isIntersecting);
-    }
+  const checkIntersection: IntersectionObserverCallback = (entries) => {
+    // if any part of the element is hidden, set overlap
+    entries.map((x) => {
+      if (x.intersectionRatio > 0) setIsOverlapping(true);
+    });
   };
 
   useEffect(() => {
     const currentContainer = eventContainerRef.current;
-    const parent = parentContainer.current;
-    const observer = new IntersectionObserver(checkItersection, {
-      root: parent,
+
+    const observer = new IntersectionObserver(checkIntersection, {
+      root: root.current,
+      rootMargin,
+      threshold,
     });
 
     if (currentContainer) observer.observe(currentContainer);
