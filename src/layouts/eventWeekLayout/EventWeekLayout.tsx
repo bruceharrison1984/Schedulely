@@ -4,6 +4,7 @@ import { useActions } from '@/hooks/useActions';
 import { useCalendar } from '@/hooks/useCalendar';
 import { useComponents } from '@/hooks/useComponents';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
+import { useRef } from 'react';
 
 interface EventLayoutProps {
   events: InternalCalendarEvent[];
@@ -21,15 +22,17 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { eventComponent: EventComponent } = useComponents();
   const { isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
+  const weekLayoutRef = useRef(null);
 
   return (
-    <div className="event-week-layout">
+    <div ref={weekLayoutRef} className="event-week-layout">
       {events.map((event) => (
         <EventPositionLayout
           key={event.id}
           event={event}
           startIndex={getGridStartIndex(event.start, daysInweek[0])}
           endIndex={getGridEndIndex(event.end, daysInweek[6])}
+          parentContainerRef={weekLayoutRef}
         >
           <EventComponent
             event={event}
