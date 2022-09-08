@@ -3,7 +3,6 @@ import './Schedulely.scss';
 import { CalendarEvent } from '@/types/index';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Schedulely } from './Schedulely';
-import { addDays } from 'date-fns';
 import chance from 'chance';
 
 export default {
@@ -35,10 +34,11 @@ const generateEvents = (
       chanceSeed.integer({ min: 0, max: 11 }),
       chanceSeed.integer({ min: 1, max: 30 })
     );
-    const end = addDays(
-      start,
-      chanceSeed.integer({ min: minLength, max: maxLength })
+    const end = new Date(start);
+    end.setDate(
+      start.getDate() + chanceSeed.integer({ min: minLength, max: maxLength })
     );
+
     const summary = chanceSeed.name();
     const color = chanceSeed.color({ format: 'hex' });
     events.push({
@@ -57,44 +57,44 @@ const events = [
   ...generateEvents(100, 0, 1, 100),
   {
     color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    end: '2022-09-09T16:07:22.292Z',
     id: 'f147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    start: '2022-09-08T16:07:22.292Z',
     summary: 'Craig Bishop',
   },
   {
     color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    end: '2022-09-09T16:07:22.292Z',
     id: 'a147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    start: '2022-09-08T16:07:22.292Z',
     summary: 'Craig Bishop',
   },
   {
     color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    end: '2022-09-09T16:07:22.292Z',
     id: 'b147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    start: '2022-09-08T16:07:22.292Z',
     summary: 'Craig Bishop',
   },
   {
     color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    end: '2022-09-09T16:07:22.292Z',
     id: 'c147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    start: '2022-09-08T16:07:22.292Z',
     summary: 'Craig Bishop',
   },
   {
     color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    end: '2022-09-09T16:07:22.292Z',
     id: 'd147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    start: '2022-09-08T16:07:22.292Z',
     summary: 'Craig Bishop',
   },
   {
     color: '#4b578a',
-    end: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    end: '2022-09-09T16:07:22.292Z',
     id: 'e147',
-    start: 'Wed Mar 02 2022 00:00:00 GMT-0600 (Central Standard Time)',
+    start: '2022-09-08T16:07:22.292Z',
     summary: 'Craig Bishop',
   },
 ];

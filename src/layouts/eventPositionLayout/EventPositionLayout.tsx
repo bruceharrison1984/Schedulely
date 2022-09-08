@@ -24,7 +24,6 @@ export const EventPositionLayout = ({
   const { setHighlight, clearHighlight } = useEventHighlight();
   const { eventContainerRef, isOverlapping } = useEventIntersection({
     root: parentContainerRef,
-    threshold: 1,
   });
 
   return (
@@ -34,7 +33,7 @@ export const EventPositionLayout = ({
       style={{
         gridColumnStart: startIndex,
         gridColumnEnd: endIndex,
-        border: isOverlapping ? 'solid 1px red' : undefined,
+        display: isOverlapping ? 'none' : undefined,
       }}
       onMouseOver={() => setHighlight(event.id)}
       onMouseLeave={clearHighlight}

@@ -8,9 +8,11 @@
   margin-top: 1.7em;
   white-space: nowrap;
   grid-auto-flow: dense;
+  overflow: hidden;
+  height: 7em;
 }
 
 /* we hide any events greater than 3. This works but is kind of opaque and doesn't support scenarios where the day grid is taller than 7m */
-.event-week-layout > div:nth-child(n + 4) {
-  display: none;
-}
+// .event-week-layout > div:nth-child(n + 4) {
+//   display: none;
+// }
