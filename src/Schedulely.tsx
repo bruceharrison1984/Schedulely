@@ -26,29 +26,27 @@ export const Schedulely = ({
   initialDate = new Date().toISOString(),
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
-  additionalClassNames?.push('schedulely');
+
   return (
-    <React.StrictMode>
-      <div
-        id="schedulely"
-        className={additionalClassNames?.join(' ')}
-        data-theme={theme}
-        data-dark={dark ? '' : undefined}
-      >
-        <ActionProvider actions={actions}>
-          <ComponentProvider calendarComponents={schedulelyComponents}>
-            <CalendarProvider
-              initialDate={initialDate}
-              dateAdapter={dateAdapter}
-              calendarEvents={events}
-            >
-              <HeaderLayout />
-              <DayOfWeekLayout />
-              <MonthLayout />
-            </CalendarProvider>
-          </ComponentProvider>
-        </ActionProvider>
-      </div>
-    </React.StrictMode>
+    <div
+      id="schedulely"
+      className={[...additionalClassNames, 'schedulely'].join(' ')}
+      data-theme={theme}
+      data-dark={dark ? '' : undefined}
+    >
+      <ActionProvider actions={actions}>
+        <ComponentProvider calendarComponents={schedulelyComponents}>
+          <CalendarProvider
+            initialDate={initialDate}
+            dateAdapter={dateAdapter}
+            calendarEvents={events}
+          >
+            <HeaderLayout />
+            <DayOfWeekLayout />
+            <MonthLayout />
+          </CalendarProvider>
+        </ComponentProvider>
+      </ActionProvider>
+    </div>
   );
 };

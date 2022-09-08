@@ -7,7 +7,10 @@ export const useEventIntersection = ({ root }: IntersectionObserverInit) => {
 
   const checkItersection: IntersectionObserverCallback = (entries) => {
     const [entry] = entries;
-    setIsOverlapping(entry.isIntersecting);
+    if (entry.intersectionRatio > 0 && entry.intersectionRatio < 1) {
+      console.log(entry);
+      setIsOverlapping(entry.isIntersecting);
+    }
   };
 
   useEffect(() => {
