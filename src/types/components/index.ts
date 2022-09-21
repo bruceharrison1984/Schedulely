@@ -3,8 +3,5 @@
  */
 
 export * from './DayComponent';
-export * from './DayHeaderComponent';
-export * from './DayOfWeekComponent';
 export * from './EventComponent';
 export * from './HeaderComponent';
-export * from './MoreEventsIndicatorComponent';

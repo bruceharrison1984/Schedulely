@@ -1,11 +1,4 @@
-import {
-  DefaultDay,
-  DefaultDayHeader,
-  DefaultDayOfWeek,
-  DefaultEvent,
-  DefaultHeader,
-  DefaultMoreEventsIndicator,
-} from '../components';
+import { DefaultDay, DefaultEvent, DefaultHeader } from '../components';
 import { PropsWithChildren, createContext } from 'react';
 import { SchedulelyComponents } from '@/types/index';
 import React from 'react';
@@ -33,14 +26,9 @@ export const ComponentProvider = ({
     : defaultComponents;
 
   const contextValue: SchedulelyComponents = {
-    dayOfWeekComponent: React.memo(components.dayOfWeekComponent),
     dayComponent: React.memo(components.dayComponent),
     headerComponent: React.memo(components.headerComponent),
-    dayHeaderComponent: React.memo(components.dayHeaderComponent),
     eventComponent: React.memo(components.eventComponent),
-    moreEventsIndicatorComponent: React.memo(
-      components.moreEventsIndicatorComponent
-    ),
   };
 
   return (
@@ -51,10 +39,7 @@ export const ComponentProvider = ({
 };
 
 const defaultComponents: SchedulelyComponents = {
-  dayOfWeekComponent: DefaultDayOfWeek,
   dayComponent: DefaultDay,
   headerComponent: DefaultHeader,
-  dayHeaderComponent: DefaultDayHeader,
   eventComponent: DefaultEvent,
-  moreEventsIndicatorComponent: DefaultMoreEventsIndicator,
 };

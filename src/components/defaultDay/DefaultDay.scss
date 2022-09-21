@@ -1,4 +1,5 @@
 .default-day {
+  display: grid;
   height: 100%;
 }
 
@@ -10,4 +11,39 @@
 .default-day-sibling {
   background-color: var(--schedulely-sibling-month-bg-color);
   color: var(--schedulely-sibling-month-font-color);
+}
+
+.default-day-header {
+  text-align: center;
+  width: 100%;
+  margin-top: 0.1em;
+}
+
+.default-day-header--text {
+  position: relative;
+  top: 0.15em;
+  font-weight: bold;
+}
+
+.default-day-header--indicator {
+  height: 1.45em;
+  width: 1.45em;
+  background-color: var(--schedulely-today-indicator-color);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.additional-events-indicator {
+  opacity: 0.5;
+  cursor: pointer;
+  font-weight: bolder;
+  color: var(--schedulely-font-color);
+  text-align: center;
+  width: fit-content;
+  margin: auto;
+  z-index: 100;
+}
+
+.additional-events-indicator:hover {
+  opacity: 1;
 }
