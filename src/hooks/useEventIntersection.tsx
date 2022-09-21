@@ -15,10 +15,8 @@ export const useEventIntersection = ({
   const checkIntersection: IntersectionObserverCallback = (entries) => {
     // if any part of the element is hidden, set overlap
     entries.map((x) => {
-      // console.log(x);
-
-      if (x.intersectionRatio > 1) {
-        console.log(x);
+      if (x.intersectionRatio < 1) {
+        console.log(x.intersectionRatio);
         setIsOverlapping(true);
       }
     });

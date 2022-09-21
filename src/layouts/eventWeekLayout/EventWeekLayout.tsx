@@ -28,7 +28,18 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   /** Event week height needs to be constrained to week height and prevent overflow */
 
   return (
-    <div ref={weekLayoutRef} className="event-week-layout">
+    <div
+      ref={weekLayoutRef}
+      className="event-week-layout"
+      style={{ height: dayHeightPx }}
+    >
+      {/** This div creates space for the DayComponent header on the calendar layer */}
+      <div
+        style={{
+          gridColumnStart: 1,
+          gridColumnEnd: 8,
+        }}
+      />
       {weekLayoutRef &&
         events.map((event) => (
           <EventPositionLayout
