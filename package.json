@@ -18,8 +18,7 @@
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
     "prepare": "husky install",
     "test": "jest",
-    "storybook": "start-storybook -p 6006 --no-open",
-    "deploy-storybook": "storybook-to-ghpages"
+    "dev": "ladle serve"
   },
   "files": [
     "dist"
@@ -31,11 +30,7 @@
     "type": "git"
   },
   "devDependencies": {
-    "@storybook/addon-console": "^1.2.3",
-    "@storybook/addon-essentials": "^6.5.10",
-    "@storybook/addon-links": "^6.5.10",
-    "@storybook/react": "^6.5.10",
-    "@storybook/storybook-deployer": "^2.8.11",
+    "@ladle/react": "^2.4.3",
     "@swc/core": "^1.2.248",
     "@swc/jest": "^0.2.22",
     "@testing-library/react": "^12.1.4",
@@ -66,10 +61,6 @@
     "rollup": "^2.79.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-ts": "^3.0.2",
-    "storybook-addon-performance": "^0.16.1",
-    "storybook-addon-sass-postcss": "^0.1.3",
-    "storybook-addon-swc": "^1.1.8",
-    "storybook-dark-mode": "^1.1.0",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "^4.8.2"
   },

@@ -29,7 +29,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     <div
       ref={weekLayoutRef}
       className="event-week-layout"
-      // style={{ height: `${dayHeightPx}px` }}
+      style={{ height: `${dayHeightPx}px` }}
     >
       {weekLayoutRef &&
         events.map((event) => (
