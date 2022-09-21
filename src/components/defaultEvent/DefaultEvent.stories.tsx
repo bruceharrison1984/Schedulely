@@ -1,5 +1,8 @@
+import './DefaultEvent.scss';
+
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { DefaultEvent } from './DefaultEvent';
+import { EventComponentProps } from '@/types';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -8,7 +11,9 @@ export default {
 } as ComponentMeta<typeof DefaultEvent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof DefaultEvent> = (props) => (
+const Template: ComponentStory<typeof DefaultEvent> = (
+  props: EventComponentProps
+) => (
   <div id="schedulely" className="schedulely" data-theme={'light'}>
     <DefaultEvent {...props} />
   </div>
