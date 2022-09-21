@@ -43,12 +43,9 @@ export const CalendarProvider = ({
   const [rootDimensions, setRootDimensions] = useState<DOMRect | undefined>(
     rootDiv?.current?.getBoundingClientRect()
   );
-  const screenSize = useScreenSize();
+  const [dayHeightPx, setDayHeightPx] = useState<number>();
 
-  useEffect(() => {
-    if (rootDiv?.current)
-      setRootDimensions(rootDiv?.current?.getBoundingClientRect());
-  }, [setRootDimensions, rootDiv]);
+  const screenSize = useScreenSize();
 
   const daysOfWeek = useMemo(
     () => dateAdapter.getDaysOfWeek(screenSize),
@@ -59,6 +56,16 @@ export const CalendarProvider = ({
     () => dateAdapter.getCalendarView(currentMonth),
     [currentMonth, dateAdapter]
   );
+
+  useEffect(() => {
+    if (rootDiv?.current) {
+      const boundingBox = rootDiv?.current?.getBoundingClientRect();
+      setRootDimensions(boundingBox);
+      setDayHeightPx(boundingBox.height / calendarView.length);
+      console.log(boundingBox.height / calendarView.length);
+      console.log(boundingBox.height);
+    }
+  }, [setRootDimensions, rootDiv, calendarView]);
 
   const events = useMemo(
     () =>
@@ -130,6 +137,7 @@ export const CalendarProvider = ({
     onPrevYear,
     calendarWithEvents,
     calendarBoundingBox: rootDimensions,
+    dayHeightPx,
   };
 
   return (

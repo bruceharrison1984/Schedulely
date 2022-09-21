@@ -26,7 +26,7 @@ export const Schedulely = ({
   initialDate = new Date().toISOString(),
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
-  const rootDiv = useRef<HTMLDivElement>(null);
+  const calendarBodyRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -41,11 +41,11 @@ export const Schedulely = ({
             initialDate={initialDate}
             dateAdapter={dateAdapter}
             calendarEvents={events}
-            rootDiv={rootDiv}
+            rootDiv={calendarBodyRef}
           >
-            <div ref={rootDiv}>
-              <HeaderLayout />
-              <DayOfWeekLayout />
+            <HeaderLayout />
+            <DayOfWeekLayout />
+            <div ref={calendarBodyRef}>
               <MonthLayout />
             </div>
           </CalendarProvider>

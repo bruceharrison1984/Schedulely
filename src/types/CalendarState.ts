@@ -27,4 +27,5 @@ export type CalendarState = {
   calendarWithEvents: InternalEventWeek[];
 
   calendarBoundingBox?: DOMRect;
+  dayHeightPx?: number;
 };

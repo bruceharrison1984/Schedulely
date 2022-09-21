@@ -23,9 +23,14 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
   const weekLayoutRef = useRef(null);
+  const { dayHeightPx } = useCalendar();
 
   return (
-    <div ref={weekLayoutRef} className="event-week-layout">
+    <div
+      ref={weekLayoutRef}
+      className="event-week-layout"
+      // style={{ height: `${dayHeightPx}px` }}
+    >
       {weekLayoutRef &&
         events.map((event) => (
           <EventPositionLayout

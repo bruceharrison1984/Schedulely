@@ -9,7 +9,7 @@
   white-space: nowrap;
   grid-auto-flow: dense;
   overflow: hidden;
-  height: 7em;
+  // height: 5em;
 }
 
 /* we hide any events greater than 3. This works but is kind of opaque and doesn't support scenarios where the day grid is taller than 7m */
