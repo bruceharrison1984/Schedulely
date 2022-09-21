@@ -17,8 +17,8 @@ export const useEventIntersection = ({
     entries.map((x) => {
       // console.log(x);
 
-      if (x.intersectionRatio !== 1) {
-        // console.log(x);
+      if (x.intersectionRatio > 1) {
+        console.log(x);
         setIsOverlapping(true);
       }
     });
