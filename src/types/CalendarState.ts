@@ -25,4 +25,6 @@ export type CalendarState = {
 
   /** Calendar with events that will be displayed */
   calendarWithEvents: InternalEventWeek[];
+
+  calendarBoundingBox?: DOMRect;
 };
