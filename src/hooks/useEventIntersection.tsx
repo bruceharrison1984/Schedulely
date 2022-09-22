@@ -4,26 +4,29 @@ type EventIntersectionProps = Omit<IntersectionObserverInit, 'root'> & {
   root: MutableRefObject<null>;
 };
 
+/**
+ * Check if the eventContainerRef is outside the bounds of the root container.
+ * If true, isOverlapping will be set to true
+ * @param param0 EventIntersectionProps
+ * @returns
+ */
 export const useEventIntersection = ({
   root,
-  rootMargin,
-  threshold,
+  rootMargin = '0px 0px -1% 0px',
+  threshold = 1,
 }: EventIntersectionProps) => {
   const eventContainerRef = useRef(null);
   const [isOverlapping, setIsOverlapping] = useState<boolean>(false);
 
-  const checkIntersection: IntersectionObserverCallback = (entries) => {
-    // if any part of the element is hidden, set overlap
-    entries.map((x) => {
-      if (x.intersectionRatio < 1) {
-        console.log(x.intersectionRatio);
-        setIsOverlapping(true);
-      }
-    });
-  };
+  /**
+   * If any part of the element is hidden or touching the edge, set overlap to true
+   * @param entries IntersectionObserverEntry[]
+   */
+  const checkIntersection: IntersectionObserverCallback = (entries) =>
+    entries.map((x) => x.intersectionRatio < 1 && setIsOverlapping(true));
 
   useEffect(() => {
-    const currentContainer = eventContainerRef.current;
+    const eventContainer = eventContainerRef.current;
 
     const observer = new IntersectionObserver(checkIntersection, {
       root: root.current,
@@ -31,10 +34,10 @@ export const useEventIntersection = ({
       threshold,
     });
 
-    if (currentContainer) observer.observe(currentContainer);
+    if (eventContainer) observer.observe(eventContainer);
 
     return () => {
-      if (currentContainer) observer.unobserve(currentContainer);
+      if (eventContainer) observer.unobserve(eventContainer);
     };
   });
 
