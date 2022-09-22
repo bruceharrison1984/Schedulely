@@ -29,6 +29,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v2
+      - name: Update NPM
+        run: npm install -g npm
+      - name: NPM Install
+        run: npm ci
       - name: Build Ladle package
         run: npm run publish-ghpages -o ./_site
       - name: Upload artifact
