@@ -29,36 +29,39 @@
       var(--schedulely-border-radius) 0 0;
   }
 
-  > .week-container > .week-layout {
-    > div {
-      border-left: none;
-      border-bottom: none;
-      &:first-child {
-        border-left: var(--schedulely-border);
-      }
-    }
-  }
-
-  > .week-container:last-child {
-    border-radius: 0 0 var(--schedulely-border-radius)
-      var(--schedulely-border-radius);
-
-    > .week-layout > div {
-      border-bottom: var(--schedulely-border);
-
-      &:first-child {
-        border-radius: 0 0 0 var(--schedulely-border-radius);
-
-        > .default-day {
-          border-radius: 0 0 0 var(--schedulely-border-radius);
+  /* The layout of the calendar body lives in a div that we use to get a ref for day height */
+  > div {
+    > .week-container > .week-layout {
+      > div {
+        border-left: none;
+        border-bottom: none;
+        &:first-child {
+          border-left: var(--schedulely-border);
         }
       }
+    }
 
-      &:last-child {
-        border-radius: 0 0 var(--schedulely-border-radius) 0;
+    > .week-container:last-child {
+      border-radius: 0 0 var(--schedulely-border-radius)
+        var(--schedulely-border-radius);
 
-        > .default-day {
+      > .week-layout > div {
+        border-bottom: var(--schedulely-border);
+
+        &:first-child {
+          border-radius: 0 0 0 var(--schedulely-border-radius);
+
+          > .default-day {
+            border-radius: 0 0 0 var(--schedulely-border-radius);
+          }
+        }
+
+        &:last-child {
           border-radius: 0 0 var(--schedulely-border-radius) 0;
+
+          > .default-day {
+            border-radius: 0 0 var(--schedulely-border-radius) 0;
+          }
         }
       }
     }

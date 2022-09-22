@@ -31,31 +31,34 @@
     }
   }
 
-  > .week-container > .week-layout {
-    > div {
-      > .default-day > .week-day-layout > .default-day-header {
-        text-align: right;
+  /* The layout of the calendar body lives in a div that we use to get a ref for day height */
+  > div {
+    > .week-container > .week-layout {
+      > div {
+        > .default-day > .week-day-layout > .default-day-header {
+          text-align: right;
 
-        > .default-day-header--indicator {
-          margin: 1px;
-          text-align: center;
+          > .default-day-header--indicator {
+            margin: 1px;
+            text-align: center;
+          }
+
+          > .default-day-header--text {
+            font-weight: normal;
+            margin: 5px;
+          }
         }
 
-        > .default-day-header--text {
-          font-weight: normal;
-          margin: 5px;
+        border-left: none;
+
+        &:last-child {
+          border-right: none;
         }
       }
 
-      border-left: none;
-
-      &:last-child {
-        border-right: none;
+      &:last-child > div {
+        border-bottom: none;
       }
-    }
-
-    &:last-child > div {
-      border-bottom: none;
     }
   }
 }
