@@ -1,18 +1,12 @@
 import './Schedulely.scss';
 
-import { CalendarEvent } from '@/types/index';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { CalendarEvent, SchedulelyProps } from '@/types/index';
 import { Schedulely } from './Schedulely';
 import chance from 'chance';
 
 export default {
   title: 'Schedulely',
-  component: Schedulely,
-} as ComponentMeta<typeof Schedulely>;
-
-const Template: ComponentStory<typeof Schedulely> = (props) => (
-  <Schedulely {...props}></Schedulely>
-);
+};
 
 const chanceSeed = chance(1);
 
@@ -99,17 +93,19 @@ const events = [
   },
 ];
 
-export const datefns = Template.bind({});
-datefns.storyName = 'Default';
-datefns.args = {
-  events,
-  initialDate: new Date().toISOString(),
+export const DefaultTheme = () => {
+  const props: SchedulelyProps = {
+    events,
+    initialDate: new Date().toISOString(),
+  };
+  return <Schedulely {...props}></Schedulely>;
 };
 
-export const minimum = Template.bind({});
-minimum.storyName = 'Minimal';
-minimum.args = {
-  events,
-  theme: 'minimal',
-  initialDate: new Date().toISOString(),
+export const MinimalTheme = () => {
+  const props: SchedulelyProps = {
+    events,
+    theme: 'minimal',
+    initialDate: new Date().toISOString(),
+  };
+  return <Schedulely {...props}></Schedulely>;
 };

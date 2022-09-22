@@ -7,7 +7,7 @@ import {
 } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';
-import { createDateFnsAdapter } from './dateAdapters';
+import { createDefaultAdapter } from './dateAdapters';
 import { useRef } from 'react';
 
 /**
@@ -16,7 +16,7 @@ import { useRef } from 'react';
  * @returns
  */
 export const Schedulely = ({
-  dateAdapter = createDateFnsAdapter(),
+  dateAdapter = createDefaultAdapter(),
   schedulelyComponents,
   events,
   theme,
