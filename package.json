@@ -18,7 +18,8 @@
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
     "prepare": "husky install",
     "test": "jest",
-    "dev": "ladle serve"
+    "dev": "ladle serve",
+    "publish-ghpages": "ladle build"
   },
   "files": [
     "dist"
