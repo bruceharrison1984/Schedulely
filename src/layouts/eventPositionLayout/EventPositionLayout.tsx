@@ -1,11 +1,13 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
-import { PropsWithChildren } from 'react';
+import { MutableRefObject, PropsWithChildren } from 'react';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
+import { useEventIntersection } from '@/hooks/useEventIntersection';
 
 interface EventPositionLayoutProps {
   event: InternalCalendarEvent;
   startIndex: number;
   endIndex: number;
+  parentContainerRef: MutableRefObject<null>;
 }
 
 /**
@@ -17,8 +19,12 @@ export const EventPositionLayout = ({
   startIndex,
   endIndex,
   children,
+  parentContainerRef,
 }: PropsWithChildren<EventPositionLayoutProps>) => {
   const { setHighlight, clearHighlight } = useEventHighlight();
+  const { eventContainerRef, isOverlapping } = useEventIntersection({
+    root: parentContainerRef,
+  });
 
   return (
     <div
@@ -27,9 +33,11 @@ export const EventPositionLayout = ({
       style={{
         gridColumnStart: startIndex,
         gridColumnEnd: endIndex,
+        display: isOverlapping ? 'none' : undefined,
       }}
       onMouseOver={() => setHighlight(event.id)}
       onMouseLeave={clearHighlight}
+      ref={eventContainerRef}
     >
       {children}
     </div>

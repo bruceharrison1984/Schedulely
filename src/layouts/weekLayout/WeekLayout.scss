@@ -4,13 +4,6 @@
   grid-template-columns: repeat(7, 1fr);
 }
 
-.week-day-layout {
-  display: grid;
-  /* Hardcoded layout here could cause issues later */
-  grid-template-rows: auto 6fr auto;
-  height: 100%;
-}
-
 .week-layout > div {
   border: var(--schedulely-border);
   position: relative;

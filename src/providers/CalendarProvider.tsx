@@ -9,6 +9,7 @@ import {
   PropsWithChildren,
   createContext,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -21,6 +22,7 @@ interface CalendarProviderProps {
   dateAdapter: DateTimeAdapter;
   initialDate: string;
   calendarEvents: CalendarEvent[];
+  rootDiv: React.RefObject<HTMLDivElement>;
 }
 
 /**
@@ -32,11 +34,17 @@ export const CalendarProvider = ({
   dateAdapter,
   initialDate,
   calendarEvents,
+  rootDiv,
   children,
 }: PropsWithChildren<CalendarProviderProps>) => {
   const [currentMonth, setCurrentMonth] = useState(
     dateAdapter.convertIsoToDate(initialDate)
   );
+  const [rootDimensions, setRootDimensions] = useState<DOMRect | undefined>(
+    rootDiv?.current?.getBoundingClientRect()
+  );
+  const [dayHeightPx, setDayHeightPx] = useState<number>();
+
   const screenSize = useScreenSize();
 
   const daysOfWeek = useMemo(
@@ -48,6 +56,16 @@ export const CalendarProvider = ({
     () => dateAdapter.getCalendarView(currentMonth),
     [currentMonth, dateAdapter]
   );
+
+  useEffect(() => {
+    if (rootDiv?.current) {
+      const boundingBox = rootDiv?.current?.getBoundingClientRect();
+      setRootDimensions(boundingBox);
+      setDayHeightPx(boundingBox.height / calendarView.length);
+      console.log(boundingBox.height / calendarView.length);
+      console.log(boundingBox.height);
+    }
+  }, [setRootDimensions, rootDiv, calendarView]);
 
   const events = useMemo(
     () =>
@@ -118,6 +136,8 @@ export const CalendarProvider = ({
     onPrevMonth,
     onPrevYear,
     calendarWithEvents,
+    calendarBoundingBox: rootDimensions,
+    dayHeightPx,
   };
 
   return (

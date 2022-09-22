@@ -7,8 +7,8 @@ import {
 } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';
-import { createDateFnsAdapter } from './dateAdapters';
-import React from 'react';
+import { createDefaultAdapter } from './dateAdapters';
+import { useRef } from 'react';
 
 /**
  * Create an instance of Schedulely
@@ -16,7 +16,7 @@ import React from 'react';
  * @returns
  */
 export const Schedulely = ({
-  dateAdapter = createDateFnsAdapter(),
+  dateAdapter = createDefaultAdapter(),
   schedulelyComponents,
   events,
   theme,
@@ -26,29 +26,31 @@ export const Schedulely = ({
   initialDate = new Date().toISOString(),
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
-  additionalClassNames?.push('schedulely');
+  const calendarBodyRef = useRef<HTMLDivElement>(null);
+
   return (
-    <React.StrictMode>
-      <div
-        id="schedulely"
-        className={additionalClassNames?.join(' ')}
-        data-theme={theme}
-        data-dark={dark ? '' : undefined}
-      >
-        <ActionProvider actions={actions}>
-          <ComponentProvider calendarComponents={schedulelyComponents}>
-            <CalendarProvider
-              initialDate={initialDate}
-              dateAdapter={dateAdapter}
-              calendarEvents={events}
-            >
-              <HeaderLayout />
-              <DayOfWeekLayout />
+    <div
+      id="schedulely"
+      className={[...additionalClassNames, 'schedulely'].join(' ')}
+      data-theme={theme}
+      data-dark={dark ? '' : undefined}
+    >
+      <ActionProvider actions={actions}>
+        <ComponentProvider calendarComponents={schedulelyComponents}>
+          <CalendarProvider
+            initialDate={initialDate}
+            dateAdapter={dateAdapter}
+            calendarEvents={events}
+            rootDiv={calendarBodyRef}
+          >
+            <HeaderLayout />
+            <DayOfWeekLayout />
+            <div ref={calendarBodyRef}>
               <MonthLayout />
-            </CalendarProvider>
-          </ComponentProvider>
-        </ActionProvider>
-      </div>
-    </React.StrictMode>
+            </div>
+          </CalendarProvider>
+        </ComponentProvider>
+      </ActionProvider>
+    </div>
   );
 };

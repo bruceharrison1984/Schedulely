@@ -3,8 +3,5 @@
  */
 
 export * from './defaultDay/index';
-export * from './defaultDayHeader/index';
-export * from './defaultDayOfWeek/index';
 export * from './defaultEvent/index';
 export * from './defaultHeader/index';
-export * from './defaultMoreEventsIndicator/index';

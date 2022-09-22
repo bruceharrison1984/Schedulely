@@ -1,39 +1,27 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import './DefaultEvent.scss';
+
 import { DefaultEvent } from './DefaultEvent';
+import { EventComponentProps } from '@/types';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/DefaultEvent',
-  component: DefaultEvent,
-} as ComponentMeta<typeof DefaultEvent>;
-
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof DefaultEvent> = (props) => (
-  <div id="schedulely" className="schedulely" data-theme={'light'}>
-    <DefaultEvent {...props} />
-  </div>
-);
-
-export const Unhovered = Template.bind({});
-Unhovered.args = {
-  event: {
-    start: new Date(1, 1, 2022),
-    end: new Date(1, 1, 2022),
-    id: '12345',
-    summary: 'Test event',
-    color: 'red',
-  },
-  isHovered: false,
+  title: 'Components/Event',
 };
 
-export const Hovered = Template.bind({});
-Hovered.args = {
-  event: {
-    start: new Date(1, 1, 2022),
-    end: new Date(1, 1, 2022),
-    id: '12345',
-    summary: 'Test event',
-    color: 'red',
-  },
-  isHovered: true,
+export const Story = () => {
+  const props: EventComponentProps = {
+    event: {
+      start: new Date(1, 1, 2022),
+      end: new Date(1, 1, 2022),
+      id: '12345',
+      summary: 'Test event',
+      color: 'red',
+    },
+    isHovered: false,
+    onClick: () => null,
+  };
+  return (
+    <div id="schedulely" className="schedulely" data-theme={'light'}>
+      <DefaultEvent {...props} />
+    </div>
+  );
 };

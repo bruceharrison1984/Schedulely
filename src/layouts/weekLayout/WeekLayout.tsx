@@ -13,13 +13,9 @@ interface WeekLayoutProps {
  * @returns WeekLayout Component
  */
 export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
-  const { dateAdapter, currentMonth } = useCalendar();
+  const { dateAdapter, currentMonth, dayHeightPx } = useCalendar();
 
-  const {
-    dayComponent: DayComponent,
-    dayHeaderComponent: DayHeader,
-    moreEventsIndicatorComponent: MoreEventsIndicatorComponent,
-  } = useComponents();
+  const { dayComponent: DayComponent } = useComponents();
 
   const { onMoreEventClick } = useActions();
 
@@ -33,12 +29,13 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
       const events = eventsOnDays.find((x) => x.date === date)?.events;
       if (!events) return false;
       if (events.length > overflowLimit) return true;
+      return false;
     },
     [eventsOnDays]
   );
 
   return (
-    <div className="week-layout">
+    <div className="week-layout" style={{ height: dayHeightPx }}>
       {dates.map((day) => (
         <div
           key={day.getDate()}
@@ -47,24 +44,12 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
         >
           <DayComponent
             isCurrentMonth={dateAdapter.isSameMonth(day, currentMonth)}
-          >
-            <div className="week-day-layout">
-              <DayHeader
-                isToday={dateAdapter.isDateToday(day)}
-                dateNumber={dateAdapter.getDayNumber(day)}
-              />
-              {/* empty div to maintain space within grid */}
-              <div></div>
-              {hasEventOverflow(day) && (
-                <MoreEventsIndicatorComponent
-                  events={
-                    eventsOnDays.find((x) => x.date === day)?.events || []
-                  }
-                  onClick={onMoreEventClick}
-                />
-              )}
-            </div>
-          </DayComponent>
+            isToday={dateAdapter.isDateToday(day)}
+            dateNumber={dateAdapter.getDayNumber(day)}
+            isOverflowed={hasEventOverflow(day)}
+            events={eventsOnDays.find((x) => x.date === day)?.events || []}
+            onClick={onMoreEventClick}
+          />
         </div>
       ))}
     </div>
