@@ -13,7 +13,7 @@
   "sideEffects": false,
   "scripts": {
     "barrels": "barrelsby -c .barrelsby.json",
-    "build": "rm -rf dist && rollup -c",
+    "rollup": "rm -rf dist && rollup -c",
     "lint": "eslint . --ext .ts --ext .tsx",
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
     "test": "jest",

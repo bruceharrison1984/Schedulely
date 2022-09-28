@@ -1,9 +1,22 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
+    "rollup": {
+      "inputs": [
+        "src/**",
+        "rollup.config.js"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "dependsOn": [
+        "^rollup"
+      ],
+      "outputs": [
+        ".next/**"
+      ]
     },
     "lint": {
       "outputs": []
