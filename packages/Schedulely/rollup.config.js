@@ -1,4 +1,5 @@
 import { defineConfig } from 'rollup';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import ts from 'rollup-plugin-ts';
 
@@ -10,8 +11,8 @@ const options = defineConfig({
     format: 'esm',
     assetFileNames: '[name].css',
   },
-  external: ['react/jsx-runtime', 'react', /@swc\/helpers/, /date-fns/],
   plugins: [
+    peerDepsExternal(),
     postcss({ extract: 'index.css', sourceMap: true }),
     ts({
       transpiler: 'swc',
