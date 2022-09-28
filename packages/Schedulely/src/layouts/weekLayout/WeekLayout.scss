@@ -1,0 +1,10 @@
+.week-layout {
+  display: grid;
+  grid-area: 1 / 1;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.week-layout > div {
+  border: var(--schedulely-border);
+  position: relative;
+}

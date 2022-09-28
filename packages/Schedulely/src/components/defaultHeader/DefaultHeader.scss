@@ -1,0 +1,35 @@
+.header-button {
+  border: none;
+  background-color: transparent;
+  color: var(--schedulely-font-color);
+  font-size: 2em;
+  opacity: 50%;
+}
+
+.header-button:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
+
+.header-layout {
+  display: flex;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.header-banner {
+  flex-grow: 2;
+  text-align: center;
+  color: var(--schedulely-font-color);
+}
+
+.current-month-indicator {
+  background-color: salmon;
+  border-radius: 20px;
+  height: 0.4em;
+  width: 0.4em;
+  margin-left: 0.5em;
+  margin-top: 0.4em;
+  display: inline-block;
+  position: relative;
+}
