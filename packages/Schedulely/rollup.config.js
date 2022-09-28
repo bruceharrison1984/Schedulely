@@ -6,7 +6,7 @@ const options = defineConfig({
   input: 'src/index.ts',
   output: {
     sourcemap: 'hidden',
-    dir: './dist/react-pico-calendar',
+    dir: './dist',
     format: 'esm',
     assetFileNames: '[name].css',
   },
