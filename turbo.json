@@ -26,7 +26,7 @@
         "^rollup"
       ],
       "outputs": [
-        ".next/**"
+        "build/**"
       ]
     },
     "lint": {
