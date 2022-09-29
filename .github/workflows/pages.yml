@@ -34,7 +34,7 @@ jobs:
       - name: NPM Install
         run: npm ci
       - name: Build Ladle package
-        run: npm run build-ladle -- --base https://bruceharrison1984.github.io/react-pico-calendar/
+        run: npm run build-ladle -- -- --base https://bruceharrison1984.github.io/react-pico-calendar/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
