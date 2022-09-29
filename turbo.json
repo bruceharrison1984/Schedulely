@@ -1,6 +1,16 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
+    "build-ladle": {
+      "inputs": [
+        "src/**",
+        "rollup.config.js",
+        "package.json"
+      ],
+      "outputs": [
+        "build/**"
+      ]
+    },
     "rollup": {
       "inputs": [
         "src/**",

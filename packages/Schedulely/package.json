@@ -18,7 +18,7 @@
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
     "test": "jest",
     "dev": "ladle serve",
-    "publish-ghpages": "ladle build"
+    "build-ladle": "ladle build"
   },
   "files": [
     "dist"
