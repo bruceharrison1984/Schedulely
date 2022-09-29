@@ -3,9 +3,10 @@ import './DefaultDay.scss';
 import { DayComponentProps } from '@/types';
 import { DefaultDay } from './DefaultDay';
 
-export default {
+const story = {
   title: 'Components/DefaultDay',
 };
+export default story;
 
 export const Story = () => {
   const props: DayComponentProps = {

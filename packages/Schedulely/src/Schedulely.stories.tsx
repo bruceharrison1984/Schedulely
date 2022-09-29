@@ -4,9 +4,10 @@ import { CalendarEvent, SchedulelyProps } from '@/types/index';
 import { Schedulely } from './Schedulely';
 import chance from 'chance';
 
-export default {
+const story = {
   title: 'Schedulely',
 };
+export default story;
 
 const chanceSeed = chance(1);
 
@@ -14,7 +15,7 @@ const generateEvents = (
   numberOfEvents = 100,
   minLength = 0,
   maxLength = 15,
-  idOffset = 0
+  idOffset = 0,
 ) => {
   const events: CalendarEvent[] = [];
   const today = new Date();
@@ -26,11 +27,11 @@ const generateEvents = (
         max: today.getFullYear() + 1,
       }),
       chanceSeed.integer({ min: 0, max: 11 }),
-      chanceSeed.integer({ min: 1, max: 30 })
+      chanceSeed.integer({ min: 1, max: 30 }),
     );
     const end = new Date(start);
     end.setDate(
-      start.getDate() + chanceSeed.integer({ min: minLength, max: maxLength })
+      start.getDate() + chanceSeed.integer({ min: minLength, max: maxLength }),
     );
 
     const summary = chanceSeed.name();

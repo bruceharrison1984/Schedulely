@@ -3,9 +3,10 @@ import './DefaultEvent.scss';
 import { DefaultEvent } from './DefaultEvent';
 import { EventComponentProps } from '@/types';
 
-export default {
+const story = {
   title: 'Components/Event',
 };
+export default story;
 
 export const Story = () => {
   const props: EventComponentProps = {
