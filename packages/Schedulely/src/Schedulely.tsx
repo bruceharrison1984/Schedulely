@@ -9,6 +9,7 @@ import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';
 import { createDefaultAdapter } from './dateAdapters';
 import { useRef } from 'react';
+import React from 'react';
 
 /**
  * Create an instance of Schedulely

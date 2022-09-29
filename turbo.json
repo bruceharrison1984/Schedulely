@@ -4,7 +4,8 @@
     "rollup": {
       "inputs": [
         "src/**",
-        "rollup.config.js"
+        "rollup.config.js",
+        "package.json"
       ],
       "outputs": [
         "dist/**"
