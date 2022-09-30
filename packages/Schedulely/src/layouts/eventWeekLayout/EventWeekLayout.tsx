@@ -31,7 +31,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     <div
       ref={weekLayoutRef}
       className="event-week-layout"
-      style={{ height: dayHeightPx }}
+      // style={{ height: dayHeightPx }}
     >
       {/** This div creates space for the DayComponent header on the calendar layer */}
       <div

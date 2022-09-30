@@ -8,12 +8,17 @@ import { useCalendar } from '@/hooks/useCalendar';
  * @returns MonthLayout Component
  */
 export const MonthLayout = () => {
-  const { calendarWithEvents } = useCalendar();
+  const { calendarWithEvents, dayHeightPx } = useCalendar();
 
   return (
     <HighlightProvider>
       {calendarWithEvents.map((week, idx) => (
-        <div key={idx} className="week-container" data-week={idx}>
+        <div
+          key={idx}
+          className="week-container"
+          style={{ height: dayHeightPx }}
+          data-week={idx}
+        >
           {/* If we have no events, don't bother rendering the event grid */}
           {!!week.events.length && (
             <EventWeekLayout

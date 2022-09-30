@@ -94,6 +94,18 @@ const events = [
   },
 ];
 
+export const NoEvents = () => {
+  const props: SchedulelyProps = {
+    events: [],
+    initialDate: new Date().toISOString(),
+  };
+  return (
+    <div style={{ height: '100%' }}>
+      <Schedulely {...props}></Schedulely>
+    </div>
+  );
+};
+
 export const DefaultTheme = () => {
   const props: SchedulelyProps = {
     events,
