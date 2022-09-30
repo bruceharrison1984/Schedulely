@@ -35,7 +35,6 @@
   /* The layout of the calendar body lives in a div that we use to get a ref for day height */
   > .calendar-body-container {
     height: 100%;
-
     > .week-container > .week-layout {
       > div {
         border-left: none;

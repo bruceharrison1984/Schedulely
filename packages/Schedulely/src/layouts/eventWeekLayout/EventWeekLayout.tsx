@@ -23,16 +23,11 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
   const weekLayoutRef = useRef(null);
-  const { dayHeightPx } = useCalendar();
 
   /** Event week height needs to be constrained to week height and prevent overflow */
 
   return (
-    <div
-      ref={weekLayoutRef}
-      className="event-week-layout"
-      // style={{ height: dayHeightPx }}
-    >
+    <div ref={weekLayoutRef} className="event-week-layout">
       {/** This div creates space for the DayComponent header on the calendar layer */}
       <div
         style={{

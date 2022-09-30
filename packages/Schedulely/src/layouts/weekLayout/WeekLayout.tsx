@@ -31,11 +31,14 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
       if (events.length > overflowLimit) return true;
       return false;
     },
-    [eventsOnDays]
+    [eventsOnDays],
   );
 
   return (
-    <div className="week-layout" style={{ height: dayHeightPx }}>
+    <div
+      className="week-layout"
+      // style={{ height: dayHeightPx }}
+    >
       {dates.map((day) => (
         <div
           key={day.getDate()}
