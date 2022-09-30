@@ -35,7 +35,6 @@ export const Schedulely = ({
       className={[...additionalClassNames, 'schedulely'].join(' ')}
       data-theme={theme}
       data-dark={dark ? '' : undefined}
-      style={{ resize: 'both' }}
     >
       <ActionProvider actions={actions}>
         <ComponentProvider calendarComponents={schedulelyComponents}>
