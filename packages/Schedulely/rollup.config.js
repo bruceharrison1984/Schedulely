@@ -1,5 +1,5 @@
 import { defineConfig } from 'rollup';
-// import inject from '@rollup/plugin-inject';
+import inject from '@rollup/plugin-inject';
 import postcss from 'rollup-plugin-postcss';
 import ts from 'rollup-plugin-ts';
 
@@ -26,9 +26,9 @@ const options = defineConfig({
         minify: true,
       },
     }),
-    // inject({
-    //   React: 'react',
-    // }),
+    inject({
+      React: 'react',
+    }),
   ],
 });
 
