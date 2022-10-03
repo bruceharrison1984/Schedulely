@@ -1,0 +1,71 @@
+/* Default theme */
+& {
+  height: 100%;
+  margin: 0.5em;
+
+  /* Custom font must be made available via link tag, etc. */
+  font-family: 'Roboto', sans-serif;
+  --schedulely-current-month-bg-color: white;
+  --schedulely-today-indicator-color: salmon;
+  --schedulely-font-color: black;
+  --schedulely-sibling-month-bg-color: #eff2f1;
+  --schedulely-sibling-month-font-color: dimgray;
+  --schedulely-grid-gap: 0em;
+  --schedulely-day-of-week-header-bg-color: black;
+  --schedulely-day-of-week-header-text-color: white;
+  --schedulely-day-height: 7em;
+  --schedulely-border: 1px solid black;
+  --schedulely-border-radius: 0.5em;
+
+  &[data-dark] {
+    --schedulely-current-month-bg-color: rgb(112, 112, 112);
+    --schedulely-sibling-month-bg-color: #2b2b2b;
+    --schedulely-day-of-week-header-bg-color: white;
+    --schedulely-day-of-week-header-text-color: black;
+    --schedulely-font-color: white;
+    --schedulely-border: 1px solid white;
+  }
+
+  > .day-of-week-layout {
+    border-radius: var(--schedulely-border-radius)
+      var(--schedulely-border-radius) 0 0;
+  }
+
+  /* The layout of the calendar body lives in a div that we use to get a ref for day height */
+  > .calendar-body-container {
+    > .week-container > .week-layout {
+      > div {
+        border-left: none;
+        border-bottom: none;
+        &:first-child {
+          border-left: var(--schedulely-border);
+        }
+      }
+    }
+
+    > .week-container:last-child {
+      border-radius: 0 0 var(--schedulely-border-radius)
+        var(--schedulely-border-radius);
+
+      > .week-layout > div {
+        border-bottom: var(--schedulely-border);
+
+        &:first-child {
+          border-radius: 0 0 0 var(--schedulely-border-radius);
+
+          > .default-day {
+            border-radius: 0 0 0 var(--schedulely-border-radius);
+          }
+        }
+
+        &:last-child {
+          border-radius: 0 0 var(--schedulely-border-radius) 0;
+
+          > .default-day {
+            border-radius: 0 0 var(--schedulely-border-radius) 0;
+          }
+        }
+      }
+    }
+  }
+}

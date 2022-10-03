@@ -1,0 +1,40 @@
+{
+  "name": "schedulely",
+  "version": "0.0.31",
+  "keywords": [
+    "schedule",
+    "calendar",
+    "react",
+    "month"
+  ],
+  "description": "CSS-grid based React calendar with a focus on extensibility and small package size",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "barrels": "barrelsby -c .barrelsby.json",
+    "rollup": "rollup -c",
+    "lint": "eslint . --ext .ts --ext .tsx",
+    "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
+    "test": "jest",
+    "dev": "ladle serve",
+    "build-ladle": "ladle build"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Bruce Harrison",
+  "license": "Apache-2.0",
+  "repository": {
+    "url": "https://github.com/bruceharrison1984/Schedulely",
+    "type": "git"
+  },
+  "devDependencies": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.2",
+    "react-dom": ">=17.0.2"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,24 @@
+{
+  "directory": [
+    "./src/components",
+    "./src/dateAdapters",
+    "./src/hooks",
+    "./src/layouts",
+    "./src/providers",
+    "./src/themes",
+    "./src/types"
+  ],
+  "delete": true,
+  "location": "all",
+  "verbose": false,
+  "singleQuotes": true,
+  "structure": "flat",
+  "include": ["src/.*.tsx$", "src/.*.ts$"],
+  "exclude": [
+    ".stories.tsx$",
+    ".spec.tsx?$",
+    ".spec.tsx.snap$",
+    ".util.tsx?$",
+    "__tests__"
+  ]
+}
