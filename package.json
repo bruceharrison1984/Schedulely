@@ -49,5 +49,9 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "packageManager": "npm@8.15.0"
+  "packageManager": "npm@8.15.0",
+  "overrides": {
+    "trim": "^0.0.3",
+    "got": "^11.8.5"
+  }
 }
