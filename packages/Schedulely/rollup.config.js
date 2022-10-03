@@ -13,7 +13,7 @@ const options = defineConfig({
     assetFileNames: '[name].css',
   },
   plugins: [
-    peerDepsExternal(),
+    // peerDepsExternal(),
     postcss({ extract: 'index.css', sourceMap: true }),
     ts({
       transpiler: 'swc',
