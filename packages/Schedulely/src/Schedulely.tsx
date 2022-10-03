@@ -46,7 +46,15 @@ export const Schedulely = ({
           >
             <HeaderLayout />
             <DayOfWeekLayout />
-            <div ref={calendarBodyRef} className="calendar-body-container">
+            <div
+              ref={calendarBodyRef}
+              className="calendar-body-container"
+              style={{
+                height: '100%',
+                display: 'grid',
+                marginBottom: '2000px',
+              }}
+            >
               <MonthLayout />
             </div>
           </CalendarProvider>

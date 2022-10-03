@@ -13,7 +13,7 @@ interface WeekLayoutProps {
  * @returns WeekLayout Component
  */
 export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
-  const { dateAdapter, currentMonth, dayHeightPx } = useCalendar();
+  const { dateAdapter, currentMonth } = useCalendar();
 
   const { dayComponent: DayComponent } = useComponents();
 
@@ -35,10 +35,7 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
   );
 
   return (
-    <div
-      className="week-layout"
-      // style={{ height: dayHeightPx }}
-    >
+    <div className="week-layout">
       {dates.map((day) => (
         <div
           key={day.getDate()}
