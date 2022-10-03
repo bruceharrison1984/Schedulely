@@ -33,7 +33,7 @@ jobs:
         run: npm install -g npm
       - name: NPM Install
         run: npm ci
-      - name: Build Ladle package
+      - name: Build Docs
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
