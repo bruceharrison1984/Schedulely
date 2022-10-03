@@ -1,5 +1,5 @@
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Ladle to Github Pages
+name: Deploy Documentation
 
 on:
   # Runs on pushes targeting the default branch
