@@ -8,8 +8,6 @@ import {
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';
 import { createDefaultAdapter } from './dateAdapters';
-import { useRef } from 'react';
-import React from 'react';
 
 /**
  * Create an instance of Schedulely
@@ -27,7 +25,6 @@ export const Schedulely = ({
   initialDate = new Date().toISOString(),
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
-  const calendarBodyRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -42,17 +39,14 @@ export const Schedulely = ({
             initialDate={initialDate}
             dateAdapter={dateAdapter}
             calendarEvents={events}
-            rootDiv={calendarBodyRef}
           >
             <HeaderLayout />
             <DayOfWeekLayout />
             <div
-              ref={calendarBodyRef}
               className="calendar-body-container"
               style={{
                 height: '100%',
                 display: 'grid',
-                marginBottom: '2000px',
               }}
             >
               <MonthLayout />
