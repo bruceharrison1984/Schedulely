@@ -32,10 +32,10 @@
   }
 
   /* The layout of the calendar body lives in a div that we use to get a ref for day height */
-  > div {
+  > .calendar-body-container {
     > .week-container > .week-layout {
       > div {
-        > .default-day > .week-day-layout > .default-day-header {
+        > .default-day > .default-day-header {
           text-align: right;
 
           > .default-day-header--indicator {
