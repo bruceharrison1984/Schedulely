@@ -100,7 +100,7 @@ export const NoEvents = () => {
     initialDate: new Date().toISOString(),
   };
   return (
-    <div style={{ height: '100%' }}>
+    <div style={{ height: '100%', marginBottom: '5em' }}>
       <Schedulely {...props}></Schedulely>
     </div>
   );
@@ -112,7 +112,7 @@ export const DefaultTheme = () => {
     initialDate: new Date().toISOString(),
   };
   return (
-    <div style={{ height: '100%' }}>
+    <div style={{ height: '100%', marginBottom: '5em' }}>
       <Schedulely {...props}></Schedulely>
     </div>
   );
@@ -125,7 +125,7 @@ export const MinimalTheme = () => {
     initialDate: new Date().toISOString(),
   };
   return (
-    <div style={{ height: '100%' }}>
+    <div style={{ height: '100%', marginBottom: '5em' }}>
       <Schedulely {...props}></Schedulely>
     </div>
   );

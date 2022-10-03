@@ -11,22 +11,26 @@ export const MonthLayout = () => {
   const { calendarWithEvents } = useCalendar();
 
   return (
-    <HighlightProvider>
-      {calendarWithEvents.map((week, idx) => (
-        <div key={idx} className="week-container" data-week={idx}>
-          {/* If we have no events, don't bother rendering the event grid */}
-          {!!week.events.length && (
-            <EventWeekLayout
-              events={week.events}
-              daysInweek={week.daysInWeek}
+    <div className="calendar-body-container">
+      <HighlightProvider>
+        {calendarWithEvents.map((week, idx) => (
+          <div key={idx} className="week-container" data-week={idx}>
+            {
+              /* If we have no events, don't bother rendering the event grid */
+              !!week.events.length && (
+                <EventWeekLayout
+                  events={week.events}
+                  daysInweek={week.daysInWeek}
+                />
+              )
+            }
+            <WeekLayout
+              eventsOnDays={week.eventsOnDays}
+              dates={week.daysInWeek}
             />
-          )}
-          <WeekLayout
-            eventsOnDays={week.eventsOnDays}
-            dates={week.daysInWeek}
-          />
-        </div>
-      ))}
-    </HighlightProvider>
+          </div>
+        ))}
+      </HighlightProvider>
+    </div>
   );
 };

@@ -42,15 +42,7 @@ export const Schedulely = ({
           >
             <HeaderLayout />
             <DayOfWeekLayout />
-            <div
-              className="calendar-body-container"
-              style={{
-                height: '100%',
-                display: 'grid',
-              }}
-            >
-              <MonthLayout />
-            </div>
+            <MonthLayout />
           </CalendarProvider>
         </ComponentProvider>
       </ActionProvider>
