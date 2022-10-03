@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Schedulely',
   tagline: 'The tiniest React calendar',
-  url: 'https://github.com/bruceharrison1984/Schedulely',
+  url: 'https://github.com/bruceharrison1984',
   baseUrl: '/Schedulely/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -51,7 +51,7 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
           {
             href: 'https://github.com/bruceharrison1984/Schedulely',

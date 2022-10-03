@@ -11,6 +11,7 @@
     "build-ladle": "turbo run build-ladle --no-daemon",
     "rollup": "turbo run rollup --no-daemon",
     "dev": "turbo run dev --parallel",
+    "dev-docs": "turbo run dev-docs",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

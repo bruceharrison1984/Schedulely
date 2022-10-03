@@ -1,47 +1,64 @@
 ---
-sidebar_position: 1
+title: 🚦 Getting started
+description: Learn how to get started with Rocket Docs.
 ---
 
-# Tutorial Intro
+<!-- This throws a warning but doesn't get compiled away -->
 
-Let's discover **Docusaurus in less than 5 minutes**.
+import styles from 'schedulely/dist/index.css';
 
-## Getting Started
+The fastest way to get started using Schedulely is to just add the NPM package to your React project, and create an instance of Schedulely.
 
-Get started by **creating a new site**.
-
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
-
-### What you'll need
-
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
+## 📦 Installation
 
 ```bash
-npm init docusaurus@latest my-website classic
+npm install schedulely
+## or
+yarn install schedulely
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+## 🔨 Basic Usage
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+This example initializes the calendar with default components, using the included NativeJS DateAdapter as the date library.
+The default theme uses the `Roboto` font, so it should be loaded prior to initializing `Schedulely`.
 
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
+```html
+<!-- HEAD (for custom font) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+  rel="stylesheet"
+/>
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+```tsx live=true
+/* array of CalendarEvents */
+const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+render(<Schedulely events={events} />);
+```
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+## Component Props
+
+```tsx
+export interface SchedulelyProps {
+  dateAdapter?: DateTimeAdapter;
+  schedulelyComponents?: Partial<SchedulelyComponents>;
+  events: CalendarEvent[];
+  additionalClassNames?: string[];
+  theme?: string;
+  actions?: Partial<ActionState>;
+  initialDate?: string;
+}
+```
+
+| Property             | Type                             | Description                                                                      |
+| -------------------- | -------------------------------- | -------------------------------------------------------------------------------- |
+| dateAdapter          | `DateTimeAdapter?`               | Override the default Date/date-fns adapter with a custom implementation          |
+| schedulelyComponents | `Partial<SchedulelyComponents>?` | Override individual components with custom ones                                  |
+| events               | `CalendarEvent[]`                | List of events that will be displayed                                            |
+| additionalClassNames | `string[]?`                      | Any additional class names you want applied to the root element                  |
+| theme                | `string?`                        | Name of theme to apply to Schedulely                                             |
+| actions              | `Partial<ActionState>?`          | Override component actions                                                       |
+| initialDate          | `string?`                        | Schedulely will start on the current month, unless overridden with this property |
