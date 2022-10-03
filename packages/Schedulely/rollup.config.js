@@ -15,6 +15,7 @@ const options = defineConfig({
   plugins: [
     postcss({ extract: 'index.css', sourceMap: true }),
     ts({
+      cwd: '.',
       transpiler: 'swc',
       swcConfig: {
         jsc: {
