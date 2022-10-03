@@ -17,23 +17,23 @@ export const useScreenSize = () => {
       window.addEventListener('resize', listener);
       return listener;
     },
-    [setScreenSize, screenSize]
+    [setScreenSize, screenSize],
   );
 
   useEffect(() => {
     const tinyQuery = createQueryListener(
-      '(max-width: 480px)',
-      DisplaySize.tiny
+      '(max-width: 500px)',
+      DisplaySize.tiny,
     );
 
     const mediumQuery = createQueryListener(
-      '(max-width: 768px) and (min-width: 481px)',
-      DisplaySize.medium
+      '(max-width: 800px) and (min-width: 501px)',
+      DisplaySize.medium,
     );
 
     const largeQuery = createQueryListener(
-      '(min-width: 769px)',
-      DisplaySize.large
+      '(min-width: 801px)',
+      DisplaySize.large,
     );
 
     return () => {
