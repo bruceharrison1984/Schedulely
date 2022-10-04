@@ -6,4 +6,5 @@
   z-index: 1; /* TODO: Figure out what is making this necessary */
   gap: 0.2em; /* space between events */
   grid-auto-flow: dense;
+  grid-auto-rows: 1fr;
 }
