@@ -7,9 +7,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Schedulely',
-  tagline: 'The tiniest React calendar',
-  url: 'https://github.com/bruceharrison1984',
-  baseUrl: '/Schedulely/',
+  tagline: 'The super-fast, super-small React calendar',
+  url: 'https://github.com/',
+  baseUrl: '/bruceharrison1984/Schedulely/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -44,7 +44,7 @@ const config = {
         title: 'Schedulely',
         logo: {
           alt: 'Schedulely Logo',
-          src: 'img/logo.svg',
+          src: 'img/calendar-days-regular.svg',
         },
         items: [
           {
