@@ -6,9 +6,8 @@ import {
   ComponentProvider,
 } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
-import { DisplaySize, SchedulelyProps } from '@/types/index';
+import { SchedulelyProps } from '@/types/index';
 import { createDefaultAdapter } from './dateAdapters';
-import { useCallback, useEffect, useState } from 'react';
 
 /**
  * Create an instance of Schedulely
