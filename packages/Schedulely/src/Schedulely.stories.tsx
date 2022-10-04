@@ -1,5 +1,6 @@
 import './Schedulely.scss';
 
+import { useLadleContext, ActionType, ThemeState } from '@ladle/react';
 import { CalendarEvent, SchedulelyProps } from '@/types/index';
 import { Schedulely } from './Schedulely';
 import chance from 'chance';
@@ -15,7 +16,7 @@ const generateEvents = (
   numberOfEvents = 100,
   minLength = 0,
   maxLength = 15,
-  idOffset = 0,
+  idOffset = 0
 ) => {
   const events: CalendarEvent[] = [];
   const today = new Date();
@@ -27,11 +28,11 @@ const generateEvents = (
         max: today.getFullYear() + 1,
       }),
       chanceSeed.integer({ min: 0, max: 11 }),
-      chanceSeed.integer({ min: 1, max: 30 }),
+      chanceSeed.integer({ min: 1, max: 30 })
     );
     const end = new Date(start);
     end.setDate(
-      start.getDate() + chanceSeed.integer({ min: minLength, max: maxLength }),
+      start.getDate() + chanceSeed.integer({ min: minLength, max: maxLength })
     );
 
     const summary = chanceSeed.name();
@@ -99,9 +100,14 @@ export const NoEvents = () => {
     events: [],
     initialDate: new Date().toISOString(),
   };
+  const { globalState } = useLadleContext();
+
   return (
     <div style={{ height: '100%', marginBottom: '5em' }}>
-      <Schedulely {...props}></Schedulely>
+      <Schedulely
+        {...props}
+        dark={globalState.theme === ThemeState.Dark}
+      ></Schedulely>
     </div>
   );
 };
@@ -111,9 +117,14 @@ export const DefaultTheme = () => {
     events,
     initialDate: new Date().toISOString(),
   };
+  const { globalState } = useLadleContext();
+
   return (
     <div style={{ height: '100%', marginBottom: '5em' }}>
-      <Schedulely {...props}></Schedulely>
+      <Schedulely
+        {...props}
+        dark={globalState.theme === ThemeState.Dark}
+      ></Schedulely>
     </div>
   );
 };
@@ -124,9 +135,14 @@ export const MinimalTheme = () => {
     theme: 'minimal',
     initialDate: new Date().toISOString(),
   };
+  const { globalState } = useLadleContext();
+
   return (
     <div style={{ height: '100%', marginBottom: '5em' }}>
-      <Schedulely {...props}></Schedulely>
+      <Schedulely
+        {...props}
+        dark={globalState.theme === ThemeState.Dark}
+      ></Schedulely>
     </div>
   );
 };
