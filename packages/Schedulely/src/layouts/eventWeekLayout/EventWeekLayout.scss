@@ -7,4 +7,7 @@
   gap: 0.2em; /* space between events */
   grid-auto-flow: dense;
   grid-auto-rows: 1fr;
+  /* These hide event text that overflows */
+  white-space: nowrap;
+  overflow: hidden;
 }

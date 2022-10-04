@@ -1,17 +1,25 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import {
+  faGaugeHigh,
+  faMinimize,
+  faUpDownLeftRight,
+} from '@fortawesome/free-solid-svg-icons';
+import { faReact } from '@fortawesome/free-brands-svg-icons';
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  icon?: IconProp;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'Tiny Install Size',
-    Svg: require('@site/static/img/minimize-solid.svg').default,
+    icon: faMinimize,
     description: (
       <>
         Schedulely was designed with install size in mind. So much so, the only
@@ -22,7 +30,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Fast Performance',
-    Svg: require('@site/static/img/gauge-high-solid.svg').default,
+    icon: faGaugeHigh,
     description: (
       <>
         Schedulely leans on CSS-grid and CSS for display, so it is extremely
@@ -33,7 +41,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Responsive',
-    Svg: require('@site/static/img/up-down-left-right-solid.svg').default,
+    icon: faUpDownLeftRight,
     description: (
       <>
         Schedulely has responsive design in mind and it will automatically
@@ -45,7 +53,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Powered by React',
-    Svg: require('@site/static/img/react.svg').default,
+    icon: faReact,
     description: (
       <>
         Schedulely was built using React 17, so it should be an easy drop-in
@@ -55,11 +63,11 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, description, icon }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <FontAwesomeIcon icon={icon} size={'2x'} />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>

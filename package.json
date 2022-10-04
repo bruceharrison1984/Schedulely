@@ -54,5 +54,8 @@
   "overrides": {
     "trim": "^0.0.3",
     "got": "^11.8.5"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.2.0"
   }
 }

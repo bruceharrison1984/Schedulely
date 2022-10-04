@@ -1,12 +1,10 @@
-import { Schedulely } from 'schedulely';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import HomepageSchedulely from '../components/HomepageSchedulely/HomepageSchedulely';
 import Layout from '@theme/Layout';
 import React from 'react';
 import clsx from 'clsx';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-
-import 'schedulely/dist/index.css';
 import styles from './index.module.css';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -27,14 +25,12 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      title={`${siteConfig.title} documentation`}
+      description="Documentation for the Schedulely React component"
     >
       <HomepageHeader />
       <main>
-        <div style={{ height: '500px', width: '50%', margin: 'auto' }}>
-          <Schedulely events={[]} />
-        </div>
+        <HomepageSchedulely />
         <HomepageFeatures />
       </main>
     </Layout>
