@@ -14,7 +14,7 @@ const story = {
   title: 'Schedulely',
   decorators: [
     (Component, context) => (
-      <div style={{ height: '100%', marginBottom: '5em' }}>
+      <div style={{ height: '100%' }}>
         <Component />
       </div>
     ),

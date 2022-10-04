@@ -32,6 +32,11 @@ export const Schedulely = ({
       className={[...additionalClassNames, 'schedulely'].join(' ')}
       data-theme={theme}
       data-dark={dark === true ? true : undefined}
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        gridTemplateRows: 'auto auto 1fr',
+      }}
     >
       <ActionProvider actions={actions}>
         <ComponentProvider calendarComponents={schedulelyComponents}>
