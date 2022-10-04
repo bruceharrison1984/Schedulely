@@ -13,12 +13,12 @@
   "verbose": false,
   "singleQuotes": true,
   "structure": "flat",
-  "include": ["src/.*.tsx$", "src/.*.ts$"],
+  "include": [
+    "src/.*.tsx$",
+    "src/.*.ts$"
+  ],
   "exclude": [
-    ".stories.tsx$",
-    ".spec.tsx?$",
-    ".spec.tsx.snap$",
-    ".util.tsx?$",
+    "__stories__",
     "__tests__"
   ]
 }

@@ -4,7 +4,9 @@
       "preset": [
         "advanced",
         {
-          "autoprefixer": { "add": true }
+          "autoprefixer": {
+            "add": true
+          }
         }
       ]
     }
