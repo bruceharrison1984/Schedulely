@@ -1,6 +1,6 @@
-import './DefaultEvent.scss';
+import '../src/components/defaultEvent/DefaultEvent.scss';
 
-import { DefaultEvent } from './DefaultEvent';
+import { DefaultEvent } from '@/components';
 import { EventComponentProps } from '@/types';
 
 const story = {

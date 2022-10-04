@@ -16,7 +16,7 @@
     "lint": "eslint . --ext .ts --ext .tsx",
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
     "test": "jest",
-    "dev": "ladle serve",
+    "dev": "ladle serve --stories=__stories__/**",
     "build-ladle": "ladle build"
   },
   "files": [

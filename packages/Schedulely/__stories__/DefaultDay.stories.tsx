@@ -1,7 +1,7 @@
-import './DefaultDay.scss';
+import '../src/components/defaultDay/DefaultDay.scss';
 
 import { DayComponentProps } from '@/types';
-import { DefaultDay } from './DefaultDay';
+import { DefaultDay } from '../src/components/defaultDay/DefaultDay';
 
 const story = {
   title: 'Components/DefaultDay',

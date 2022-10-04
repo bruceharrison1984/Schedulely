@@ -1,14 +1,5 @@
-import './Schedulely.scss';
-
-import { CalendarEvent, SchedulelyProps } from '@/types/index';
-import { Schedulely } from './Schedulely';
-import { ThemeState, useLadleContext } from '@ladle/react';
+import { CalendarEvent } from '@/types';
 import chance from 'chance';
-
-const story = {
-  title: 'Schedulely',
-};
-export default story;
 
 const chanceSeed = chance(1);
 
@@ -48,7 +39,7 @@ const generateEvents = (
   return events;
 };
 
-const events = [
+export const storyEvents = [
   ...generateEvents(100),
   ...generateEvents(100, 0, 1, 100),
   {
@@ -94,55 +85,3 @@ const events = [
     summary: 'Craig Bishop',
   },
 ];
-
-export const NoEvents = () => {
-  const props: SchedulelyProps = {
-    events: [],
-    initialDate: new Date().toISOString(),
-  };
-  const { globalState } = useLadleContext();
-
-  return (
-    <div style={{ height: '100%', marginBottom: '5em' }}>
-      <Schedulely
-        {...props}
-        dark={globalState.theme === ThemeState.Dark}
-      ></Schedulely>
-    </div>
-  );
-};
-
-export const DefaultTheme = () => {
-  const props: SchedulelyProps = {
-    events,
-    initialDate: new Date().toISOString(),
-  };
-  const { globalState } = useLadleContext();
-
-  return (
-    <div style={{ height: '100%', marginBottom: '5em' }}>
-      <Schedulely
-        {...props}
-        dark={globalState.theme === ThemeState.Dark}
-      ></Schedulely>
-    </div>
-  );
-};
-
-export const MinimalTheme = () => {
-  const props: SchedulelyProps = {
-    events,
-    theme: 'minimal',
-    initialDate: new Date().toISOString(),
-  };
-  const { globalState } = useLadleContext();
-
-  return (
-    <div style={{ height: '100%', marginBottom: '5em' }}>
-      <Schedulely
-        {...props}
-        dark={globalState.theme === ThemeState.Dark}
-      ></Schedulely>
-    </div>
-  );
-};

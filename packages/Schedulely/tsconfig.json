@@ -6,6 +6,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "__tests__"],
-  "exclude": [".stories.tsx$", "node_modules"]
+  "include": ["src", "__tests__", "__stories__"],
+  "exclude": ["node_modules"]
 }
