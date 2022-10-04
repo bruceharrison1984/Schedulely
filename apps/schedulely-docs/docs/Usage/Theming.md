@@ -54,18 +54,17 @@ Both included themes have dark modes available.
 
 There are a variety of CSS variables OOTB that should be used in custom components if you wish theming to still work correctly.
 
-| Variable                                     | Description                                                                   |
-| -------------------------------------------- | ----------------------------------------------------------------------------- |
-| `--schedulely-current-month-bg-color`        | background color of the current month's days                                  |
-| `--schedulely-sibling-month-bg-color`        | background color of the sibling month's days                                  |
-| `--schedulely-font-color`                    | font color unless specified by another CSS variable                           |
-| `--schedulely-grid-gap`                      | gap between the calendar grid elements                                        |
-| `--schedulely-day-of-week-header-bg-color`   | the background color of the header that lists the days of the week            |
-| `--schedulely-day-of-week-header-text-color` | the foreground color of the header that lists the days of the week            |
-| `--schedulely-day-height`                    | how tall should calendar days appear (this can dramatically break Schedulely) |
-| `--schedulely-border-color`                  | color of the border that divides the calendar grid                            |
-| `--schedulely-border`                        | how borders within the calendar appear                                        |
-| `--schedulely-border-radius`                 | exterior border radius of the calendar                                        |
+| Variable                                     | Description                                                        |
+| -------------------------------------------- | ------------------------------------------------------------------ |
+| `--schedulely-current-month-bg-color`        | background color of the current month's days                       |
+| `--schedulely-sibling-month-bg-color`        | background color of the sibling month's days                       |
+| `--schedulely-font-color`                    | font color unless specified by another CSS variable                |
+| `--schedulely-grid-gap`                      | gap between the calendar grid elements                             |
+| `--schedulely-day-of-week-header-bg-color`   | the background color of the header that lists the days of the week |
+| `--schedulely-day-of-week-header-text-color` | the foreground color of the header that lists the days of the week |
+| `--schedulely-border-color`                  | color of the border that divides the calendar grid                 |
+| `--schedulely-border`                        | how borders within the calendar appear                             |
+| `--schedulely-border-radius`                 | exterior border radius of the calendar                             |
 
 ## Variable UI Locations
 
