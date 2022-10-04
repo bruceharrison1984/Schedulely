@@ -1,8 +1,8 @@
 import './Schedulely.scss';
 
-import { useLadleContext, ActionType, ThemeState } from '@ladle/react';
 import { CalendarEvent, SchedulelyProps } from '@/types/index';
 import { Schedulely } from './Schedulely';
+import { ThemeState, useLadleContext } from '@ladle/react';
 import chance from 'chance';
 
 const story = {
