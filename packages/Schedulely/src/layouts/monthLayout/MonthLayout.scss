@@ -2,10 +2,12 @@
   /* We use a grid here so WeekLayout and EventLayout can inheirit it's position */
   display: grid;
   height: 100%;
+  grid-auto-rows: 1fr;
 }
 
 .week-container {
   /* We use a grid here so WeekLayout and EventLayout can inheirit it's position */
   display: grid;
   height: 100%;
+  min-height: 4em; /* add a minimum to avoid the calendar from bunching up really small */
 }
