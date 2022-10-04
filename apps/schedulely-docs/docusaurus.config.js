@@ -9,7 +9,7 @@ const config = {
   title: 'schedulely',
   tagline: 'The super-fast, super-small React calendar',
   url: 'https://github.com/',
-  baseUrl: '/bruceharrison1984/Schedulely/',
+  baseUrl: '/Schedulely/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
