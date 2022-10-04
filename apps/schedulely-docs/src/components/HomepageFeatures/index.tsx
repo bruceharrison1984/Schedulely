@@ -45,9 +45,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Schedulely has responsive design in mind and it will automatically
-        adjust to whatever container you place it in. Whether you use fixed
-        sizes, or dynamic sizes, Schedulely will automatically re-size in both X
-        and Y.
+        adjust to whatever container you place it in.
       </>
     ),
   },
