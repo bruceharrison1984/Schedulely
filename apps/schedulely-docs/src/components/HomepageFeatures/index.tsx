@@ -26,8 +26,20 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Schedulely leans on CSS-grid and CSS for display, so it is extremely
-        performant. Memoization and careful planning for re-renders means the
-        smallest updates are made.
+        performant. Memoization and careful planning for re-renders means only
+        the smallest updates are made.
+      </>
+    ),
+  },
+  {
+    title: 'Responsive',
+    Svg: require('@site/static/img/up-down-left-right-solid.svg').default,
+    description: (
+      <>
+        Schedulely has responsive design in mind and it will automatically
+        adjust to whatever container you place it in. Whether you use fixed
+        sizes, or dynamic sizes, Schedulely will automatically re-size in both X
+        and Y.
       </>
     ),
   },

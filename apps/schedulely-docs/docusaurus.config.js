@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Schedulely',
+  title: 'schedulely',
   tagline: 'The super-fast, super-small React calendar',
   url: 'https://github.com/',
   baseUrl: '/bruceharrison1984/Schedulely/',
