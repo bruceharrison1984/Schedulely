@@ -119,6 +119,11 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
 
   const convertIsoToDate = (isoDate: string) => new Date(isoDate);
 
+  const isCurrentMonth = (date: Date) => {
+    const currentMonth = new Date().getMonth();
+    return date.getMonth() === currentMonth;
+  };
+
   return {
     getCalendarView,
     getDaysOfWeek,
@@ -132,6 +137,6 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     getGridStartIndex,
     isEventInWeek,
     convertIsoToDate,
-    isCurrentMonth: () => true,
+    isCurrentMonth,
   };
 };
