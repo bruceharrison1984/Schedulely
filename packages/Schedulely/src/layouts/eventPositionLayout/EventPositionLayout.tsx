@@ -33,7 +33,7 @@ export const EventPositionLayout = ({
       style={{
         gridColumnStart: startIndex,
         gridColumnEnd: endIndex,
-        display: isOverlapping ? 'none' : undefined,
+        display: isOverlapping ? 'none' : 'inline-block',
       }}
       onMouseOver={() => setHighlight(event.id)}
       onMouseLeave={clearHighlight}

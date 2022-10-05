@@ -1,10 +1,4 @@
-import {
-  MutableRefObject,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { MutableRefObject, useLayoutEffect, useRef, useState } from 'react';
 
 type EventIntersectionProps = Omit<IntersectionObserverInit, 'root'> & {
   root: MutableRefObject<null>;
@@ -32,6 +26,7 @@ export const useEventIntersection = ({
     entries.map((x) => x.intersectionRatio < 1 && setIsOverlapping(true));
 
   useLayoutEffect(() => {
+    if (!root) return;
     const eventContainer = eventContainerRef.current;
 
     const observer = new IntersectionObserver(checkIntersection, {
@@ -45,7 +40,7 @@ export const useEventIntersection = ({
     return () => {
       if (eventContainer) observer.unobserve(eventContainer);
     };
-  });
+  }, [root]);
 
   return { eventContainerRef, isOverlapping };
 };
