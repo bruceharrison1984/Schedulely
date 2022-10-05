@@ -41,7 +41,8 @@ export const useKeyboardControls = () => {
     document.addEventListener('keydown', navigatePrevYear);
     document.addEventListener('keydown', navigateNextMonth);
     document.addEventListener('keydown', navigateNextYear);
-    () => {
+
+    return () => {
       document.removeEventListener('keydown', navigatePrevMonth);
       document.removeEventListener('keydown', navigatePrevYear);
       document.removeEventListener('keydown', navigateNextMonth);

@@ -1,5 +1,5 @@
 import { DisplaySize } from '../types';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 
 /**
  * Watch the size of the screen and make it available as the DisplaySize enum.
@@ -20,7 +20,7 @@ export const useScreenSize = () => {
     [setScreenSize, screenSize]
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const tinyQuery = createQueryListener(
       '(max-width: 500px)',
       DisplaySize.tiny
