@@ -32,7 +32,7 @@ export const DefaultHeader: HeaderComponent = ({
       </button>
 
       <div className="header-banner">
-        <h2 style={{ display: 'inline-block' }}>
+        <h2 className="header-text" style={{ display: 'inline-block' }}>
           {month} - {year}
           {isCurrentMonth && (
             <div className="current-month-indicator" title="Current Month" />
