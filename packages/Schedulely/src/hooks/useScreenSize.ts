@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
  * @returns Current display size
  */
 export const useScreenSize = () => {
-  const [screenSize, setScreenSize] = useState<DisplaySize>(DisplaySize.large);
+  const [screenSize, setScreenSize] = useState<DisplaySize>(DisplaySize.tiny);
 
   const createQueryListener = useCallback(
     (mediaQuery: string, size: DisplaySize) => {
@@ -17,23 +17,23 @@ export const useScreenSize = () => {
       window.addEventListener('resize', listener);
       return listener;
     },
-    [setScreenSize, screenSize],
+    [setScreenSize, screenSize]
   );
 
   useEffect(() => {
     const tinyQuery = createQueryListener(
       '(max-width: 500px)',
-      DisplaySize.tiny,
+      DisplaySize.tiny
     );
 
     const mediumQuery = createQueryListener(
       '(max-width: 800px) and (min-width: 501px)',
-      DisplaySize.medium,
+      DisplaySize.medium
     );
 
     const largeQuery = createQueryListener(
       '(min-width: 801px)',
-      DisplaySize.large,
+      DisplaySize.large
     );
 
     return () => {
