@@ -32,12 +32,12 @@ export const DefaultHeader: HeaderComponent = ({
       </button>
 
       <div className="header-banner">
-        <h2 className="header-text" style={{ display: 'inline-block' }}>
+        <span className="header-text">
           {month} - {year}
-          {isCurrentMonth && (
-            <div className="current-month-indicator" title="Current Month" />
-          )}
-        </h2>
+        </span>
+        {isCurrentMonth && (
+          <div className="current-month-indicator" title="Current Month" />
+        )}
       </div>
 
       <button className="header-button" title="Next Year" onClick={onNextYear}>
