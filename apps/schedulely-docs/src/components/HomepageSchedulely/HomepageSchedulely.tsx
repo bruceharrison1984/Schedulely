@@ -9,7 +9,7 @@ const HomepageSchedulely = () => {
   const { isDarkTheme } = useColorMode();
 
   return (
-    <div style={{ width: '50%', margin: 'auto' }}>
+    <div className="homepage-schedulely" style={{ margin: 'auto' }}>
       <Schedulely events={storyEvents} dark={isDarkTheme} />
     </div>
   );

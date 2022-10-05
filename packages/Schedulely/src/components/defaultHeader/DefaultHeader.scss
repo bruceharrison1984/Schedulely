@@ -33,3 +33,33 @@
   display: inline-block;
   position: relative;
 }
+
+@media only screen and (max-width: 600px) {
+  .homepage-schedulely {
+    width: 95%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .homepage-schedulely {
+    width: 95%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .homepage-schedulely {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .homepage-schedulely {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .homepage-schedulely {
+    width: 60%;
+  }
+}

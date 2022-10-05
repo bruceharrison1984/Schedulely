@@ -7,6 +7,7 @@
   box-shadow: dimgray 0.1em 0.1em 0.2em;
   text-overflow: ellipsis;
   overflow: hidden;
+  color: black; /* event text is always black*/
 }
 
 .event:hover {
