@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 
 type EventVisibility = {
   element: HTMLElement | null;
-  isVisible?: boolean;
+  isVisible: boolean;
 };
 
 /**
@@ -16,7 +16,7 @@ export const useEventIntersection = () => {
   const eventContainerRefs = useRef<Record<string, EventVisibility>>({});
 
   const setRefFromKey = (key: string) => (element: HTMLElement | null) => {
-    eventContainerRefs.current[key] = { element };
+    eventContainerRefs.current[key] = { element, isVisible: true };
   };
 
   useLayoutEffect(() => {
@@ -25,7 +25,10 @@ export const useEventIntersection = () => {
     const checkIntersection: IntersectionObserverCallback = (entries) =>
       entries.map((x) => {
         if (x.intersectionRatio < 1) {
-          console.log(x);
+          const eventId = x.target.attributes.getNamedItem('data-eventid');
+          if (eventId) {
+            eventContainerRefs.current[eventId.value].isVisible = false;
+          }
         }
       });
 
@@ -46,5 +49,9 @@ export const useEventIntersection = () => {
     };
   }, [parentContainerRef, eventContainerRefs]);
 
-  return { parentContainerRef, eventContainerRefs, setRefFromKey };
+  return {
+    parentContainerRef,
+    eventContainerRefs: eventContainerRefs.current,
+    setRefFromKey,
+  };
 };

@@ -26,6 +26,9 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { parentContainerRef, eventContainerRefs, setRefFromKey } =
     useEventIntersection();
 
+  const isEventVisible = (eventId: string) =>
+    eventContainerRefs[eventId]?.isVisible ? 'inline-block' : 'none';
+
   return (
     <div ref={parentContainerRef} className="event-week-layout">
       {/** This div creates space for the DayComponent header on the calendar layer */}
@@ -35,26 +38,28 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
           gridColumnEnd: 8,
         }}
       />
-      {events.map((event) => (
-        <div
-          key={event.id}
-          className="event-position-layout"
-          data-eventid={event.id}
-          style={{
-            gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
-            gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
-          }}
-          onMouseOver={() => setHighlight(event.id)}
-          onMouseLeave={clearHighlight}
-          ref={setRefFromKey(event.id)}
-        >
-          <EventComponent
-            event={event}
-            isHovered={isHighlighted(event.id)}
-            onClick={onEventClick}
-          />
-        </div>
-      ))}
+      {parentContainerRef &&
+        events.map((event) => (
+          <div
+            key={event.id}
+            className="event-position-layout"
+            data-eventid={event.id}
+            style={{
+              gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
+              gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
+              // display: isEventVisible(event.id),
+            }}
+            onMouseOver={() => setHighlight(event.id)}
+            onMouseLeave={clearHighlight}
+            ref={setRefFromKey(event.id)}
+          >
+            <EventComponent
+              event={event}
+              isHovered={isHighlighted(event.id)}
+              onClick={onEventClick}
+            />
+          </div>
+        ))}
     </div>
   );
 };
