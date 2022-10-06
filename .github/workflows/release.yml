@@ -39,7 +39,8 @@ jobs:
         with:
           path: ./apps/schedulely-docs/build
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload Schedulely package artifact
+        uses: actions/upload-artifact@v3
         with:
           name: schedulely-package
           path: ./packages/Schedulely
@@ -48,7 +49,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/download-artifact@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          registry-url: https://registry.npmjs.org/
+
+      - name: Update NPM
+        run: npm install -g npm
+      - name: Download Schedulely artifact
+        uses: actions/download-artifact@v3
         with:
           name: schedulely-package
       - name: Publish to NPM
