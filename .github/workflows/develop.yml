@@ -24,12 +24,14 @@ jobs:
           cache: 'npm'
       - name: Update NPM
         run: npm install -g npm
-
       - name: NPM Install
         run: npm ci
-
       - name: Lint
         run: npm run lint
-
       - name: Build
         run: npm run rollup
+      - name: Upload Schedulely package artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: schedulely-package
+          path: ./packages/Schedulely
