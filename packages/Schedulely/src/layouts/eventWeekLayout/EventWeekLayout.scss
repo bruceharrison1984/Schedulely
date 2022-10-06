@@ -10,4 +10,8 @@
   /* These hide event text that overflows */
   white-space: nowrap;
   overflow: hidden;
+
+  & > .event-position-layout {
+    min-width: 0;
+  }
 }

@@ -1,4 +1,3 @@
-import { EventPositionLayout } from '@/layouts/eventPositionLayout';
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { useActions } from '@/hooks/useActions';
 import { useCalendar } from '@/hooks/useCalendar';
@@ -20,6 +19,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     dateAdapter: { getGridStartIndex, getGridEndIndex },
   } = useCalendar();
   const { eventComponent: EventComponent } = useComponents();
+  const { setHighlight, clearHighlight } = useEventHighlight();
   const { isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
   const weekLayoutRef = useRef(null);
@@ -27,7 +27,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   /** Event week height needs to be constrained to week height and prevent overflow */
 
   return (
-    <div ref={weekLayoutRef} className="event-week-layout">
+    <div className="event-week-layout">
       {/** This div creates space for the DayComponent header on the calendar layer */}
       <div
         style={{
@@ -35,22 +35,24 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
           gridColumnEnd: 8,
         }}
       />
-      {weekLayoutRef &&
-        events.map((event) => (
-          <EventPositionLayout
-            key={event.id}
+      {events.map((event) => (
+        <div
+          className="event-position-layout"
+          data-eventid={event.id}
+          style={{
+            gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
+            gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
+          }}
+          onMouseOver={() => setHighlight(event.id)}
+          onMouseLeave={clearHighlight}
+        >
+          <EventComponent
             event={event}
-            startIndex={getGridStartIndex(event.start, daysInweek[0])}
-            endIndex={getGridEndIndex(event.end, daysInweek[6])}
-            parentContainerRef={weekLayoutRef}
-          >
-            <EventComponent
-              event={event}
-              isHovered={isHighlighted(event.id)}
-              onClick={onEventClick}
-            />
-          </EventPositionLayout>
-        ))}
+            isHovered={isHighlighted(event.id)}
+            onClick={onEventClick}
+          />
+        </div>
+      ))}
     </div>
   );
 };
