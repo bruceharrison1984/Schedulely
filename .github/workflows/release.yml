@@ -34,12 +34,33 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Upload documentation artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./apps/schedulely-docs/build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: schedulely-package
+          path: ./packages/Schedulely
+
+  publish-package:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: schedulely-package
       - name: Publish to NPM
         run: npm publish --access public
-        working-directory: ./packages/Schedulely
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
+  ## finalizing the release doesn't depend on Docs deploying because it fails frequently
+  finalize-release:
+    runs-on: ubuntu-latest
+    needs: publish-package
+    steps:
       ## Checkout so we can apply the new tag
       - uses: actions/checkout@v2
         with:
@@ -50,3 +71,14 @@ jobs:
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
           prerelease: false
+
+  deploy-pages:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
