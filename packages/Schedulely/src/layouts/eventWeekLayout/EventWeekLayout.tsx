@@ -40,7 +40,11 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     const checkIntersection: IntersectionObserverCallback = (entries) =>
       entries.map((x) => {
         if (x.intersectionRatio < 1) {
-          console.log(x);
+          var styles = x.target.attributes.getNamedItem('style');
+          if (styles) {
+            styles.value = `${styles.value} display: none;`;
+            x.target.attributes.setNamedItem(styles);
+          }
         }
       });
 
