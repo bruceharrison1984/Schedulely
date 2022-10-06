@@ -37,6 +37,8 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const weekLayoutRef = useRef(null);
 
   useLayoutEffect(() => {
+    if (!weekLayoutRef.current) return;
+
     const checkIntersection: IntersectionObserverCallback = (entries) =>
       entries.map((x) => {
         if (x.intersectionRatio < 1) {
@@ -47,8 +49,6 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
           }
         }
       });
-
-    if (!weekLayoutRef.current) return;
 
     const observer = new IntersectionObserver(checkIntersection, {
       root: weekLayoutRef.current,
