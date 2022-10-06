@@ -31,17 +31,12 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Prettier
-        run: npm run prettier
-
-      - name: Test
-        run: npm run test
-
       - name: Build
         run: npm run build
 
       - name: Publish to NPM
         run: npm publish --access public
+        working-directory: ./packages/Schedulely
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
