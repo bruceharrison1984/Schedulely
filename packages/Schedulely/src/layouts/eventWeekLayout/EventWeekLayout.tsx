@@ -27,7 +27,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     useEventIntersection();
 
   const isEventVisible = (eventId: string) =>
-    eventContainerRefs[eventId]?.isVisible ? 'inline-block' : 'none';
+    eventContainerRefs[eventId]?.isVisible ? 'red solid 1px' : 'black';
 
   return (
     <div ref={parentContainerRef} className="event-week-layout">
@@ -47,7 +47,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
             style={{
               gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
               gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
-              // display: isEventVisible(event.id),
+              border: isEventVisible(event.id),
             }}
             onMouseOver={() => setHighlight(event.id)}
             onMouseLeave={clearHighlight}
