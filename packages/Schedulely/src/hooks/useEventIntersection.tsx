@@ -1,7 +1,8 @@
-import { MutableRefObject, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
-type EventIntersectionProps = Omit<IntersectionObserverInit, 'root'> & {
-  root: MutableRefObject<null>;
+type EventVisibility = {
+  element: HTMLElement | null;
+  isVisible?: boolean;
 };
 
 /**
@@ -10,37 +11,40 @@ type EventIntersectionProps = Omit<IntersectionObserverInit, 'root'> & {
  * @param param0 EventIntersectionProps
  * @returns
  */
-export const useEventIntersection = ({
-  root,
-  rootMargin = '0px 0px -1% 0px',
-  threshold = 1,
-}: EventIntersectionProps) => {
-  const eventContainerRef = useRef(null);
-  const [isOverlapping, setIsOverlapping] = useState<boolean>(false);
+export const useEventIntersection = () => {
+  const parentContainerRef = useRef(null);
+  const eventContainerRefs = useRef<Record<string, EventVisibility>>({});
 
-  /**
-   * If any part of the element is hidden or touching the edge, set overlap to true
-   * @param entries IntersectionObserverEntry[]
-   */
-  const checkIntersection: IntersectionObserverCallback = (entries) =>
-    entries.map((x) => x.intersectionRatio < 1 && setIsOverlapping(true));
+  const setRefFromKey = (key: string) => (element: HTMLElement | null) => {
+    eventContainerRefs.current[key] = { element };
+  };
 
   useLayoutEffect(() => {
-    if (!root) return;
-    const eventContainer = eventContainerRef.current;
+    if (!parentContainerRef.current) return;
+
+    const checkIntersection: IntersectionObserverCallback = (entries) =>
+      entries.map((x) => {
+        if (x.intersectionRatio < 1) {
+          console.log(x);
+        }
+      });
 
     const observer = new IntersectionObserver(checkIntersection, {
-      root: root.current,
-      rootMargin,
-      threshold,
+      root: parentContainerRef.current,
+      rootMargin: '0px 0px -1% 0px',
+      threshold: 1,
     });
 
-    if (eventContainer) observer.observe(eventContainer);
+    Object.values(eventContainerRefs.current).map(({ element }) => {
+      if (element) observer.observe(element);
+    });
 
     return () => {
-      if (eventContainer) observer.unobserve(eventContainer);
+      Object.values(eventContainerRefs.current).map(({ element }) => {
+        if (element) observer.unobserve(element);
+      });
     };
-  }, [root]);
+  }, [parentContainerRef, eventContainerRefs]);
 
-  return { eventContainerRef, isOverlapping };
+  return { parentContainerRef, eventContainerRefs, setRefFromKey };
 };
