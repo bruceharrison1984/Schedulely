@@ -1,4 +1,5 @@
 .event-week-layout {
+  position: relative;
   display: grid;
   grid-area: 1 / 1;
   grid-template-columns: repeat(7, 1fr);
@@ -6,12 +7,16 @@
   z-index: 1; /* TODO: Figure out what is making this necessary */
   gap: 0.2em; /* space between events */
   grid-auto-flow: dense;
-  grid-auto-rows: 1fr;
   /* These hide event text that overflows */
   white-space: nowrap;
   overflow: hidden;
 
   & > .event-position-layout {
     min-width: 0;
+    min-height: 0;
+  }
+
+  & > .event-position-layout:nth-child(n + 6) {
+    display: none;
   }
 }
