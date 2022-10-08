@@ -3,6 +3,7 @@
   display: grid;
   /* Build container for maximum number of rows to avoid breaking out of the parent container and overlapping other content */
   grid-template-rows: repeat(6, minmax(0, 1fr));
+  position: relative;
 }
 
 .week-container {

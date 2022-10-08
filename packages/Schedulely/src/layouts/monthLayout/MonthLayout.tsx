@@ -15,10 +15,18 @@ export const MonthLayout = () => {
       <HighlightProvider>
         {calendarWithEvents.map((week, idx) => (
           <div key={idx} className="week-container" data-week={idx}>
-            <EventWeekLayout
-              events={week.events}
-              daysInweek={week.daysInWeek}
-            />
+            <div
+              style={{
+                height: '100%',
+                width: '100%',
+                position: 'absolute',
+              }}
+            >
+              <EventWeekLayout
+                events={week.events}
+                daysInweek={week.daysInWeek}
+              />
+            </div>
             <WeekLayout
               eventsOnDays={week.eventsOnDays}
               dates={week.daysInWeek}
