@@ -7,7 +7,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
  * @param param0 EventIntersectionProps
  * @returns
  */
-export const useEventIntersection = (events: InternalCalendarEvent[]) => {
+export const useEventIntersection = () => {
   const parentContainerRef = useRef(null);
   const eventContainerRefs = useRef<Record<string, HTMLElement | null>>({});
   const [hiddenEvents, setHiddenEvents] = useState<Record<string, boolean>>({});
