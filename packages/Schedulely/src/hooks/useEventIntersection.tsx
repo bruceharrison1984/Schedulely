@@ -1,8 +1,5 @@
-import { MutableRefObject, useLayoutEffect, useRef, useState } from 'react';
-
-type EventIntersectionProps = Omit<IntersectionObserverInit, 'root'> & {
-  root: MutableRefObject<null>;
-};
+import { InternalCalendarEvent } from '..';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 /**
  * Check if the eventContainerRef is outside the bounds of the root container.
@@ -10,37 +7,59 @@ type EventIntersectionProps = Omit<IntersectionObserverInit, 'root'> & {
  * @param param0 EventIntersectionProps
  * @returns
  */
-export const useEventIntersection = ({
-  root,
-  rootMargin = '0px 0px -1% 0px',
-  threshold = 1,
-}: EventIntersectionProps) => {
-  const eventContainerRef = useRef(null);
-  const [isOverlapping, setIsOverlapping] = useState<boolean>(false);
+export const useEventIntersection = () => {
+  const parentContainerRef = useRef(null);
+  const eventContainerRefs = useRef<Record<string, HTMLElement | null>>({});
+  const [hiddenEvents, setHiddenEvents] = useState<Record<string, boolean>>({});
 
-  /**
-   * If any part of the element is hidden or touching the edge, set overlap to true
-   * @param entries IntersectionObserverEntry[]
-   */
+  const setRefFromKey = (key: string) => (element: HTMLElement | null) => {
+    eventContainerRefs.current[key] = element;
+  };
+
   const checkIntersection: IntersectionObserverCallback = (entries) =>
-    entries.map((x) => x.intersectionRatio < 1 && setIsOverlapping(true));
-
-  useLayoutEffect(() => {
-    if (!root) return;
-    const eventContainer = eventContainerRef.current;
-
-    const observer = new IntersectionObserver(checkIntersection, {
-      root: root.current,
-      rootMargin,
-      threshold,
+    entries.map((x) => {
+      const eventId = x.target.attributes.getNamedItem('data-eventid');
+      if (eventId) {
+        if (x.intersectionRatio < 1) {
+          setHiddenEvents((current) => {
+            current[eventId.value] = true;
+            return current;
+          });
+        } else {
+          setHiddenEvents((current) => {
+            current[eventId.value] = false;
+            return current;
+          });
+        }
+      }
     });
 
-    if (eventContainer) observer.observe(eventContainer);
+  useLayoutEffect(() => {
+    console.log('running hook');
+    const observer = new IntersectionObserver(checkIntersection, {
+      root: parentContainerRef.current,
+      rootMargin: '0px 0px -15% 0px',
+      threshold: 1,
+    });
+
+    if (eventContainerRefs.current)
+      Object.values(eventContainerRefs.current).map((element) => {
+        if (element) observer.observe(element);
+      });
 
     return () => {
-      if (eventContainer) observer.unobserve(eventContainer);
+      if (eventContainerRefs.current)
+        Object.values(eventContainerRefs.current).map((element) => {
+          if (element) observer.unobserve(element);
+        });
+      observer.disconnect();
     };
-  }, [root]);
+  });
 
-  return { eventContainerRef, isOverlapping };
+  return {
+    parentContainerRef,
+    hiddenEvents,
+    eventContainerRefs: eventContainerRefs.current,
+    setRefFromKey,
+  };
 };

@@ -1,13 +1,30 @@
 .event-week-layout {
-  display: grid;
-  grid-area: 1 / 1;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  z-index: 1; /* TODO: Figure out what is making this necessary */
-  gap: 0.2em; /* space between events */
-  grid-auto-flow: dense;
-  grid-auto-rows: 1fr;
-  /* These hide event text that overflows */
-  white-space: nowrap;
+  height: 100%;
+  width: 100%;
+  position: absolute;
   overflow: hidden;
+
+  > .event-week-layout-grid {
+    position: relative;
+    display: grid;
+    grid-area: 1 / 1;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    z-index: 1; /* TODO: Figure out what is making this necessary */
+    gap: 0.2em; /* space between events */
+    grid-auto-flow: dense;
+    // /* These hide event text that overflows */
+    white-space: nowrap;
+
+    /** This div creates space for the DayComponent header on the calendar layer */
+    > .event-week-layout-header-spacer {
+      grid-column-start: 1;
+      grid-column-end: 8;
+    }
+
+    & > .event-position-layout {
+      min-width: 0;
+      min-height: 0;
+    }
+  }
 }
