@@ -15,7 +15,7 @@ const options = defineConfig({
   external: ['react', 'react-dom'],
   plugins: [
     copy({
-      targets: [{ src: '../../README.md', dest: './dist/' }],
+      targets: [{ src: '../../README.md', dest: './' }],
     }),
     postcss({ extract: 'index.css', sourceMap: true }),
     ts({

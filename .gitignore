@@ -3,6 +3,8 @@
 dist
 .turbo
 
+packages/**/*.md
+
 # service worker
 public/sw.js
 public/workbox-*.js
