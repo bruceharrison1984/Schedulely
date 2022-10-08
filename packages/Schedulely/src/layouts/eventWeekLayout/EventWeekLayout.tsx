@@ -30,15 +30,8 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     eventContainerRefs[eventId]?.isVisible ? 'red solid 1px' : 'black';
 
   return (
-    <div
-      ref={parentContainerRef}
-      style={{
-        height: '100%',
-        width: '100%',
-        position: 'absolute',
-      }}
-    >
-      <div className="event-week-layout">
+    <div className="event-week-layout" ref={parentContainerRef}>
+      <div className="event-week-layout-grid">
         {/** This div creates space for the DayComponent header on the calendar layer */}
         <div
           style={{

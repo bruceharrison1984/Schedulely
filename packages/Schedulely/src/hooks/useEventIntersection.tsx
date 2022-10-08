@@ -20,7 +20,7 @@ export const useEventIntersection = () => {
   };
 
   useLayoutEffect(() => {
-    if (!parentContainerRef.current) return;
+    // if (!parentContainerRef.current) return;
 
     const checkIntersection: IntersectionObserverCallback = (entries) =>
       entries.map((x) => {
