@@ -12,10 +12,10 @@ function HomepageHeader() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
-        {/* <p className="hero__subtitle">
-          The super-fast, super-small React calendar
-        </p> */}
-        <p className="hero__subtitle">🚧 Work in progress 🚧</p>
+        <p>
+          🚧 There be dragons here. Please bear with us until the 1.0.0 release
+          🚧
+        </p>
       </div>
     </header>
   );

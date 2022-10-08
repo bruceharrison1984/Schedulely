@@ -16,4 +16,4 @@ Schedulely provides a minimal system for navigating months by using the keyboard
 
 ## Override
 
-Currently, overriding the keyboard buttons used for actions is not supported but may be added in the future if people request it.
+Currently, overriding the keyboard buttons used for actions is not supported but may be added in the future requested.

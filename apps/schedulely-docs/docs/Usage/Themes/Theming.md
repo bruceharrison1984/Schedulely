@@ -35,12 +35,6 @@ import './my-theme.css';
 <Schedulely ... theme="my-theme" dark={true} />
 ```
 
-## Dark Mode
-
-Dark mode is supported by setting the `dark` attribute to any value other than `undefined` on the main schedulely component. This will
-cause the `data-dark` attribute to appear on the root Schedulely element. Specific CSS selectors can be used to based on this attribute.
-See the included styles for guidance.
-
 ## Included Themes
 
 Themes can be demoed in the Storybook application by changing the theme prop to one of the following values:
