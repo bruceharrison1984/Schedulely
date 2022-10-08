@@ -30,36 +30,45 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     eventContainerRefs[eventId]?.isVisible ? 'red solid 1px' : 'black';
 
   return (
-    <div ref={parentContainerRef} className="event-week-layout">
-      {/** This div creates space for the DayComponent header on the calendar layer */}
-      <div
-        style={{
-          gridColumnStart: 1,
-          gridColumnEnd: 8,
-        }}
-      />
-      {parentContainerRef &&
-        events.map((event) => (
-          <div
-            key={event.id}
-            className="event-position-layout"
-            data-eventid={event.id}
-            style={{
-              gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
-              gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
-              border: isEventVisible(event.id),
-            }}
-            onMouseOver={() => setHighlight(event.id)}
-            onMouseLeave={clearHighlight}
-            ref={setRefFromKey(event.id)}
-          >
-            <EventComponent
-              event={event}
-              isHovered={isHighlighted(event.id)}
-              onClick={onEventClick}
-            />
-          </div>
-        ))}
+    <div
+      ref={parentContainerRef}
+      style={{
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
+      }}
+    >
+      <div className="event-week-layout">
+        {/** This div creates space for the DayComponent header on the calendar layer */}
+        <div
+          style={{
+            gridColumnStart: 1,
+            gridColumnEnd: 8,
+          }}
+        />
+        {parentContainerRef &&
+          events.map((event) => (
+            <div
+              key={event.id}
+              className="event-position-layout"
+              data-eventid={event.id}
+              style={{
+                gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
+                gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
+                border: isEventVisible(event.id),
+              }}
+              onMouseOver={() => setHighlight(event.id)}
+              onMouseLeave={clearHighlight}
+              ref={setRefFromKey(event.id)}
+            >
+              <EventComponent
+                event={event}
+                isHovered={isHighlighted(event.id)}
+                onClick={onEventClick}
+              />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
