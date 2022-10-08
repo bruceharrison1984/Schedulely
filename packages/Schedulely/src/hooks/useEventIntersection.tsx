@@ -1,3 +1,4 @@
+import { InternalCalendarEvent } from '..';
 import { useLayoutEffect, useRef, useState } from 'react';
 
 /**
@@ -6,7 +7,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
  * @param param0 EventIntersectionProps
  * @returns
  */
-export const useEventIntersection = () => {
+export const useEventIntersection = (events: InternalCalendarEvent[]) => {
   const parentContainerRef = useRef(null);
   const eventContainerRefs = useRef<Record<string, HTMLElement | null>>({});
   const [hiddenEvents, setHiddenEvents] = useState<Record<string, boolean>>({});
@@ -34,25 +35,26 @@ export const useEventIntersection = () => {
     });
 
   useLayoutEffect(() => {
-    if (!parentContainerRef.current) return;
-
+    console.log('running hook');
     const observer = new IntersectionObserver(checkIntersection, {
       root: parentContainerRef.current,
-      rootMargin: '0px 0px -1% 0px',
-      threshold: 0.5,
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 1,
     });
 
-    Object.values(eventContainerRefs.current).map((element) => {
-      if (element) observer.observe(element);
-    });
+    if (eventContainerRefs.current)
+      Object.values(eventContainerRefs.current).map((element) => {
+        if (element) observer.observe(element);
+      });
 
     return () => {
-      Object.values(eventContainerRefs.current).map((element) => {
-        if (element) observer.unobserve(element);
-      });
+      if (eventContainerRefs.current)
+        Object.values(eventContainerRefs.current).map((element) => {
+          if (element) observer.unobserve(element);
+        });
       observer.disconnect();
     };
-  }, [parentContainerRef.current, eventContainerRefs]);
+  }, [parentContainerRef.current, eventContainerRefs.current, events]);
 
   return {
     parentContainerRef,

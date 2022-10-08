@@ -24,10 +24,10 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { onEventClick } = useActions();
 
   const { parentContainerRef, hiddenEvents, setRefFromKey } =
-    useEventIntersection();
+    useEventIntersection(events);
 
-  const isEventVisible = (eventId: string) =>
-    hiddenEvents[eventId] ? 'red solid 1px' : 'black';
+  const isEventHidden = (eventId: string) =>
+    hiddenEvents[eventId] ? 'hidden' : 'visible';
 
   return (
     <div className="event-week-layout" ref={parentContainerRef}>
@@ -41,7 +41,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
             style={{
               gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
               gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
-              border: isEventVisible(event.id),
+              visibility: isEventHidden(event.id),
             }}
             onMouseOver={() => setHighlight(event.id)}
             onMouseLeave={clearHighlight}
