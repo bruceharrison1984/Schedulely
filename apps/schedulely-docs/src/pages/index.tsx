@@ -30,7 +30,9 @@ export default function Home(): JSX.Element {
     >
       <HomepageHeader />
       <main>
-        <HomepageSchedulely />
+        <div style={{ height: '600px' }}>
+          <HomepageSchedulely />
+        </div>
         <HomepageFeatures />
       </main>
     </Layout>
