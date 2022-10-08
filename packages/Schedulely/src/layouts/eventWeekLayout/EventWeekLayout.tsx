@@ -23,44 +23,37 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
 
-  const { parentContainerRef, eventContainerRefs, setRefFromKey } =
+  const { parentContainerRef, hiddenEvents, setRefFromKey } =
     useEventIntersection();
 
   const isEventVisible = (eventId: string) =>
-    eventContainerRefs[eventId]?.isVisible ? 'red solid 1px' : 'black';
+    hiddenEvents[eventId] ? 'red solid 1px' : 'black';
 
   return (
     <div className="event-week-layout" ref={parentContainerRef}>
       <div className="event-week-layout-grid">
-        {/** This div creates space for the DayComponent header on the calendar layer */}
-        <div
-          style={{
-            gridColumnStart: 1,
-            gridColumnEnd: 8,
-          }}
-        />
-        {parentContainerRef &&
-          events.map((event) => (
-            <div
-              key={event.id}
-              className="event-position-layout"
-              data-eventid={event.id}
-              style={{
-                gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
-                gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
-                border: isEventVisible(event.id),
-              }}
-              onMouseOver={() => setHighlight(event.id)}
-              onMouseLeave={clearHighlight}
-              ref={setRefFromKey(event.id)}
-            >
-              <EventComponent
-                event={event}
-                isHovered={isHighlighted(event.id)}
-                onClick={onEventClick}
-              />
-            </div>
-          ))}
+        <div className="event-week-layout-header-spacer" />
+        {events.map((event) => (
+          <div
+            key={event.id}
+            className="event-position-layout"
+            data-eventid={event.id}
+            style={{
+              gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
+              gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
+              border: isEventVisible(event.id),
+            }}
+            onMouseOver={() => setHighlight(event.id)}
+            onMouseLeave={clearHighlight}
+            ref={setRefFromKey(event.id)}
+          >
+            <EventComponent
+              event={event}
+              isHovered={isHighlighted(event.id)}
+              onClick={onEventClick}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

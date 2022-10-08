@@ -16,6 +16,12 @@
     // /* These hide event text that overflows */
     white-space: nowrap;
 
+    /** This div creates space for the DayComponent header on the calendar layer */
+    > .event-week-layout-header-spacer {
+      grid-column-start: 1;
+      grid-column-end: 8;
+    }
+
     & > .event-position-layout {
       min-width: 0;
       min-height: 0;
