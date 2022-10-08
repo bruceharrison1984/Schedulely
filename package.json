@@ -41,6 +41,7 @@
     "postcss": "^8.4.16",
     "prettier": "latest",
     "rollup": "^2.79.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-progress": "^1.1.2",
     "rollup-plugin-ts": "^3.0.2",

@@ -1,4 +1,5 @@
 import { defineConfig } from 'rollup';
+import copy from 'rollup-plugin-copy';
 import inject from '@rollup/plugin-inject';
 import postcss from 'rollup-plugin-postcss';
 import ts from 'rollup-plugin-ts';
@@ -13,6 +14,9 @@ const options = defineConfig({
   },
   external: ['react', 'react-dom'],
   plugins: [
+    copy({
+      targets: [{ src: '../../README.md', dest: './dist/' }],
+    }),
     postcss({ extract: 'index.css', sourceMap: true }),
     ts({
       cwd: '.',

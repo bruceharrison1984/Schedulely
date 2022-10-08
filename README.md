@@ -4,7 +4,9 @@
 
 _This component is still very early in development. Everything is currently still subject to massive change, so use at your own risk!_
 
-![Large Calendar Preview](/assets/large_preview.png)
+## 📚 Preview & Documentation
+
+- [Documentation and previews can be found in the docs](https://bruceharrison1984.github.io/Schedulely/)
 
 ---
 
@@ -22,6 +24,6 @@ The ultimate goal for this library was to create a framework that allowed for us
 
 The included default calendar components can be simply used as is, but the real power is being able to easily override these components. This allows consumers to use any state-management, styles, UX, or _whatever_ without needing them included in this library, and without interfering with it's overall behavior.
 
-## 📚 Documentation
+## 📚 Preview & Documentation
 
-- Documentation can be found [**here**](https://bruceharrison1984.github.io/Schedulely/)
+- [Documentation and previews can be found in the docs](https://bruceharrison1984.github.io/Schedulely/)
