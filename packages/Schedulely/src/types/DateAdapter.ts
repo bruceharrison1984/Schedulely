@@ -1,3 +1,5 @@
+import { ComponentSize } from './ComponentSize';
+
 /**
  * Common interface for porting date libraries so they can be used with Schedulely
  */
@@ -12,7 +14,7 @@ export interface DateTimeAdapter {
   getDayNumber: (date: Date) => number;
 
   /** Get full names of all days of the week */
-  getDaysOfWeek: (displaySize: DisplaySize) => string[];
+  getDaysOfWeek: (displaySize: ComponentSize) => string[];
 
   /** Get the day of week grid index for the end of the event. Used for positioning within the Week css-grid. */
   getGridEndIndex: (eventEndDate: Date, endOfWeek: Date) => number;

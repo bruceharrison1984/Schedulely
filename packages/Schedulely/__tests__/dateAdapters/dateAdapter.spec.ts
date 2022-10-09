@@ -1,4 +1,5 @@
-import { DateTimeAdapter, DisplaySize } from '@/types/index';
+import { ComponentSize } from '@/types/ComponentSize';
+import { DateTimeAdapter } from '@/types/index';
 import { createDefaultAdapter } from '@/dateAdapters/date';
 import {
   getAddMonthsToDateTestCases,
@@ -116,7 +117,7 @@ describe('Date Adapter', () => {
     });
 
     describe('getDaysOfWeek', () => {
-      it.each<{ format: DisplaySize; expected: string[] }>(
+      it.each<{ format: ComponentSize; expected: string[] }>(
         getDaysOfWeekTestCases()
       )('with format "$format" returns $expected', ({ format, expected }) => {
         const result = adapter.getDaysOfWeek(format);

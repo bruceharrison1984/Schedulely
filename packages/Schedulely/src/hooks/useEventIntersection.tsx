@@ -34,14 +34,13 @@ export const useEventIntersection = () => {
       }
     });
 
-  useLayoutEffect(() => {
-    console.log('running hook');
-    const observer = new IntersectionObserver(checkIntersection, {
-      root: parentContainerRef.current,
-      rootMargin: '0px 0px -15% 0px',
-      threshold: 1,
-    });
+  const observer = new IntersectionObserver(checkIntersection, {
+    root: parentContainerRef.current,
+    rootMargin: '0px 0px -15% 0px',
+    threshold: 1,
+  });
 
+  useLayoutEffect(() => {
     if (eventContainerRefs.current)
       Object.values(eventContainerRefs.current).map((element) => {
         if (element) observer.observe(element);

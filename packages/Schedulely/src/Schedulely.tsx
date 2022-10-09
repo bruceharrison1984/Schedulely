@@ -8,6 +8,8 @@ import {
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';
 import { createDefaultAdapter } from './dateAdapters';
+import { useEffect } from 'react';
+import useResizeObserver from './hooks/useResizeObserver';
 
 /**
  * Create an instance of Schedulely
@@ -26,6 +28,8 @@ export const Schedulely = ({
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
+  const { observedRef, breakSize } = useResizeObserver();
+
   return (
     <div
       id="schedulely"
@@ -37,6 +41,7 @@ export const Schedulely = ({
         gridTemplateColumns: '1fr',
         gridTemplateRows: 'auto auto 1fr',
       }}
+      ref={observedRef}
     >
       <ActionProvider actions={actions}>
         <ComponentProvider calendarComponents={schedulelyComponents}>
@@ -44,6 +49,7 @@ export const Schedulely = ({
             initialDate={initialDate}
             dateAdapter={dateAdapter}
             calendarEvents={events}
+            componentSize={breakSize}
           >
             <HeaderLayout />
             <DayOfWeekLayout />
