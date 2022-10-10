@@ -7,6 +7,9 @@
     "react",
     "month"
   ],
+  "sideEffects": [
+    "*.css"
+  ],
   "description": "CSS-grid based React calendar with a focus on extensibility and small package size",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",

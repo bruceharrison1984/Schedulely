@@ -6,14 +6,14 @@ import { useColorMode } from '@docusaurus/theme-common';
 import React from 'react';
 
 const HomepageSchedulely = () => {
-  const { isDarkTheme } = useColorMode();
+  const { colorMode } = useColorMode();
 
   return (
     <div
       className="homepage-schedulely"
       style={{ margin: 'auto', height: '100%' }}
     >
-      <Schedulely events={storyEvents} dark={isDarkTheme} />
+      <Schedulely events={storyEvents} dark={colorMode === 'dark'} />
     </div>
   );
 };
