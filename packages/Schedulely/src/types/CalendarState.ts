@@ -1,3 +1,4 @@
+import { ComponentSize } from './ComponentSize';
 import { DateTimeAdapter } from '.';
 import { InternalEventWeek } from './InternalEventWeek';
 
@@ -9,7 +10,7 @@ export type CalendarState = {
   dateAdapter: DateTimeAdapter;
 
   /** Array with localized names of the days of the week */
-  daysOfWeek: string[];
+  getDaysOfWeek: (componentSize: ComponentSize) => string[];
 
   /** Advance the calendar one month */
   onNextMonth: () => void;

@@ -5,6 +5,7 @@ import {
   InternalCalendarEvent,
   InternalEventWeek,
 } from '@/types/index';
+import { ComponentSize } from '@/types/ComponentSize';
 import {
   PropsWithChildren,
   createContext,
@@ -12,7 +13,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useScreenSize } from '@/hooks/useScreenSize';
 
 export const CalendarContext = createContext<CalendarState | null>(null);
 CalendarContext.displayName = 'CalendarContext';
@@ -35,19 +35,17 @@ export const CalendarProvider = ({
   children,
 }: PropsWithChildren<CalendarProviderProps>) => {
   const [currentMonth, setCurrentMonth] = useState(
-    dateAdapter.convertIsoToDate(initialDate),
+    dateAdapter.convertIsoToDate(initialDate)
   );
 
-  const screenSize = useScreenSize();
-
-  const daysOfWeek = useMemo(
-    () => dateAdapter.getDaysOfWeek(screenSize),
-    [screenSize, dateAdapter],
+  const getDaysOfWeek = useCallback(
+    (componentSize: ComponentSize) => dateAdapter.getDaysOfWeek(componentSize),
+    [dateAdapter]
   );
 
   const calendarView = useMemo(
     () => dateAdapter.getCalendarView(currentMonth),
-    [currentMonth, dateAdapter],
+    [currentMonth, dateAdapter]
   );
 
   const events = useMemo(
@@ -66,9 +64,9 @@ export const CalendarProvider = ({
         .filter(
           (event) =>
             dateAdapter.isSameMonth(event.start, currentMonth) ||
-            dateAdapter.isSameMonth(event.end, currentMonth),
+            dateAdapter.isSameMonth(event.end, currentMonth)
         ),
-    [currentMonth, calendarEvents, dateAdapter],
+    [currentMonth, calendarEvents, dateAdapter]
   );
 
   const calendarWithEvents = useMemo<InternalEventWeek[]>(
@@ -78,42 +76,42 @@ export const CalendarProvider = ({
         weekEnd: week[6],
         daysInWeek: week,
         events: events.filter((event) =>
-          dateAdapter.isEventInWeek(event.start, event.end, week),
+          dateAdapter.isEventInWeek(event.start, event.end, week)
         ),
         eventsOnDays: week.map((day) => ({
           date: day,
           events: events.filter(
-            (event) => event.start <= day && event.end >= day,
+            (event) => event.start <= day && event.end >= day
           ),
         })),
       })),
-    [calendarView, events, dateAdapter],
+    [calendarView, events, dateAdapter]
   );
 
   const onNextMonth = useCallback(
     () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, 1)),
-    [dateAdapter],
+    [dateAdapter]
   );
 
   const onNextYear = useCallback(
     () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, 12)),
-    [dateAdapter],
+    [dateAdapter]
   );
 
   const onPrevMonth = useCallback(
     () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -1)),
-    [dateAdapter],
+    [dateAdapter]
   );
 
   const onPrevYear = useCallback(
     () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -12)),
-    [dateAdapter],
+    [dateAdapter]
   );
 
   const contextValue: CalendarState = {
     currentMonth,
     dateAdapter: dateAdapter,
-    daysOfWeek: daysOfWeek,
+    getDaysOfWeek,
     onNextMonth,
     onNextYear,
     onPrevMonth,

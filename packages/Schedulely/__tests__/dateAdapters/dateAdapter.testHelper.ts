@@ -1,3 +1,4 @@
+import { ComponentSize } from '@/types/ComponentSize';
 import { DisplaySize } from '@/types/DateAdapter';
 import chance from 'chance';
 
@@ -222,7 +223,7 @@ export const getMonthNameFromDateTestCases = () => [
 
 export const getDaysOfWeekTestCases = () => [
   {
-    format: DisplaySize.large,
+    format: 'large' as ComponentSize,
     expected: [
       'Sunday',
       'Monday',
@@ -234,11 +235,11 @@ export const getDaysOfWeekTestCases = () => [
     ],
   },
   {
-    format: DisplaySize.medium,
+    format: 'medium' as ComponentSize,
     expected: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   },
   {
-    format: DisplaySize.tiny,
+    format: 'small' as ComponentSize,
     expected: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
   },
 ];
