@@ -23,6 +23,7 @@ export default function useResizeObserver() {
       if (observer && observedRef.current) {
         observer.unobserve(observedRef.current);
       }
+      observer.disconnect();
     };
   }, [observedRef]);
 
