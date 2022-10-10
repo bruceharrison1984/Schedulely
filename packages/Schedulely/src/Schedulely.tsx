@@ -28,8 +28,6 @@ export const Schedulely = ({
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
-  const { observedRef, breakSize } = useResizeObserver();
-
   return (
     <div
       id="schedulely"
@@ -41,7 +39,6 @@ export const Schedulely = ({
         gridTemplateColumns: '1fr',
         gridTemplateRows: 'auto auto 1fr',
       }}
-      ref={observedRef}
     >
       <ActionProvider actions={actions}>
         <ComponentProvider calendarComponents={schedulelyComponents}>
@@ -49,7 +46,6 @@ export const Schedulely = ({
             initialDate={initialDate}
             dateAdapter={dateAdapter}
             calendarEvents={events}
-            componentSize={breakSize}
           >
             <HeaderLayout />
             <DayOfWeekLayout />

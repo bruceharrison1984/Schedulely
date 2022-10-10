@@ -21,7 +21,6 @@ interface CalendarProviderProps {
   dateAdapter: DateTimeAdapter;
   initialDate: string;
   calendarEvents: CalendarEvent[];
-  componentSize: ComponentSize;
 }
 
 /**
@@ -34,15 +33,14 @@ export const CalendarProvider = ({
   initialDate,
   calendarEvents,
   children,
-  componentSize,
 }: PropsWithChildren<CalendarProviderProps>) => {
   const [currentMonth, setCurrentMonth] = useState(
     dateAdapter.convertIsoToDate(initialDate)
   );
 
-  const daysOfWeek = useMemo(
-    () => dateAdapter.getDaysOfWeek(componentSize),
-    [componentSize, dateAdapter]
+  const getDaysOfWeek = useCallback(
+    (componentSize: ComponentSize) => dateAdapter.getDaysOfWeek(componentSize),
+    [dateAdapter]
   );
 
   const calendarView = useMemo(
@@ -113,7 +111,7 @@ export const CalendarProvider = ({
   const contextValue: CalendarState = {
     currentMonth,
     dateAdapter: dateAdapter,
-    daysOfWeek: daysOfWeek,
+    getDaysOfWeek,
     onNextMonth,
     onNextYear,
     onPrevMonth,
