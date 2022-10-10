@@ -6,27 +6,25 @@ export default function useResizeObserver() {
   const breakpoints = { small: 500, large: 800 };
   const [breakSize, setBreakSize] = useState<ComponentSize>('small');
 
-  const observer = useRef(
-    new ResizeObserver((entries) => {
+  useLayoutEffect(() => {
+    const observer = new ResizeObserver((entries) => {
       const { width } = entries[0].contentRect;
       if (width <= breakpoints.small) setBreakSize('small');
       if (width > breakpoints.small && width < breakpoints.large)
         setBreakSize('medium');
       if (width >= breakpoints.large) setBreakSize('large');
-    })
-  );
+    });
 
-  useLayoutEffect(() => {
-    if (observedRef.current) {
-      observer.current.observe(observedRef.current);
+    if (observer && observedRef.current) {
+      observer.observe(observedRef.current);
     }
 
     return () => {
-      if (observedRef.current) {
-        observer.current.unobserve(observedRef.current);
+      if (observer && observedRef.current) {
+        observer.unobserve(observedRef.current);
       }
     };
-  }, [observedRef, observer]);
+  }, [observedRef]);
 
   return { observedRef, breakSize };
 }
