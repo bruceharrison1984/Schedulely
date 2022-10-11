@@ -19,15 +19,14 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     dateAdapter: { getGridStartIndex, getGridEndIndex },
   } = useCalendar();
   const { eventComponent: EventComponent } = useComponents();
-  const { setHighlight, clearHighlight } = useEventHighlight();
-  const { isHighlighted } = useEventHighlight();
+  const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
 
   const { parentContainerRef, hiddenEvents, setRefFromKey } =
     useEventIntersection();
 
   const isEventHidden = (eventId: string) =>
-    hiddenEvents[eventId] ? 'hidden' : 'visible';
+    hiddenEvents.includes(eventId) ? 'hidden' : 'visible';
 
   return (
     <div className="event-week-layout" ref={parentContainerRef}>

@@ -1,3 +1,4 @@
+import { EventIntersectionProvider } from '@/providers/EventIntersectionProvider';
 import { EventWeekLayout } from '@/layouts/eventWeekLayout';
 import { HighlightProvider } from '@/providers/HightlightProvider';
 import { WeekLayout } from '@/layouts/weekLayout';
@@ -15,10 +16,12 @@ export const MonthLayout = () => {
       <HighlightProvider>
         {calendarWithEvents.map((week, idx) => (
           <div key={idx} className="week-container" data-week={idx}>
-            <EventWeekLayout
-              events={week.events}
-              daysInweek={week.daysInWeek}
-            />
+            <EventIntersectionProvider>
+              <EventWeekLayout
+                events={week.events}
+                daysInweek={week.daysInWeek}
+              />
+            </EventIntersectionProvider>
             <WeekLayout
               eventsOnDays={week.eventsOnDays}
               dates={week.daysInWeek}

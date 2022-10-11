@@ -7,9 +7,8 @@ import {
 } from '@/providers/index';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';
+import { StrictMode } from 'react';
 import { createDefaultAdapter } from './dateAdapters';
-import { useEffect } from 'react';
-import useResizeObserver from './hooks/useResizeObserver';
 
 /**
  * Create an instance of Schedulely
@@ -29,30 +28,32 @@ export const Schedulely = ({
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
   return (
-    <div
-      id="schedulely"
-      className={[...additionalClassNames, 'schedulely'].join(' ')}
-      data-theme={theme}
-      data-dark={dark === true ? true : undefined}
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        gridTemplateRows: 'auto auto 1fr',
-      }}
-    >
-      <ActionProvider actions={actions}>
-        <ComponentProvider calendarComponents={schedulelyComponents}>
-          <CalendarProvider
-            initialDate={initialDate}
-            dateAdapter={dateAdapter}
-            calendarEvents={events}
-          >
-            <HeaderLayout />
-            <DayOfWeekLayout />
-            <MonthLayout />
-          </CalendarProvider>
-        </ComponentProvider>
-      </ActionProvider>
-    </div>
+    <StrictMode>
+      <div
+        id="schedulely"
+        className={[...additionalClassNames, 'schedulely'].join(' ')}
+        data-theme={theme}
+        data-dark={dark === true ? true : undefined}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gridTemplateRows: 'auto auto 1fr',
+        }}
+      >
+        <ActionProvider actions={actions}>
+          <ComponentProvider calendarComponents={schedulelyComponents}>
+            <CalendarProvider
+              initialDate={initialDate}
+              dateAdapter={dateAdapter}
+              calendarEvents={events}
+            >
+              <HeaderLayout />
+              <DayOfWeekLayout />
+              <MonthLayout />
+            </CalendarProvider>
+          </ComponentProvider>
+        </ActionProvider>
+      </div>
+    </StrictMode>
   );
 };
