@@ -22,11 +22,8 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
 
-  const { parentContainerRef, hiddenEvents, setRefFromKey } =
+  const { parentContainerRef, isEventHidden, setRefFromKey } =
     useEventIntersection();
-
-  const isEventHidden = (eventId: string) =>
-    hiddenEvents.includes(eventId) ? 'hidden' : 'visible';
 
   return (
     <div className="event-week-layout" ref={parentContainerRef}>

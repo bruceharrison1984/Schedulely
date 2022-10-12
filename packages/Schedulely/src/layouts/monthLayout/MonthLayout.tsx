@@ -16,7 +16,7 @@ export const MonthLayout = () => {
       <HighlightProvider>
         {calendarWithEvents.map((week, idx) => (
           <div key={idx} className="week-container" data-week={idx}>
-            <EventIntersectionProvider>
+            <EventIntersectionProvider events={week}>
               <EventWeekLayout
                 events={week.events}
                 daysInweek={week.daysInWeek}

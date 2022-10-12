@@ -1,3 +1,4 @@
+import { InternalEventWeek } from '..';
 import {
   MutableRefObject,
   ReactNode,
@@ -9,8 +10,7 @@ import {
 
 type EventIntersectionContextState = {
   parentContainerRef: MutableRefObject<null>;
-  hiddenEvents: string[];
-  eventContainerRefs: Record<string, HTMLElement | null>;
+  isEventHidden: (eventId: string) => 'hidden' | 'visible';
   setRefFromKey: (
     key: string
   ) => (element: HTMLElement | null) => HTMLElement | null;
@@ -27,8 +27,10 @@ EventIntersectionContext.displayName = 'EventIntersectionContext';
  */
 export const EventIntersectionProvider = ({
   children,
+  events,
 }: {
   children: ReactNode;
+  events: InternalEventWeek;
 }) => {
   const parentContainerRef = useRef(null);
   const eventContainerRefs = useRef<Record<string, HTMLElement | null>>({});
@@ -36,6 +38,9 @@ export const EventIntersectionProvider = ({
 
   const setRefFromKey = (key: string) => (element: HTMLElement | null) =>
     (eventContainerRefs.current[key] = element);
+
+  const isEventHidden = (eventId: string) =>
+    hiddenEvents.includes(eventId) ? 'hidden' : 'visible';
 
   const checkIntersection: IntersectionObserverCallback = (entries) =>
     entries.map((x) => {
@@ -68,18 +73,19 @@ export const EventIntersectionProvider = ({
       });
 
     return () => {
-      if (eventContainerRefs.current)
+      if (eventContainerRefs.current) {
         Object.values(eventContainerRefs.current).map((element) => {
           if (element) observer.unobserve(element);
         });
+        eventContainerRefs.current = {};
+      }
       observer.disconnect();
     };
-  }, [eventContainerRefs]);
+  }, [eventContainerRefs, events]);
 
   const value = {
     parentContainerRef,
-    hiddenEvents,
-    eventContainerRefs: eventContainerRefs.current,
+    isEventHidden,
     setRefFromKey,
   };
 
