@@ -11,24 +11,16 @@ import { useRef } from 'react';
  */
 export const MonthLayout = () => {
   const { calendarWithEvents } = useCalendar();
-  const weekRef = useRef(null);
 
   return (
     <div className="calendar-body-container">
       <HighlightProvider>
         {calendarWithEvents.map((week, idx) => (
-          <div
-            key={idx}
-            className="week-container"
-            data-week={idx}
-            ref={weekRef}
-          >
-            <EventIntersectionProvider parentRef={weekRef}>
-              <EventWeekLayout
-                events={week.events}
-                daysInweek={week.daysInWeek}
-              />
-            </EventIntersectionProvider>
+          <div key={idx} className="week-container" data-week={idx}>
+            <EventWeekLayout
+              events={week.events}
+              daysInweek={week.daysInWeek}
+            />
             <WeekLayout
               eventsOnDays={week.eventsOnDays}
               dates={week.daysInWeek}
