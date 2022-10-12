@@ -22,11 +22,10 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
 
-  const { parentContainerRef, isEventHidden, setRefFromKey } =
-    useEventIntersection();
+  const { isEventHidden, setRefFromKey } = useEventIntersection();
 
   return (
-    <div className="event-week-layout" ref={parentContainerRef}>
+    <div className="event-week-layout">
       <div className="event-week-layout-grid">
         <div className="event-week-layout-header-spacer" />
         {events.map((event) => (

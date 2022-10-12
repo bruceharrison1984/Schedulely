@@ -4,12 +4,10 @@ import {
   ReactNode,
   createContext,
   useLayoutEffect,
-  useRef,
   useState,
 } from 'react';
 
 type EventIntersectionContextState = {
-  parentContainerRef: MutableRefObject<null>;
   isEventHidden: (eventId: string) => 'hidden' | 'visible';
   setRefFromKey: (
     key: string
@@ -27,26 +25,34 @@ EventIntersectionContext.displayName = 'EventIntersectionContext';
  */
 export const EventIntersectionProvider = ({
   children,
-  events,
+  parentRef,
 }: {
   children: ReactNode;
-  events: InternalEventWeek;
+  parentRef: MutableRefObject<null>;
 }) => {
-  const parentContainerRef = useRef(null);
-  const eventContainerRefs = useRef<Record<string, HTMLElement | null>>({});
+  const [eventContainerRefs, setContainerRefs] = useState<
+    Record<string, HTMLElement | null>
+  >({});
   const [hiddenEvents, setHiddenEvents] = useState<string[]>([]);
 
-  const setRefFromKey = (key: string) => (element: HTMLElement | null) =>
-    (eventContainerRefs.current[key] = element);
+  const setRefFromKey = (key: string) => (element: HTMLElement | null) => {
+    setContainerRefs((current) => {
+      current[key] = element;
+      return current;
+    });
+    return element;
+  };
 
   const isEventHidden = (eventId: string) =>
     hiddenEvents.includes(eventId) ? 'hidden' : 'visible';
 
   const checkIntersection: IntersectionObserverCallback = (entries) =>
     entries.map((x) => {
+      console.log('checking', x);
       const eventId = x.target.attributes.getNamedItem('data-eventid');
       if (eventId) {
         if (x.intersectionRatio < 1) {
+          console.log('hiding event');
           setHiddenEvents((current) => {
             if (!current.includes(eventId.value)) current.push(eventId.value);
             return current;
@@ -62,29 +68,28 @@ export const EventIntersectionProvider = ({
   useLayoutEffect(() => {
     console.log('intersection hook');
     const observer = new IntersectionObserver(checkIntersection, {
-      root: parentContainerRef.current,
+      root: parentRef.current,
       rootMargin: '0px 0px -15% 0px',
       threshold: 1,
     });
 
-    if (eventContainerRefs.current)
-      Object.values(eventContainerRefs.current).map((element) => {
+    if (eventContainerRefs)
+      Object.values(eventContainerRefs).map((element) => {
         if (element) observer.observe(element);
       });
 
     return () => {
-      if (eventContainerRefs.current) {
-        Object.values(eventContainerRefs.current).map((element) => {
+      if (eventContainerRefs) {
+        Object.values(eventContainerRefs).map((element) => {
           if (element) observer.unobserve(element);
         });
-        eventContainerRefs.current = {};
+        setContainerRefs({});
       }
       observer.disconnect();
     };
-  }, [eventContainerRefs, events]);
+  }, [eventContainerRefs]);
 
   const value = {
-    parentContainerRef,
     isEventHidden,
     setRefFromKey,
   };
