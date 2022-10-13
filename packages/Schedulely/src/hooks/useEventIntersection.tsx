@@ -17,12 +17,12 @@ export const useEventIntersection = () => {
       var styles = x.target.attributes.getNamedItem('style');
       if (x.intersectionRatio < 1) {
         if (styles) {
-          styles.value = `${styles.value} visibility: hidden;`;
+          styles.value = `${styles.value}; visibility:hidden;`;
           x.target.attributes.setNamedItem(styles);
         }
       } else {
         if (styles) {
-          styles.value = `${styles.value} visibility: visible;`;
+          styles.value = `${styles.value}; visibility:visible;`;
           x.target.attributes.setNamedItem(styles);
         }
       }
