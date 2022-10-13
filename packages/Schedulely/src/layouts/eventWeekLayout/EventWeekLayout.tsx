@@ -2,7 +2,7 @@ import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { useActions } from '@/hooks/useActions';
 import { useCalendar } from '@/hooks/useCalendar';
 import { useComponents } from '@/hooks/useComponents';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
 
 interface EventLayoutProps {
@@ -22,12 +22,16 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
 
-  const refs = useRef<Record<string, HTMLElement | null>>({});
+  const [eventRefs, setEventRefs] = useState<
+    Record<string, HTMLElement | null>
+  >({});
 
   const setRefFromKey = (key: string) => (element: HTMLElement | null) => {
-    refs.current[key] = element;
+    const old = eventRefs;
+    old[key] = element;
+    setEventRefs(old);
   };
-  const weekLayoutRef = useRef(null);
+  const [weekLayoutRef, setWeekLayoutRef] = useState<HTMLElement | null>(null);
 
   const checkIntersection: IntersectionObserverCallback = (entries) =>
     entries.map((x) => {
@@ -47,26 +51,24 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(checkIntersection, {
-      root: weekLayoutRef.current,
+      root: weekLayoutRef,
       rootMargin: '0px 0px -15% 0px',
       threshold: 1,
     });
 
-    Object.values(refs.current).map((eventRef) => observer.observe(eventRef!));
+    Object.values(eventRefs).map((eventRef) => observer.observe(eventRef!));
 
     return () => {
-      Object.values(refs.current).map((eventRef) =>
-        observer.unobserve(eventRef!)
-      );
+      Object.values(eventRefs).map((eventRef) => observer.unobserve(eventRef!));
       observer.disconnect();
     };
-  }, [weekLayoutRef.current, refs.current]);
+  }, [weekLayoutRef, eventRefs]);
 
   return (
     <div
       id={daysInweek[0].getDate().toString()}
       className="event-week-layout"
-      ref={weekLayoutRef}
+      ref={setWeekLayoutRef}
     >
       <div className="event-week-layout-grid">
         <div className="event-week-layout-header-spacer" />
