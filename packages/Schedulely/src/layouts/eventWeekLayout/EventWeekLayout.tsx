@@ -4,6 +4,7 @@ import { useCalendar } from '@/hooks/useCalendar';
 import { useComponents } from '@/hooks/useComponents';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
+import { useEventIntersection } from '@/hooks';
 
 interface EventLayoutProps {
   events: InternalCalendarEvent[];
@@ -21,51 +22,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { eventComponent: EventComponent } = useComponents();
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
-
-  const [eventRefs, setEventRefs] = useState<
-    Record<string, HTMLElement | null>
-  >({});
-
-  const setRefFromKey = (key: string) => (element: HTMLElement | null) => {
-    const old = eventRefs;
-    old[key] = element;
-    setEventRefs(old);
-  };
-  const [weekLayoutRef, setWeekLayoutRef] = useState<HTMLElement | null>(null);
-
-  const checkIntersection: IntersectionObserverCallback = (entries) =>
-    entries.map((x) => {
-      var styles = x.target.attributes.getNamedItem('style');
-      if (x.intersectionRatio < 1) {
-        if (styles) {
-          styles.value = `${styles.value} visibility: hidden;`;
-          x.target.attributes.setNamedItem(styles);
-        }
-      } else {
-        if (styles) {
-          styles.value = `${styles.value} visibility: visible;`;
-          x.target.attributes.setNamedItem(styles);
-        }
-      }
-    });
-
-  useLayoutEffect(() => {
-    console.log(weekLayoutRef?.id);
-    const observer = new IntersectionObserver(checkIntersection, {
-      root: weekLayoutRef,
-      rootMargin: '0px 0px -15% 0px',
-      threshold: 1,
-    });
-
-    Object.values(eventRefs).map((eventRef) => observer.observe(eventRef!));
-
-    return () => {
-      Object.values(eventRefs).map((eventRef) => {
-        if (eventRef) observer.unobserve(eventRef!);
-      });
-      observer.disconnect();
-    };
-  }, [weekLayoutRef, eventRefs]);
+  const { setWeekLayoutRef, setRefFromKey } = useEventIntersection();
 
   return (
     <div
