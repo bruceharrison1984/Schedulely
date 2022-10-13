@@ -2,23 +2,13 @@ import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { useActions } from '@/hooks/useActions';
 import { useCalendar } from '@/hooks/useCalendar';
 import { useComponents } from '@/hooks/useComponents';
+import { useEffect, useRef } from 'react';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
-import { useLayoutEffect, useRef } from 'react';
 
 interface EventLayoutProps {
   events: InternalCalendarEvent[];
   daysInweek: Date[];
 }
-
-const useRefs = () => {
-  const refs = useRef<Record<string, HTMLElement | null>>({});
-
-  const setRefFromKey = (key: string) => (element: HTMLElement | null) => {
-    refs.current[key] = element;
-  };
-
-  return { refs: refs.current, setRefFromKey };
-};
 
 /**
  * This component controls the layout of an individual events within a week
@@ -32,47 +22,52 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
 
-  const { refs, setRefFromKey } = useRefs();
+  const refs = useRef<Record<string, HTMLElement | null>>({});
+
+  const setRefFromKey = (key: string) => (element: HTMLElement | null) => {
+    refs.current[key] = element;
+  };
   const weekLayoutRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const checkIntersection: IntersectionObserverCallback = (entries) =>
-      entries.map((x) => {
-        var styles = x.target.attributes.getNamedItem('style');
-        if (x.intersectionRatio < 1) {
-          if (styles) {
-            styles.value = `${styles.value} display: none;`;
-            x.target.attributes.setNamedItem(styles);
-          }
-        } else {
-          if (styles) {
-            styles.value = `${styles.value} display: block;`;
-            x.target.attributes.setNamedItem(styles);
-          }
+  const checkIntersection: IntersectionObserverCallback = (entries) =>
+    entries.map((x) => {
+      var styles = x.target.attributes.getNamedItem('style');
+      if (x.intersectionRatio < 1) {
+        if (styles) {
+          styles.value = `${styles.value} visibility: hidden;`;
+          x.target.attributes.setNamedItem(styles);
         }
-      });
+      } else {
+        if (styles) {
+          styles.value = `${styles.value} visibility: visible;`;
+          x.target.attributes.setNamedItem(styles);
+        }
+      }
+    });
 
-    if (!weekLayoutRef.current) return;
-
+  useEffect(() => {
     const observer = new IntersectionObserver(checkIntersection, {
       root: weekLayoutRef.current,
-      rootMargin: '0px 0px -1% 0px',
+      rootMargin: '0px 0px -15% 0px',
       threshold: 1,
     });
 
-    Object.values(refs).map((eventRef) => {
-      if (eventRef) observer.observe(eventRef);
-    });
+    Object.values(refs.current).map((eventRef) => observer.observe(eventRef!));
 
     return () => {
-      Object.values(refs).map((eventRef) => {
-        if (eventRef) observer.unobserve(eventRef);
-      });
+      Object.values(refs.current).map((eventRef) =>
+        observer.unobserve(eventRef!)
+      );
+      observer.disconnect();
     };
-  }, [weekLayoutRef, refs]);
+  }, [weekLayoutRef.current, refs.current]);
 
   return (
-    <div className="event-week-layout" ref={weekLayoutRef}>
+    <div
+      id={daysInweek[0].getDate().toString()}
+      className="event-week-layout"
+      ref={weekLayoutRef}
+    >
       <div className="event-week-layout-grid">
         <div className="event-week-layout-header-spacer" />
         {events.map((event) => (
