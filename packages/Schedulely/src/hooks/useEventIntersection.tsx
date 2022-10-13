@@ -1,18 +1,19 @@
 import { useLayoutEffect, useState } from 'react';
 
 export const useEventIntersection = () => {
-  const [eventRefs, setEventRefs] = useState<
+  const [childContainerRefs, setChildContainerRefs] = useState<
     Record<string, HTMLElement | null>
   >({});
 
-  const [weekLayoutRef, setWeekLayoutRef] = useState<HTMLElement | null>(null);
+  const [parentContainerRef, setParentContainerRef] =
+    useState<HTMLElement | null>(null);
 
   const [eventVisibility, setEventVisibility] = useState<
     Record<string, boolean>
   >({});
 
   const setRefFromKey = (key: string) => (element: HTMLElement | null) =>
-    setEventRefs((current) => {
+    setChildContainerRefs((current) => {
       current[key] = element;
       return current;
     });
@@ -31,22 +32,20 @@ export const useEventIntersection = () => {
 
   useLayoutEffect(() => {
     const observer = new IntersectionObserver(checkIntersection, {
-      root: weekLayoutRef,
+      root: parentContainerRef,
       rootMargin: '0px 0px -15% 0px',
       threshold: 1,
     });
 
-    Object.values(eventRefs).map((eventRef) => {
+    Object.values(childContainerRefs).map((eventRef) => {
       if (eventRef) observer.observe(eventRef!);
     });
 
     return () => {
-      Object.values(eventRefs).map((eventRef) => {
-        if (eventRef) observer.unobserve(eventRef!);
-      });
+      observer.takeRecords().map((x) => observer.unobserve(x.target));
       observer.disconnect();
     };
   });
 
-  return { setWeekLayoutRef, setRefFromKey, isEventHidden };
+  return { setParentContainerRef, setRefFromKey, isEventHidden };
 };
