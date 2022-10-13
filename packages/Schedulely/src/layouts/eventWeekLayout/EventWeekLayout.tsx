@@ -2,7 +2,7 @@ import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { useActions } from '@/hooks/useActions';
 import { useCalendar } from '@/hooks/useCalendar';
 import { useComponents } from '@/hooks/useComponents';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
 
 interface EventLayoutProps {
@@ -49,7 +49,8 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
       }
     });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    console.log(weekLayoutRef?.id);
     const observer = new IntersectionObserver(checkIntersection, {
       root: weekLayoutRef,
       rootMargin: '0px 0px -15% 0px',
@@ -59,7 +60,9 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     Object.values(eventRefs).map((eventRef) => observer.observe(eventRef!));
 
     return () => {
-      Object.values(eventRefs).map((eventRef) => observer.unobserve(eventRef!));
+      Object.values(eventRefs).map((eventRef) => {
+        if (eventRef) observer.unobserve(eventRef!);
+      });
       observer.disconnect();
     };
   }, [weekLayoutRef, eventRefs]);

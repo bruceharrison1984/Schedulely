@@ -1,9 +1,7 @@
-import { EventIntersectionProvider } from '@/providers/EventIntersectionProvider';
 import { EventWeekLayout } from '@/layouts/eventWeekLayout';
 import { HighlightProvider } from '@/providers/HightlightProvider';
 import { WeekLayout } from '@/layouts/weekLayout';
 import { useCalendar } from '@/hooks/useCalendar';
-import { useRef } from 'react';
 
 /**
  * This component controls the layout of the weeks of the calendar
@@ -16,7 +14,11 @@ export const MonthLayout = () => {
     <div className="calendar-body-container">
       <HighlightProvider>
         {calendarWithEvents.map((week, idx) => (
-          <div key={idx} className="week-container" data-week={idx}>
+          <div
+            key={week.weekStart.toISOString()}
+            className="week-container"
+            data-week={idx}
+          >
             <EventWeekLayout
               events={week.events}
               daysInweek={week.daysInWeek}
