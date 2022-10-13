@@ -5,27 +5,28 @@ export const useEventIntersection = () => {
     Record<string, HTMLElement | null>
   >({});
 
-  const setRefFromKey = (key: string) => (element: HTMLElement | null) => {
-    const old = eventRefs;
-    old[key] = element;
-    setEventRefs(old);
-  };
   const [weekLayoutRef, setWeekLayoutRef] = useState<HTMLElement | null>(null);
+
+  const [eventVisibility, setEventVisibility] = useState<
+    Record<string, boolean>
+  >({});
+
+  const setRefFromKey = (key: string) => (element: HTMLElement | null) =>
+    setEventRefs((current) => {
+      current[key] = element;
+      return current;
+    });
+
+  const isEventHidden = (key: string) => eventVisibility[key];
 
   const checkIntersection: IntersectionObserverCallback = (entries) =>
     entries.map((x) => {
-      var styles = x.target.attributes.getNamedItem('style');
-      if (x.intersectionRatio < 1) {
-        if (styles) {
-          styles.value = `${styles.value}; visibility:hidden;`;
-          x.target.attributes.setNamedItem(styles);
-        }
-      } else {
-        if (styles) {
-          styles.value = `${styles.value}; visibility:visible;`;
-          x.target.attributes.setNamedItem(styles);
-        }
-      }
+      var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
+      if (eventId === undefined) return;
+      setEventVisibility((current) => {
+        current[eventId!] = x.intersectionRatio < 1;
+        return { ...current };
+      });
     });
 
   useLayoutEffect(() => {
@@ -45,7 +46,7 @@ export const useEventIntersection = () => {
       });
       observer.disconnect();
     };
-  }, [weekLayoutRef, eventRefs]);
+  });
 
-  return { setWeekLayoutRef, setRefFromKey };
+  return { setWeekLayoutRef, setRefFromKey, isEventHidden };
 };

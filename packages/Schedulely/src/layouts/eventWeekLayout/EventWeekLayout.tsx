@@ -2,7 +2,6 @@ import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { useActions } from '@/hooks/useActions';
 import { useCalendar } from '@/hooks/useCalendar';
 import { useComponents } from '@/hooks/useComponents';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useEventHighlight } from '@/hooks/useEventHighlight';
 import { useEventIntersection } from '@/hooks';
 
@@ -22,14 +21,11 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { eventComponent: EventComponent } = useComponents();
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
-  const { setWeekLayoutRef, setRefFromKey } = useEventIntersection();
+  const { setWeekLayoutRef, setRefFromKey, isEventHidden } =
+    useEventIntersection();
 
   return (
-    <div
-      id={daysInweek[0].getDate().toString()}
-      className="event-week-layout"
-      ref={setWeekLayoutRef}
-    >
+    <div className="event-week-layout" ref={setWeekLayoutRef}>
       <div className="event-week-layout-grid">
         <div className="event-week-layout-header-spacer" />
         {events.map((event) => (
@@ -40,7 +36,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
             style={{
               gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
               gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
-              // visibility: isEventHidden(event.id),
+              visibility: isEventHidden(event.id) ? 'hidden' : 'visible',
             }}
             onMouseOver={() => setHighlight(event.id)}
             onMouseLeave={clearHighlight}
