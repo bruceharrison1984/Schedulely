@@ -1,5 +1,4 @@
 import { ComponentSize } from '@/types/ComponentSize';
-import { DisplaySize } from '@/types/DateAdapter';
 import chance from 'chance';
 
 const DEFAULT_ITERATIONS = 30;

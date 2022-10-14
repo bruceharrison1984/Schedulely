@@ -1,5 +1,5 @@
 import { ComponentSize } from '@/types/ComponentSize';
-import { DateTimeAdapter, DisplaySize } from '@/types/index';
+import { DateTimeAdapter } from '@/types/index';
 
 /**
  * Create an instance of the default date adapter
@@ -7,16 +7,16 @@ import { DateTimeAdapter, DisplaySize } from '@/types/index';
  * @returns DateTimeAdapter
  */
 export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
-  /** Map used to translate DisplaySize in to Intl day name format */
+  /** Map used to translate ComponentSize in to Intl day name format */
   const map = new Map<ComponentSize, 'long' | 'narrow' | 'short'>([
     ['large', 'long'],
     ['medium', 'short'],
     ['small', 'narrow'],
   ]);
 
-  const getDaysOfWeek = (displaySize: ComponentSize) => {
+  const getDaysOfWeek = (componentSize: ComponentSize) => {
     const formatter = new Intl.DateTimeFormat(locale, {
-      weekday: map.get(displaySize),
+      weekday: map.get(componentSize),
     });
     return [0, 1, 2, 3, 4, 5, 6].map((x) =>
       formatter.format(new Date(2012, 0, x + 1))

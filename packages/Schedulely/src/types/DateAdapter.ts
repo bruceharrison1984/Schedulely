@@ -14,7 +14,7 @@ export interface DateTimeAdapter {
   getDayNumber: (date: Date) => number;
 
   /** Get full names of all days of the week */
-  getDaysOfWeek: (displaySize: ComponentSize) => string[];
+  getDaysOfWeek: (componentSize: ComponentSize) => string[];
 
   /** Get the day of week grid index for the end of the event. Used for positioning within the Week css-grid. */
   getGridEndIndex: (eventEndDate: Date, endOfWeek: Date) => number;
@@ -49,10 +49,4 @@ export interface DateTimeAdapter {
 
   /** Does the target date fall between the supplied dates */
   isDateBetween: (targetDate: Date, dateOne: Date, dateTwo: Date) => boolean;
-}
-
-export enum DisplaySize {
-  tiny,
-  medium,
-  large,
 }
