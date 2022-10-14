@@ -1,6 +1,7 @@
+import { InternalCalendarEvent } from '@/types';
 import { useLayoutEffect, useState } from 'react';
 
-export const useEventIntersection = () => {
+export const useEventIntersection = (events: InternalCalendarEvent[]) => {
   const [childContainerRefs, setChildContainerRefs] = useState<
     Record<string, HTMLElement | null>
   >({});

@@ -4,6 +4,7 @@
 
 export * from './ActionState';
 export * from './CalendarState';
+export * from './ComponentSize';
 export * from './DateAdapter';
 export * from './HighlightEventState';
 export * from './InternalCalendarEvent';

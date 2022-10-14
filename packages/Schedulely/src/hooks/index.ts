@@ -8,3 +8,4 @@ export * from './useComponents';
 export * from './useEventHighlight';
 export * from './useEventIntersection';
 export * from './useKeyboardControls';
+export * from './useResizeObserver';
