@@ -110,7 +110,7 @@ export const CalendarProvider = ({
 
   const contextValue: CalendarState = {
     currentMonth,
-    dateAdapter: dateAdapter,
+    dateAdapter,
     getDaysOfWeek,
     onNextMonth,
     onNextYear,

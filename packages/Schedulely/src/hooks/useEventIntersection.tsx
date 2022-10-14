@@ -13,6 +13,10 @@ export const useEventIntersection = (events: InternalCalendarEvent[]) => {
     Record<string, boolean>
   >({});
 
+  const [hiddenEvents, setHiddenEvents] = useState<
+    Record<string, InternalCalendarEvent[]>
+  >({});
+
   const setRefFromKey = (key: string) => (element: HTMLElement | null) =>
     setChildContainerRefs((current) => {
       current[key] = element;
@@ -27,6 +31,16 @@ export const useEventIntersection = (events: InternalCalendarEvent[]) => {
       if (eventId === undefined) return;
       setEventVisibility((current) => {
         current[eventId!] = x.intersectionRatio < 1;
+        return { ...current };
+      });
+      setHiddenEvents((current) => {
+        var hiddenEvent = events?.find((x) => x.id === eventId);
+        if (hiddenEvent) {
+          let hidden = current[hiddenEvent!.end.toISOString()];
+          if (!hidden?.length) hidden = [];
+          current[hiddenEvent!.end.toISOString()] = [...hidden, hiddenEvent];
+        }
+
         return { ...current };
       });
     });
@@ -46,7 +60,7 @@ export const useEventIntersection = (events: InternalCalendarEvent[]) => {
       observer.takeRecords().map((x) => observer.unobserve(x.target));
       observer.disconnect();
     };
-  });
+  }, [childContainerRefs, parentContainerRef]);
 
-  return { setParentContainerRef, setRefFromKey, isEventHidden };
+  return { setParentContainerRef, setRefFromKey, isEventHidden, hiddenEvents };
 };
