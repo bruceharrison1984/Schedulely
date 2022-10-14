@@ -14,7 +14,8 @@
     "dev-docs": "turbo run dev-docs",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@ladle/react": "^2.4.3",
@@ -36,6 +37,7 @@
     "cssnano-preset-advanced": "^5.3.8",
     "eslint": "^8.24.0",
     "eslint-config-custom": "*",
+    "husky": "^8.0.1",
     "jest": "^29.0.3",
     "jest-environment-jsdom": "^29.0.3",
     "postcss": "^8.4.16",
