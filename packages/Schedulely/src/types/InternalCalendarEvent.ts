@@ -36,4 +36,7 @@ export interface InternalCalendarEvent {
 
   /** Visible color of the event *(css color value)* */
   color: string;
+
+  /** Is this event visible (not hidden) */
+  visible: boolean;
 }

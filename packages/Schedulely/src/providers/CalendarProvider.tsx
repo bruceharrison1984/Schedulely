@@ -58,6 +58,7 @@ export const CalendarProvider = ({
             color: x.color,
             id: x.id,
             summary: x.summary,
+            visible: true,
           };
           return internalEvent;
         })

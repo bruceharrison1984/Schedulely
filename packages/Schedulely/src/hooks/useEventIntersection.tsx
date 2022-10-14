@@ -10,11 +10,7 @@ export const useEventIntersection = (events: InternalCalendarEvent[]) => {
     useState<HTMLElement | null>(null);
 
   const [eventVisibility, setEventVisibility] = useState<
-    Record<string, boolean>
-  >({});
-
-  const [hiddenEvents, setHiddenEvents] = useState<
-    Record<string, InternalCalendarEvent[]>
+    Record<string, InternalCalendarEvent>
   >({});
 
   const setRefFromKey = (key: string) => (element: HTMLElement | null) =>
@@ -23,24 +19,17 @@ export const useEventIntersection = (events: InternalCalendarEvent[]) => {
       return current;
     });
 
-  const isEventHidden = (key: string) => eventVisibility[key];
+  const isEventVisible = (key: string) => eventVisibility[key]?.visible;
 
   const checkIntersection: IntersectionObserverCallback = (entries) =>
     entries.map((x) => {
       var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
-      if (eventId === undefined) return;
-      setEventVisibility((current) => {
-        current[eventId!] = x.intersectionRatio < 1;
-        return { ...current };
-      });
-      setHiddenEvents((current) => {
-        var hiddenEvent = events?.find((x) => x.id === eventId);
-        if (hiddenEvent) {
-          let hidden = current[hiddenEvent!.end.toISOString()];
-          if (!hidden?.length) hidden = [];
-          current[hiddenEvent!.end.toISOString()] = [...hidden, hiddenEvent];
-        }
+      const matchingEvent = events.find((x) => x.id === eventId);
+      if (matchingEvent === undefined) return;
 
+      setEventVisibility((current) => {
+        current[matchingEvent.id] = matchingEvent;
+        current[matchingEvent.id].visible = x.intersectionRatio >= 1;
         return { ...current };
       });
     });
@@ -60,7 +49,7 @@ export const useEventIntersection = (events: InternalCalendarEvent[]) => {
       observer.takeRecords().map((x) => observer.unobserve(x.target));
       observer.disconnect();
     };
-  }, [childContainerRefs, parentContainerRef]);
+  }, [parentContainerRef, events]);
 
-  return { setParentContainerRef, setRefFromKey, isEventHidden, hiddenEvents };
+  return { setParentContainerRef, setRefFromKey, isEventVisible };
 };
