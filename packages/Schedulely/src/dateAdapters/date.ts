@@ -125,6 +125,13 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     return date.getMonth() === currentMonth;
   };
 
+  const isDateBetween = (targetDate: Date, dateOne: Date, dateTwo: Date) => {
+    // set dates to midnight to avoid missing on half-days
+    dateOne.setHours(0, 0, 0, 0);
+    dateTwo.setHours(0, 0, 0, 0);
+    return targetDate >= dateOne && targetDate <= dateTwo;
+  };
+
   return {
     getCalendarView,
     getDaysOfWeek,
@@ -139,5 +146,6 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     isEventInWeek,
     convertIsoToDate,
     isCurrentMonth,
+    isDateBetween,
   };
 };

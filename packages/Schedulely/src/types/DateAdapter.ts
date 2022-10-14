@@ -46,6 +46,9 @@ export interface DateTimeAdapter {
 
   /** Is the supplied month the same as the current month */
   isCurrentMonth: (date: Date) => boolean;
+
+  /** Does the target date fall between the supplied dates */
+  isDateBetween: (targetDate: Date, dateOne: Date, dateTwo: Date) => boolean;
 }
 
 export enum DisplaySize {

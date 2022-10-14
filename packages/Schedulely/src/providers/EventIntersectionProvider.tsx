@@ -1,5 +1,6 @@
 import { InternalCalendarEvent } from '@/types';
 import { ReactNode, createContext, useLayoutEffect, useState } from 'react';
+import { useCalendar } from '@/hooks';
 
 type EventIntersectionState = {
   setParentContainerRef: React.Dispatch<
@@ -28,6 +29,10 @@ export const EventIntersectionProvider = ({
   children: ReactNode;
   events: InternalCalendarEvent[];
 }) => {
+  const {
+    dateAdapter: { isDateBetween },
+  } = useCalendar();
+
   const [childContainerRefs, setChildContainerRefs] = useState<
     Record<string, HTMLElement | null>
   >({});
@@ -47,7 +52,7 @@ export const EventIntersectionProvider = ({
 
   const getOverflowForDay = (date: Date) =>
     Object.values(eventVisibility).filter(
-      (x) => !x.visible && date >= x.start && date <= x.end
+      (x) => !x.visible && isDateBetween(date, x.start, x.end)
     );
 
   const isEventVisible = (key: string) => eventVisibility[key]?.visible;
