@@ -3,6 +3,7 @@ import { ReactNode, createContext, useLayoutEffect, useState } from 'react';
 import { useCalendar } from '@/hooks';
 
 type EventIntersectionState = {
+  /** Set the parent container that will be used as the root element for overflow detection */
   setParentContainerRef: React.Dispatch<
     React.SetStateAction<HTMLElement | null>
   >;
@@ -18,9 +19,10 @@ export const EventIntersectionContext =
 EventIntersectionContext.displayName = 'EventIntersectionContext';
 
 /**
- * Enables highlighting of events that span multiple weeks. Kinda hacky but it works.
+ * Determines which events overflow from the calendar, and when they should be hidden
  * @param {ReactNode} children Child nodes
- * @returns HighlightProvider component
+ * @param {nternalCalendarEvent[]} events Calendar Events assoicated with this parent
+ * @returns EventIntersectionProvider component
  */
 export const EventIntersectionProvider = ({
   children,
