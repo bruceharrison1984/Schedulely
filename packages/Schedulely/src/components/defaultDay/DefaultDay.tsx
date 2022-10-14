@@ -16,6 +16,9 @@ export const DefaultDay: DayComponent = ({
     <span className="default-day-header--text">{dateNumber}</span>
   );
 
+  const hiddenEventTooltip =
+    events.length > 1 ? `(${events.length}) hidden events` : '(1) hidden event';
+
   return (
     <div
       className={`default-day ${
@@ -26,7 +29,7 @@ export const DefaultDay: DayComponent = ({
       {isOverflowed && (
         <div
           className="additional-events-indicator"
-          title={`(${events.length}) total events`}
+          title={hiddenEventTooltip}
           onClick={() => onClick(events)}
         >
           ...
