@@ -1,6 +1,10 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { useActions } from '@/hooks/useActions';
-import { useCalendar, useComponents } from '@/hooks/index';
+import {
+  useCalendar,
+  useComponents,
+  useEventIntersection,
+} from '@/hooks/index';
 import { useCallback } from 'react';
 
 interface WeekLayoutProps {
@@ -14,10 +18,10 @@ interface WeekLayoutProps {
  */
 export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
   const { dateAdapter, currentMonth } = useCalendar();
-
   const { dayComponent: DayComponent } = useComponents();
-
   const { onMoreEventClick } = useActions();
+  const { setParentContainerRef, setRefFromKey, isEventVisible } =
+    useEventIntersection();
 
   /**
    * Display 'more events' indicator.
@@ -31,7 +35,7 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
       if (events.length > overflowLimit) return true;
       return false;
     },
-    [eventsOnDays],
+    [eventsOnDays]
   );
 
   return (
