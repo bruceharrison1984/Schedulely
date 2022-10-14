@@ -336,5 +336,45 @@ describe('Date Adapter', () => {
         ).toThrow();
       });
     });
+
+    describe('isDateBetween', () => {
+      it.each<{
+        targetDate: Date;
+        dateOne: Date;
+        dateTwo: Date;
+        expected: boolean;
+      }>([
+        {
+          targetDate: new Date(2022, 1, 8),
+          dateOne: new Date(2022, 1, 6),
+          dateTwo: new Date(2022, 1, 9),
+          expected: true,
+        },
+        {
+          targetDate: new Date(2022, 1, 8),
+          dateOne: new Date(2022, 1, 10),
+          dateTwo: new Date(2022, 1, 11),
+          expected: false,
+        },
+        {
+          targetDate: new Date(2022, 1, 6),
+          dateOne: new Date(2022, 1, 6),
+          dateTwo: new Date(2022, 1, 9),
+          expected: true,
+        },
+        {
+          targetDate: new Date(2022, 1, 9),
+          dateOne: new Date(2022, 1, 6),
+          dateTwo: new Date(2022, 1, 9),
+          expected: true,
+        },
+      ])(
+        '$targetDate between $dateOne and $dateTwo returns $expected',
+        ({ targetDate, dateOne, dateTwo, expected }) => {
+          const result = adapter.isDateBetween(targetDate, dateOne, dateTwo);
+          expect(result).toBe(expected);
+        }
+      );
+    });
   });
 });
