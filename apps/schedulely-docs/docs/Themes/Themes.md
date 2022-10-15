@@ -1,5 +1,5 @@
 ---
-title: 🎨 Theming
+title: 🎨 Themes
 description: Implementing custom themes
 ---
 
