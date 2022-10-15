@@ -1,6 +1,5 @@
 ---
-title: EventComponent
-description: Event Component
+title: Event Component
 ---
 
 ## Description
@@ -19,46 +18,53 @@ export interface EventComponentProps {
 }
 ```
 
-| Property  | Type                                     | Description                                                                                    |
-| --------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| event     | `InternalCalendarEvent`                  | The object that represents this event                                                          |
-| isHovered | `boolean`                                | True when event is hovered. Can be used to control event display when spanning multiple weeks. |
-| onClick   | `(event: InternalCalendarEvent) => void` | Function executes when the event is clicked                                                    |
+| Property  | Type                                     | Description                                                             |
+| --------- | ---------------------------------------- | ----------------------------------------------------------------------- |
+| event     | `InternalCalendarEvent`                  | The event that this component represents                                |
+| isHovered | `boolean`                                | True when event is hovered. Default behavior is used to highlight event |
+| onClick   | `(event: InternalCalendarEvent) => void` | Function executes when the event is clicked                             |
 
 ## Example (DefaultEvent)
 
-```tsx live=true
-const event = {
-  id: '1',
-  start: new Date(),
-  end: new Date(),
-  summary: 'This is an event',
-  color: 'lightblue',
-};
+```tsx live
+// This demo is an example of what a custom component might look like if you wanted to override the default.
+// If you are using the default components, you don't need to worry about this.
 
-/** Implement EventComponent */
-const DefaultEvent = ({ event, isHovered, onClick }) => (
-  <div
-    className={`schedulely--event ${
-      isHovered ? 'schedulely--event-selected' : 'schedulely--event-unselected'
-    }`}
-    style={{
-      backgroundColor: event.color,
-    }}
-    title={event.summary}
-    onClick={() => onClick(event)}
-  >
-    {event.summary}
-  </div>
-);
+function DefaultEventDemo(props) {
+  const event = {
+    id: '1',
+    start: new Date(),
+    end: new Date(),
+    summary: 'This is an event',
+    color: 'lightblue',
+  };
 
-render(
-  <div className="schedulely">
-    <DefaultEvent
-      event={event}
-      isHovered={false}
-      onClick={() => alert(JSON.stringify(event, null, 2))}
-    />
-  </div>
-);
+  const DefaultEvent = ({ event, isHovered, onClick }) => {
+    const classes = ['event'];
+    if (isHovered) classes.push('event-selected');
+
+    return (
+      <div
+        className={classes.join(' ')}
+        style={{
+          backgroundColor: event.color,
+        }}
+        title={event.summary}
+        onClick={() => onClick(event)}
+      >
+        <div className="event-text-container">{event.summary}</div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="schedulely">
+      <DefaultEvent
+        event={event}
+        isHovered={false}
+        onClick={() => alert(JSON.stringify(event, null, 2))}
+      />
+    </div>
+  );
+}
 ```

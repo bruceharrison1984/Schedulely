@@ -1,6 +1,5 @@
 ---
 title: 🔧 Components
-description: Implementing custom components for different visual styles
 ---
 
 ## _Section Disclaimer_
@@ -29,11 +28,8 @@ Care should be taken when styling custom components. The underlying calendar lay
 
 The following interfaces can be used to craft custom components to be used in Schedulely.
 
-| Component           | Description                                                                               |
-| ------------------- | ----------------------------------------------------------------------------------------- |
-| DayComponent        | Represents a single Day on the calendar                                                   |
-| DayHeaderComponent  | Date header that appears on a Day                                                         |
-| DayOfWeekComponent  | Day of week displayed at top of calendar                                                  |
-| EventComponent      | Single event on the calendar                                                              |
-| HeaderComponent     | The banner that appears at the top of the calendar                                        |
-| MoreEventsIndicator | Indicator that appears at the bottom of a day if it has more events than can be displayed |
+| Component       | Description                                         |
+| --------------- | --------------------------------------------------- |
+| DayComponent    | Represents a single Day on the calendar             |
+| EventComponent  | Single event on the calendar                        |
+| HeaderComponent | The toolbar that appears at the top of the calendar |
