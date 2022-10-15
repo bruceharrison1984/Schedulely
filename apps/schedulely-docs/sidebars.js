@@ -29,7 +29,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Usage',
+      label: '👨🏻‍💻 Usage',
       link: {
         type: 'generated-index',
       },
