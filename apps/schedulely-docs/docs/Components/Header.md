@@ -1,6 +1,5 @@
 ---
-title: HeaderComponent
-description: Header Component
+title: Header Component
 ---
 
 ## Description
@@ -34,65 +33,62 @@ export interface HeaderProps {
 
 ## Example (DefaultHeader)
 
-```tsx live=true
-/** Implement HeaderComponent */
-const DefaultHeader = ({
-  month,
-  year,
-  onNextMonth,
-  onNextYear,
-  onPrevMonth,
-  onPrevYear,
-  isCurrentMonth,
-}) => (
-  <div className="schedulely--header-layout">
-    <button
-      className="schedulely--header-button"
-      title="Previous Month"
-      onClick={onPrevMonth}
-    >
-      <strong>{'‹'}</strong>
-    </button>
-    <button
-      className="schedulely--header-button"
-      title="Previous Year"
-      onClick={onPrevYear}
-    >
-      <strong>{'«'}</strong>
-    </button>
+```tsx live
+// This demo is an example of what a custom component might look like if you wanted to override the default.
+// If you are using the default components, you don't need to worry about this.
 
-    <div className="schedulely--header-banner">
-      <h2 style={{ display: 'inline-block' }}>
-        {month} - {year}
+function DefaultHeaderDemo(props) {
+  const DefaultHeader = ({
+    month,
+    year,
+    onNextMonth,
+    onNextYear,
+    onPrevMonth,
+    onPrevYear,
+    isCurrentMonth,
+  }) => (
+    <div className="header-layout">
+      <button
+        className="header-button"
+        title="Previous Month"
+        onClick={onPrevMonth}
+      >
+        <strong>{'‹'}</strong>
+      </button>
+      <button
+        className="header-button"
+        title="Previous Year"
+        onClick={onPrevYear}
+      >
+        <strong>{'«'}</strong>
+      </button>
+
+      <div className="header-banner">
+        <span className="header-text">
+          {month} - {year}
+        </span>
         {isCurrentMonth && (
-          <div
-            className="schedulely--current-month-indicator"
-            title="Current Month"
-          />
+          <div className="current-month-indicator" title="Current Month" />
         )}
-      </h2>
+      </div>
+
+      <button className="header-button" title="Next Year" onClick={onNextYear}>
+        <strong>{'»'}</strong>
+      </button>
+      <button
+        className="header-button"
+        title="Next Month"
+        onClick={onNextMonth}
+      >
+        <strong>{'›'}</strong>
+      </button>
     </div>
+  );
 
-    <button
-      className="schedulely--header-button"
-      title="Next Year"
-      onClick={onNextYear}
-    >
-      <strong>{'»'}</strong>
-    </button>
-    <button
-      className="schedulely--header-button"
-      title="Next Month"
-      onClick={onNextMonth}
-    >
-      <strong>{'›'}</strong>
-    </button>
-  </div>
-);
-
-render(
-  <div className="schedulely">
-    <DefaultHeader month="December" year="2022" />
-  </div>
-);
+  return (
+    <div className="schedulely">
+      <DefaultHeader month="December" year="2022" />
+    </div>
+  );
+}
 ```
