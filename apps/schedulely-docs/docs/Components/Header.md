@@ -33,62 +33,56 @@ export interface HeaderProps {
 
 ## Example (DefaultHeader)
 
-```tsx live
+```tsx live noInline
 // This demo is an example of what a custom component might look like if you wanted to override the default.
 // If you are using the default components, you don't need to worry about this.
 
-function DefaultHeaderDemo(props) {
-  const DefaultHeader = ({
-    month,
-    year,
-    onNextMonth,
-    onNextYear,
-    onPrevMonth,
-    onPrevYear,
-    isCurrentMonth,
-  }) => (
-    <div className="header-layout">
-      <button
-        className="header-button"
-        title="Previous Month"
-        onClick={onPrevMonth}
-      >
-        <strong>{'‹'}</strong>
-      </button>
-      <button
-        className="header-button"
-        title="Previous Year"
-        onClick={onPrevYear}
-      >
-        <strong>{'«'}</strong>
-      </button>
+const DefaultHeader = ({
+  month,
+  year,
+  onNextMonth,
+  onNextYear,
+  onPrevMonth,
+  onPrevYear,
+  isCurrentMonth,
+}) => (
+  <div className="header-layout">
+    <button
+      className="header-button"
+      title="Previous Month"
+      onClick={onPrevMonth}
+    >
+      <strong>{'‹'}</strong>
+    </button>
+    <button
+      className="header-button"
+      title="Previous Year"
+      onClick={onPrevYear}
+    >
+      <strong>{'«'}</strong>
+    </button>
 
-      <div className="header-banner">
-        <span className="header-text">
-          {month} - {year}
-        </span>
-        {isCurrentMonth && (
-          <div className="current-month-indicator" title="Current Month" />
-        )}
-      </div>
-
-      <button className="header-button" title="Next Year" onClick={onNextYear}>
-        <strong>{'»'}</strong>
-      </button>
-      <button
-        className="header-button"
-        title="Next Month"
-        onClick={onNextMonth}
-      >
-        <strong>{'›'}</strong>
-      </button>
+    <div className="header-banner">
+      <span className="header-text">
+        {month} - {year}
+      </span>
+      {isCurrentMonth && (
+        <div className="current-month-indicator" title="Current Month" />
+      )}
     </div>
-  );
 
-  return (
-    <div className="schedulely">
-      <DefaultHeader month="December" year="2022" />
-    </div>
-  );
-}
+    <button className="header-button" title="Next Year" onClick={onNextYear}>
+      <strong>{'»'}</strong>
+    </button>
+    <button className="header-button" title="Next Month" onClick={onNextMonth}>
+      <strong>{'›'}</strong>
+    </button>
+  </div>
+);
+
+render(
+  <div className="schedulely">
+    <DefaultHeader month="December" year="2022" />
+  </div>
+);
 ```

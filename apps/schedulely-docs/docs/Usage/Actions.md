@@ -22,8 +22,10 @@ By default, the actions will print their target Events in to the javascript cons
 
 The default behavior will just print Event information to the javascript console. This behavior is intended to be overridden.
 
-```tsx live=true
-/* array of CalendarEvents */
+```tsx live noInline
+// This demo is an example of what a custom component might look like if you wanted to override the default.
+// If you are using the default components, you don't need to worry about this.
+
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
 render(<Schedulely events={events} />);
@@ -35,7 +37,7 @@ Action behavior can be easily set by passing in a function for the desired actio
 
 This simple example replaces the default `console.log` action action with `alert`.
 
-```tsx live=true
+```tsx live noInline
 /* array of CalendarEvents */
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
@@ -56,7 +58,7 @@ This principal could easily be expanded upon to display an information modal wit
 
 If you have no need for custom actions(or otherwise), the default `console.log` actions can easily be disabled by having them simply return `null`.
 
-```tsx live=true
+```tsx live noInline
 /* array of CalendarEvents */
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 

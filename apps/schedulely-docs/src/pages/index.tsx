@@ -6,6 +6,10 @@ import clsx from 'clsx';
 import styles from './index.module.css';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
+
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
