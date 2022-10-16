@@ -4,9 +4,7 @@ title: Day Component
 
 ## Description
 
-The `EventComponent` how events are displayed within Schedulely. The `EventComponent` itself is purely concerned with display, it's overall length is determined
-internally based on the start/end of the event. The `hover` effect is also handled internally, so all you need to do is describe what action should be taken if
-the event happens to be hovered.
+The `DayComponent` is used to display individual days on the calendar grid. Various properties are used to control the color, indicators, and text of the calendar day.
 
 ## Component Props
 
