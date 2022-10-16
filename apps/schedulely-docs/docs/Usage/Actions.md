@@ -3,8 +3,6 @@ title: 🎬 Actions
 description: Functions used for interacting with Schedulely
 ---
 
-import { Schedulely } from 'schedulely';
-
 While Schedulely expects developers to implement their own components to achieve their desired goals, we have provided clear interfaces for how actions should be handled.
 The ActionProvider is used under the hood to take in functions as arguments, memoize them, and pass them in to the calendar components. This makes state management within
 Schedulely simple, and ensures we are re-rendering the bare minimum.
@@ -28,14 +26,7 @@ The default behavior will just print Event information to the javascript console
 // This demo is an example of what a custom component might look like if you wanted to override the default.
 // If you are using the default components, you don't need to worry about this.
 
-const event = {
-  id: '1',
-  start: new Date(),
-  end: new Date(),
-  summary: 'This is an event',
-  color: 'lightblue',
-};
-const events = [event];
+const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
 render(<Schedulely events={events} />);
 ```

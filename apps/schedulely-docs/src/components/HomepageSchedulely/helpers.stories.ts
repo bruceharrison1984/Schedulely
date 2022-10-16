@@ -3,7 +3,7 @@ import chance from 'chance';
 
 const chanceSeed = chance(1);
 
-const generateEvents = (
+export const generateEvents = (
   numberOfEvents = 100,
   minLength = 0,
   maxLength = 15,

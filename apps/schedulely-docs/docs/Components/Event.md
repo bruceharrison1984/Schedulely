@@ -26,45 +26,43 @@ export interface EventComponentProps {
 
 ## Example (DefaultEvent)
 
-```tsx live
+```tsx live noInline
 // This demo is an example of what a custom component might look like if you wanted to override the default.
 // If you are using the default components, you don't need to worry about this.
 
-function DefaultEventDemo(props) {
-  const event = {
-    id: '1',
-    start: new Date(),
-    end: new Date(),
-    summary: 'This is an event',
-    color: 'lightblue',
-  };
-
-  const DefaultEvent = ({ event, isHovered, onClick }) => {
-    const classes = ['event'];
-    if (isHovered) classes.push('event-selected');
-
-    return (
-      <div
-        className={classes.join(' ')}
-        style={{
-          backgroundColor: event.color,
-        }}
-        title={event.summary}
-        onClick={() => onClick(event)}
-      >
-        <div className="event-text-container">{event.summary}</div>
-      </div>
-    );
-  };
+const DefaultEvent = ({ event, isHovered, onClick }) => {
+  const classes = ['event'];
+  if (isHovered) classes.push('event-selected');
 
   return (
-    <div className="schedulely">
-      <DefaultEvent
-        event={event}
-        isHovered={false}
-        onClick={() => alert(JSON.stringify(event, null, 2))}
-      />
+    <div
+      className={classes.join(' ')}
+      style={{
+        backgroundColor: event.color,
+      }}
+      title={event.summary}
+      onClick={() => onClick(event)}
+    >
+      <div className="event-text-container">{event.summary}</div>
     </div>
   );
-}
+};
+
+const event = {
+  id: '1',
+  start: new Date(),
+  end: new Date(),
+  summary: 'This is an event',
+  color: 'lightblue',
+};
+
+render(
+  <div className="schedulely">
+    <DefaultEvent
+      event={event}
+      isHovered={false}
+      onClick={() => alert(JSON.stringify(event, null, 2))}
+    />
+  </div>
+);
 ```

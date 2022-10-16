@@ -29,19 +29,18 @@ export interface DayComponentProps {
 
 ## Example (DefaultDay)
 
-```tsx live
+```tsx live noInline
 // This demo is an example of what a custom component might look like if you wanted to override the default.
 // If you are using the default components, you don't need to worry about this.
 
-function DefaultEventDemo(props) {
-  // These values would be obtained via `props`
-  // We have to manually define them for this demo
-  const isToday = true;
-  const dateNumber = 21;
-  const events = [];
-  const isCurrentMonth = true;
-  const isOverflowed = true;
-
+const DefaultDay = ({
+  isCurrentMonth,
+  isToday,
+  dateNumber,
+  events,
+  isOverflowed,
+  onClick,
+}) => {
   const dayHeader = isToday ? (
     <div className="default-day-header--indicator">
       <span className="default-day-header--text">{dateNumber}</span>
@@ -53,38 +52,38 @@ function DefaultEventDemo(props) {
   const hiddenEventTooltip =
     events.length > 1 ? `(${events.length}) hidden events` : '(1) hidden event';
 
-  const DefaultDay = ({ event, isHovered, onClick }) => {
-    const classes = ['event'];
-    if (isHovered) classes.push('event-selected');
-
-    return (
-      <div
-        className={`default-day ${
-          isCurrentMonth ? 'default-day-current' : 'default-day-sibling'
-        }`}
-      >
-        <div className="default-day-header">{dayHeader}</div>
-        {isOverflowed && (
-          <div
-            className="additional-events-indicator"
-            title={hiddenEventTooltip}
-            onClick={() => onClick(events)}
-          >
-            ...
-          </div>
-        )}
-      </div>
-    );
-  };
-
   return (
-    <div className="schedulely" style={{ height: '7em', width: '7em' }}>
-      <DefaultDay
-        event={event}
-        isHovered={false}
-        onClick={() => alert('Array of events would be here!')}
-      />
+    <div
+      className={`default-day ${
+        isCurrentMonth ? 'default-day-current' : 'default-day-sibling'
+      }`}
+    >
+      <div className="default-day-header">{dayHeader}</div>
+      {isOverflowed && (
+        <div
+          className="additional-events-indicator"
+          title={hiddenEventTooltip}
+          onClick={() => onClick(events)}
+        >
+          ...
+        </div>
+      )}
     </div>
   );
-}
+};
+
+const events = [...generateEvents(2)];
+
+render(
+  <div className="schedulely" style={{ height: '7em', width: '7em' }}>
+    <DefaultDay
+      isCurrentMonth={true}
+      isToday={true}
+      dateNumber={21}
+      events={events}
+      isOverflowed={true}
+      onClick={() => alert(JSON.stringify(events))}
+    />
+  </div>
+);
 ```
