@@ -58,3 +58,17 @@
     width: 60%;
   }
 }
+
+.homepage-action-message {
+  font-size: 0.8em;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.resize-action-message {
+  font-size: 0.7em;
+  width: 100%;
+  text-align: end;
+  font-weight: bold;
+}

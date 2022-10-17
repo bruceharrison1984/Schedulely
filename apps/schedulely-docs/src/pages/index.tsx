@@ -15,11 +15,10 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p>
-          🚧 There be dragons here. Please bear with us until the 1.0.0 release
-          🚧
-        </p>
+        <h1 className="hero__title" style={{ marginBottom: '-0.1em' }}>
+          {siteConfig.title}
+        </h1>
+        <p>The extremely tiny, super-responsize calendar</p>
       </div>
     </header>
   );
@@ -34,7 +33,11 @@ export default function Home(): JSX.Element {
     >
       <HomepageHeader />
       <main>
-        <div style={{ height: '600px' }}>
+        <div className="homepage-action-message">
+          🚧 There be dragons here. Please bear with us until the 1.0.0 release
+          🚧
+        </div>
+        <div style={{ height: '40em', marginBottom: '1em' }}>
           <HomepageSchedulely />
         </div>
         <HomepageFeatures />

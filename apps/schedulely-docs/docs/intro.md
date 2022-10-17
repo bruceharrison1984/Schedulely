@@ -32,7 +32,7 @@ The default theme uses the `Roboto` font, so it should be loaded prior to initia
 />
 ```
 
-```tsx live=true
+```tsx live noInline
 /* array of CalendarEvents */
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
