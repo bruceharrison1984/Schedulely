@@ -1,6 +1,6 @@
-import { InternalCalendarEvent } from '@/types';
+import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { ReactNode, createContext, useLayoutEffect, useState } from 'react';
-import { useCalendar } from '@/hooks';
+import { useCalendar } from '@/hooks/useCalendar';
 
 type EventIntersectionState = {
   /** Set the parent container that will be used as the root element for overflow detection */
