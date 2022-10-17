@@ -25,7 +25,7 @@ const HomepageSchedulely = () => {
         }}
         maxHeight={'100%'}
         maxWidth={'100%'}
-        minHeight={'70%'}
+        minHeight={'71%'}
         minWidth={'40%'}
         handleStyles={{
           bottom: {
