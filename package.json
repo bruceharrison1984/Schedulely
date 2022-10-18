@@ -10,6 +10,7 @@
     "build": "turbo run build --no-daemon",
     "build-ladle": "turbo run build-ladle --no-daemon",
     "rollup": "turbo run rollup --no-daemon",
+    "ssr-test": "turbo run ssr-test --no-daemon",
     "dev": "turbo run dev --parallel",
     "dev-docs": "turbo run dev-docs",
     "lint": "turbo run lint",

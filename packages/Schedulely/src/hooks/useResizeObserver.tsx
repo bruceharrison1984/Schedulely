@@ -1,12 +1,12 @@
 import { ComponentSize } from '@/types/ComponentSize';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function useResizeObserver() {
   const observedRef = useRef(null);
   const breakpoints = { small: 500, large: 800 };
   const [breakSize, setBreakSize] = useState<ComponentSize>('small');
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const observer = new ResizeObserver((entries) => {
       const { width } = entries[0].contentRect;
       if (width <= breakpoints.small) setBreakSize('small');

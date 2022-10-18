@@ -1,7 +1,6 @@
 import { Schedulely } from 'schedulely';
 import { storyEvents } from '../helpers.stories';
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -14,23 +13,14 @@ export default function Home() {
       </Head>
 
       <div className={styles.main}>
+        <h2 className={styles.title}>Schedulely SSR Test</h2>
+        <p className={styles.description}>
+          This application simulates running Schedulely in an SSR scenario
+        </p>
         <div style={{ width: '100%', height: '100%' }}>
           <Schedulely events={storyEvents} />
         </div>
       </div>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   );
 }

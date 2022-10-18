@@ -44,6 +44,12 @@
         "^rollup"
       ],
       "cache": false
+    },
+    "ssr-test": {
+      "dependsOn": [
+        "^rollup"
+      ],
+      "cache": false
     }
   }
 }
