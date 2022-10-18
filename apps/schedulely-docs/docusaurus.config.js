@@ -77,8 +77,24 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Getting Started',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Components',
+                to: '/docs/Components',
+              },
+              {
+                label: 'Usage',
+                to: '/docs/category/usage',
+              },
+              {
+                label: 'Themes',
+                to: '/docs/Themes',
+              },
+              {
+                label: 'Alternatives',
+                to: '/docs/alternatives',
               },
             ],
           },
@@ -90,11 +106,15 @@ const config = {
         darkTheme: darkCodeTheme,
       },
       liveCodeBlock: {
-        /**
-         * The position of the live playground, above or under the editor
-         * Possible values: "top" | "bottom"
-         */
         playgroundPosition: 'top',
+      },
+      announcementBar: {
+        id: 'warning',
+        content:
+          '🚧 <b>There be dragons here. Please bear with us until the 1.0.0 release</b> 🚧',
+        backgroundColor: '#fafbfc',
+        textColor: '#091E42',
+        isCloseable: false,
       },
     }),
 };

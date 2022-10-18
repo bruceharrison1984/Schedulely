@@ -1,5 +1,5 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
-import { ReactNode, createContext, useLayoutEffect, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 import { useCalendar } from '@/hooks/useCalendar';
 
 type EventIntersectionState = {
@@ -72,7 +72,7 @@ export const EventIntersectionProvider = ({
       });
     });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(checkIntersection, {
       root: parentContainerRef,
       rootMargin: '0px 0px -15% 0px',
