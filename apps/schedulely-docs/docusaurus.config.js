@@ -37,6 +37,12 @@ const config = {
           trackingID: 'G-B7NYF75SRT',
           anonymizeIP: true,
         },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+        },
       }),
     ],
   ],
