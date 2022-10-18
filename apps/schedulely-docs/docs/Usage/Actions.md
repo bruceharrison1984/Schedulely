@@ -1,5 +1,5 @@
 ---
-title: 🎬 Actions
+title: Actions
 description: Functions used for interacting with Schedulely
 ---
 

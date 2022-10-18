@@ -20,7 +20,7 @@ const sidebars = {
     'intro',
     {
       type: 'category',
-      label: '🔧 Components',
+      label: 'Components',
       link: {
         type: 'doc',
         id: 'Components/Components',
@@ -29,7 +29,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '👨🏻‍💻 Usage',
+      label: 'Usage',
       link: {
         type: 'generated-index',
       },
@@ -37,7 +37,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '🎨 Themes',
+      label: 'Themes',
       link: {
         type: 'doc',
         id: 'Themes/Themes',

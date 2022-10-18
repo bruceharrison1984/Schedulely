@@ -1,5 +1,5 @@
 ---
-title: ⌨️ Keyboard Controls
+title: Keyboard Controls
 description: Control Schedulely with shortcuts
 ---
 

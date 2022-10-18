@@ -33,10 +33,6 @@ export default function Home(): JSX.Element {
     >
       <HomepageHeader />
       <main>
-        <div className="homepage-action-message">
-          🚧 There be dragons here. Please bear with us until the 1.0.0 release
-          🚧
-        </div>
         <div style={{ height: '40em', marginBottom: '1em' }}>
           <HomepageSchedulely />
         </div>

@@ -1,5 +1,5 @@
 ---
-title: ⏲ DateTime
+title: DateTime
 description: DateTime implementations
 ---
 
