@@ -77,8 +77,24 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Getting Started',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Components',
+                to: '/docs/Components',
+              },
+              {
+                label: 'Usage',
+                to: '/docs/category/usage',
+              },
+              {
+                label: 'Themes',
+                to: '/docs/Themes',
+              },
+              {
+                label: 'Alternatives',
+                to: '/docs/alternatives',
               },
             ],
           },

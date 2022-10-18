@@ -1,3 +1,4 @@
 {
-  "jest.jestCommandLine": "npm run test --"
+  "jest.jestCommandLine": "npm run test --",
+  "cSpell.words": ["Schedulely"]
 }

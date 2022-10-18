@@ -32,8 +32,15 @@ The default theme uses the `Roboto` font, so it should be loaded prior to initia
 />
 ```
 
+You also need to import the default stylesheet, it will _not_ be loaded automatically.
+
+```tsx
+// global import or in the component where Schedulely will be displayed
+import 'schedulely/dist/index.css';
+```
+
 ```tsx live noInline
-/* array of CalendarEvents */
+/* demo array of CalendarEvents */
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
 render(<Schedulely events={events} />);

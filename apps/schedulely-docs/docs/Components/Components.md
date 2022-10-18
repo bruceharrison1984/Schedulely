@@ -24,9 +24,28 @@ All default components have interfaces available, and custom components can be p
 
 Care should be taken when styling custom components. The underlying calendar layout is flexible, but it can still be easily broken.
 
+## Overriding Components
+
+If you do decide to use custom components, your implementation is just passed into the constructor.
+
+Components are individually overridden so if you create a custom DayComponent, you only need to pass in that DayComponent. Default components are used if they are not explicitly overridden.
+
+```tsx
+  <Schedulely
+    events={storyEvents}
+    dark={colorMode === 'dark'}
+    theme={theme}
+    schedulelyComponents={{
+      dayComponent: <ComponentThatInheritsDayComponent>,
+      headerComponent: <ComponentThatInheritsHeaderComponent>,
+      eventComponent: <ComponentThatInheritsEventComponent>,
+    }}
+  />
+```
+
 ## Interfaces
 
-The following interfaces can be used to craft custom components to be used in Schedulely.
+The following interfaces should be used to craft custom components to be used in Schedulely.
 
 | Component       | Description                                         |
 | --------------- | --------------------------------------------------- |

@@ -66,4 +66,4 @@ TBD: Screenshot pointing out these variable targets
 
 ## CSS Overrides
 
-All styles are delivered through the `Schedulely.css` file, which should be imported either at the global scope of your React project, or in the individual component where Schedulely is used. Any styles can easily be overridden by creating a copy of this stylesheet, and changing the values you would like to change.
+All styles are delivered through the `schedulely/dist/index.css` file, which should be imported either at the global scope of your React project, or in the individual component where Schedulely is used. Any styles can easily be overridden by creating a copy of this stylesheet, and changing the values you would like to change.
