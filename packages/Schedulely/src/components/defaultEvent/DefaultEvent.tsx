@@ -10,6 +10,8 @@ export const DefaultEvent: EventComponent = ({ event, isHovered, onClick }) => {
 
   return (
     <div
+      role={'listitem'}
+      data-eventid={event.id}
       className={classes.join(' ')}
       style={{
         backgroundColor: event.color,

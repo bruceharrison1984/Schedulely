@@ -3,27 +3,27 @@ import { DefaultDay } from '@/components';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
 import chance from 'chance';
 
-describe('DefaultDay', () => {
-  const testEvents: InternalCalendarEvent[] = [
-    {
-      id: '123-abc',
-      start: new Date(),
-      end: new Date(),
-      summary: 'testEvent',
-      color: 'red',
-      visible: false,
-    },
-  ];
-  const onClickHandler = jest.fn((events: InternalCalendarEvent[]) => null);
-  const defaults: DayComponentProps = {
-    isCurrentMonth: true,
-    isOverflowed: true,
-    isToday: true,
-    dateNumber: chance().integer({ min: 1, max: 31 }),
-    events: testEvents,
-    onClick: onClickHandler,
-  };
+const testEvents: InternalCalendarEvent[] = [
+  {
+    id: '123-abc',
+    start: new Date(),
+    end: new Date(),
+    summary: 'testEvent',
+    color: 'red',
+    visible: false,
+  },
+];
+const onClickHandler = jest.fn((events: InternalCalendarEvent[]) => null);
+const defaults: DayComponentProps = {
+  isCurrentMonth: true,
+  isOverflowed: true,
+  isToday: true,
+  dateNumber: chance().integer({ min: 1, max: 31 }),
+  events: testEvents,
+  onClick: onClickHandler,
+};
 
+describe('DefaultDay', () => {
   describe('isCurrentMonth', () => {
     it('displays correct class for current month', () => {
       const testObject = render(<DefaultDay {...defaults} />);
