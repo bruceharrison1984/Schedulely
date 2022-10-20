@@ -23,6 +23,13 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     );
   };
 
+  /**
+   * This function will return an array of arrays representing a month, split into weeks 7 days long.
+   * This includes leading/trailing days.
+   * This only uses native JS objects, so no external libs are needed
+   * @param date Native JS date object
+   * @returns Date[][]
+   */
   const getCalendarView = (date: Date) => {
     const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
