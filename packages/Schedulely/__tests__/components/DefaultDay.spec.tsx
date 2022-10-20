@@ -1,16 +1,27 @@
-import { DayComponentProps } from '@/types';
+import { DayComponentProps, InternalCalendarEvent } from '@/types';
 import { DefaultDay } from '@/components';
-import { RenderResult, render } from '@testing-library/react';
+import { RenderResult, fireEvent, render } from '@testing-library/react';
 import chance from 'chance';
 
 describe('DefaultDay', () => {
+  const testEvents: InternalCalendarEvent[] = [
+    {
+      id: '123-abc',
+      start: new Date(),
+      end: new Date(),
+      summary: 'testEvent',
+      color: 'red',
+      visible: false,
+    },
+  ];
+  const onClickHandler = jest.fn((events: InternalCalendarEvent[]) => null);
   const defaults: DayComponentProps = {
     isCurrentMonth: true,
     isOverflowed: true,
     isToday: true,
     dateNumber: chance().integer({ min: 1, max: 31 }),
-    events: [],
-    onClick: () => null,
+    events: testEvents,
+    onClick: onClickHandler,
   };
 
   describe('isCurrentMonth', () => {
@@ -45,6 +56,17 @@ describe('DefaultDay', () => {
 
       it('indicator has help text', () => {
         expect(testObject.getByRole('note').title).not.toBeNull();
+      });
+
+      describe('onClick handler', () => {
+        beforeEach(() => {
+          fireEvent.click(testObject.getByRole('note'));
+        });
+
+        it('fires', () => expect(onClickHandler).toHaveBeenCalled());
+
+        it('passes events as args', () =>
+          expect(onClickHandler.mock.calls[0][0]).toEqual(testEvents));
       });
     });
 
