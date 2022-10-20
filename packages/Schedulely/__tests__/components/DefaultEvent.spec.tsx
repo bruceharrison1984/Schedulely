@@ -19,13 +19,13 @@ const defaults: EventComponentProps = {
 };
 
 describe('DefaultEvent', () => {
-  let testObject: RenderResult;
-
-  beforeEach(() => {
-    testObject = render(<DefaultEvent {...defaults} />);
-  });
-
   describe('summary', () => {
+    let testObject: RenderResult;
+
+    beforeEach(() => {
+      testObject = render(<DefaultEvent {...defaults} />);
+    });
+
     it('displays correct text', () =>
       expect(
         testObject.getByRole('listitem').querySelector('div')?.textContent
@@ -33,6 +33,12 @@ describe('DefaultEvent', () => {
   });
 
   describe('color', () => {
+    let testObject: RenderResult;
+
+    beforeEach(() => {
+      testObject = render(<DefaultEvent {...defaults} />);
+    });
+
     it('displays correct color', () =>
       expect(
         testObject
@@ -42,7 +48,10 @@ describe('DefaultEvent', () => {
   });
 
   describe('onClick handler', () => {
+    let testObject: RenderResult;
+
     beforeEach(() => {
+      testObject = render(<DefaultEvent {...defaults} />);
       fireEvent.click(testObject.getByRole('listitem'));
     });
 
@@ -50,5 +59,31 @@ describe('DefaultEvent', () => {
 
     it('passes events as args', () =>
       expect(onClickHandler.mock.calls[0][0]).toEqual(testEvent));
+  });
+
+  describe('onHover', () => {
+    describe('is true', () => {
+      let testObject: RenderResult;
+
+      beforeEach(() => {
+        testObject = render(<DefaultEvent {...defaults} isHovered={true} />);
+      });
+      it('contains correct class', () =>
+        expect(testObject.getByRole('listitem').className).toContain(
+          'event-selected'
+        ));
+    });
+
+    describe('is false', () => {
+      let testObject: RenderResult;
+
+      beforeEach(() => {
+        testObject = render(<DefaultEvent {...defaults} />);
+      });
+      it('contains correct class', () =>
+        expect(testObject.getByRole('listitem').className).not.toContain(
+          'event-selected'
+        ));
+    });
   });
 });
