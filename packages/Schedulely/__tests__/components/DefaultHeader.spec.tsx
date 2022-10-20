@@ -1,6 +1,6 @@
 import { DefaultHeader } from '@/components';
 import { HeaderComponentProps } from '@/types';
-import { RenderResult, render } from '@testing-library/react';
+import { RenderResult, fireEvent, render } from '@testing-library/react';
 import chance from 'chance';
 
 const onNextMonthHandler = jest.fn(() => null);
@@ -58,12 +58,30 @@ describe('DefaultHeader', () => {
         expect(testObject.queryByRole('alert')).toBeNull());
     });
 
-    describe('onNextMonth', () => {
+    describe('onClick', () => {
       let testObject: RenderResult;
 
       beforeEach(() => (testObject = render(<DefaultHeader {...defaults} />)));
 
-      it('calls callback', () => {});
+      it('for previous month calls handler', () => {
+        fireEvent.click(testObject.getByTitle('Previous Month'));
+        expect(onPrevMonthHandler).toHaveBeenCalled();
+      });
+
+      it('for next month calls handler', () => {
+        fireEvent.click(testObject.getByTitle('Next Month'));
+        expect(onNextMonthHandler).toHaveBeenCalled();
+      });
+
+      it('for previous year calls handler', () => {
+        fireEvent.click(testObject.getByTitle('Previous Year'));
+        expect(onPrevYearHandler).toHaveBeenCalled();
+      });
+
+      it('for next year calls handler', () => {
+        fireEvent.click(testObject.getByTitle('Next Year'));
+        expect(onNextYearHandler).toHaveBeenCalled();
+      });
     });
   });
 });
