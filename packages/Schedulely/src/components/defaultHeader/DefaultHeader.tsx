@@ -17,6 +17,7 @@ export const DefaultHeader: HeaderComponent = ({
   return (
     <div className="header-layout">
       <button
+        role={'button'}
         className="header-button"
         title="Previous Month"
         onClick={onPrevMonth}
@@ -24,6 +25,7 @@ export const DefaultHeader: HeaderComponent = ({
         <strong>{'‹'}</strong>
       </button>
       <button
+        role={'button'}
         className="header-button"
         title="Previous Year"
         onClick={onPrevYear}
@@ -31,19 +33,29 @@ export const DefaultHeader: HeaderComponent = ({
         <strong>{'«'}</strong>
       </button>
 
-      <div className="header-banner">
-        <span className="header-text">
+      <div role={'banner'} className="header-banner">
+        <span role={'heading'} className="header-text">
           {month} - {year}
         </span>
         {isCurrentMonth && (
-          <div className="current-month-indicator" title="Current Month" />
+          <div
+            role={'alert'}
+            className="current-month-indicator"
+            title="Current Month"
+          />
         )}
       </div>
 
-      <button className="header-button" title="Next Year" onClick={onNextYear}>
+      <button
+        role={'button'}
+        className="header-button"
+        title="Next Year"
+        onClick={onNextYear}
+      >
         <strong>{'»'}</strong>
       </button>
       <button
+        role={'button'}
         className="header-button"
         title="Next Month"
         onClick={onNextMonth}
