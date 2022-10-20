@@ -21,13 +21,17 @@ export const DefaultDay: DayComponent = ({
 
   return (
     <div
+      role={'cell'}
       className={`default-day ${
         isCurrentMonth ? 'default-day-current' : 'default-day-sibling'
       }`}
     >
-      <div className="default-day-header">{dayHeader}</div>
+      <div role={'heading'} className="default-day-header">
+        {dayHeader}
+      </div>
       {isOverflowed && (
         <div
+          role={'note'}
           className="additional-events-indicator"
           title={hiddenEventTooltip}
           onClick={() => onClick(events)}
