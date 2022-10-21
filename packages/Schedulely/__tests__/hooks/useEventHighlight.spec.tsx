@@ -28,4 +28,14 @@ describe('useEventHighlight', () => {
     act(() => result.current.clearHighlight());
     expect(result.current.isHighlighted(eventId)).toBeFalsy();
   });
+
+  it('changing highlight should alter stored highlight', () => {
+    const { result } = renderHook(() => useEventHighlight(), { wrapper });
+    const eventId = Chance().string({ length: 32 });
+
+    act(() => result.current.setHighlight(eventId));
+    expect(result.current.isHighlighted(eventId)).toBeTruthy();
+    act(() => result.current.setHighlight('new-value'));
+    expect(result.current.isHighlighted('new-value')).toBeTruthy();
+  });
 });
