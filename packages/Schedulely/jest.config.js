@@ -14,4 +14,12 @@ module.exports = {
     './jest.env.js',
     '@testing-library/jest-dom/extend-expect',
   ],
+  coverageThreshold: {
+    global: {
+      branches: 1,
+      functions: 1,
+      lines: 1,
+      statements: 0,
+    },
+  },
 };
