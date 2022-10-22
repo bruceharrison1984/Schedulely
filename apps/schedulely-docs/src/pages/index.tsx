@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
     >
       <HomepageHeader />
       <main>
-        <div style={{ height: '40em', marginBottom: '1em' }}>
+        <div style={{ height: '40em', marginBottom: '2.5em' }}>
           <HomepageSchedulely />
         </div>
         <HomepageFeatures />
