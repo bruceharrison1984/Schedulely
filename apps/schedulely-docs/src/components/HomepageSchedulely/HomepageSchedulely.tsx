@@ -61,10 +61,10 @@ const HomepageSchedulely = () => {
             theme={theme}
           />
           <div className="resize-action-message">
-            Test
+            Test{' '}
             <a href="https://github.com/bokuweb/re-resizable" target={'_blank'}>
               live resize
-            </a>
+            </a>{' '}
             by dragging the dashed line
           </div>
         </Resizable>

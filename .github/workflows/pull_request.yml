@@ -1,18 +1,16 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Development CI
+name: Pull Request
 
 on:
-  push:
+  pull_request:
     branches:
-      - '*'
-  workflow_dispatch:
+      - main
 
 jobs:
-  lint:
+  lint-pr:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 16.x
@@ -26,9 +24,8 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-  build:
+  build-pr:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 16.x
@@ -40,7 +37,26 @@ jobs:
         run: npm install -g npm
       - name: NPM Install
         run: npm ci
-      - name: Lint
-        run: npm run lint
       - name: Build
         run: npm run build
+  test-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'npm'
+      - name: Update NPM
+        run: npm install -g npm
+      - name: NPM Install
+        run: npm ci
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        id: coverage
+        with:
+          output: report-markdown
+          working-directory: ./packages/Schedulely
+      - uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: ${{ steps.coverage.outputs.report }}
