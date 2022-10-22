@@ -43,8 +43,8 @@ jobs:
         id: coverage
         with:
           output: report-markdown
-          test-script: npm run test-ci
-          skip-step: install
+          coverage-file: report.json
+          base-coverage-file: report.json
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: ${{ steps.coverage.outputs.report }}
