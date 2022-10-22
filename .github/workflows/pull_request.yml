@@ -52,14 +52,11 @@ jobs:
         run: npm install -g npm
       - name: NPM Install
         run: npm ci
-      - name: Test
-        run: npm run test-ci
       - uses: ArtiomTr/jest-coverage-report-action@v2
         id: coverage
         with:
           output: report-markdown
-          coverage-file: ./report.json
-          base-coverage-file: ./report.json
+          working-directory: ./packages/Schedulely
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: ${{ steps.coverage.outputs.report }}

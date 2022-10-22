@@ -19,7 +19,6 @@
     "lint": "eslint . --ext .ts --ext .tsx",
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
     "test": "jest",
-    "test-ci": "jest --ci --json --coverage --testLocationInResults --outputFile=../../report.json",
     "dev": "ladle serve --stories=__stories__/**",
     "build-ladle": "ladle build"
   },
