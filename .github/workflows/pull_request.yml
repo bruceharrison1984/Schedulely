@@ -1,16 +1,15 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Development CI
+name: Pull Request
 
 on:
-  push:
+  pull_request:
     branches:
-      - '*'
-  workflow_dispatch:
+      - main
 
 jobs:
-  lint:
+  lint-pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,7 +24,7 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-  build:
+  build-pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -38,7 +37,5 @@ jobs:
         run: npm install -g npm
       - name: NPM Install
         run: npm ci
-      - name: Lint
-        run: npm run lint
       - name: Build
         run: npm run build
