@@ -1,3 +1,4 @@
+import { ComponentSize } from '../ComponentSize';
 import { JSXElementConstructor } from 'react';
 
 /** Props used when creating a Header */
@@ -21,6 +22,9 @@ export interface HeaderComponentProps {
 
   /** Triggers moving back one year */
   onPrevYear: () => void;
+
+  /** The current size of the header component */
+  componentSize: ComponentSize;
 }
 
 /** The month/year banner displayed at the top of the calendar */
