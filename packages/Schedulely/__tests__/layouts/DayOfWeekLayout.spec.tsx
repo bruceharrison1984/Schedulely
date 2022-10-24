@@ -28,7 +28,7 @@ const hook: CalendarState = {
   calendarWithEvents: [],
 };
 
-describe('DayOfWeekLayout', () => {
+xdescribe('DayOfWeekLayout', () => {
   mockUseCalendar.mockReturnValue(hook);
 
   const testFixture = render(
