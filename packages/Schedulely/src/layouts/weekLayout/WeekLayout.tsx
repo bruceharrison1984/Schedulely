@@ -5,7 +5,6 @@ import {
   useComponents,
   useEventIntersection,
 } from '@/hooks/index';
-import { useCallback } from 'react';
 
 interface WeekLayoutProps {
   dates: Date[];
@@ -20,7 +19,7 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
   const { dateAdapter, currentMonth } = useCalendar();
   const { dayComponent: DayComponent } = useComponents();
   const { onMoreEventClick } = useActions();
-  const { getOverflowForDay } = useEventIntersection();
+  const { getEventsOnDate } = useEventIntersection();
 
   return (
     <div className="week-layout">
@@ -34,8 +33,10 @@ export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
             isCurrentMonth={dateAdapter.isSameMonth(day, currentMonth)}
             isToday={dateAdapter.isDateToday(day)}
             dateNumber={dateAdapter.getDayNumber(day)}
-            isOverflowed={getOverflowForDay(day).length > 0}
-            events={getOverflowForDay(day)}
+            isOverflowed={
+              getEventsOnDate(day).filter((x) => !x.visible).length > 0
+            }
+            events={getEventsOnDate(day)}
             onClick={onMoreEventClick}
           />
         </div>

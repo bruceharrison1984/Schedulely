@@ -24,14 +24,14 @@ export interface DayComponentProps {
 | isCurrentMonth | `boolean`                 | True if this date occurs in the current visible month                           |
 | isToday        | `boolean`                 | True is this date is equal to today's date                                      |
 | dateNumber     | `number`                  | The numeric date of the day                                                     |
-| events         | `InternalCalendarEvent[]` | Array of all _hidden_ events that occur or span this date                       |
+| events         | `InternalCalendarEvent[]` | Array of _all_ events that occur or span this date (both hidden and visible)    |
 | isOverflowed   | `boolean`                 | True if the date has more events than can visible fit. (Some events are hidden) |
 
 ## Dealing with hidden events
 
 Once one or more events overflow the DayComponent container, `isOverflowed` will be set to true and the UI updated to show the additional events indicator, presuming you are using the default Day component.
 
-Once events overflow the day container, they will also begin being hidden. All hidden events are contained within the `events` array.
+Once events overflow the day container, they will also begin being hidden. All events are contained within the `events` array, with the `visible` property indicating the visibility of each event on that day.
 
 ## Example (DefaultDay)
 
