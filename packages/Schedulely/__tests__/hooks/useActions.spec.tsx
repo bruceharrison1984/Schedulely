@@ -1,10 +1,9 @@
-import { ActionProvider, HighlightProvider } from '@/providers';
+import { ActionProvider } from '@/providers';
 import { InternalCalendarEvent } from '@/types';
 import { ReactNode } from 'react';
 import { act } from 'react-test-renderer';
 import { renderHook } from '@testing-library/react-hooks';
-import { useActions, useEventHighlight } from '@/hooks';
-import Chance from 'chance';
+import { useActions } from '@/hooks';
 
 const testEvents: InternalCalendarEvent[] = [
   {

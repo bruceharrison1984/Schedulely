@@ -1,8 +1,7 @@
 import { ComponentSize } from '..';
-import { ReactNode, createContext, useEffect, useRef, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 
 type BreakpointContextState = {
-  containerRef?: React.MutableRefObject<null>;
   breakpoint: ComponentSize;
 };
 
@@ -25,10 +24,10 @@ export const BreakpointProvider = ({
 }) => {
   const breakpoints = { small: 500, large: 800 };
   const [breakpoint, setBreakpoint] = useState<ComponentSize>('small');
-
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
       const { width } = entries[0].contentRect;
+
       if (width <= breakpoints.small) setBreakpoint('small');
       if (width > breakpoints.small && width < breakpoints.large)
         setBreakpoint('medium');
@@ -48,7 +47,6 @@ export const BreakpointProvider = ({
   }, [containerRef]);
 
   const value: BreakpointContextState = {
-    containerRef,
     breakpoint,
   };
 
