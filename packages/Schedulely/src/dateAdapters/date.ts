@@ -1,5 +1,5 @@
 import { ComponentSize } from '@/types/ComponentSize';
-import { DateTimeAdapter } from '@/types/index';
+import { DateTimeAdapter } from '@/types';
 
 /**
  * Create an instance of the default date adapter

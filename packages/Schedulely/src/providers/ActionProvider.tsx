@@ -1,5 +1,4 @@
-import { ActionState } from '@/types/ActionState';
-import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
+import { ActionState, InternalCalendarEvent } from '@/types';
 import { PropsWithChildren, createContext, useCallback } from 'react';
 
 export const ActionContext = createContext<ActionState | null>(null);

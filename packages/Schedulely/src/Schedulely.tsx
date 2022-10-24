@@ -5,9 +5,10 @@ import {
   CalendarProvider,
   ComponentProvider,
 } from '@/providers/index';
+import { BreakpointProvider } from './providers/BreakPointProvider';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';
-import { StrictMode } from 'react';
+import { StrictMode, useRef } from 'react';
 import { createDefaultAdapter } from './dateAdapters';
 
 /**
@@ -27,6 +28,8 @@ export const Schedulely = ({
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
+  const containerRef = useRef(null);
+
   return (
     <StrictMode>
       <div
@@ -39,20 +42,23 @@ export const Schedulely = ({
           gridTemplateColumns: '1fr',
           gridTemplateRows: 'auto auto 1fr',
         }}
+        ref={containerRef}
       >
-        <ActionProvider actions={actions}>
-          <ComponentProvider calendarComponents={schedulelyComponents}>
-            <CalendarProvider
-              initialDate={initialDate}
-              dateAdapter={dateAdapter}
-              calendarEvents={events}
-            >
-              <HeaderLayout />
-              <DayOfWeekLayout />
-              <MonthLayout />
-            </CalendarProvider>
-          </ComponentProvider>
-        </ActionProvider>
+        <BreakpointProvider containerRef={containerRef}>
+          <ActionProvider actions={actions}>
+            <ComponentProvider calendarComponents={schedulelyComponents}>
+              <CalendarProvider
+                initialDate={initialDate}
+                dateAdapter={dateAdapter}
+                calendarEvents={events}
+              >
+                <HeaderLayout />
+                <DayOfWeekLayout />
+                <MonthLayout />
+              </CalendarProvider>
+            </ComponentProvider>
+          </ActionProvider>
+        </BreakpointProvider>
       </div>
     </StrictMode>
   );

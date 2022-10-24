@@ -1,4 +1,4 @@
-import { HeaderComponent } from '@/types/index';
+import { HeaderComponent } from '@/types';
 import { useCallback } from 'react';
 
 /**

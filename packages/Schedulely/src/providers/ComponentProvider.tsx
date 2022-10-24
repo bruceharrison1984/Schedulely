@@ -1,7 +1,6 @@
 import { DefaultDay, DefaultEvent, DefaultHeader } from '../components';
-import { PropsWithChildren, createContext } from 'react';
-import { SchedulelyComponents } from '@/types/index';
-import React from 'react';
+import { PropsWithChildren, createContext, memo } from 'react';
+import { SchedulelyComponents } from '@/types';
 
 export const ComponentContext = createContext<SchedulelyComponents | null>(
   null
@@ -26,9 +25,9 @@ export const ComponentProvider = ({
     : defaultComponents;
 
   const contextValue: SchedulelyComponents = {
-    dayComponent: React.memo(components.dayComponent),
-    headerComponent: React.memo(components.headerComponent),
-    eventComponent: React.memo(components.eventComponent),
+    dayComponent: memo(components.dayComponent),
+    headerComponent: memo(components.headerComponent),
+    eventComponent: memo(components.eventComponent),
   };
 
   return (

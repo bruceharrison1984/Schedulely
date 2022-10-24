@@ -1,6 +1,5 @@
-import { EventIntersectionProvider } from '@/providers/EventIntersectionProvider';
+import { EventIntersectionProvider, HighlightProvider } from '@/providers';
 import { EventWeekLayout } from '@/layouts/eventWeekLayout';
-import { HighlightProvider } from '@/providers/HightlightProvider';
 import { WeekLayout } from '@/layouts/weekLayout';
 import { useCalendar } from '@/hooks/useCalendar';
 

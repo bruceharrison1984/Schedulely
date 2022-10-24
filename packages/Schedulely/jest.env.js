@@ -3,13 +3,4 @@
 import React from 'react';
 
 global.React = React;
-
-Object.defineProperty(window, 'matchMedia', {
-  value: () => {
-    return {
-      matches: false,
-      addListener: () => {},
-      removeListener: () => {},
-    };
-  },
-});
+global.ResizeObserver = require('resize-observer-polyfill');

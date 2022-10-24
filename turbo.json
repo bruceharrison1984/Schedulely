@@ -1,15 +1,35 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
-    "test": {},
+    "barrels": {
+      "dependsOn": [],
+      "outputs": [
+        "src/**/index.ts"
+      ],
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "barrels"
+      ],
+      "outputs": [],
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "__tests__/**/*.tsx",
+        "__tests__/**/*.ts"
+      ]
+    },
     "rollup": {
       "dependsOn": [
         "test"
       ],
       "inputs": [
         "src/**",
-        "rollup.config.js",
-        "package.json"
+        "rollup.config.js"
       ],
       "outputs": [
         "dist/**"
@@ -26,8 +46,7 @@
     "build-ladle": {
       "inputs": [
         "src/**",
-        "rollup.config.js",
-        "package.json"
+        "rollup.config.js"
       ],
       "outputs": [
         "build/**"

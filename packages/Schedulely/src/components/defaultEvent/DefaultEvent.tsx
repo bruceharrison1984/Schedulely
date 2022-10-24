@@ -1,4 +1,4 @@
-import { EventComponent } from '@/types/index';
+import { EventComponent } from '@/types';
 
 /**
  * This component is the UI representation of events on the calendar

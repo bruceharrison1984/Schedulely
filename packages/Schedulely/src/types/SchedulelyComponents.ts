@@ -1,4 +1,4 @@
-import { DayComponent, EventComponent, HeaderComponent } from './components';
+import { DayComponent, EventComponent, HeaderComponent } from '@/types';
 
 export interface SchedulelyComponents {
   dayComponent: DayComponent;

@@ -1,11 +1,11 @@
 import {
   CalendarEvent,
   CalendarState,
+  ComponentSize,
   DateTimeAdapter,
   InternalCalendarEvent,
   InternalEventWeek,
-} from '@/types/index';
-import { ComponentSize } from '@/types/ComponentSize';
+} from '@/types';
 import {
   PropsWithChildren,
   createContext,

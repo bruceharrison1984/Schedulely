@@ -1,4 +1,4 @@
-import { InternalCalendarEvent } from './InternalCalendarEvent';
+import { InternalCalendarEvent } from '../InternalCalendarEvent';
 
 /** Represents the state of the ActionProvider */
 export interface ActionState {

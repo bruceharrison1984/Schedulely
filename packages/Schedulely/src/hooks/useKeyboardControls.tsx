@@ -1,4 +1,4 @@
-import { useCalendar } from './useCalendar';
+import { useCalendar } from '@/hooks/useCalendar';
 import { useCallback, useEffect } from 'react';
 
 /**
