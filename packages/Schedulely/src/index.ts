@@ -1,3 +1,3 @@
 export * from './Schedulely';
-export * from '@/types/index';
-export * from '@/dateAdapters/index';
+export * from '@/types';
+export * from '@/dateAdapters';
