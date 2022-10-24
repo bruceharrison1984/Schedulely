@@ -1,14 +1,21 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
-    "barrels": {},
+    "barrels": {
+      "outputs": [],
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts"
+      ]
+    },
     "test": {
       "dependsOn": [
         "barrels"
       ],
-      "outputs": [
-        "**/index.ts",
-        "index.ts"
+      "outputs": [],
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts"
       ]
     },
     "rollup": {
