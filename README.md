@@ -25,3 +25,17 @@ A react-based, light-weight, highly customizable Month calendar for React-based 
 The ultimate goal for this library was to create a framework that allowed for users to create their own calendar and components for use in the grid system. This allows for users to easily add additional functionality without bloating the base library with features not everyone may want.
 
 The included default calendar components can be simply used as is, but the real power is being able to easily override these components. This allows consumers to use any state-management, styles, UX, or _whatever_ without needing them included in this library, and without interfering with it's overall behavior.
+
+## Development
+
+These project uses Turborepo for building, so many of these tasks are additive and will call other tasks.
+
+The following commands are used for development:
+| | |
+|------------|---------------------------------------------------------------------------|
+| `build` | Build all artifacts |
+| `rollup` | Build the Schedulely NPM package artifact |
+| `dev` | Run Schedulely within Ladle. This is used for real-time local development |
+| `test` | Run Jest unit tests |
+| `dev-docs` | Run Docusaurus documentation with real-time updates. |
+| `ssr-test` | Run NextJS server-side app. Used to the SSR functionality |
