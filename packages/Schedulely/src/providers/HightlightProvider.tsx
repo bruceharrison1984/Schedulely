@@ -1,4 +1,4 @@
-import { HighlightEventState } from '@/types/HighlightEventState';
+import { HighlightEventState } from '@/types/state/HighlightEventState';
 import { ReactNode, createContext, useCallback, useState } from 'react';
 
 export const HighlightContext = createContext<HighlightEventState | null>(null);

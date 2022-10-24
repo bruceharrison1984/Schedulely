@@ -1,4 +1,4 @@
-import { ActionState } from '@/types/ActionState';
+import { ActionState } from '@/types/state/ActionState';
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import { PropsWithChildren, createContext, useCallback } from 'react';
 
