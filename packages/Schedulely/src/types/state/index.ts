@@ -5,4 +5,5 @@
 export * from './ActionState';
 export * from './BreakpointContextState';
 export * from './CalendarState';
+export * from './EventIntersectionContextState';
 export * from './HighlightEventState';

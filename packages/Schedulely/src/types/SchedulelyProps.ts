@@ -1,7 +1,9 @@
-import { ActionState } from './state/ActionState';
-import { CalendarEvent } from './InternalCalendarEvent';
-import { DateTimeAdapter } from './DateAdapter';
-import { SchedulelyComponents } from './SchedulelyComponents';
+import {
+  ActionState,
+  CalendarEvent,
+  DateTimeAdapter,
+  SchedulelyComponents,
+} from '@/types';
 
 /** Properties used to initialize Schedulely */
 export interface SchedulelyProps {

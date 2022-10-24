@@ -1,4 +1,4 @@
-import { DayComponent } from '@/types/index';
+import { DayComponent } from '@/types';
 
 export const DefaultDay: DayComponent = ({
   isCurrentMonth,

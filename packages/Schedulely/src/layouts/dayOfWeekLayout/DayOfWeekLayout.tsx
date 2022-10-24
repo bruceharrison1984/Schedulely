@@ -1,5 +1,4 @@
-import { useBreakpoint } from '@/hooks';
-import { useCalendar } from '@/hooks/useCalendar';
+import { useBreakpoint, useCalendar } from '@/hooks';
 
 /**
  * This component controls the layout of the names of the days of the week at the top of the calendar

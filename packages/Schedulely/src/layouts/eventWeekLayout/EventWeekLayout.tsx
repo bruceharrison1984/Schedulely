@@ -1,9 +1,11 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
-import { useActions } from '@/hooks/useActions';
-import { useCalendar } from '@/hooks/useCalendar';
-import { useComponents } from '@/hooks/useComponents';
-import { useEventHighlight } from '@/hooks/useEventHighlight';
-import { useEventIntersection } from '@/hooks';
+import {
+  useActions,
+  useCalendar,
+  useComponents,
+  useEventHighlight,
+  useEventIntersection,
+} from '@/hooks';
 
 interface EventLayoutProps {
   events: InternalCalendarEvent[];

@@ -1,5 +1,4 @@
-import { BreakpointContextState } from '@/types/state/BreakpointContextState';
-import { ComponentSize } from '..';
+import { BreakpointContextState, ComponentSize } from '@/types';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
 export const BreakpointContext = createContext<BreakpointContextState | null>(

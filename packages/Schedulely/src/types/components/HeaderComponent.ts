@@ -1,4 +1,4 @@
-import { ComponentSize } from '../ComponentSize';
+import { ComponentSize } from '@/types';
 import { JSXElementConstructor } from 'react';
 
 /** Props used when creating a Header */

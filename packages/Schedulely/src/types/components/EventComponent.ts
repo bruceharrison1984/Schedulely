@@ -1,4 +1,4 @@
-import { InternalCalendarEvent } from '@/types/index';
+import { InternalCalendarEvent } from '@/types';
 import { JSXElementConstructor } from 'react';
 
 /**

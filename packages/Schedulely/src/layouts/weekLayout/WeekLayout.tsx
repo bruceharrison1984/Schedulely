@@ -1,10 +1,10 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
-import { useActions } from '@/hooks/useActions';
 import {
+  useActions,
   useCalendar,
   useComponents,
   useEventIntersection,
-} from '@/hooks/index';
+} from '@/hooks';
 
 interface WeekLayoutProps {
   dates: Date[];
