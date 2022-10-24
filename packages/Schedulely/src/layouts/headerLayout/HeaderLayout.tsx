@@ -1,6 +1,7 @@
 import { useActions, useCalendar, useComponents } from '@/hooks/index';
 import { useEffect } from 'react';
 import { useKeyboardControls } from '@/hooks/index';
+import useResizeObserver from '@/hooks/useResizeObserver';
 
 /**
  * This component controls the layout of the header that display the controls and the current month/year description
@@ -15,9 +16,8 @@ export const HeaderLayout = () => {
     onPrevMonth,
     dateAdapter: { getMonthName, getYear, isCurrentMonth },
   } = useCalendar();
-
+  const { observedRef, breakSize } = useResizeObserver();
   const { onMonthChangeClick } = useActions();
-
   const { headerComponent: Header } = useComponents();
 
   useEffect(() => {
@@ -40,14 +40,17 @@ export const HeaderLayout = () => {
   useKeyboardControls();
 
   return (
-    <Header
-      isCurrentMonth={isCurrentMonth(currentMonth)}
-      month={getMonthName(currentMonth)}
-      year={getYear(currentMonth)}
-      onNextMonth={onNextMonth}
-      onNextYear={onNextYear}
-      onPrevMonth={onPrevMonth}
-      onPrevYear={onPrevYear}
-    />
+    <div ref={observedRef}>
+      <Header
+        isCurrentMonth={isCurrentMonth(currentMonth)}
+        month={getMonthName(currentMonth)}
+        year={getYear(currentMonth)}
+        onNextMonth={onNextMonth}
+        onNextYear={onNextYear}
+        onPrevMonth={onPrevMonth}
+        onPrevYear={onPrevYear}
+        componentSize={breakSize}
+      />
+    </div>
   );
 };

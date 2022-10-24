@@ -1,4 +1,5 @@
 import { HeaderComponent } from '@/types/index';
+import { useCallback } from 'react';
 
 /**
  * The default header representation
@@ -13,7 +14,14 @@ export const DefaultHeader: HeaderComponent = ({
   onPrevMonth,
   onPrevYear,
   isCurrentMonth,
+  componentSize,
 }) => {
+  const fontSize = useCallback(() => {
+    if (componentSize === 'large') return '1.5em';
+    if (componentSize === 'medium') return '1.3em';
+    return '1.1em';
+  }, [componentSize]);
+
   return (
     <div className="header-layout">
       <button
@@ -34,7 +42,11 @@ export const DefaultHeader: HeaderComponent = ({
       </button>
 
       <div role={'banner'} className="header-banner">
-        <span role={'heading'} className="header-text">
+        <span
+          role={'heading'}
+          className="header-text"
+          style={{ fontSize: fontSize() }}
+        >
           {month} - {year}
         </span>
         {isCurrentMonth && (

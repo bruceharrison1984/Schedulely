@@ -11,7 +11,7 @@ type EventIntersectionState = {
   /** Lookup an event and retrieve its visibility */
   isEventVisible: (key: string) => boolean;
   /** Gets an array of hidden overflow events for the supplied date. An empty array is returned if no days are hidden. */
-  getOverflowForDay: (date: Date) => InternalCalendarEvent[];
+  getEventsOnDate: (date: Date) => InternalCalendarEvent[];
 };
 
 export const EventIntersectionContext =
@@ -52,9 +52,9 @@ export const EventIntersectionProvider = ({
       return current;
     });
 
-  const getOverflowForDay = (date: Date) =>
-    Object.values(eventVisibility).filter(
-      (x) => !x.visible && isDateBetween(date, x.start, x.end)
+  const getEventsOnDate = (date: Date) =>
+    Object.values(eventVisibility).filter((x) =>
+      isDateBetween(date, x.start, x.end)
     );
 
   const isEventVisible = (key: string) => eventVisibility[key]?.visible;
@@ -93,7 +93,7 @@ export const EventIntersectionProvider = ({
     setParentContainerRef,
     setRefFromKey,
     isEventVisible,
-    getOverflowForDay,
+    getEventsOnDate,
   };
 
   return (
