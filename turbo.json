@@ -4,11 +4,11 @@
     "barrels": {
       "dependsOn": [],
       "outputs": [
-        "**/index.ts"
+        "src/**/index.ts"
       ],
       "inputs": [
-        "**/*.tsx",
-        "**/*.ts"
+        "src/**/*.tsx",
+        "src/**/*.ts"
       ]
     },
     "test": {
@@ -17,8 +17,10 @@
       ],
       "outputs": [],
       "inputs": [
-        "**/*.tsx",
-        "**/*.ts"
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "__tests__/**/*.tsx",
+        "__tests__/**/*.ts"
       ]
     },
     "rollup": {
