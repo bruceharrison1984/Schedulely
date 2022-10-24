@@ -24,8 +24,7 @@
       ],
       "inputs": [
         "src/**",
-        "rollup.config.js",
-        "package.json"
+        "rollup.config.js"
       ],
       "outputs": [
         "dist/**"
@@ -42,8 +41,7 @@
     "build-ladle": {
       "inputs": [
         "src/**",
-        "rollup.config.js",
-        "package.json"
+        "rollup.config.js"
       ],
       "outputs": [
         "build/**"

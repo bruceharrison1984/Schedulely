@@ -1,6 +1,6 @@
 import { EventIntersectionState, InternalCalendarEvent } from '@/types';
 import { ReactNode, createContext, useEffect, useState } from 'react';
-import { useCalendar } from '@/hooks';
+import { useCalendar } from '@/hooks/useCalendar';
 
 export const EventIntersectionContext =
   createContext<EventIntersectionState | null>(null);
