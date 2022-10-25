@@ -1,5 +1,5 @@
 import {
-  ActionState,
+  ActionContextState,
   CalendarEvent,
   DateTimeAdapter,
   SchedulelyComponents,
@@ -26,7 +26,7 @@ export interface SchedulelyProps {
   dark?: boolean;
 
   /** Schedulely actions */
-  actions?: Partial<ActionState>;
+  actions?: Partial<ActionContextState>;
 
   /** Initial Date that Schedulely should be opened to */
   initialDate?: string;

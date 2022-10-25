@@ -1,7 +1,7 @@
 import { InternalCalendarEvent } from '../InternalCalendarEvent';
 
 /** Represents the state of the ActionProvider */
-export interface ActionState {
+export interface ActionContextState {
   /** function that will run when an event is clicked on */
   onEventClick: (event: InternalCalendarEvent) => void;
 

@@ -1,11 +1,11 @@
-import { ActionState, InternalCalendarEvent } from '@/types';
+import { ActionContextState, InternalCalendarEvent } from '@/types';
 import { PropsWithChildren, createContext, useCallback } from 'react';
 
-export const ActionContext = createContext<ActionState | null>(null);
+export const ActionContext = createContext<ActionContextState | null>(null);
 ActionContext.displayName = 'ActionContext';
 
 interface ActionProviderProps {
-  actions?: Partial<ActionState>;
+  actions?: Partial<ActionContextState>;
 }
 
 /**
@@ -42,7 +42,7 @@ export const ActionProvider = ({
     onMonthChangeClick,
   ]);
 
-  const context: ActionState = {
+  const context: ActionContextState = {
     onEventClick: memoizedOnEventClick,
     onMoreEventClick: memoizedOnMoreEventClick,
     onMonthChangeClick: memoizedOnMonthChangeClick,

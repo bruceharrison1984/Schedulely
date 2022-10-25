@@ -1,6 +1,6 @@
 import {
+  CalendarContextState,
   CalendarEvent,
-  CalendarState,
   ComponentSize,
   DateTimeAdapter,
   InternalCalendarEvent,
@@ -14,7 +14,7 @@ import {
   useState,
 } from 'react';
 
-export const CalendarContext = createContext<CalendarState | null>(null);
+export const CalendarContext = createContext<CalendarContextState | null>(null);
 CalendarContext.displayName = 'CalendarContext';
 
 interface CalendarProviderProps {
@@ -109,7 +109,7 @@ export const CalendarProvider = ({
     [dateAdapter]
   );
 
-  const contextValue: CalendarState = {
+  const contextValue: CalendarContextState = {
     currentMonth,
     dateAdapter,
     getDaysOfWeek,

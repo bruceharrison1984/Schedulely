@@ -2,7 +2,7 @@ import { ComponentSize } from '../ComponentSize';
 import { DateTimeAdapter } from '..';
 import { InternalEventWeek } from '../InternalEventWeek';
 
-export type CalendarState = {
+export type CalendarContextState = {
   /** The current visible month */
   currentMonth: Date;
 

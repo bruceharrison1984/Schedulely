@@ -24,10 +24,7 @@ export const MonthLayout = () => {
                 events={week.events}
                 daysInweek={week.daysInWeek}
               />
-              <WeekLayout
-                eventsOnDays={week.eventsOnDays}
-                dates={week.daysInWeek}
-              />
+              <WeekLayout dates={week.daysInWeek} />
             </EventIntersectionProvider>
           </div>
         ))}

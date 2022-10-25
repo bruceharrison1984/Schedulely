@@ -1,4 +1,4 @@
-export interface HighlightEventState {
+export interface HighlightEventContextState {
   /** Set the ID of the currently highlighted event */
   setHighlight: (eventId: string) => void;
 

@@ -1,5 +1,5 @@
 import { BreakpointProvider } from '@/providers';
-import { CalendarState, ComponentSize } from '@/types';
+import { CalendarContextState, ComponentSize } from '@/types';
 import { DayOfWeekLayout } from '@/layouts';
 import { RenderResult, render } from '@testing-library/react';
 import { createDefaultAdapter } from '@/dateAdapters';
@@ -19,7 +19,7 @@ const daysOfWeek = [
   'Saturday',
 ];
 
-const hook: CalendarState = {
+const hook: CalendarContextState = {
   currentMonth: new Date(),
   dateAdapter: createDefaultAdapter(),
   getDaysOfWeek: () => daysOfWeek,

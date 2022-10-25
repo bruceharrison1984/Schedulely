@@ -1,4 +1,3 @@
-import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import {
   useActions,
   useCalendar,
@@ -8,14 +7,13 @@ import {
 
 interface WeekLayoutProps {
   dates: Date[];
-  eventsOnDays: { date: Date; events: InternalCalendarEvent[] }[];
 }
 
 /**
  * This component controls the layout of an individual weeks worth of days
  * @returns WeekLayout Component
  */
-export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
+export const WeekLayout = ({ dates }: WeekLayoutProps) => {
   const { dateAdapter, currentMonth } = useCalendar();
   const { dayComponent: DayComponent } = useComponents();
   const { onMoreEventClick } = useActions();
