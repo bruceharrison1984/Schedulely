@@ -1,8 +1,7 @@
 import { BreakpointProvider } from '@/providers';
-import { CalendarContextState, ComponentSize } from '@/types';
 import { DayOfWeekLayout } from '@/layouts';
 import { RenderResult, render } from '@testing-library/react';
-import { createDefaultAdapter } from '@/dateAdapters';
+import { getCalendarProviderProps } from '../testHelpers/component.testHelper';
 import { useCalendar } from '../../src/hooks/useCalendar';
 import React from 'react';
 
@@ -19,19 +18,7 @@ const daysOfWeek = [
   'Saturday',
 ];
 
-const hook: CalendarContextState = {
-  currentDate: new Date(),
-  currentMonth: '',
-  currentYear: 1,
-  isCurrentMonth: false,
-  dateAdapter: createDefaultAdapter(),
-  daysOfWeek: daysOfWeek,
-  onNextMonth: () => null,
-  onPrevMonth: () => null,
-  onNextYear: () => null,
-  onPrevYear: () => null,
-  calendarWithEvents: [],
-};
+const hook = getCalendarProviderProps({ daysOfWeek: daysOfWeek });
 
 describe('DayOfWeekLayout', () => {
   mockUseCalendar.mockReturnValue(hook);

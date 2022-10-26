@@ -1,7 +1,8 @@
 import { useBreakpoint, useCalendar, useComponents } from '@/hooks';
 
 /**
- * This component controls the layout of the header that display the controls and the current month/year description
+ * This component controls the layout of the header that display the controls and the current month/year description.
+ * This is just a wrapper so we can access context and pass it into user supplied components
  * @returns HeaderLayout component
  */
 export const HeaderLayout = () => {

@@ -9,7 +9,7 @@ import {
   getIsTodayTestCases,
   getMonthNameFromDateTestCases,
   getYearFromDateTestCases,
-} from './dateAdapter.testHelper';
+} from '../testHelpers/dateAdapter.testHelper';
 
 /**
  * Additional adapters should just be added to this array
