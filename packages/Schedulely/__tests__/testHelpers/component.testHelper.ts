@@ -1,4 +1,5 @@
-import { CalendarContextState } from '@/types';
+import { CalendarContextState, SchedulelyComponents } from '@/types';
+import { DefaultDay, DefaultEvent, DefaultHeader } from '@/components';
 import { createDefaultAdapter } from '@/dateAdapters';
 
 export const getCalendarProviderProps = (
@@ -18,4 +19,15 @@ export const getCalendarProviderProps = (
     calendarWithEvents: [],
   };
   return { hook, ...overrides } as CalendarContextState;
+};
+
+export const getComponentProviderProps = (
+  overrides: Partial<SchedulelyComponents>
+) => {
+  const hook: SchedulelyComponents = {
+    dayComponent: DefaultDay,
+    headerComponent: DefaultHeader,
+    eventComponent: DefaultEvent,
+  };
+  return { hook, ...overrides };
 };
