@@ -14,7 +14,7 @@ export const DayOfWeekLayout = () => {
       {getDaysOfWeek(breakpoint).map((dayOfWeek, idx) => (
         <div key={`${dayOfWeek}-${idx}`}>
           {/* wrap with extra div so we can control borders without touching the DayOfWeek component */}
-          <span className="default-day-of-week">{dayOfWeek}</span>
+          <div className="default-day-of-week">{dayOfWeek}</div>
         </div>
       ))}
     </div>
