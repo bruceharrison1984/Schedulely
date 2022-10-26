@@ -1,12 +1,30 @@
-import { BreakpointProvider } from '@/providers';
-import { CalendarContextState, ComponentSize } from '@/types';
-import { DayOfWeekLayout } from '@/layouts';
-import { RenderResult, render } from '@testing-library/react';
-import { createDefaultAdapter } from '@/dateAdapters';
+import {
+  BreakpointProvider,
+  CalendarProvider,
+  ComponentProvider,
+  EventIntersectionProvider,
+  HighlightProvider,
+} from '@/providers';
+import { EventWeekLayout } from '@/layouts';
+import { getCalendarProviderProps } from '../testHelpers/component.testHelper';
+import { render } from '@testing-library/react';
 import { useCalendar } from '../../src/hooks/useCalendar';
 import React from 'react';
 
-describe('EventWeekLayout', () => {
+jest.mock('../../src/hooks/useCalendar');
+const mockUseCalendar = useCalendar as jest.MockedFunction<typeof useCalendar>;
+const useCalendarMockContext = getCalendarProviderProps(null);
+
+xdescribe('EventWeekLayout', () => {
+  console.log(useCalendarMockContext);
+  mockUseCalendar.mockReturnValue(useCalendarMockContext);
+
+  // const testObject = render(
+  //   <ComponentProvider>
+  //     <EventWeekLayout events={[]} daysInweek={[]} />
+  //   </ComponentProvider>
+  // );
+
   it('skip', () => {
     expect(true).toBe(true);
   });

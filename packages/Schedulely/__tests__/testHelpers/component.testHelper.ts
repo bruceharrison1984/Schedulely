@@ -3,7 +3,7 @@ import { DefaultDay, DefaultEvent, DefaultHeader } from '@/components';
 import { createDefaultAdapter } from '@/dateAdapters';
 
 export const getCalendarProviderProps = (
-  overrides: Partial<CalendarContextState>
+  overrides: Partial<CalendarContextState> | null
 ) => {
   const hook: CalendarContextState = {
     currentDate: new Date(),
