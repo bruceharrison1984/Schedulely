@@ -15,12 +15,6 @@ export type CalendarContextState = {
   /** The DateTimeAdapter that is being utilized */
   dateAdapter: DateTimeAdapter;
 
-  /** The first visible date on the active month */
-  firstDateInView: Date;
-
-  /** The last visible date on the active month */
-  lastDateInView: Date;
-
   /** Indicates if the active month is the current month */
   isCurrentMonth: boolean;
 

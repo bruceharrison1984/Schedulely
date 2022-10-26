@@ -89,18 +89,14 @@ export const CalendarProvider = ({
     [currentDate, calendarEvents, dateAdapter]
   );
 
-  const firstDateInView = useMemo(() => calendarView[0][0], [calendarView]);
-  const lastDateInView = useMemo(
-    () =>
+  useEffect(() => {
+    const firstDateInView = calendarView[0][0];
+    const lastDateInView =
       calendarView[calendarView.length - 1][
         calendarView[calendarView.length - 1].length - 1
-      ],
-    [calendarView]
-  );
-
-  useEffect(() => {
+      ];
     onMonthChangeClick(firstDateInView, lastDateInView);
-  }, [firstDateInView, lastDateInView]);
+  }, [onMonthChangeClick, calendarView]);
 
   const calendarWithEvents = useMemo<InternalEventWeek[]>(
     () =>
@@ -146,8 +142,6 @@ export const CalendarProvider = ({
     currentMonth,
     currentYear,
     dateAdapter,
-    firstDateInView,
-    lastDateInView,
     isCurrentMonth,
     getDaysOfWeek,
     onNextMonth,
