@@ -130,12 +130,6 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     return targetDate >= dateOne && targetDate <= dateTwo;
   };
 
-  const getFirstDayOfMonth = (date: Date) =>
-    new Date(date.getFullYear(), date.getMonth(), 1);
-
-  const getLastDayOfMonth = (date: Date) =>
-    new Date(date.getFullYear(), date.getMonth() + 1, 0, 0, 0, 0);
-
   return {
     getCalendarView,
     getDaysOfWeek,
@@ -149,7 +143,5 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     convertIsoToDate,
     isCurrentMonth,
     isDateBetween,
-    getFirstDayOfMonth,
-    getLastDayOfMonth,
   };
 };

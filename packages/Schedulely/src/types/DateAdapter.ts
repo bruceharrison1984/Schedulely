@@ -43,10 +43,4 @@ export interface DateTimeAdapter {
 
   /** Does the target date fall between the supplied dates */
   isDateBetween: (targetDate: Date, dateOne: Date, dateTwo: Date) => boolean;
-
-  /** Get the first day of the supplied month */
-  getFirstDayOfMonth: (date: Date) => Date;
-
-  /** Get the last day of the supplied month */
-  getLastDayOfMonth: (date: Date) => Date;
 }
