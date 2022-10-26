@@ -3,8 +3,14 @@ import { DateTimeAdapter } from '..';
 import { InternalEventWeek } from '../InternalEventWeek';
 
 export type CalendarContextState = {
-  /** The current visible month */
-  currentMonth: Date;
+  /** The current active date (this controls calendar position) */
+  currentDate: Date;
+
+  /** The current active month */
+  currentMonth: string;
+
+  /** The current active year */
+  currentYear: number;
 
   /** The DateTimeAdapter that is being utilized */
   dateAdapter: DateTimeAdapter;

@@ -34,8 +34,18 @@ export const CalendarProvider = ({
   calendarEvents,
   children,
 }: PropsWithChildren<CalendarProviderProps>) => {
-  const [currentMonth, setCurrentMonth] = useState(
+  const [currentDate, setCurrentDate] = useState(
     dateAdapter.convertIsoToDate(initialDate)
+  );
+
+  const currentMonth = useMemo(
+    () => dateAdapter.getMonthName(currentDate),
+    [currentDate]
+  );
+
+  const currentYear = useMemo(
+    () => dateAdapter.getYear(currentDate),
+    [currentDate]
   );
 
   const getDaysOfWeek = useCallback(
@@ -44,8 +54,8 @@ export const CalendarProvider = ({
   );
 
   const calendarView = useMemo(
-    () => dateAdapter.getCalendarView(currentMonth),
-    [currentMonth, dateAdapter]
+    () => dateAdapter.getCalendarView(currentDate),
+    [currentDate, dateAdapter]
   );
 
   const events = useMemo(
@@ -64,10 +74,10 @@ export const CalendarProvider = ({
         })
         .filter(
           (event) =>
-            dateAdapter.isSameMonth(event.start, currentMonth) ||
-            dateAdapter.isSameMonth(event.end, currentMonth)
+            dateAdapter.isSameMonth(event.start, currentDate) ||
+            dateAdapter.isSameMonth(event.end, currentDate)
         ),
-    [currentMonth, calendarEvents, dateAdapter]
+    [currentDate, calendarEvents, dateAdapter]
   );
 
   const calendarWithEvents = useMemo<InternalEventWeek[]>(
@@ -90,27 +100,29 @@ export const CalendarProvider = ({
   );
 
   const onNextMonth = useCallback(
-    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, 1)),
+    () => setCurrentDate((month) => dateAdapter.addMonthsToDate(month, 1)),
     [dateAdapter]
   );
 
   const onNextYear = useCallback(
-    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, 12)),
+    () => setCurrentDate((month) => dateAdapter.addMonthsToDate(month, 12)),
     [dateAdapter]
   );
 
   const onPrevMonth = useCallback(
-    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -1)),
+    () => setCurrentDate((month) => dateAdapter.addMonthsToDate(month, -1)),
     [dateAdapter]
   );
 
   const onPrevYear = useCallback(
-    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -12)),
+    () => setCurrentDate((month) => dateAdapter.addMonthsToDate(month, -12)),
     [dateAdapter]
   );
 
   const contextValue: CalendarContextState = {
+    currentDate,
     currentMonth,
+    currentYear,
     dateAdapter,
     getDaysOfWeek,
     onNextMonth,

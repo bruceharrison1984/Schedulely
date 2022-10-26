@@ -13,36 +13,32 @@ import { useEffect } from 'react';
  */
 export const HeaderLayout = () => {
   const {
-    currentMonth,
+    currentDate,
     onNextMonth,
     onNextYear,
     onPrevYear,
     onPrevMonth,
-    dateAdapter: {
-      getMonthName,
-      getYear,
-      isCurrentMonth,
-      getFirstDayOfMonth,
-      getLastDayOfMonth,
-    },
+    currentMonth,
+    currentYear,
+    dateAdapter: { isCurrentMonth, getFirstDayOfMonth, getLastDayOfMonth },
   } = useCalendar();
   const { onMonthChangeClick } = useActions();
   const { headerComponent: Header } = useComponents();
   const { breakpoint } = useBreakpoint();
 
   useEffect(() => {
-    const firstOfMonth = getFirstDayOfMonth(currentMonth);
-    const lastOfMonth = getLastDayOfMonth(currentMonth);
+    const firstOfMonth = getFirstDayOfMonth(currentDate);
+    const lastOfMonth = getLastDayOfMonth(currentDate);
     onMonthChangeClick(firstOfMonth, lastOfMonth);
-  }, [currentMonth, onMonthChangeClick]);
+  }, [currentDate, onMonthChangeClick]);
 
   useKeyboardControls();
 
   return (
     <Header
-      isCurrentMonth={isCurrentMonth(currentMonth)}
-      month={getMonthName(currentMonth)}
-      year={getYear(currentMonth)}
+      isCurrentMonth={isCurrentMonth(currentDate)}
+      month={currentMonth}
+      year={currentYear}
       onNextMonth={onNextMonth}
       onNextYear={onNextYear}
       onPrevMonth={onPrevMonth}
