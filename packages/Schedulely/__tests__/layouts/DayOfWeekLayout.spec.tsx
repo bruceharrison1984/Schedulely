@@ -20,9 +20,12 @@ const daysOfWeek = [
 ];
 
 const hook: CalendarContextState = {
-  currentMonth: new Date(),
+  currentDate: new Date(),
+  currentMonth: '',
+  currentYear: 1,
+  isCurrentMonth: false,
   dateAdapter: createDefaultAdapter(),
-  getDaysOfWeek: () => daysOfWeek,
+  daysOfWeek: daysOfWeek,
   onNextMonth: () => null,
   onPrevMonth: () => null,
   onNextYear: () => null,

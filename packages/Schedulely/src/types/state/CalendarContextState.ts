@@ -18,8 +18,8 @@ export type CalendarContextState = {
   /** Indicates if the active month is the current month */
   isCurrentMonth: boolean;
 
-  /** Array with localized names of the days of the week */
-  getDaysOfWeek: (componentSize: ComponentSize) => string[];
+  /** The days of the week, for use in the calendar header */
+  daysOfWeek: string[];
 
   /** Advance the calendar one month */
   onNextMonth: () => void;
