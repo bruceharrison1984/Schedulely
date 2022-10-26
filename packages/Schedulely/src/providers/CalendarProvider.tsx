@@ -10,9 +10,11 @@ import {
   PropsWithChildren,
   createContext,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
+import { useActions } from '@/hooks';
 
 export const CalendarContext = createContext<CalendarContextState | null>(null);
 CalendarContext.displayName = 'CalendarContext';
@@ -34,6 +36,8 @@ export const CalendarProvider = ({
   calendarEvents,
   children,
 }: PropsWithChildren<CalendarProviderProps>) => {
+  const { onMonthChangeClick } = useActions();
+
   const [currentDate, setCurrentDate] = useState(
     dateAdapter.convertIsoToDate(initialDate)
   );
@@ -45,6 +49,11 @@ export const CalendarProvider = ({
 
   const currentYear = useMemo(
     () => dateAdapter.getYear(currentDate),
+    [currentDate]
+  );
+
+  const isCurrentMonth = useMemo(
+    () => dateAdapter.isCurrentMonth(currentDate),
     [currentDate]
   );
 
@@ -79,6 +88,19 @@ export const CalendarProvider = ({
         ),
     [currentDate, calendarEvents, dateAdapter]
   );
+
+  const firstDateInView = useMemo(() => calendarView[0][0], [calendarView]);
+  const lastDateInView = useMemo(
+    () =>
+      calendarView[calendarView.length - 1][
+        calendarView[calendarView.length - 1].length - 1
+      ],
+    [calendarView]
+  );
+
+  useEffect(() => {
+    onMonthChangeClick(firstDateInView, lastDateInView);
+  }, [firstDateInView, lastDateInView]);
 
   const calendarWithEvents = useMemo<InternalEventWeek[]>(
     () =>
@@ -124,6 +146,9 @@ export const CalendarProvider = ({
     currentMonth,
     currentYear,
     dateAdapter,
+    firstDateInView,
+    lastDateInView,
+    isCurrentMonth,
     getDaysOfWeek,
     onNextMonth,
     onNextYear,

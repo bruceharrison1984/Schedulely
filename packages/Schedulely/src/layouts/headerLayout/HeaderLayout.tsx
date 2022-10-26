@@ -1,11 +1,4 @@
-import {
-  useActions,
-  useBreakpoint,
-  useCalendar,
-  useComponents,
-  useKeyboardControls,
-} from '@/hooks';
-import { useEffect } from 'react';
+import { useBreakpoint, useCalendar, useComponents } from '@/hooks';
 
 /**
  * This component controls the layout of the header that display the controls and the current month/year description
@@ -13,28 +6,20 @@ import { useEffect } from 'react';
  */
 export const HeaderLayout = () => {
   const {
-    currentDate,
     onNextMonth,
     onNextYear,
     onPrevYear,
     onPrevMonth,
     currentMonth,
     currentYear,
-    dateAdapter: { isCurrentMonth, getFirstDayOfMonth, getLastDayOfMonth },
+    isCurrentMonth,
   } = useCalendar();
-  const { onMonthChangeClick } = useActions();
   const { headerComponent: Header } = useComponents();
   const { breakpoint } = useBreakpoint();
 
-  useEffect(() => {
-    const firstOfMonth = getFirstDayOfMonth(currentDate);
-    const lastOfMonth = getLastDayOfMonth(currentDate);
-    onMonthChangeClick(firstOfMonth, lastOfMonth);
-  }, [currentDate, onMonthChangeClick]);
-
   return (
     <Header
-      isCurrentMonth={isCurrentMonth(currentDate)}
+      isCurrentMonth={isCurrentMonth}
       month={currentMonth}
       year={currentYear}
       onNextMonth={onNextMonth}
