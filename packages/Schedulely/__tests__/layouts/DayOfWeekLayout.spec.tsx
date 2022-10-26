@@ -9,6 +9,7 @@ import { createDefaultAdapter } from '@/dateAdapters';
 import React from 'react';
 
 const smallDaysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+const mediumDaysOfWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
 describe('DayOfWeekLayout', () => {
   let testObject: RenderResult;
@@ -31,6 +32,13 @@ describe('DayOfWeekLayout', () => {
 
   describe('small display header text', () => {
     test.each(smallDaysOfWeek)('%s is rendered', (value) => {
+      // lazily check because Sun/Sat will match on small mode
+      expect(testObject.queryAllByText(value)).not.toBeNull();
+    });
+  });
+
+  xdescribe('medium display header text', () => {
+    test.each(mediumDaysOfWeek)('%s is rendered', (value) => {
       expect(testObject.queryAllByText(value)).not.toBeNull();
     });
   });
