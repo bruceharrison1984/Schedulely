@@ -32,8 +32,6 @@ export const HeaderLayout = () => {
     onMonthChangeClick(firstOfMonth, lastOfMonth);
   }, [currentDate, onMonthChangeClick]);
 
-  useKeyboardControls();
-
   return (
     <Header
       isCurrentMonth={isCurrentMonth(currentDate)}
