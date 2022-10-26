@@ -18,26 +18,21 @@ export const HeaderLayout = () => {
     onNextYear,
     onPrevYear,
     onPrevMonth,
-    dateAdapter: { getMonthName, getYear, isCurrentMonth },
+    dateAdapter: {
+      getMonthName,
+      getYear,
+      isCurrentMonth,
+      getFirstDayOfMonth,
+      getLastDayOfMonth,
+    },
   } = useCalendar();
   const { onMonthChangeClick } = useActions();
   const { headerComponent: Header } = useComponents();
   const { breakpoint } = useBreakpoint();
 
   useEffect(() => {
-    const firstOfMonth = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth(),
-      1
-    );
-    const lastOfMonth = new Date(
-      firstOfMonth.getFullYear(),
-      firstOfMonth.getMonth() + 1,
-      1,
-      0,
-      0,
-      -1
-    );
+    const firstOfMonth = getFirstDayOfMonth(currentMonth);
+    const lastOfMonth = getLastDayOfMonth(currentMonth);
     onMonthChangeClick(firstOfMonth, lastOfMonth);
   }, [currentMonth, onMonthChangeClick]);
 
