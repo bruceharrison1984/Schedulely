@@ -121,6 +121,7 @@ describe('EventWeekLayout', () => {
     });
   });
 
+  // we can't really test this well in jest without a massive setup. Maybe later.
   describe('useEventIntersection', () => {
     it('setParentContainerRef is called on the parent', () =>
       expect(mockSetParentContainerRef).toHaveBeenCalledTimes(1));
