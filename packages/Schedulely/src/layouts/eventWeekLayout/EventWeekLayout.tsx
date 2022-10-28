@@ -11,15 +11,6 @@ interface EventLayoutProps {
   daysInweek: Date[];
 }
 
-const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
-  eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one because css-grid isn't zero-index'd
-
-const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
-  if (eventEndDate > endOfWeek) return 8;
-  const end = eventEndDate.getDay() + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
-  return end;
-};
-
 /**
  * This component controls the layout of an individual events within a week
  * @returns EventLayout Component
@@ -30,6 +21,15 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { onEventClick } = useActions();
   const { setParentContainerRef, setRefFromKey, isEventVisible } =
     useEventIntersection();
+
+  const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
+    eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one because css-grid isn't zero-index'd
+
+  const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
+    if (eventEndDate > endOfWeek) return 8;
+    const end = eventEndDate.getDay() + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
+    return end;
+  };
 
   return (
     <div className="event-week-layout" ref={setParentContainerRef}>

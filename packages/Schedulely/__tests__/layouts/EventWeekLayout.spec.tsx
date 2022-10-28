@@ -1,32 +1,78 @@
-import {
-  BreakpointProvider,
-  CalendarProvider,
-  ComponentProvider,
-  EventIntersectionProvider,
-  HighlightProvider,
-} from '@/providers';
+import { DefaultEvent } from '@/components';
 import { EventWeekLayout } from '@/layouts';
-import { getCalendarProviderProps } from '../testHelpers/component.testHelper';
-import { render } from '@testing-library/react';
-import { useCalendar } from '../../src/hooks/useCalendar';
-import React from 'react';
+import { InternalCalendarEvent } from '@/types';
+import { RenderResult, render } from '@testing-library/react';
 
-jest.mock('../../src/hooks/useCalendar');
-const mockUseCalendar = useCalendar as jest.MockedFunction<typeof useCalendar>;
-const useCalendarMockContext = getCalendarProviderProps(null);
+// Oct 2-8 2022 is the test week
+const daysInWeek = [
+  new Date(2022, 9, 2),
+  new Date(2022, 9, 3),
+  new Date(2022, 9, 4),
+  new Date(2022, 9, 5),
+  new Date(2022, 9, 6),
+  new Date(2022, 9, 7),
+  new Date(2022, 9, 8),
+];
 
-xdescribe('EventWeekLayout', () => {
-  console.log(useCalendarMockContext);
-  mockUseCalendar.mockReturnValue(useCalendarMockContext);
+let events: InternalCalendarEvent[] = [
+  {
+    id: 'event-1',
+    color: 'red',
+    start: new Date(2022, 9, 2),
+    end: new Date(2022, 9, 2),
+    summary: 'event-1',
+    visible: true,
+  },
+];
 
-  // const testObject = render(
-  //   <ComponentProvider>
-  //     <EventWeekLayout events={[]} daysInweek={[]} />
-  //   </ComponentProvider>
-  // );
+let mockSetHighlight: (eventId: string) => void = jest.fn(
+  (eventId: string) => {}
+);
+let mockClearHighlight: () => void = jest.fn(() => {});
+let mockIsHighlighted: (eventId: string) => boolean = jest.fn(
+  (eventId: string) => false
+);
 
-  it('skip', () => {
-    expect(true).toBe(true);
+let mockEventOnClickHandler: () => void = jest.fn(() => {});
+
+let mockSetParentContainerRef: (eventId: string) => void = jest.fn(
+  (eventId: string) => {}
+);
+let mockSetRefFromKey: () => void = jest.fn(() => {});
+let mockIsEventVisible: (eventId: string) => boolean = jest.fn(
+  (eventId: string) => true
+);
+
+jest.mock('@/hooks', () => ({
+  useComponents: jest.fn(() => ({
+    eventComponent: DefaultEvent,
+  })),
+  useEventHighlight: jest.fn(() => ({
+    setHighlight: mockSetHighlight,
+    clearHighlight: mockClearHighlight,
+    isHighlighted: mockIsHighlighted,
+  })),
+  useActions: jest.fn(() => ({
+    onEventClick: mockEventOnClickHandler,
+  })),
+  useEventIntersection: jest.fn(() => ({
+    setParentContainerRef: mockSetParentContainerRef,
+    setRefFromKey: mockSetRefFromKey,
+    isEventVisible: mockIsEventVisible,
+  })),
+}));
+
+describe('EventWeekLayout', () => {
+  let testObject: RenderResult;
+
+  beforeEach(() => {
+    testObject = render(
+      <EventWeekLayout events={events} daysInweek={daysInWeek} />
+    );
+  });
+
+  it('displays correct number of events', () => {
+    expect(testObject.getByText('event-1')).toBeTruthy();
   });
   // describe('getGridEndIndex', () => {
   //   it.each<{ eventEnd: Date; endOfWeek: Date; expected: number }>([
