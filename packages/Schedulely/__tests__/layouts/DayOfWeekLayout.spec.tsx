@@ -6,7 +6,7 @@ import { RenderResult, render } from '@testing-library/react';
 const chance = Chance();
 const mockDaysOfTheWeek = chance.unique(() => chance.string(), 7);
 
-jest.mock('@/hooks/useCalendar', () => ({
+jest.mock('@/hooks', () => ({
   useCalendar: jest.fn(() => ({
     daysOfWeek: mockDaysOfTheWeek,
   })),

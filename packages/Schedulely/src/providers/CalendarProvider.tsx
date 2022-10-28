@@ -1,7 +1,6 @@
 import {
   CalendarContextState,
   CalendarEvent,
-  ComponentSize,
   DateTimeAdapter,
   InternalCalendarEvent,
   InternalEventWeek,
@@ -14,7 +13,8 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useActions, useBreakpoint } from '@/hooks';
+import { useActions } from '@/hooks/useActions';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 export const CalendarContext = createContext<CalendarContextState | null>(null);
 CalendarContext.displayName = 'CalendarContext';

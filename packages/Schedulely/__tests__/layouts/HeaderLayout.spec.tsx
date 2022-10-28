@@ -1,31 +1,21 @@
-import { BreakpointProvider, ComponentProvider } from '@/providers';
 import { HeaderComponent } from '@/types';
 import { HeaderLayout } from '@/layouts';
-import { getCalendarProviderProps } from '../testHelpers/component.testHelper';
 import { render } from '@testing-library/react';
-import { useCalendar } from '../../src/hooks/useCalendar';
-import React from 'react';
 
-jest.mock('../../src/hooks/useCalendar');
-const mockUseCalendar = useCalendar as jest.MockedFunction<typeof useCalendar>;
-const hook = getCalendarProviderProps({});
+const mockHeaderComponent: HeaderComponent = () => <div>HEADER COMPONENT</div>;
 
-const testHeaderComponent: HeaderComponent = () => <div>HEADER COMPONENT</div>;
+jest.mock('@/hooks', () => ({
+  useComponents: jest.fn(() => ({
+    headerComponent: mockHeaderComponent,
+  })),
+  useCalendar: jest.fn(() => ({})),
+  useBreakpoint: jest.fn(() => ({})),
+}));
 
 describe('HeaderLayout', () => {
-  mockUseCalendar.mockReturnValue(hook);
-
-  const testObject = render(
-    <BreakpointProvider containerRef={React.createRef()}>
-      <ComponentProvider
-        calendarComponents={{ headerComponent: testHeaderComponent }}
-      >
-        <HeaderLayout />
-      </ComponentProvider>
-    </BreakpointProvider>
-  );
+  const testObject = render(<HeaderLayout />);
 
   it('uses custom header component', () => {
-    expect(testObject.queryByText('HEADER COMPONENT')).not.toBeNull();
+    expect(testObject.getByText('HEADER COMPONENT')).toBeTruthy();
   });
 });
