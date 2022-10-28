@@ -2,12 +2,16 @@ import { Chance } from 'chance';
 import { DefaultHeader } from '@/components';
 import { HeaderComponent } from '@/types';
 import { HeaderLayout } from '@/layouts';
-import { RenderResult, render } from '@testing-library/react';
+import { RenderResult, fireEvent, render } from '@testing-library/react';
 
 let mockHeaderComponent: HeaderComponent = DefaultHeader;
 const mockCurrentMonth = Chance().month();
 const mockCurrentYear = Chance().year();
 const mockIsCurrentMonth = Chance().bool();
+const mockOnNextMonthClick = jest.fn();
+const mockOnNextYearHandler = jest.fn();
+const mockOnPrevMonthHandler = jest.fn();
+const mockOnPrevYearHandler = jest.fn();
 
 jest.mock('@/hooks', () => ({
   useComponents: jest.fn(() => ({
@@ -17,6 +21,10 @@ jest.mock('@/hooks', () => ({
     currentMonth: mockCurrentMonth,
     currentYear: mockCurrentYear,
     isCurrentMonth: mockIsCurrentMonth,
+    onNextMonth: mockOnNextMonthClick,
+    onNextYear: mockOnNextYearHandler,
+    onPrevYear: mockOnPrevYearHandler,
+    onPrevMonth: mockOnPrevMonthHandler,
   })),
   useBreakpoint: jest.fn(() => ({
     breakpoint: 'small',
@@ -44,6 +52,26 @@ describe('HeaderLayout', () => {
     it('passes isCurrentMonth', () => {
       const result = expect(testObject.queryByRole('alert'));
       mockIsCurrentMonth ? result.toBeTruthy() : result.toBeFalsy();
+    });
+
+    it('passes onNextMonthHandler', () => {
+      fireEvent.click(testObject.getByTitle('Next Month'));
+      expect(mockOnNextMonthClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('passes onNextYearHandler', () => {
+      fireEvent.click(testObject.getByTitle('Next Year'));
+      expect(mockOnNextYearHandler).toHaveBeenCalledTimes(1);
+    });
+
+    it('passes onPrevMonthHandler', () => {
+      fireEvent.click(testObject.getByTitle('Previous Month'));
+      expect(mockOnPrevMonthHandler).toHaveBeenCalledTimes(1);
+    });
+
+    it('passes onPrevYearHandler', () => {
+      fireEvent.click(testObject.getByTitle('Previous Year'));
+      expect(mockOnPrevYearHandler).toHaveBeenCalledTimes(1);
     });
   });
 
