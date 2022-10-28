@@ -48,7 +48,7 @@ let mockIsHighlighted = jest.fn((eventId: string) => false);
 let mockEventOnClickHandler = jest.fn(() => {});
 
 let mockSetParentContainerRef = jest.fn((eventId: string) => {});
-let mockSetRefFromKey = jest.fn(() => {});
+let mockSetRefFromKey = jest.fn((eventId: string) => {});
 let mockIsEventVisible = jest.fn((eventId: string) => true);
 
 jest.mock('@/hooks', () => ({
@@ -74,34 +74,43 @@ describe('EventWeekLayout', () => {
   let testObject: RenderResult;
 
   beforeEach(() => {
+    mockSetParentContainerRef.mockClear();
     testObject = render(
       <EventWeekLayout events={events} daysInweek={daysInWeek} />
     );
+  });
+
+  afterEach(() => {
+    mockIsEventVisible.mockClear();
+    mockSetRefFromKey.mockClear();
   });
 
   describe.each(events.map((x) => x.summary))('event %s', (value) => {
     let eventDomObject: HTMLElement;
 
     beforeEach(() => {
+      eventDomObject = testObject.getByText(value);
+    });
+
+    afterEach(() => {
       mockSetHighlight.mockClear();
       mockClearHighlight.mockClear();
-      eventDomObject = testObject.getByText(value);
+      mockEventOnClickHandler.mockClear();
     });
 
     it('is in document', () => {
       expect(eventDomObject).toBeTruthy();
     });
 
-    describe('highlight', () => {
+    describe('useEventHighlight', () => {
       it('calls setHighlight onMouseOver', () => {
         fireEvent.mouseOver(eventDomObject);
         expect(mockSetHighlight).toHaveBeenCalledTimes(1);
-        expect(mockSetHighlight.mock.calls[0][0]).toEqual(value);
       });
 
       it('passes eventID to set highlight onMouseOver', () => {
         fireEvent.mouseOver(eventDomObject);
-        expect(mockSetHighlight.mock.calls[0][0]).toEqual(value);
+        expect(mockSetHighlight).toHaveBeenLastCalledWith(value);
       });
 
       it('is cleared onMouseLeave', () => {
@@ -109,6 +118,35 @@ describe('EventWeekLayout', () => {
         expect(mockClearHighlight).toHaveBeenCalledTimes(1);
       });
     });
+
+    describe('action', () => {
+      it('event onClick handler is called', () => {
+        fireEvent.click(eventDomObject.parentElement!);
+        expect(mockEventOnClickHandler).toHaveBeenCalledTimes(1);
+      });
+    });
+  });
+
+  describe('useEventIntersection', () => {
+    it('setParentContainerRef is called on the parent', () => {
+      expect(mockSetParentContainerRef).toHaveBeenCalledTimes(1);
+    });
+
+    it('isEventVisible is called', () => {
+      expect(mockIsEventVisible).toHaveBeenCalledTimes(events.length);
+    });
+
+    // it('isEventVisible is called with eventId', () => {
+    //   expect(mockIsEventVisible).toHaveBeenLastCalledWith(value);
+    // });
+
+    it('setRefFromKey is called', () => {
+      expect(mockSetRefFromKey).toHaveBeenCalledTimes(events.length);
+    });
+
+    // it('setRefFromKey is called with eventId', () => {
+    //   expect(mockSetRefFromKey).toHaveBeenLastCalledWith(value);
+    // });
   });
 
   // describe('getGridEndIndex', () => {
