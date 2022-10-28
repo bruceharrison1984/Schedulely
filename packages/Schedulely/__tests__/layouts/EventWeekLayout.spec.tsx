@@ -41,23 +41,15 @@ let events: InternalCalendarEvent[] = [
   },
 ];
 
-let mockSetHighlight: (eventId: string) => void = jest.fn(
-  (eventId: string) => {}
-);
-let mockClearHighlight: () => void = jest.fn(() => {});
-let mockIsHighlighted: (eventId: string) => boolean = jest.fn(
-  (eventId: string) => false
-);
+let mockSetHighlight = jest.fn((eventId: string) => {});
+let mockClearHighlight = jest.fn(() => {});
+let mockIsHighlighted = jest.fn((eventId: string) => false);
 
-let mockEventOnClickHandler: () => void = jest.fn(() => {});
+let mockEventOnClickHandler = jest.fn(() => {});
 
-let mockSetParentContainerRef: (eventId: string) => void = jest.fn(
-  (eventId: string) => {}
-);
-let mockSetRefFromKey: () => void = jest.fn(() => {});
-let mockIsEventVisible: (eventId: string) => boolean = jest.fn(
-  (eventId: string) => true
-);
+let mockSetParentContainerRef = jest.fn((eventId: string) => {});
+let mockSetRefFromKey = jest.fn(() => {});
+let mockIsEventVisible = jest.fn((eventId: string) => true);
 
 jest.mock('@/hooks', () => ({
   useComponents: jest.fn(() => ({
@@ -91,6 +83,8 @@ describe('EventWeekLayout', () => {
     let eventDomObject: HTMLElement;
 
     beforeEach(() => {
+      mockSetHighlight.mockClear();
+      mockClearHighlight.mockClear();
       eventDomObject = testObject.getByText(value);
     });
 
@@ -99,14 +93,20 @@ describe('EventWeekLayout', () => {
     });
 
     describe('highlight', () => {
-      it('is set onMouseOver', () => {
+      it('calls setHighlight onMouseOver', () => {
         fireEvent.mouseOver(eventDomObject);
-        expect(mockSetHighlight).toHaveBeenCalled();
+        expect(mockSetHighlight).toHaveBeenCalledTimes(1);
+        expect(mockSetHighlight.mock.calls[0][0]).toEqual(value);
+      });
+
+      it('passes eventID to set highlight onMouseOver', () => {
+        fireEvent.mouseOver(eventDomObject);
+        expect(mockSetHighlight.mock.calls[0][0]).toEqual(value);
       });
 
       it('is cleared onMouseLeave', () => {
         fireEvent.mouseLeave(eventDomObject);
-        expect(mockClearHighlight).toHaveBeenCalled();
+        expect(mockClearHighlight).toHaveBeenCalledTimes(1);
       });
     });
   });
