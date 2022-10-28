@@ -1,7 +1,7 @@
 import { DefaultEvent } from '@/components';
 import { EventWeekLayout } from '@/layouts';
 import { InternalCalendarEvent } from '@/types';
-import { RenderResult, render } from '@testing-library/react';
+import { RenderResult, fireEvent, render } from '@testing-library/react';
 
 // Oct 2-8 2022 is the test week
 const daysInWeek = [
@@ -21,6 +21,22 @@ let events: InternalCalendarEvent[] = [
     start: new Date(2022, 9, 2),
     end: new Date(2022, 9, 2),
     summary: 'event-1',
+    visible: true,
+  },
+  {
+    id: 'event-2',
+    color: 'red',
+    start: new Date(2022, 9, 2),
+    end: new Date(2022, 9, 2),
+    summary: 'event-2',
+    visible: true,
+  },
+  {
+    id: 'event-3',
+    color: 'red',
+    start: new Date(2022, 9, 2),
+    end: new Date(2022, 9, 2),
+    summary: 'event-3',
     visible: true,
   },
 ];
@@ -71,9 +87,30 @@ describe('EventWeekLayout', () => {
     );
   });
 
-  it('displays correct number of events', () => {
-    expect(testObject.getByText('event-1')).toBeTruthy();
+  describe.each(events.map((x) => x.summary))('event %s', (value) => {
+    let eventDomObject: HTMLElement;
+
+    beforeEach(() => {
+      eventDomObject = testObject.getByText(value);
+    });
+
+    it('is in document', () => {
+      expect(eventDomObject).toBeTruthy();
+    });
+
+    describe('highlight', () => {
+      it('is set onMouseOver', () => {
+        fireEvent.mouseOver(eventDomObject);
+        expect(mockSetHighlight).toHaveBeenCalled();
+      });
+
+      it('is cleared onMouseLeave', () => {
+        fireEvent.mouseLeave(eventDomObject);
+        expect(mockClearHighlight).toHaveBeenCalled();
+      });
+    });
   });
+
   // describe('getGridEndIndex', () => {
   //   it.each<{ eventEnd: Date; endOfWeek: Date; expected: number }>([
   //     {
