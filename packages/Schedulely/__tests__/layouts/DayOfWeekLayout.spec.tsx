@@ -1,7 +1,10 @@
+import { Chance } from 'chance';
 import { DayOfWeekLayout } from '@/layouts';
 import { RenderResult, render } from '@testing-library/react';
 
-const mockDaysOfTheWeek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+// randomize day names for the hell of it
+const chance = Chance();
+const mockDaysOfTheWeek = chance.unique(() => chance.string(), 7);
 
 jest.mock('@/hooks/useCalendar', () => ({
   useCalendar: jest.fn(() => ({
