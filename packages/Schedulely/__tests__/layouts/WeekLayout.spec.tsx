@@ -60,7 +60,7 @@ describe('WeekLayout', () => {
 
   // This is called twice, once for the day component and again for the container data attribute
   it('calls isDateToday', () =>
-    expect(mockIsDateToday).toHaveBeenCalledTimes(dates.length * 2));
+    expect(mockIsDateToday).toHaveBeenCalledTimes(dates.length));
 
   it('isDateToday is called with each date', () =>
     expect(
@@ -94,5 +94,5 @@ describe('WeekLayout', () => {
 
   // This is called twice, once for the overflow indicator, and again for the indicator itself
   it('calls getEventsOnDate', () =>
-    expect(mockGetEventsOnDate).toHaveBeenCalledTimes(dates.length * 2));
+    expect(mockGetEventsOnDate).toHaveBeenCalledTimes(dates.length));
 });

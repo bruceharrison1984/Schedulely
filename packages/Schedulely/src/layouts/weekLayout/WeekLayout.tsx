@@ -24,24 +24,26 @@ export const WeekLayout = ({ dates }: WeekLayoutProps) => {
 
   return (
     <div className="week-layout">
-      {dates.map((day) => (
-        <div
-          key={day.getDate()}
-          data-day={day.getDate()}
-          data-istoday={isDateToday(day) ? true : undefined}
-        >
-          <DayComponent
-            isCurrentMonth={isSameMonth(day, currentDate)}
-            isToday={isDateToday(day)}
-            dateNumber={getDayNumber(day)}
-            isOverflowed={
-              getEventsOnDate(day).filter((x) => !x.visible).length > 0
-            }
-            events={getEventsOnDate(day)}
-            onClick={onMoreEventClick}
-          />
-        </div>
-      ))}
+      {dates.map((day) => {
+        const isToday = isDateToday(day);
+        const events = getEventsOnDate(day);
+        return (
+          <div
+            key={day.getDate()}
+            data-day={day.getDate()}
+            data-istoday={isToday ? true : undefined}
+          >
+            <DayComponent
+              isCurrentMonth={isSameMonth(day, currentDate)}
+              isToday={isToday}
+              dateNumber={getDayNumber(day)}
+              isOverflowed={events.filter((x) => !x.visible).length > 0}
+              events={events}
+              onClick={onMoreEventClick}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
