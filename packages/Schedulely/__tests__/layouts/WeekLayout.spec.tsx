@@ -16,7 +16,17 @@ const dates = [
 
 let mockOnMoreEventClick = jest.fn((events: InternalCalendarEvent[]) => {});
 let mockGetEventsOnDate = jest.fn(
-  (date: Date) => [] as InternalCalendarEvent[]
+  (date: Date) =>
+    [
+      {
+        id: 'event-1',
+        color: 'red',
+        start: new Date(2022, 9, 2),
+        end: new Date(2022, 9, 2),
+        summary: 'event-1',
+        visible: true,
+      },
+    ] as InternalCalendarEvent[]
 );
 let mockIsDateToday = jest.fn((date: Date) => true);
 let mockIsSameMonth = jest.fn((date: Date, date2: Date) => true);

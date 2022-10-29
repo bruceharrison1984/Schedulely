@@ -27,12 +27,10 @@ export const WeekLayout = ({ dates }: WeekLayoutProps) => {
       {dates.map((day) => {
         const isToday = isDateToday(day);
         const events = getEventsOnDate(day);
+        const date = day.getDate();
+
         return (
-          <div
-            key={day.getDate()}
-            data-day={day.getDate()}
-            data-istoday={isToday ? true : undefined}
-          >
+          <div key={date} data-day={date} data-istoday={isToday}>
             <DayComponent
               isCurrentMonth={isSameMonth(day, currentDate)}
               isToday={isToday}
