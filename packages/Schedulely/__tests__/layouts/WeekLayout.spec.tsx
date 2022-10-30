@@ -68,7 +68,6 @@ describe('WeekLayout', () => {
     mockIsSameMonth.mockClear();
   });
 
-  // This is called twice, once for the day component and again for the container data attribute
   it('calls isDateToday', () =>
     expect(mockIsDateToday).toHaveBeenCalledTimes(dates.length));
 
@@ -94,15 +93,15 @@ describe('WeekLayout', () => {
   it('calls isSameMonth', () =>
     expect(mockIsSameMonth).toHaveBeenCalledTimes(dates.length));
 
-  // it('isSameMonth is called with each date', () =>
-  //   expect(
-  //     mockIsSameMonth.mock.calls
-  //       .flat()
-  //       .filter((x, i, a) => a.indexOf(x) == i)
-  //       .sort()
-  //   ).toEqual(dates.map((x) => x).sort()));
+  it('isSameMonth is called with each date', () => {
+    expect(
+      mockIsSameMonth.mock.calls
+        .map((x) => x[0])
+        .filter((x, i, a) => a.indexOf(x) == i)
+        .sort()
+    ).toEqual(dates.map((x) => x).sort());
+  });
 
-  // This is called twice, once for the overflow indicator, and again for the indicator itself
   it('calls getEventsOnDate', () =>
     expect(mockGetEventsOnDate).toHaveBeenCalledTimes(dates.length));
 });
