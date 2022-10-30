@@ -1,6 +1,6 @@
 import { DefaultDay } from '@/components';
 import { InternalCalendarEvent } from '@/types';
-import { RenderResult, render } from '@testing-library/react';
+import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { WeekLayout } from '@/layouts';
 
 // Oct 2-8 2022 is the test week
@@ -26,11 +26,19 @@ let mockGetEventsOnDate = jest.fn(
         summary: 'event-1',
         visible: true,
       },
+      {
+        id: 'event-1',
+        color: 'red',
+        start: new Date(2022, 9, 2),
+        end: new Date(2022, 9, 8),
+        summary: 'event-1',
+        visible: false,
+      },
     ] as InternalCalendarEvent[]
 );
 let mockIsDateToday = jest.fn((date: Date) => true);
 let mockIsSameMonth = jest.fn((date: Date, date2: Date) => true);
-let mockGetDayNumber = jest.fn((date: Date) => 1);
+let mockGetDayNumber = jest.fn((date: Date) => date.getDate());
 let mockCurrentDate = jest.fn(() => Date);
 
 jest.mock('@/hooks', () => ({
@@ -61,7 +69,6 @@ describe('WeekLayout', () => {
   });
 
   afterEach(() => {
-    mockOnMoreEventClick.mockClear();
     mockGetEventsOnDate.mockClear();
     mockIsDateToday.mockClear();
     mockGetDayNumber.mockClear();
@@ -104,4 +111,26 @@ describe('WeekLayout', () => {
 
   it('calls getEventsOnDate', () =>
     expect(mockGetEventsOnDate).toHaveBeenCalledTimes(dates.length));
+
+  describe.each(dates.map((x) => x))('date container for %s', (value) => {
+    let dayDomObject: HTMLElement;
+
+    beforeEach(() => {
+      dayDomObject = testObject
+        .getByText(value.getDate())
+        .closest('[role="cell"]')!;
+    });
+
+    afterEach(() => {
+      mockOnMoreEventClick.mockClear();
+    });
+
+    it('is rendered', () => expect(dayDomObject).toBeTruthy());
+
+    it('calls onMoreEventClick when clicked', () => {
+      const moreEventObject = dayDomObject.querySelector('[role="note"]')!;
+      fireEvent.click(moreEventObject);
+      expect(mockGetEventsOnDate).toHaveBeenCalledTimes(dates.length);
+    });
+  });
 });
