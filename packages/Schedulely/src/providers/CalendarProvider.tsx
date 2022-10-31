@@ -102,8 +102,6 @@ export const CalendarProvider = ({
   const calendarWithEvents = useMemo<InternalEventWeek[]>(
     () =>
       calendarView.map<InternalEventWeek>((week) => ({
-        // weekStart: week[0],
-        // weekEnd: week[6],
         daysInWeek: week,
         events: events.filter((event) =>
           dateAdapter.isEventInWeek(event.start, event.end, week)
