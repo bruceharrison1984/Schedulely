@@ -1,4 +1,3 @@
-import { ComponentSize } from '../ComponentSize';
 import { DateTimeAdapter } from '..';
 import { InternalEventWeek } from '../InternalEventWeek';
 
