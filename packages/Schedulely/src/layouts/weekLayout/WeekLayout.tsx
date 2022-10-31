@@ -5,7 +5,7 @@ import {
   useEventIntersection,
 } from '@/hooks';
 
-interface WeekLayoutProps {
+export interface WeekLayoutProps {
   dates: Date[];
 }
 

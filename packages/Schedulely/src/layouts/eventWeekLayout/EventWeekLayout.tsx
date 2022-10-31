@@ -6,7 +6,7 @@ import {
   useEventIntersection,
 } from '@/hooks';
 
-interface EventLayoutProps {
+export interface EventLayoutProps {
   events: InternalCalendarEvent[];
   daysInweek: Date[];
 }
