@@ -16,7 +16,7 @@ export const MonthLayout = () => {
       <HighlightProvider>
         {calendarWithEvents.map((week, idx) => (
           <div
-            key={week.weekStart.toISOString()}
+            key={week.daysInWeek[0].toISOString()}
             className="week-container"
             data-week={idx}
           >
