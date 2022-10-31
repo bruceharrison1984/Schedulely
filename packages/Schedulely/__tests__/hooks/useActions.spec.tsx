@@ -2,6 +2,7 @@ import { ActionProvider } from '@/providers';
 import { InternalCalendarEvent } from '@/types';
 import { ReactNode } from 'react';
 import { act } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { useActions } from '@/hooks';
 
@@ -84,5 +85,13 @@ describe('useActions', () => {
 
     it('passes correct args', () =>
       expect(onMoreEventClickHandler.mock.calls[0][0]).toEqual(testEvents));
+  });
+
+  it('throws when called outside of provider', () => {
+    const ExceptionWrapper = () => {
+      expect(useActions).toThrowError(/must be used within/);
+      return <></>;
+    };
+    render(<ExceptionWrapper />);
   });
 });
