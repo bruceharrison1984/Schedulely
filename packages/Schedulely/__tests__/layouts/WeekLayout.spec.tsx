@@ -1,6 +1,5 @@
-import { DefaultDay } from '@/components';
-import { InternalCalendarEvent } from '@/types';
-import { RenderResult, fireEvent, render } from '@testing-library/react';
+import { DayComponentProps, InternalCalendarEvent } from '@/types';
+import { RenderResult, render } from '@testing-library/react';
 import { WeekLayout } from '@/layouts';
 
 // Oct 2-8 2022 is the test week
@@ -41,9 +40,13 @@ let mockIsSameMonth = jest.fn((date: Date, date2: Date) => true);
 let mockGetDayNumber = jest.fn((date: Date) => date.getDate());
 let mockCurrentDate = jest.fn(() => Date);
 
+const mockDayComponentPropsCheck = jest.fn();
 jest.mock('@/hooks', () => ({
   useComponents: jest.fn(() => ({
-    dayComponent: DefaultDay,
+    dayComponent: jest.fn((props: DayComponentProps) => {
+      mockDayComponentPropsCheck(props);
+      return <div data-testid={props.dateNumber}></div>;
+    }),
   })),
   useCalendar: jest.fn(() => ({
     dateAdapter: {
@@ -112,25 +115,19 @@ describe('WeekLayout', () => {
   it('calls getEventsOnDate', () =>
     expect(mockGetEventsOnDate).toHaveBeenCalledTimes(dates.length));
 
-  describe.each(dates.map((x) => x))('date container for %s', (value) => {
-    let dayDomObject: HTMLElement;
+  describe.each(dates.map((x, index) => ({ value: x, index })))(
+    'date container for %s',
+    ({ value, index }) => {
+      it('is rendered', () =>
+        expect(
+          testObject.getByTestId(value.getDate().toString())
+        ).toBeTruthy());
 
-    beforeEach(() => {
-      dayDomObject = testObject
-        .getByText(value.getDate())
-        .closest('[role="cell"]')!;
-    });
-
-    afterEach(() => {
-      mockOnMoreEventClick.mockClear();
-    });
-
-    it('is rendered', () => expect(dayDomObject).toBeTruthy());
-
-    it('calls onMoreEventClick when clicked', () => {
-      const moreEventObject = dayDomObject.querySelector('[role="note"]')!;
-      fireEvent.click(moreEventObject);
-      expect(mockGetEventsOnDate).toHaveBeenCalledTimes(dates.length);
-    });
-  });
+      it('passes OnMoreEventClickHandler', () => {
+        expect(mockOnMoreEventClick).toEqual(
+          mockDayComponentPropsCheck.mock.calls[index][0].onClick
+        );
+      });
+    }
+  );
 });
