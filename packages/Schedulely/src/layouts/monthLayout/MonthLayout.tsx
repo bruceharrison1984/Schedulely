@@ -1,8 +1,7 @@
 import { EventIntersectionProvider, HighlightProvider } from '@/providers';
 import { EventWeekLayout } from '@/layouts/eventWeekLayout';
 import { WeekLayout } from '@/layouts/weekLayout';
-import { useCalendar } from '@/hooks/useCalendar';
-import { useKeyboardControls } from '@/hooks';
+import { useCalendar, useKeyboardControls } from '@/hooks';
 
 /**
  * This component controls the layout of the weeks of the calendar
