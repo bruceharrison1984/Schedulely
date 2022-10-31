@@ -13,7 +13,8 @@
     },
     "test": {
       "dependsOn": [
-        "lint"
+        "lint",
+        "barrels"
       ],
       "outputs": [],
       "inputs": [
