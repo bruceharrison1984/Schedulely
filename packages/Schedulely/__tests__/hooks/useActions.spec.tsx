@@ -39,7 +39,7 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 describe('useActions', () => {
   const {
     result: {
-      current: { onEventClick, onMonthChangeClick, onMoreEventClick },
+      current: { onEventClick, onMonthChangeClick },
     },
   } = renderHook(() => useActions(), { wrapper });
 
