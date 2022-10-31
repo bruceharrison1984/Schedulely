@@ -12,13 +12,15 @@
       ]
     },
     "test": {
-      "dependsOn": [],
+      "dependsOn": [
+        "lint"
+      ],
       "outputs": [],
       "inputs": [
-        "./src/**/*.tsx",
-        "./src/**/*.ts",
-        "./__tests__/**/*.tsx",
-        "./__tests__/**/*.ts"
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "__tests__/**/*.tsx",
+        "__tests__/**/*.ts"
       ]
     },
     "rollup": {
