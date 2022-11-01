@@ -1,16 +1,24 @@
-import { ComponentSize } from '../ComponentSize';
 import { DateTimeAdapter } from '..';
 import { InternalEventWeek } from '../InternalEventWeek';
 
-export type CalendarState = {
-  /** The current visible month */
-  currentMonth: Date;
+export type CalendarContextState = {
+  /** The current active date (this controls calendar position) */
+  currentDate: Date;
+
+  /** The current active month */
+  currentMonth: string;
+
+  /** The current active year */
+  currentYear: number;
 
   /** The DateTimeAdapter that is being utilized */
   dateAdapter: DateTimeAdapter;
 
-  /** Array with localized names of the days of the week */
-  getDaysOfWeek: (componentSize: ComponentSize) => string[];
+  /** Indicates if the active month is the current month */
+  isCurrentMonth: boolean;
+
+  /** The days of the week, for use in the calendar header */
+  daysOfWeek: string[];
 
   /** Advance the calendar one month */
   onNextMonth: () => void;

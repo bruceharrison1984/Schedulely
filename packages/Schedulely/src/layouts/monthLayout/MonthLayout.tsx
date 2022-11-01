@@ -1,7 +1,7 @@
 import { EventIntersectionProvider, HighlightProvider } from '@/providers';
 import { EventWeekLayout } from '@/layouts/eventWeekLayout';
 import { WeekLayout } from '@/layouts/weekLayout';
-import { useCalendar } from '@/hooks/useCalendar';
+import { useCalendar, useKeyboardControls } from '@/hooks';
 
 /**
  * This component controls the layout of the weeks of the calendar
@@ -9,13 +9,14 @@ import { useCalendar } from '@/hooks/useCalendar';
  */
 export const MonthLayout = () => {
   const { calendarWithEvents } = useCalendar();
+  useKeyboardControls();
 
   return (
     <div className="calendar-body-container">
       <HighlightProvider>
         {calendarWithEvents.map((week, idx) => (
           <div
-            key={week.weekStart.toISOString()}
+            key={week.daysInWeek[0].toISOString()}
             className="week-container"
             data-week={idx}
           >
@@ -24,10 +25,7 @@ export const MonthLayout = () => {
                 events={week.events}
                 daysInweek={week.daysInWeek}
               />
-              <WeekLayout
-                eventsOnDays={week.eventsOnDays}
-                dates={week.daysInWeek}
-              />
+              <WeekLayout dates={week.daysInWeek} />
             </EventIntersectionProvider>
           </div>
         ))}

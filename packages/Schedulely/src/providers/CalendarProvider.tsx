@@ -1,7 +1,6 @@
 import {
+  CalendarContextState,
   CalendarEvent,
-  CalendarState,
-  ComponentSize,
   DateTimeAdapter,
   InternalCalendarEvent,
   InternalEventWeek,
@@ -10,11 +9,14 @@ import {
   PropsWithChildren,
   createContext,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
+import { useActions } from '@/hooks/useActions';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
-export const CalendarContext = createContext<CalendarState | null>(null);
+export const CalendarContext = createContext<CalendarContextState | null>(null);
 CalendarContext.displayName = 'CalendarContext';
 
 interface CalendarProviderProps {
@@ -34,18 +36,36 @@ export const CalendarProvider = ({
   calendarEvents,
   children,
 }: PropsWithChildren<CalendarProviderProps>) => {
-  const [currentMonth, setCurrentMonth] = useState(
+  const { onMonthChangeClick } = useActions();
+  const { breakpoint } = useBreakpoint();
+
+  const [currentDate, setCurrentDate] = useState(
     dateAdapter.convertIsoToDate(initialDate)
   );
 
-  const getDaysOfWeek = useCallback(
-    (componentSize: ComponentSize) => dateAdapter.getDaysOfWeek(componentSize),
-    [dateAdapter]
+  const currentMonth = useMemo(
+    () => dateAdapter.getMonthName(currentDate),
+    [currentDate]
+  );
+
+  const currentYear = useMemo(
+    () => dateAdapter.getYear(currentDate),
+    [currentDate]
+  );
+
+  const isCurrentMonth = useMemo(
+    () => dateAdapter.isCurrentMonth(currentDate),
+    [currentDate]
+  );
+
+  const daysOfWeek = useMemo(
+    () => dateAdapter.getDaysOfWeek(breakpoint),
+    [breakpoint]
   );
 
   const calendarView = useMemo(
-    () => dateAdapter.getCalendarView(currentMonth),
-    [currentMonth, dateAdapter]
+    () => dateAdapter.getCalendarView(currentDate),
+    [currentDate, dateAdapter]
   );
 
   const events = useMemo(
@@ -64,17 +84,24 @@ export const CalendarProvider = ({
         })
         .filter(
           (event) =>
-            dateAdapter.isSameMonth(event.start, currentMonth) ||
-            dateAdapter.isSameMonth(event.end, currentMonth)
+            dateAdapter.isSameMonth(event.start, currentDate) ||
+            dateAdapter.isSameMonth(event.end, currentDate)
         ),
-    [currentMonth, calendarEvents, dateAdapter]
+    [currentDate, calendarEvents, dateAdapter]
   );
+
+  useEffect(() => {
+    const firstDateInView = calendarView[0][0];
+    const lastDateInView =
+      calendarView[calendarView.length - 1][
+        calendarView[calendarView.length - 1].length - 1
+      ];
+    onMonthChangeClick(firstDateInView, lastDateInView);
+  }, [onMonthChangeClick, calendarView]);
 
   const calendarWithEvents = useMemo<InternalEventWeek[]>(
     () =>
       calendarView.map<InternalEventWeek>((week) => ({
-        weekStart: week[0],
-        weekEnd: week[6],
         daysInWeek: week,
         events: events.filter((event) =>
           dateAdapter.isEventInWeek(event.start, event.end, week)
@@ -90,34 +117,37 @@ export const CalendarProvider = ({
   );
 
   const onNextMonth = useCallback(
-    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, 1)),
+    () => setCurrentDate((month) => dateAdapter.addMonthsToDate(month, 1)),
     [dateAdapter]
   );
 
   const onNextYear = useCallback(
-    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, 12)),
+    () => setCurrentDate((month) => dateAdapter.addMonthsToDate(month, 12)),
     [dateAdapter]
   );
 
   const onPrevMonth = useCallback(
-    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -1)),
+    () => setCurrentDate((month) => dateAdapter.addMonthsToDate(month, -1)),
     [dateAdapter]
   );
 
   const onPrevYear = useCallback(
-    () => setCurrentMonth((month) => dateAdapter.addMonthsToDate(month, -12)),
+    () => setCurrentDate((month) => dateAdapter.addMonthsToDate(month, -12)),
     [dateAdapter]
   );
 
-  const contextValue: CalendarState = {
+  const contextValue: CalendarContextState = {
+    currentDate,
     currentMonth,
+    currentYear,
     dateAdapter,
-    getDaysOfWeek,
+    isCurrentMonth,
+    daysOfWeek,
+    calendarWithEvents,
     onNextMonth,
     onNextYear,
     onPrevMonth,
     onPrevYear,
-    calendarWithEvents,
   };
 
   return (

@@ -1,7 +1,8 @@
-import { HighlightEventState } from '@/types';
+import { HighlightEventContextState } from '@/types';
 import { ReactNode, createContext, useCallback, useState } from 'react';
 
-export const HighlightContext = createContext<HighlightEventState | null>(null);
+export const HighlightContext =
+  createContext<HighlightEventContextState | null>(null);
 HighlightContext.displayName = 'HighlightContext';
 
 /**
@@ -19,7 +20,7 @@ export const HighlightProvider = ({ children }: { children: ReactNode }) => {
     [highlightedEvent]
   );
 
-  const context: HighlightEventState = {
+  const context: HighlightEventContextState = {
     setHighlight: (eventId: string) => setHighlightedEvent(eventId),
     clearHighlight: () => setHighlightedEvent(undefined),
     isHighlighted,

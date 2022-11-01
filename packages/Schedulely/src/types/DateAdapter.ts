@@ -16,12 +16,6 @@ export interface DateTimeAdapter {
   /** Get full names of all days of the week */
   getDaysOfWeek: (componentSize: ComponentSize) => string[];
 
-  /** Get the day of week grid index for the end of the event. Used for positioning within the Week css-grid. */
-  getGridEndIndex: (eventEndDate: Date, endOfWeek: Date) => number;
-
-  /** Get the day of week index for the start of the event. Used for positioning within the Week css-grid */
-  getGridStartIndex: (eventDate: Date, startOfWeek: Date) => number;
-
   /** Get the full name of the month for a given date */
   getMonthName: (date: Date) => string;
 

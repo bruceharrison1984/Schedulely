@@ -1,4 +1,4 @@
-import { ActionContext } from '@/providers';
+import { ActionContext } from '@/providers/ActionProvider';
 import { useContext } from 'react';
 
 export const useActions = () => {

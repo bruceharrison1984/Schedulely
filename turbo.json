@@ -13,6 +13,7 @@
     },
     "test": {
       "dependsOn": [
+        "lint",
         "barrels"
       ],
       "outputs": [],
@@ -53,7 +54,13 @@
       ]
     },
     "lint": {
-      "outputs": []
+      "outputs": [],
+      "inputs": [
+        "./src/**/*.tsx",
+        "./src/**/*.ts",
+        "./__tests__/**/*.tsx",
+        "./__tests__/**/*.ts"
+      ]
     },
     "dev": {
       "cache": false

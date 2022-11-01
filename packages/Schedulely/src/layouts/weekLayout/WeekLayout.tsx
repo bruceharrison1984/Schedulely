@@ -1,4 +1,3 @@
-import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import {
   useActions,
   useCalendar,
@@ -6,41 +5,43 @@ import {
   useEventIntersection,
 } from '@/hooks';
 
-interface WeekLayoutProps {
+export interface WeekLayoutProps {
   dates: Date[];
-  eventsOnDays: { date: Date; events: InternalCalendarEvent[] }[];
 }
 
 /**
  * This component controls the layout of an individual weeks worth of days
  * @returns WeekLayout Component
  */
-export const WeekLayout = ({ dates, eventsOnDays }: WeekLayoutProps) => {
-  const { dateAdapter, currentMonth } = useCalendar();
+export const WeekLayout = ({ dates }: WeekLayoutProps) => {
+  const {
+    dateAdapter: { isDateToday, isSameMonth, getDayNumber },
+    currentDate,
+  } = useCalendar();
   const { dayComponent: DayComponent } = useComponents();
   const { onMoreEventClick } = useActions();
   const { getEventsOnDate } = useEventIntersection();
 
   return (
     <div className="week-layout">
-      {dates.map((day) => (
-        <div
-          key={day.getDate()}
-          data-day={day.getDate()}
-          data-istoday={dateAdapter.isDateToday(day) ? true : undefined}
-        >
-          <DayComponent
-            isCurrentMonth={dateAdapter.isSameMonth(day, currentMonth)}
-            isToday={dateAdapter.isDateToday(day)}
-            dateNumber={dateAdapter.getDayNumber(day)}
-            isOverflowed={
-              getEventsOnDate(day).filter((x) => !x.visible).length > 0
-            }
-            events={getEventsOnDate(day)}
-            onClick={onMoreEventClick}
-          />
-        </div>
-      ))}
+      {dates.map((day) => {
+        const isToday = isDateToday(day);
+        const events = getEventsOnDate(day);
+        const date = day.getDate();
+
+        return (
+          <div key={date} data-day={date} data-istoday={isToday}>
+            <DayComponent
+              isCurrentMonth={isSameMonth(day, currentDate)}
+              isToday={isToday}
+              dateNumber={getDayNumber(day)}
+              isOverflowed={events.filter((x) => !x.visible).length > 0}
+              events={events}
+              onClick={onMoreEventClick}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };

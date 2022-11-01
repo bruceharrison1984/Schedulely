@@ -1,11 +1,11 @@
-import { ActionState, InternalCalendarEvent } from '@/types';
+import { ActionContextState } from '@/types';
 import { PropsWithChildren, createContext, useCallback } from 'react';
 
-export const ActionContext = createContext<ActionState | null>(null);
+export const ActionContext = createContext<ActionContextState | null>(null);
 ActionContext.displayName = 'ActionContext';
 
 interface ActionProviderProps {
-  actions?: Partial<ActionState>;
+  actions?: Partial<ActionContextState>;
 }
 
 /**
@@ -19,33 +19,24 @@ export const ActionProvider = ({
   children,
   actions,
 }: PropsWithChildren<ActionProviderProps>) => {
-  const onEventClick = actions?.onEventClick
-    ? actions?.onEventClick
-    : (event: InternalCalendarEvent) => console.log(event);
+  const onEventClick = useCallback(actions?.onEventClick || (() => null), [
+    actions?.onEventClick,
+  ]);
 
-  const onMoreEventClick = actions?.onMoreEventClick
-    ? actions?.onMoreEventClick
-    : (events: InternalCalendarEvent[]) => console.log(events);
+  const onMoreEventClick = useCallback(
+    actions?.onMoreEventClick || (() => null),
+    [actions?.onMoreEventClick]
+  );
 
-  const onMonthChangeClick = actions?.onMonthChangeClick
-    ? actions?.onMonthChangeClick
-    : (firstOfMonth: Date, lastOfMonth: Date) =>
-        console.log({ firstOfMonth, lastOfMonth });
+  const onMonthChangeClick = useCallback(
+    actions?.onMonthChangeClick || (() => null),
+    [actions?.onMonthChangeClick]
+  );
 
-  const memoizedOnEventClick = useCallback(onEventClick, [onEventClick]);
-
-  const memoizedOnMoreEventClick = useCallback(onMoreEventClick, [
+  const context: ActionContextState = {
+    onEventClick,
     onMoreEventClick,
-  ]);
-
-  const memoizedOnMonthChangeClick = useCallback(onMonthChangeClick, [
     onMonthChangeClick,
-  ]);
-
-  const context: ActionState = {
-    onEventClick: memoizedOnEventClick,
-    onMoreEventClick: memoizedOnMoreEventClick,
-    onMonthChangeClick: memoizedOnMonthChangeClick,
   };
 
   return (

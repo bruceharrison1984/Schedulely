@@ -1,6 +1,7 @@
 import { HighlightProvider } from '@/providers';
 import { ReactNode } from 'react';
 import { act } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { useEventHighlight } from '@/hooks';
 import Chance from 'chance';
@@ -37,5 +38,13 @@ describe('useEventHighlight', () => {
     expect(result.current.isHighlighted(eventId)).toBeTruthy();
     act(() => result.current.setHighlight('new-value'));
     expect(result.current.isHighlighted('new-value')).toBeTruthy();
+  });
+
+  it('throws when called outside of provider', () => {
+    const ExceptionWrapper = () => {
+      expect(useEventHighlight).toThrowError(/must be used within/);
+      return <></>;
+    };
+    render(<ExceptionWrapper />);
   });
 });

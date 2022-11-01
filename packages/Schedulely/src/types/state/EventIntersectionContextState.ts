@@ -8,6 +8,6 @@ export type EventIntersectionState = {
   setRefFromKey: (key: string) => (element: HTMLElement | null) => void;
   /** Lookup an event and retrieve its visibility */
   isEventVisible: (key: string) => boolean;
-  /** Gets an array of hidden overflow events for the supplied date. An empty array is returned if no days are hidden. */
+  /** Gets an array of events that occur on or span the supplied date. */
   getEventsOnDate: (date: Date) => InternalCalendarEvent[];
 };
