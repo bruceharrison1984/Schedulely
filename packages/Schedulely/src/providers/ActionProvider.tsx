@@ -1,4 +1,4 @@
-import { ActionContextState, InternalCalendarEvent } from '@/types';
+import { ActionContextState } from '@/types';
 import { PropsWithChildren, createContext, useCallback } from 'react';
 
 export const ActionContext = createContext<ActionContextState | null>(null);
@@ -19,33 +19,24 @@ export const ActionProvider = ({
   children,
   actions,
 }: PropsWithChildren<ActionProviderProps>) => {
-  const onEventClick = actions?.onEventClick
-    ? actions?.onEventClick
-    : (event: InternalCalendarEvent) => console.log(event);
-
-  const onMoreEventClick = actions?.onMoreEventClick
-    ? actions?.onMoreEventClick
-    : (events: InternalCalendarEvent[]) => console.log(events);
-
-  const onMonthChangeClick = actions?.onMonthChangeClick
-    ? actions?.onMonthChangeClick
-    : (firstOfMonth: Date, lastOfMonth: Date) =>
-        console.log({ firstOfMonth, lastOfMonth });
-
-  const memoizedOnEventClick = useCallback(onEventClick, [onEventClick]);
-
-  const memoizedOnMoreEventClick = useCallback(onMoreEventClick, [
-    onMoreEventClick,
+  const onEventClick = useCallback(actions?.onEventClick || (() => null), [
+    actions?.onEventClick,
   ]);
 
-  const memoizedOnMonthChangeClick = useCallback(onMonthChangeClick, [
-    onMonthChangeClick,
-  ]);
+  const onMoreEventClick = useCallback(
+    actions?.onMoreEventClick || (() => null),
+    [actions?.onMoreEventClick]
+  );
+
+  const onMonthChangeClick = useCallback(
+    actions?.onMonthChangeClick || (() => null),
+    [actions?.onMonthChangeClick]
+  );
 
   const context: ActionContextState = {
-    onEventClick: memoizedOnEventClick,
-    onMoreEventClick: memoizedOnMoreEventClick,
-    onMonthChangeClick: memoizedOnMonthChangeClick,
+    onEventClick,
+    onMoreEventClick,
+    onMonthChangeClick,
   };
 
   return (
