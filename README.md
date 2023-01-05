@@ -2,7 +2,7 @@
 
 ### Prerelease
 
-_This component is still very early in development. Everything is currently still subject to massive change, so use at your own risk!_
+_This component is still very early in development. Everything is currently still subject to massive change, so use at your own risk! Don't be surprised if you run into major or breaking bugs until we hit the 1.0.0 release._
 
 ![Schedulely Preview](https://github.com/bruceharrison1984/Schedulely/blob/main/assets/preview.png?raw=true 'Schedulely Preview')
 
