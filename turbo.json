@@ -73,6 +73,7 @@
     },
     "ssr-test": {
       "dependsOn": [
+        "build",
         "^rollup"
       ],
       "cache": false

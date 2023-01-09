@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "ssr-test": "next dev"
+    "build": "next build",
+    "ssr-test": "next start"
   },
   "dependencies": {
     "next": "12.3.1",
