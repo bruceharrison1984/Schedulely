@@ -14,6 +14,7 @@ import {
   useState,
 } from 'react';
 import { useActions } from '@/hooks/useActions';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 export const CalendarContext = createContext<CalendarContextState | null>(null);
 CalendarContext.displayName = 'CalendarContext';
@@ -36,6 +37,7 @@ export const CalendarProvider = ({
   children,
 }: PropsWithChildren<CalendarProviderProps>) => {
   const { onMonthChangeClick } = useActions();
+  const { breakpoint } = useBreakpoint();
 
   const [currentDate, setCurrentDate] = useState(
     dateAdapter.convertIsoToDate(initialDate)
@@ -57,7 +59,10 @@ export const CalendarProvider = ({
   );
 
   // Does this need memo?
-  const daysOfWeek = useMemo(() => dateAdapter.getDaysOfWeek(), []);
+  const daysOfWeek = useMemo(
+    () => dateAdapter.getDaysOfWeek(breakpoint),
+    [breakpoint]
+  );
 
   const calendarView = useMemo(
     () => dateAdapter.getCalendarView(currentDate),
