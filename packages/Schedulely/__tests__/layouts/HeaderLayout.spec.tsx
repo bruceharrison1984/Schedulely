@@ -26,9 +26,6 @@ jest.mock('@/hooks', () => ({
     onPrevYear: mockOnPrevYearHandler,
     onPrevMonth: mockOnPrevMonthHandler,
   })),
-  useBreakpoint: jest.fn(() => ({
-    breakpoint: 'small',
-  })),
 }));
 
 describe('HeaderLayout', () => {

@@ -14,7 +14,7 @@ export interface DateTimeAdapter {
   getDayNumber: (date: Date) => number;
 
   /** Get full names of all days of the week */
-  getDaysOfWeek: (componentSize: ComponentSize) => string[];
+  getDaysOfWeek: () => string[];
 
   /** Get the full name of the month for a given date */
   getMonthName: (date: Date) => string;

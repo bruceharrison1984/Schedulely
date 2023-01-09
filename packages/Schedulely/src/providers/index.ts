@@ -3,7 +3,6 @@
  */
 
 export * from './ActionProvider';
-export * from './BreakPointProvider';
 export * from './CalendarProvider';
 export * from './ComponentProvider';
 export * from './EventIntersectionProvider';

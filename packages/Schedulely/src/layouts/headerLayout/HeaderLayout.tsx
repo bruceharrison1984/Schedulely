@@ -1,4 +1,4 @@
-import { useBreakpoint, useCalendar, useComponents } from '@/hooks';
+import { useCalendar, useComponents } from '@/hooks';
 
 /**
  * This component controls the layout of the header that display the controls and the current month/year description.
@@ -16,7 +16,6 @@ export const HeaderLayout = () => {
     isCurrentMonth,
   } = useCalendar();
   const { headerComponent: Header } = useComponents();
-  const { breakpoint } = useBreakpoint();
 
   return (
     <Header
@@ -27,7 +26,6 @@ export const HeaderLayout = () => {
       onNextYear={onNextYear}
       onPrevMonth={onPrevMonth}
       onPrevYear={onPrevYear}
-      componentSize={breakpoint}
     />
   );
 };

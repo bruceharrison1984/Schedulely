@@ -1,5 +1,6 @@
 .header-layout {
   display: flex;
+  container-type: inline-size;
 
   > .header-button {
     border: none;
@@ -24,6 +25,21 @@
     > .header-text {
       margin-top: auto;
       margin-bottom: auto;
+      font-size: 1.3em;
+
+      //small size
+      @container (max-width: 640px) {
+        font-size: 1.1em;
+      }
+
+      @container (min-width: 641px) and (max-width: 1024px) {
+        font-size: 1.3em;
+      }
+
+      //large size
+      @container (min-width: 1025px) {
+        font-size: 1.5em;
+      }
     }
 
     > .current-month-indicator {
