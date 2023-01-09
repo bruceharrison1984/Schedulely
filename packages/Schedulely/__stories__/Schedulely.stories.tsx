@@ -2,13 +2,8 @@ import '../src/Schedulely.scss';
 
 import { Schedulely } from '../src/Schedulely';
 import { SchedulelyProps } from '@/types/index';
-import {
-  Story,
-  StoryDecorator,
-  ThemeState,
-  useLadleContext,
-} from '@ladle/react';
-import { storyEvents } from './helpers.stories';
+import { StoryDecorator, ThemeState, useLadleContext } from '@ladle/react';
+import { storyEvents } from './helpers';
 
 const story = {
   title: 'Schedulely',
