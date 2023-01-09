@@ -57,7 +57,7 @@ const HomepageSchedulely = () => {
         >
           <Schedulely
             events={storyEvents}
-            dark={localStorage.getItem('theme') === 'dark'}
+            dark={colorMode === 'dark'}
             theme={theme}
           />
           <div className="resize-action-message">
