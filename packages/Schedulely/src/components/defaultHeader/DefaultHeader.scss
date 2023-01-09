@@ -1,6 +1,5 @@
 .header-layout {
   display: flex;
-  container-type: inline-size;
 
   > .header-button {
     border: none;
@@ -28,16 +27,16 @@
       font-size: 1.3em;
 
       //small size
-      @container (max-width: 640px) {
+      @container schedulely-container (width < 640px) {
         font-size: 1.1em;
       }
 
-      @container (min-width: 641px) and (max-width: 1024px) {
+      @container schedulely-container (width > 641px) and (width < 1024px) {
         font-size: 1.3em;
       }
 
       //large size
-      @container (min-width: 1025px) {
+      @container schedulely-container (width > 1025px) {
         font-size: 1.5em;
       }
     }
