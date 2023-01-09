@@ -33,7 +33,7 @@ Components are individually overridden so if you create a custom DayComponent, y
 ```tsx
   <Schedulely
     events={storyEvents}
-    dark={colorMode === 'dark'}
+    dark={localStorage.getItem('theme') === 'dark'}
     theme={theme}
     schedulelyComponents={{
       dayComponent: <ComponentThatInheritsDayComponent>,
