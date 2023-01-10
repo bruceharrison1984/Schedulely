@@ -1,7 +1,7 @@
 import { ActionProvider } from '@/providers';
+import { Chance } from 'chance';
 import { InternalCalendarEvent } from '@/types';
 import { ReactNode } from 'react';
-import { act } from 'react-test-renderer';
 import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { useActions } from '@/hooks';
@@ -21,14 +21,18 @@ const onEventClickHandler = jest.fn((event: InternalCalendarEvent) => null);
 let onMonthChangeClickHandler = jest.fn(
   (firstOfMonth: Date, lastOfMonth: Date) => null
 );
-let onMoreEventClickHandler = jest.fn((event: InternalCalendarEvent[]) => null);
+let onMoreEventsClickHandler = jest.fn(
+  (event: InternalCalendarEvent[]) => null
+);
+let onDayClickHandler = jest.fn((day: Date) => null);
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <ActionProvider
     actions={{
       onEventClick: onEventClickHandler,
       onMonthChangeClick: onMonthChangeClickHandler,
-      onMoreEventClick: onMoreEventClickHandler,
+      onMoreEventsClick: onMoreEventsClickHandler,
+      onDayClick: onDayClickHandler,
     }}
   >
     {children}
@@ -38,9 +42,26 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 describe('useActions', () => {
   const {
     result: {
-      current: { onEventClick, onMonthChangeClick, onMoreEventClick },
+      current: {
+        onEventClick,
+        onMonthChangeClick,
+        onMoreEventsClick,
+        onDayClick,
+      },
     },
   } = renderHook(() => useActions(), { wrapper });
+
+  describe('onDayClick', () => {
+    const testDate = Chance().date();
+    onDayClick(testDate);
+
+    it('invokes correct function', () => {
+      expect(onDayClickHandler).toHaveBeenCalled();
+    });
+
+    it('passes correct args', () =>
+      expect(onDayClickHandler.mock.calls[0][0]).toEqual(testDate));
+  });
 
   describe('onEventClick', () => {
     onEventClick(testEvents[0]);
@@ -71,14 +92,14 @@ describe('useActions', () => {
 
   describe('onMoreEventClick', () => {
     describe('when defined', () => {
-      onMoreEventClick(testEvents);
+      onMoreEventsClick(testEvents);
 
       it('invokes correct function', () => {
-        expect(onMoreEventClickHandler).toHaveBeenCalled();
+        expect(onMoreEventsClickHandler).toHaveBeenCalled();
       });
 
       it('passes correct args', () =>
-        expect(onMoreEventClickHandler.mock.calls[0][0]).toEqual(testEvents));
+        expect(onMoreEventsClickHandler.mock.calls[0][0]).toEqual(testEvents));
     });
   });
 
@@ -97,19 +118,19 @@ describe('useActions', () => {
 
     const {
       result: {
-        current: { onEventClick, onMonthChangeClick, onMoreEventClick },
+        current: { onEventClick, onMonthChangeClick, onMoreEventsClick },
       },
     } = renderHook(() => useActions(), { wrapper: emptyWrapper });
 
     beforeEach(() => {
-      onMoreEventClickHandler.mockClear();
+      onMoreEventsClickHandler.mockClear();
       onEventClickHandler.mockClear();
       onMonthChangeClickHandler.mockClear();
     });
 
     it('does not invoke onMoreEventClick if not defined', () => {
-      onMoreEventClick(testEvents);
-      expect(onMoreEventClickHandler).not.toHaveBeenCalled();
+      onMoreEventsClick(testEvents);
+      expect(onMoreEventsClickHandler).not.toHaveBeenCalled();
     });
 
     it('does not invoke onEventClick if not defined', () => {

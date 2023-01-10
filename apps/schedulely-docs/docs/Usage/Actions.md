@@ -7,16 +7,18 @@ While Schedulely expects developers to implement their own components to achieve
 The ActionProvider is used under the hood to take in functions as arguments, memoize them, and pass them in to the calendar components. This makes state management within
 Schedulely simple, and ensures we are re-rendering the bare minimum.
 
-**Once we reach 1.0.0, the default Actions will likely be default to `() => null` instead of `console.log()`.**
+**All actions return `() => null` unless explicitly overridden.**
 
 ## Provided Actions
 
 By default, the actions will print their target Events in to the javascript console.
 
-| Action           | Signature                                | Description                                                       |
-| ---------------- | ---------------------------------------- | ----------------------------------------------------------------- |
-| onEventClick     | (event: InternalCalendarEvent) => void   | This function runs any time an individual event is clicked        |
-| onMoreEventClick | (event: InternalCalendarEvent[]) => void | The function runs whenever the 'More Events' indicator is clicked |
+| Action             | Signature                                         | Description                                                                    |
+| ------------------ | ------------------------------------------------- | ------------------------------------------------------------------------------ |
+| onEventClick       | `(event: InternalCalendarEvent) => void`          | This function runs any time an individual event is clicked                     |
+| onMoreEventsClick  | `(event: InternalCalendarEvent[]) => void`        | This function should be called whenever the 'More Events' indicator is clicked |
+| onDayClick         | `(day: Date) => void`                             | This function should be called whenever a Day Component is clicked on          |
+| onMonthChangeClick | `(firstOfMonth: Date, lastOfMonth: Date) => void` | This function is called whenever the month is changed                          |
 
 ## Default Actions
 

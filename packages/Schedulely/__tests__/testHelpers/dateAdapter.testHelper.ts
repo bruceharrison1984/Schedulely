@@ -1,4 +1,3 @@
-import { ComponentSize } from '@/types/ComponentSize';
 import chance from 'chance';
 
 const DEFAULT_ITERATIONS = 30;
@@ -82,24 +81,6 @@ export const getIsTodayTestCases = (iterations = DEFAULT_ITERATIONS) => {
     testCases.push({
       date,
       expected: false,
-    });
-  }
-  return testCases;
-};
-
-export const getDayNumberFromDateTestCases = (
-  iterations = DEFAULT_ITERATIONS
-) => {
-  const testCases = [];
-  for (let index = 0; index < iterations; index++) {
-    const date = new Date(
-      chance().integer({ min: 2000, max: 2022 }),
-      chance().integer({ min: 0, max: 11 }),
-      chance().integer({ min: 1, max: 28 })
-    );
-    testCases.push({
-      date,
-      expected: date.getDate(),
     });
   }
   return testCases;
@@ -222,7 +203,7 @@ export const getMonthNameFromDateTestCases = () => [
 
 export const getDaysOfWeekTestCases = () => [
   {
-    format: 'large' as ComponentSize,
+    format: 'long' as 'long' | 'short' | 'narrow',
     expected: [
       'Sunday',
       'Monday',
@@ -234,11 +215,11 @@ export const getDaysOfWeekTestCases = () => [
     ],
   },
   {
-    format: 'medium' as ComponentSize,
+    format: 'short' as 'long' | 'short' | 'narrow',
     expected: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   },
   {
-    format: 'small' as ComponentSize,
+    format: 'narrow' as 'long' | 'short' | 'narrow',
     expected: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
   },
 ];

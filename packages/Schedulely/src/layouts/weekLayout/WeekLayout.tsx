@@ -15,11 +15,11 @@ export interface WeekLayoutProps {
  */
 export const WeekLayout = ({ dates }: WeekLayoutProps) => {
   const {
-    dateAdapter: { isDateToday, isSameMonth, getDayNumber },
+    dateAdapter: { isDateToday, isSameMonth },
     currentDate,
   } = useCalendar();
   const { dayComponent: DayComponent } = useComponents();
-  const { onMoreEventClick } = useActions();
+  const { onMoreEventsClick, onDayClick } = useActions();
   const { getEventsOnDate } = useEventIntersection();
 
   return (
@@ -34,10 +34,11 @@ export const WeekLayout = ({ dates }: WeekLayoutProps) => {
             <DayComponent
               isCurrentMonth={isSameMonth(day, currentDate)}
               isToday={isToday}
-              dateNumber={getDayNumber(day)}
               isOverflowed={events.filter((x) => !x.visible).length > 0}
               events={events}
-              onClick={onMoreEventClick}
+              onMoreEventsClick={onMoreEventsClick}
+              onDayClick={onDayClick}
+              date={day}
             />
           </div>
         );

@@ -8,7 +8,7 @@ import {
 import { BreakpointProvider } from './providers/BreakPointProvider';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
 import { SchedulelyProps } from '@/types/index';
-import { StrictMode, useRef } from 'react';
+import { StrictMode, useEffect, useRef, useState } from 'react';
 import { createDefaultAdapter } from './dateAdapters';
 
 /**
@@ -28,7 +28,14 @@ export const Schedulely = ({
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const containerRef = useRef(null);
+
+  // hide the calendar until it is fully rendered on the client
+  // this prevents various types of UI flashing resulting from waiting for Observers to take measurements
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   return (
     <StrictMode>
@@ -41,6 +48,8 @@ export const Schedulely = ({
           display: 'grid',
           gridTemplateColumns: '1fr',
           gridTemplateRows: 'auto auto 1fr',
+          // by setting the root as visiblity:hidden, we can still measure things but avoid the flashes
+          visibility: isVisible ? 'visible' : 'hidden',
         }}
         ref={containerRef}
       >

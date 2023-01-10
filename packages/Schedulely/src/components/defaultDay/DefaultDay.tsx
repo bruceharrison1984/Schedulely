@@ -3,17 +3,18 @@ import { DayComponent } from '@/types';
 export const DefaultDay: DayComponent = ({
   isCurrentMonth,
   isToday,
-  dateNumber,
   events,
   isOverflowed,
-  onClick,
+  onMoreEventsClick,
+  onDayClick,
+  date,
 }) => {
   const dayHeader = isToday ? (
     <div className="default-day-header--indicator">
-      <span className="default-day-header--text">{dateNumber}</span>
+      <span className="default-day-header--text">{date.getDate()}</span>
     </div>
   ) : (
-    <span className="default-day-header--text">{dateNumber}</span>
+    <span className="default-day-header--text">{date.getDate()}</span>
   );
 
   const hiddenEventTooltip =
@@ -25,6 +26,7 @@ export const DefaultDay: DayComponent = ({
       className={`default-day ${
         isCurrentMonth ? 'default-day-current' : 'default-day-sibling'
       }`}
+      onClick={() => onDayClick(date)}
     >
       <div role={'heading'} className="default-day-header">
         {dayHeader}
@@ -34,7 +36,7 @@ export const DefaultDay: DayComponent = ({
           role={'note'}
           className="additional-events-indicator"
           title={hiddenEventTooltip}
-          onClick={() => onClick(events)}
+          onClick={() => onMoreEventsClick(events)}
         >
           ...
         </div>

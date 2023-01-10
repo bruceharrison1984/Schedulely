@@ -20,6 +20,7 @@ export const BreakpointProvider = ({
 }) => {
   const breakpoints = { small: 500, large: 800 };
   const [breakpoint, setBreakpoint] = useState<ComponentSize | undefined>();
+
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
       const { width } = entries[0].contentRect;

@@ -1,9 +1,7 @@
-import { ComponentSize } from '@/types/ComponentSize';
 import { DateTimeAdapter } from '@/types/index';
 import { createDefaultAdapter } from '@/dateAdapters/date';
 import {
   getAddMonthsToDateTestCases,
-  getDayNumberFromDateTestCases,
   getDaysOfWeekTestCases,
   getIsSameMonthMonthTestCases,
   getIsTodayTestCases,
@@ -117,7 +115,7 @@ describe('Date Adapter', () => {
     });
 
     describe('getDaysOfWeek', () => {
-      it.each<{ format: ComponentSize; expected: string[] }>(
+      it.each<{ format: 'long' | 'short' | 'narrow'; expected: string[] }>(
         getDaysOfWeekTestCases()
       )('with format "$format" returns $expected', ({ format, expected }) => {
         const result = adapter.getDaysOfWeek(format);
@@ -129,7 +127,7 @@ describe('Date Adapter', () => {
       it.each<{ date: Date; expected: string }>(
         getMonthNameFromDateTestCases()
       )('$date returns $expected', ({ date, expected }) => {
-        const result = adapter.getMonthName(date);
+        const result = adapter.getMonthName(date, 'long');
         expect(result).toBe(expected);
       });
     });
@@ -142,15 +140,6 @@ describe('Date Adapter', () => {
           expect(result).toBe(expected);
         }
       );
-    });
-
-    describe('getDayNumber', () => {
-      it.each<{ date: Date; expected: number }>(
-        getDayNumberFromDateTestCases()
-      )('$date returns $expected', ({ date, expected }) => {
-        const result = adapter.getDayNumber(date);
-        expect(result).toBe(expected);
-      });
     });
 
     describe('isDateToday', () => {

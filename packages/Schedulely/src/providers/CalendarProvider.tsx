@@ -43,10 +43,11 @@ export const CalendarProvider = ({
     dateAdapter.convertIsoToDate(initialDate)
   );
 
-  const currentMonth = useMemo(
-    () => dateAdapter.getMonthName(currentDate),
-    [currentDate]
-  );
+  const currentMonth = useMemo(() => {
+    let format: 'long' | 'short' = 'long';
+    if (breakpoint === 'small') format = 'short';
+    return dateAdapter.getMonthName(currentDate, format);
+  }, [currentDate, breakpoint]);
 
   const currentYear = useMemo(
     () => dateAdapter.getYear(currentDate),
@@ -59,10 +60,12 @@ export const CalendarProvider = ({
   );
 
   // Does this need memo?
-  const daysOfWeek = useMemo(
-    () => dateAdapter.getDaysOfWeek(breakpoint),
-    [breakpoint]
-  );
+  const daysOfWeek = useMemo(() => {
+    let format: 'long' | 'short' | 'narrow' = 'long';
+    if (breakpoint === 'medium') format = 'short';
+    if (breakpoint === 'small') format = 'narrow';
+    return dateAdapter.getDaysOfWeek(format);
+  }, [breakpoint]);
 
   const calendarView = useMemo(
     () => dateAdapter.getCalendarView(currentDate),
