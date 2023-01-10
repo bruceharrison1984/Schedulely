@@ -3,7 +3,6 @@ import { DateTimeAdapter } from '@/types/index';
 import { createDefaultAdapter } from '@/dateAdapters/date';
 import {
   getAddMonthsToDateTestCases,
-  getDayNumberFromDateTestCases,
   getDaysOfWeekTestCases,
   getIsSameMonthMonthTestCases,
   getIsTodayTestCases,
@@ -142,15 +141,6 @@ describe('Date Adapter', () => {
           expect(result).toBe(expected);
         }
       );
-    });
-
-    describe('getDayNumber', () => {
-      it.each<{ date: Date; expected: number }>(
-        getDayNumberFromDateTestCases()
-      )('$date returns $expected', ({ date, expected }) => {
-        const result = adapter.getDayNumber(date);
-        expect(result).toBe(expected);
-      });
     });
 
     describe('isDateToday', () => {

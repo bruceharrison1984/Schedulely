@@ -89,8 +89,6 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
 
   const getYear = (date: Date) => date.getFullYear();
 
-  const getDayNumber = (date: Date) => date.getDate();
-
   const isSameMonth = (firstDate: Date, secondDate: Date) =>
     getYear(firstDate) === getYear(secondDate) &&
     firstDate.getMonth() === secondDate.getMonth();
@@ -135,7 +133,6 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     getDaysOfWeek,
     getMonthName,
     getYear,
-    getDayNumber,
     isSameMonth,
     isDateToday,
     addMonthsToDate,

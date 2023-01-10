@@ -10,9 +10,6 @@ export interface DateTimeAdapter {
   /** Returns all days in the month, split apart by week. Includes leading/trailing days. */
   getCalendarView: (date: Date) => Date[][];
 
-  /** Get the day number component for a given date */
-  getDayNumber: (date: Date) => number;
-
   /** Get full names of all days of the week */
   getDaysOfWeek: (componentSize?: ComponentSize) => string[];
 

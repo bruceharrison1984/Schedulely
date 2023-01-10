@@ -15,7 +15,7 @@ export interface WeekLayoutProps {
  */
 export const WeekLayout = ({ dates }: WeekLayoutProps) => {
   const {
-    dateAdapter: { isDateToday, isSameMonth, getDayNumber },
+    dateAdapter: { isDateToday, isSameMonth },
     currentDate,
   } = useCalendar();
   const { dayComponent: DayComponent } = useComponents();
