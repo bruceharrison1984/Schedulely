@@ -1,7 +1,7 @@
 import { ActionProvider } from '@/providers';
+import { Chance } from 'chance';
 import { InternalCalendarEvent } from '@/types';
 import { ReactNode } from 'react';
-import { act } from 'react-test-renderer';
 import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { useActions } from '@/hooks';
@@ -24,6 +24,7 @@ let onMonthChangeClickHandler = jest.fn(
 let onMoreEventsClickHandler = jest.fn(
   (event: InternalCalendarEvent[]) => null
 );
+let onDayClickHandler = jest.fn((day: Date) => null);
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <ActionProvider
@@ -31,6 +32,7 @@ const wrapper = ({ children }: { children: ReactNode }) => (
       onEventClick: onEventClickHandler,
       onMonthChangeClick: onMonthChangeClickHandler,
       onMoreEventsClick: onMoreEventsClickHandler,
+      onDayClick: onDayClickHandler,
     }}
   >
     {children}
@@ -40,9 +42,26 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 describe('useActions', () => {
   const {
     result: {
-      current: { onEventClick, onMonthChangeClick, onMoreEventsClick },
+      current: {
+        onEventClick,
+        onMonthChangeClick,
+        onMoreEventsClick,
+        onDayClick,
+      },
     },
   } = renderHook(() => useActions(), { wrapper });
+
+  describe('onDayClick', () => {
+    const testDate = Chance().date();
+    onDayClick(testDate);
+
+    it('invokes correct function', () => {
+      expect(onDayClickHandler).toHaveBeenCalled();
+    });
+
+    it('passes correct args', () =>
+      expect(onDayClickHandler.mock.calls[0][0]).toEqual(testDate));
+  });
 
   describe('onEventClick', () => {
     onEventClick(testEvents[0]);

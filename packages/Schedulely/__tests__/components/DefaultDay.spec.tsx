@@ -70,6 +70,17 @@ describe('DefaultDay', () => {
         it('passes events as args', () =>
           expect(onMoreEventsClick.mock.calls[0][0]).toEqual(testEvents));
       });
+
+      describe('onDayClick handler', () => {
+        beforeEach(() => {
+          fireEvent.click(testObject.getByRole('cell'));
+        });
+
+        it('fires', () => expect(onDayClick).toHaveBeenCalled());
+
+        it('passes current date as arg', () =>
+          expect(onDayClick.mock.calls[0][0]).toEqual(defaults.date));
+      });
     });
 
     describe('is false', () => {
