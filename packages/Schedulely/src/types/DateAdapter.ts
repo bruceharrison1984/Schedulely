@@ -10,11 +10,20 @@ export interface DateTimeAdapter {
   /** Returns all days in the month, split apart by week. Includes leading/trailing days. */
   getCalendarView: (date: Date) => Date[][];
 
-  /** Get full names of all days of the week */
-  getDaysOfWeek: (componentSize?: ComponentSize) => string[];
+  /**
+   * Get names of all days of the week in the format specified
+   * @param format The format of the name that will be returned
+   * @returns Array of strings that contain the names of the days of the week
+   */
+  getDaysOfWeek: (format?: 'long' | 'short' | 'narrow') => string[];
 
-  /** Get the full name of the month for a given date */
-  getMonthName: (date: Date) => string;
+  /**
+   * Get the full name of the month for a given date
+   * @param date The date to get the name of the month for
+   * @param format The format of the name that will be returned
+   * @returns Name of the month in the specified format
+   */
+  getMonthName: (date: Date, format: 'long' | 'short') => string;
 
   /** Get the year component for a given date */
   getYear: (date: Date) => number;

@@ -7,16 +7,9 @@ import { DateTimeAdapter } from '@/types';
  * @returns DateTimeAdapter
  */
 export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
-  /** Map used to translate ComponentSize in to Intl day name format */
-  const map = new Map<ComponentSize, 'long' | 'narrow' | 'short'>([
-    ['large', 'long'],
-    ['medium', 'short'],
-    ['small', 'narrow'],
-  ]);
-
-  const getDaysOfWeek = (componentSize?: ComponentSize) => {
+  const getDaysOfWeek = (format?: 'long' | 'short' | 'narrow') => {
     const formatter = new Intl.DateTimeFormat(locale, {
-      weekday: map.get(componentSize || 'large'),
+      weekday: format,
     });
     return [0, 1, 2, 3, 4, 5, 6].map((x) =>
       formatter.format(new Date(2012, 0, x + 1))
@@ -80,9 +73,9 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     );
   };
 
-  const getMonthName = (date: Date) => {
+  const getMonthName = (date: Date, format?: 'long' | 'short') => {
     const formatter = new Intl.DateTimeFormat(locale, {
-      month: 'long',
+      month: format,
     });
     return formatter.format(date);
   };

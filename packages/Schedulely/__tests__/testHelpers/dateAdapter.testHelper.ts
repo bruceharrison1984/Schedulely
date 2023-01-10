@@ -204,7 +204,7 @@ export const getMonthNameFromDateTestCases = () => [
 
 export const getDaysOfWeekTestCases = () => [
   {
-    format: 'large' as ComponentSize,
+    format: 'long' as 'long' | 'short' | 'narrow',
     expected: [
       'Sunday',
       'Monday',
@@ -216,11 +216,11 @@ export const getDaysOfWeekTestCases = () => [
     ],
   },
   {
-    format: 'medium' as ComponentSize,
+    format: 'short' as 'long' | 'short' | 'narrow',
     expected: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   },
   {
-    format: 'small' as ComponentSize,
+    format: 'narrow' as 'long' | 'short' | 'narrow',
     expected: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
   },
 ];

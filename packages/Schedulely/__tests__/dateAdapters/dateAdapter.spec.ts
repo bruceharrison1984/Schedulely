@@ -116,7 +116,7 @@ describe('Date Adapter', () => {
     });
 
     describe('getDaysOfWeek', () => {
-      it.each<{ format: ComponentSize; expected: string[] }>(
+      it.each<{ format: 'long' | 'short' | 'narrow'; expected: string[] }>(
         getDaysOfWeekTestCases()
       )('with format "$format" returns $expected', ({ format, expected }) => {
         const result = adapter.getDaysOfWeek(format);
@@ -128,7 +128,7 @@ describe('Date Adapter', () => {
       it.each<{ date: Date; expected: string }>(
         getMonthNameFromDateTestCases()
       )('$date returns $expected', ({ date, expected }) => {
-        const result = adapter.getMonthName(date);
+        const result = adapter.getMonthName(date, 'long');
         expect(result).toBe(expected);
       });
     });

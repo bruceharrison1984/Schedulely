@@ -24,21 +24,7 @@
     > .header-text {
       margin-top: auto;
       margin-bottom: auto;
-      font-size: 1.3em;
-
-      //small size
-      @container schedulely-container (width < 640px) {
-        font-size: 1.1em;
-      }
-
-      @container schedulely-container (width > 641px) and (width < 1024px) {
-        font-size: 1.3em;
-      }
-
-      //large size
-      @container schedulely-container (width > 1025px) {
-        font-size: 1.5em;
-      }
+      font-size: 1.5em;
     }
 
     > .current-month-indicator {
