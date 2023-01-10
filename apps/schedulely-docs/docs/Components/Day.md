@@ -15,17 +15,20 @@ export interface DayComponentProps {
   isToday: boolean;
   isOverflowed: boolean;
   events: InternalCalendarEvent[];
-  onClick: (event: InternalCalendarEvent[]) => void;
+  onMoreEventsClick: (event: InternalCalendarEvent[]) => void;
+  onDayClick: (day: Date) => void;
 }
 ```
 
-| Property       | Type                      | Description                                                                     |
-| -------------- | ------------------------- | ------------------------------------------------------------------------------- |
-| isCurrentMonth | `boolean`                 | True if this date occurs in the current visible month                           |
-| isToday        | `boolean`                 | True is this date is equal to today's date                                      |
-| dateNumber     | `number`                  | The numeric date of the day                                                     |
-| events         | `InternalCalendarEvent[]` | Array of _all_ events that occur or span this date (both hidden and visible)    |
-| isOverflowed   | `boolean`                 | True if the date has more events than can visible fit. (Some events are hidden) |
+| Property          | Type                                       | Description                                                                     |
+| ----------------- | ------------------------------------------ | ------------------------------------------------------------------------------- |
+| isCurrentMonth    | `boolean`                                  | True if this date occurs in the current visible month                           |
+| isToday           | `boolean`                                  | True is this date is equal to today's date                                      |
+| dateNumber        | `number`                                   | The numeric date of the day                                                     |
+| events            | `InternalCalendarEvent[]`                  | Array of _all_ events that occur or span this date (both hidden and visible)    |
+| isOverflowed      | `boolean`                                  | True if the date has more events than can visible fit. (Some events are hidden) |
+| onMoreEventsClick | `(event: InternalCalendarEvent[]) => void` | This function should be called whenever the 'More Events' indicator is clicked  |
+| onDayClick        | `(day: Date) => void`                      | This function should be called whenever a Day Component is clicked on           |
 
 ## Dealing with hidden events
 
@@ -42,17 +45,18 @@ Once events overflow the day container, they will also begin being hidden. All e
 const DefaultDay = ({
   isCurrentMonth,
   isToday,
-  dateNumber,
+  date,
   events,
   isOverflowed,
-  onClick,
+  onMoreEventsClick,
+  onDayClick,
 }) => {
   const dayHeader = isToday ? (
     <div className="default-day-header--indicator">
-      <span className="default-day-header--text">{dateNumber}</span>
+      <span className="default-day-header--text">{date.getDate()}</span>
     </div>
   ) : (
-    <span className="default-day-header--text">{dateNumber}</span>
+    <span className="default-day-header--text">{date.getDate()}</span>
   );
 
   const hiddenEventTooltip =
@@ -63,13 +67,14 @@ const DefaultDay = ({
       className={`default-day ${
         isCurrentMonth ? 'default-day-current' : 'default-day-sibling'
       }`}
+      onClick={() => onDayClick(JSON.stringify(date))}
     >
       <div className="default-day-header">{dayHeader}</div>
       {isOverflowed && (
         <div
           className="additional-events-indicator"
           title={hiddenEventTooltip}
-          onClick={() => onClick(events)}
+          onClick={() => onMoreEventsClick(JSON.stringify(events))}
         >
           ...
         </div>
@@ -85,10 +90,11 @@ render(
     <DefaultDay
       isCurrentMonth={true}
       isToday={true}
-      dateNumber={21}
+      date={new Date()}
       events={events}
       isOverflowed={true}
-      onClick={() => alert(JSON.stringify(events))}
+      onMoreEventsClick={alert}
+      onDayClick={alert}
     />
   </div>
 );

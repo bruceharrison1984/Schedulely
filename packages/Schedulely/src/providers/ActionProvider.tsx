@@ -28,10 +28,9 @@ export const ActionProvider = ({
     [actions?.onMoreEventsClick]
   );
 
-  const onDayClick = useCallback(
-    actions?.onDayClick || (() => null),
-    [actions?.onDayClick]
-  );
+  const onDayClick = useCallback(actions?.onDayClick || (() => null), [
+    actions?.onDayClick,
+  ]);
 
   const onMonthChangeClick = useCallback(
     actions?.onMonthChangeClick || (() => null),
@@ -40,9 +39,9 @@ export const ActionProvider = ({
 
   const context: ActionContextState = {
     onEventClick,
-    onMoreEventsClick: onMoreEventsClick,
+    onMoreEventsClick,
     onMonthChangeClick,
-    onDayClick
+    onDayClick,
   };
 
   return (
