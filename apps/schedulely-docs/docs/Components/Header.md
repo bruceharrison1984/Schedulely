@@ -21,16 +21,15 @@ export interface HeaderProps {
 }
 ```
 
-| Property       | Type            | Description                                                                          |
-| -------------- | --------------- | ------------------------------------------------------------------------------------ |
-| month          | `string`        | The current month the calendar is displaying                                         |
-| year           | `number`        | The current year the calendar is displaying                                          |
-| isCurrentMonth | `boolean`       | True if the selected month is the same as the current month                          |
-| onNextMonth    | `() => void`    | Calling this functions moves to the next month                                       |
-| onNextYear     | `() => void`    | Calling this functions moves to the same month of the next year                      |
-| onPrevMonth    | `() => void`    | Calling this functions moves to the previous month                                   |
-| onPrevYear     | `() => void`    | Calling this functions moves to the same month of the previous year                  |
-| componentSize  | `ComponentSize` | Enum value that indicates the current size of the calendar (used for element sizing) |
+| Property       | Type         | Description                                                         |
+| -------------- | ------------ | ------------------------------------------------------------------- |
+| month          | `string`     | The current month the calendar is displaying                        |
+| year           | `number`     | The current year the calendar is displaying                         |
+| isCurrentMonth | `boolean`    | True if the selected month is the same as the current month         |
+| onNextMonth    | `() => void` | Calling this functions moves to the next month                      |
+| onNextYear     | `() => void` | Calling this functions moves to the same month of the next year     |
+| onPrevMonth    | `() => void` | Calling this functions moves to the previous month                  |
+| onPrevYear     | `() => void` | Calling this functions moves to the same month of the previous year |
 
 ## Example (DefaultHeader)
 
@@ -46,7 +45,6 @@ const DefaultHeader = ({
   onPrevMonth,
   onPrevYear,
   isCurrentMonth,
-  componentSize,
 }) => (
   <div className="header-layout">
     <button
@@ -65,10 +63,7 @@ const DefaultHeader = ({
     </button>
 
     <div className="header-banner">
-      <span
-        className="header-text"
-        style={{ fontSize: componentSize === 'large' ? '1.5em' : '1.1em' }}
-      >
+      <span className="header-text">
         {month} - {year}
       </span>
       {isCurrentMonth && (
@@ -87,7 +82,7 @@ const DefaultHeader = ({
 
 render(
   <div className="schedulely">
-    <DefaultHeader month="December" year="2022" componentSize={'large'} />
+    <DefaultHeader month="December" year="2022" />
   </div>
 );
 ```

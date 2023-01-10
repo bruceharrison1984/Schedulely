@@ -1,5 +1,3 @@
-import { ComponentSize } from '@/types';
-
 /**
  * Common interface for porting date libraries so they can be used with Schedulely
  */

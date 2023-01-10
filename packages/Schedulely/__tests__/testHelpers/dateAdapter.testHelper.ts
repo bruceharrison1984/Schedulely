@@ -1,4 +1,3 @@
-import { ComponentSize } from '@/types/ComponentSize';
 import chance from 'chance';
 
 const DEFAULT_ITERATIONS = 30;

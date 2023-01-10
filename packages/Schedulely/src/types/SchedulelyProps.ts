@@ -1,7 +1,6 @@
 import {
   ActionContextState,
   CalendarEvent,
-  ComponentSize,
   DateTimeAdapter,
   SchedulelyComponents,
 } from '@/types';

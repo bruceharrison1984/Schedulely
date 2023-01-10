@@ -1,4 +1,3 @@
-import { ComponentSize } from '@/types/ComponentSize';
 import { DateTimeAdapter } from '@/types/index';
 import { createDefaultAdapter } from '@/dateAdapters/date';
 import {
