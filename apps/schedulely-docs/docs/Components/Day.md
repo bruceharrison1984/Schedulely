@@ -11,7 +11,7 @@ The `DayComponent` is used to display individual days on the calendar grid. Vari
 ```tsx
 export interface DayComponentProps {
   isCurrentMonth: boolean;
-  dateNumber: number;
+  date: Date;
   isToday: boolean;
   isOverflowed: boolean;
   events: InternalCalendarEvent[];
@@ -24,7 +24,7 @@ export interface DayComponentProps {
 | ----------------- | ------------------------------------------ | ------------------------------------------------------------------------------- |
 | isCurrentMonth    | `boolean`                                  | True if this date occurs in the current visible month                           |
 | isToday           | `boolean`                                  | True is this date is equal to today's date                                      |
-| dateNumber        | `number`                                   | The numeric date of the day                                                     |
+| date              | `Date`                                     | JS Date object for the day                                                      |
 | events            | `InternalCalendarEvent[]`                  | Array of _all_ events that occur or span this date (both hidden and visible)    |
 | isOverflowed      | `boolean`                                  | True if the date has more events than can visible fit. (Some events are hidden) |
 | onMoreEventsClick | `(event: InternalCalendarEvent[]) => void` | This function should be called whenever the 'More Events' indicator is clicked  |
