@@ -1,11 +1,26 @@
 {
-  "extends": "tsconfig/react-library.json",
   "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "es6",
     "lib": ["ES2021"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
+    "strict": true
   },
   "include": ["src", "__tests__", "__stories__"],
   "exclude": ["node_modules"]
