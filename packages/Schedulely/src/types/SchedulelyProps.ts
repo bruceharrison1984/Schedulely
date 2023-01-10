@@ -31,9 +31,4 @@ export interface SchedulelyProps {
 
   /** Initial Date that Schedulely should be opened to */
   initialDate?: string;
-
-  /** Initial format for the days of the week. Setting this can prevent UI flashing on initialization when the calendar is rendered in smaller sizes.
-   * Default size is 'large'.
-   */
-  initialDayOfWeekFormat?: ComponentSize;
 }
