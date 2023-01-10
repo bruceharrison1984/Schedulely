@@ -62,12 +62,13 @@ export interface SchedulelyProps {
 }
 ```
 
-| Property             | Type                             | Description                                                                      |
-| -------------------- | -------------------------------- | -------------------------------------------------------------------------------- |
-| dateAdapter          | `DateTimeAdapter?`               | Override the default Date/date-fns adapter with a custom implementation          |
-| schedulelyComponents | `Partial<SchedulelyComponents>?` | Override individual components with custom ones                                  |
-| events               | `CalendarEvent[]`                | List of events that will be displayed                                            |
-| additionalClassNames | `string[]?`                      | Any additional class names you want applied to the root element                  |
-| theme                | `string?`                        | Name of theme to apply to Schedulely                                             |
-| actions              | `Partial<ActionState>?`          | Override component actions                                                       |
-| initialDate          | `string?`                        | Schedulely will start on the current month, unless overridden with this property |
+| Property               | Type                             | Description                                                                                                                                                              |
+| ---------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| dateAdapter            | `DateTimeAdapter?`               | Override the default Date/date-fns adapter with a custom implementation                                                                                                  |
+| schedulelyComponents   | `Partial<SchedulelyComponents>?` | Override individual components with custom ones                                                                                                                          |
+| events                 | `CalendarEvent[]`                | List of events that will be displayed                                                                                                                                    |
+| additionalClassNames   | `string[]?`                      | Any additional class names you want applied to the root element                                                                                                          |
+| theme                  | `string?`                        | Name of theme to apply to Schedulely                                                                                                                                     |
+| actions                | `Partial<ActionState>?`          | Override component actions                                                                                                                                               |
+| initialDate            | `string?`                        | Schedulely will start on the current month, unless overridden with this property                                                                                         |
+| initialDayOfWeekFormat | `ComponentSize`                  | Initial length format for the days of the week. Setting this can prevent UI flashing on initialization when the calendar is rendered in smaller sizes. Default is large. |
