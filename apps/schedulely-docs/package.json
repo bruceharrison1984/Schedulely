@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "dev-docs": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "docusaurus build --no-minify",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -16,10 +16,10 @@
     "schedulely": "*"
   },
   "dependencies": {
-    "@docusaurus/core": "2.1.0",
-    "@docusaurus/plugin-google-gtag": "^2.1.0",
-    "@docusaurus/preset-classic": "2.1.0",
-    "@docusaurus/theme-live-codeblock": "^2.1.0",
+    "@docusaurus/core": "2.2.0",
+    "@docusaurus/plugin-google-gtag": "^2.2.0",
+    "@docusaurus/preset-classic": "2.2.0",
+    "@docusaurus/theme-live-codeblock": "^2.2.0",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -29,7 +29,6 @@
     "re-resizable": "^6.9.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-resizable": "^3.0.4",
     "schedulely": "*"
   },
   "devDependencies": {

@@ -58,6 +58,7 @@ export const CalendarProvider = ({
     [currentDate]
   );
 
+  // Does this need memo?
   const daysOfWeek = useMemo(
     () => dateAdapter.getDaysOfWeek(breakpoint),
     [breakpoint]

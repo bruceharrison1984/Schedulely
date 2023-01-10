@@ -16,7 +16,6 @@ const defaults: HeaderComponentProps = {
   onNextYear: onNextYearHandler,
   onPrevMonth: onPrevMonthHandler,
   onPrevYear: onPrevYearHandler,
-  componentSize: 'large',
 };
 
 describe('DefaultHeader', () => {
@@ -29,24 +28,7 @@ describe('DefaultHeader', () => {
       );
     });
 
-    it('displays correct text size for large display', () => {
-      var testObject = render(<DefaultHeader {...defaults} />);
-      expect(testObject.getByRole('heading').style.fontSize).toEqual('1.5em');
-    });
-
-    it('displays correct text size for medium display', () => {
-      var testObject = render(
-        <DefaultHeader {...defaults} componentSize={'medium'} />
-      );
-      expect(testObject.getByRole('heading').style.fontSize).toEqual('1.3em');
-    });
-
-    it('displays correct text size for small display', () => {
-      var testObject = render(
-        <DefaultHeader {...defaults} componentSize={'small'} />
-      );
-      expect(testObject.getByRole('heading').style.fontSize).toEqual('1.1em');
-    });
+    // No good way to test text size
   });
 
   describe('isCurrentMonth', () => {

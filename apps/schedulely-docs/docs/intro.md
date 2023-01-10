@@ -43,7 +43,9 @@ import 'schedulely/dist/index.css';
 /* demo array of CalendarEvents */
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
-render(<Schedulely events={events} />);
+render(
+  <Schedulely dark={localStorage.getItem('theme') === 'dark'} events={events} />
+);
 ```
 
 ## Component Props

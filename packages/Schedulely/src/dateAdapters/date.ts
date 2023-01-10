@@ -14,9 +14,9 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     ['small', 'narrow'],
   ]);
 
-  const getDaysOfWeek = (componentSize: ComponentSize) => {
+  const getDaysOfWeek = (componentSize?: ComponentSize) => {
     const formatter = new Intl.DateTimeFormat(locale, {
-      weekday: map.get(componentSize),
+      weekday: map.get(componentSize || 'large'),
     });
     return [0, 1, 2, 3, 4, 5, 6].map((x) =>
       formatter.format(new Date(2012, 0, x + 1))

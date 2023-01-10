@@ -28,7 +28,9 @@ The default behavior will just print Event information to the javascript console
 
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
-render(<Schedulely events={events} />);
+render(
+  <Schedulely events={events} dark={localStorage.getItem('theme') === 'dark'} />
+);
 ```
 
 ## Setting Custom Actions
@@ -44,6 +46,7 @@ const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 render(
   <Schedulely
     events={events}
+    dark={localStorage.getItem('theme') === 'dark'}
     actions={{
       onEventClick: (event) => alert(JSON.stringify(event)),
       onMoreEventClick: (events) => alert(JSON.stringify(events)),
@@ -65,6 +68,7 @@ const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 render(
   <Schedulely
     events={events}
+    dark={localStorage.getItem('theme') === 'dark'}
     actions={{
       onEventClick: (event) => null,
       onMoreEventClick: (events) => null,
