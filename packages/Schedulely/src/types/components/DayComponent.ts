@@ -8,9 +8,6 @@ export interface DayComponentProps {
   /** Does this date represent the current month (used for coloring trailing/leading days) */
   isCurrentMonth: boolean;
 
-  /** The day number portion of the Date */
-  dateNumber: number;
-
   /** Does this date represent today? */
   isToday: boolean;
 
@@ -20,8 +17,14 @@ export interface DayComponentProps {
   /** Events occuring on this date */
   events: InternalCalendarEvent[];
 
-  /** Function executes when the indicator is clicked */
-  onClick: (event: InternalCalendarEvent[]) => void;
+  /** Function executes when the more events indicator is clicked */
+  onMoreEventsClick: (event: InternalCalendarEvent[]) => void;
+
+  /** Function executes when the day container is clicked */
+  onDayClick: (day: Date) => void;
+
+  /** JS Date object representing this day */
+  date: Date;
 }
 
 /**

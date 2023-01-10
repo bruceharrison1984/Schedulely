@@ -21,14 +21,16 @@ const onEventClickHandler = jest.fn((event: InternalCalendarEvent) => null);
 let onMonthChangeClickHandler = jest.fn(
   (firstOfMonth: Date, lastOfMonth: Date) => null
 );
-let onMoreEventClickHandler = jest.fn((event: InternalCalendarEvent[]) => null);
+let onMoreEventsClickHandler = jest.fn(
+  (event: InternalCalendarEvent[]) => null
+);
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <ActionProvider
     actions={{
       onEventClick: onEventClickHandler,
       onMonthChangeClick: onMonthChangeClickHandler,
-      onMoreEventClick: onMoreEventClickHandler,
+      onMoreEventsClick: onMoreEventsClickHandler,
     }}
   >
     {children}
@@ -38,7 +40,7 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 describe('useActions', () => {
   const {
     result: {
-      current: { onEventClick, onMonthChangeClick, onMoreEventClick },
+      current: { onEventClick, onMonthChangeClick, onMoreEventsClick },
     },
   } = renderHook(() => useActions(), { wrapper });
 
@@ -71,14 +73,14 @@ describe('useActions', () => {
 
   describe('onMoreEventClick', () => {
     describe('when defined', () => {
-      onMoreEventClick(testEvents);
+      onMoreEventsClick(testEvents);
 
       it('invokes correct function', () => {
-        expect(onMoreEventClickHandler).toHaveBeenCalled();
+        expect(onMoreEventsClickHandler).toHaveBeenCalled();
       });
 
       it('passes correct args', () =>
-        expect(onMoreEventClickHandler.mock.calls[0][0]).toEqual(testEvents));
+        expect(onMoreEventsClickHandler.mock.calls[0][0]).toEqual(testEvents));
     });
   });
 
@@ -97,19 +99,19 @@ describe('useActions', () => {
 
     const {
       result: {
-        current: { onEventClick, onMonthChangeClick, onMoreEventClick },
+        current: { onEventClick, onMonthChangeClick, onMoreEventsClick },
       },
     } = renderHook(() => useActions(), { wrapper: emptyWrapper });
 
     beforeEach(() => {
-      onMoreEventClickHandler.mockClear();
+      onMoreEventsClickHandler.mockClear();
       onEventClickHandler.mockClear();
       onMonthChangeClickHandler.mockClear();
     });
 
     it('does not invoke onMoreEventClick if not defined', () => {
-      onMoreEventClick(testEvents);
-      expect(onMoreEventClickHandler).not.toHaveBeenCalled();
+      onMoreEventsClick(testEvents);
+      expect(onMoreEventsClickHandler).not.toHaveBeenCalled();
     });
 
     it('does not invoke onEventClick if not defined', () => {

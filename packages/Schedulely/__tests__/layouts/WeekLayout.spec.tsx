@@ -13,7 +13,7 @@ const dates = [
   new Date(2022, 9, 8),
 ];
 
-let mockOnMoreEventClick = jest.fn((events: InternalCalendarEvent[]) => {});
+let mockOnMoreEventsClick = jest.fn((events: InternalCalendarEvent[]) => {});
 let mockGetEventsOnDate = jest.fn(
   (date: Date) =>
     [
@@ -37,7 +37,6 @@ let mockGetEventsOnDate = jest.fn(
 );
 let mockIsDateToday = jest.fn((date: Date) => true);
 let mockIsSameMonth = jest.fn((date: Date, date2: Date) => true);
-let mockGetDayNumber = jest.fn((date: Date) => date.getDate());
 let mockCurrentDate = jest.fn(() => Date);
 
 const mockDayComponentPropsCheck = jest.fn();
@@ -45,19 +44,18 @@ jest.mock('@/hooks', () => ({
   useComponents: jest.fn(() => ({
     dayComponent: jest.fn((props: DayComponentProps) => {
       mockDayComponentPropsCheck(props);
-      return <div data-testid={props.dateNumber}></div>;
+      return <div data-testid={props.date.getDate().toString()}></div>;
     }),
   })),
   useCalendar: jest.fn(() => ({
     dateAdapter: {
       isDateToday: mockIsDateToday,
       isSameMonth: mockIsSameMonth,
-      getDayNumber: mockGetDayNumber,
     },
     currentDate: mockCurrentDate,
   })),
   useActions: jest.fn(() => ({
-    onMoreEventClick: mockOnMoreEventClick,
+    onMoreEventsClick: mockOnMoreEventsClick,
   })),
   useEventIntersection: jest.fn(() => ({
     getEventsOnDate: mockGetEventsOnDate,
@@ -74,7 +72,6 @@ describe('WeekLayout', () => {
   afterEach(() => {
     mockGetEventsOnDate.mockClear();
     mockIsDateToday.mockClear();
-    mockGetDayNumber.mockClear();
     mockIsSameMonth.mockClear();
   });
 
@@ -84,17 +81,6 @@ describe('WeekLayout', () => {
   it('isDateToday is called with each date', () =>
     expect(
       mockIsDateToday.mock.calls
-        .flat()
-        .filter((x, i, a) => a.indexOf(x) == i)
-        .sort()
-    ).toEqual(dates.map((x) => x).sort()));
-
-  it('calls getDayNumber', () =>
-    expect(mockGetDayNumber).toHaveBeenCalledTimes(dates.length));
-
-  it('getDayNumber is called with each date', () =>
-    expect(
-      mockGetDayNumber.mock.calls
         .flat()
         .filter((x, i, a) => a.indexOf(x) == i)
         .sort()
@@ -124,8 +110,8 @@ describe('WeekLayout', () => {
         ).toBeTruthy());
 
       it('passes OnMoreEventClickHandler', () => {
-        expect(mockOnMoreEventClick).toEqual(
-          mockDayComponentPropsCheck.mock.calls[index][0].onClick
+        expect(mockOnMoreEventsClick).toEqual(
+          mockDayComponentPropsCheck.mock.calls[index][0].onMoreEventsClick
         );
       });
     }

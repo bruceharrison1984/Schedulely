@@ -13,14 +13,16 @@ const testEvents: InternalCalendarEvent[] = [
     visible: false,
   },
 ];
-const onClickHandler = jest.fn((events: InternalCalendarEvent[]) => null);
+const onMoreEventsClick = jest.fn((events: InternalCalendarEvent[]) => null);
+const onDayClick = jest.fn((date: Date) => null);
 const defaults: DayComponentProps = {
   isCurrentMonth: true,
   isOverflowed: true,
   isToday: true,
-  dateNumber: chance().integer({ min: 1, max: 31 }),
+  date: new Date(1, 1, 2022),
   events: testEvents,
-  onClick: onClickHandler,
+  onMoreEventsClick,
+  onDayClick,
 };
 
 describe('DefaultDay', () => {
@@ -58,15 +60,15 @@ describe('DefaultDay', () => {
         expect(testObject.getByRole('note').title).not.toBeNull();
       });
 
-      describe('onClick handler', () => {
+      describe('onMoreEventsClick handler', () => {
         beforeEach(() => {
           fireEvent.click(testObject.getByRole('note'));
         });
 
-        it('fires', () => expect(onClickHandler).toHaveBeenCalled());
+        it('fires', () => expect(onMoreEventsClick).toHaveBeenCalled());
 
         it('passes events as args', () =>
-          expect(onClickHandler.mock.calls[0][0]).toEqual(testEvents));
+          expect(onMoreEventsClick.mock.calls[0][0]).toEqual(testEvents));
       });
     });
 
@@ -99,7 +101,7 @@ describe('DefaultDay', () => {
       it('renders date number', () => {
         expect(
           testObject.getByRole('heading').querySelector('div span')?.textContent
-        ).toEqual(defaults.dateNumber.toString());
+        ).toEqual(defaults.date.getDate().toString());
       });
     });
 
@@ -118,7 +120,7 @@ describe('DefaultDay', () => {
       it('renders date number', () =>
         expect(
           testObject.getByRole('heading').querySelector('span')?.textContent
-        ).toEqual(defaults.dateNumber.toString()));
+        ).toEqual(defaults.date.getDate().toString()));
     });
   });
 });
