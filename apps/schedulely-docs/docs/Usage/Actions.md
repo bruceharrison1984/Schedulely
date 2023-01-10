@@ -7,7 +7,7 @@ While Schedulely expects developers to implement their own components to achieve
 The ActionProvider is used under the hood to take in functions as arguments, memoize them, and pass them in to the calendar components. This makes state management within
 Schedulely simple, and ensures we are re-rendering the bare minimum.
 
-**Once we reach 1.0.0, the default Actions will likely be default to `() => null` instead of `console.log()`.**
+**All actions return `() => null` unless explicitly overridden.**
 
 ## Provided Actions
 
