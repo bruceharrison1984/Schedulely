@@ -14,12 +14,16 @@ BreakpointContext.displayName = 'BreakpointContext';
 export const BreakpointProvider = ({
   containerRef,
   children,
+  initialDayOfWeekFormat,
 }: {
   containerRef: React.MutableRefObject<null>;
   children: ReactNode;
+  initialDayOfWeekFormat?: ComponentSize;
 }) => {
   const breakpoints = { small: 500, large: 800 };
-  const [breakpoint, setBreakpoint] = useState<ComponentSize | undefined>();
+  const [breakpoint, setBreakpoint] = useState<ComponentSize | undefined>(
+    initialDayOfWeekFormat
+  );
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
       const { width } = entries[0].contentRect;

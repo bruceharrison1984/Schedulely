@@ -11,9 +11,8 @@ export const DayOfWeekLayout = () => {
     <div className="day-of-week-layout">
       {/* We cheat a bit here and use the index as part of the key. This is because short day names can be identical. */}
       {daysOfWeek.map((dayOfWeek, idx) => (
-        <div key={`${dayOfWeek}-${idx}`}>
-          {/* wrap with extra div so we can control borders without touching the DayOfWeek component */}
-          <div className="default-day-of-week">{dayOfWeek}</div>
+        <div key={`${dayOfWeek}-${idx}`} className="default-day-of-week">
+          {dayOfWeek}
         </div>
       ))}
     </div>

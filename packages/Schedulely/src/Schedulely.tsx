@@ -25,6 +25,7 @@ export const Schedulely = ({
   actions,
   dark,
   initialDate = new Date().toISOString(),
+  initialDayOfWeekFormat,
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
@@ -44,7 +45,10 @@ export const Schedulely = ({
         }}
         ref={containerRef}
       >
-        <BreakpointProvider containerRef={containerRef}>
+        <BreakpointProvider
+          containerRef={containerRef}
+          initialDayOfWeekFormat={initialDayOfWeekFormat}
+        >
           <ActionProvider actions={actions}>
             <ComponentProvider calendarComponents={schedulelyComponents}>
               <CalendarProvider
