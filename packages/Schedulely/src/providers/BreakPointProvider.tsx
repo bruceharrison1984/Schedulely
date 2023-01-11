@@ -25,21 +25,18 @@ export const BreakpointProvider = ({
   containerRef: React.MutableRefObject<null>;
   children: ReactNode;
 }) => {
-  const breakpoints = { small: 500, large: 800 };
   const [breakpoint, setBreakpoint] = useState<ComponentSize | undefined>();
   const resizeObserver = useRef<ResizeObserver | undefined>();
 
-  const onResize: ResizeObserverCallback = useCallback(
-    (entries) => {
-      const { width } = entries[0].contentRect;
+  const onResize: ResizeObserverCallback = useCallback((entries) => {
+    const breakpoints = { small: 500, large: 800 };
+    const { width } = entries[0].contentRect;
 
-      if (width <= breakpoints.small) setBreakpoint('small');
-      if (width > breakpoints.small && width < breakpoints.large)
-        setBreakpoint('medium');
-      if (width >= breakpoints.large) setBreakpoint('large');
-    },
-    [breakpoints.large, breakpoints.small]
-  );
+    if (width <= breakpoints.small) setBreakpoint('small');
+    if (width > breakpoints.small && width < breakpoints.large)
+      setBreakpoint('medium');
+    if (width >= breakpoints.large) setBreakpoint('large');
+  }, []);
 
   useEffect(() => {
     resizeObserver.current = new ResizeObserver(onResize);
