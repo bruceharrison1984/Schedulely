@@ -1,5 +1,12 @@
 import { BreakpointContextState, ComponentSize } from '@/types';
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 export const BreakpointContext = createContext<BreakpointContextState | null>(
   null
@@ -20,26 +27,31 @@ export const BreakpointProvider = ({
 }) => {
   const breakpoints = { small: 500, large: 800 };
   const [breakpoint, setBreakpoint] = useState<ComponentSize | undefined>();
+  const resizeObserver = useRef<ResizeObserver | undefined>();
 
-  useEffect(() => {
-    const observer = new ResizeObserver((entries) => {
+  const onResize: ResizeObserverCallback = useCallback(
+    (entries) => {
       const { width } = entries[0].contentRect;
 
       if (width <= breakpoints.small) setBreakpoint('small');
       if (width > breakpoints.small && width < breakpoints.large)
         setBreakpoint('medium');
       if (width >= breakpoints.large) setBreakpoint('large');
-    });
+    },
+    [breakpoints.large, breakpoints.small]
+  );
 
-    if (observer && containerRef?.current) {
-      observer.observe(containerRef?.current);
+  useEffect(() => {
+    resizeObserver.current = new ResizeObserver(onResize);
+  }, [onResize]);
+
+  useEffect(() => {
+    if (containerRef?.current) {
+      resizeObserver.current!.observe(containerRef?.current);
     }
 
     return () => {
-      if (observer && containerRef?.current) {
-        observer.unobserve(containerRef?.current);
-      }
-      observer.disconnect();
+      resizeObserver.current!.disconnect();
     };
   }, [containerRef]);
 

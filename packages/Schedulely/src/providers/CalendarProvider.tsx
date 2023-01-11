@@ -47,16 +47,16 @@ export const CalendarProvider = ({
     let format: 'long' | 'short' = 'long';
     if (breakpoint === 'small') format = 'short';
     return dateAdapter.getMonthName(currentDate, format);
-  }, [currentDate, breakpoint]);
+  }, [currentDate, breakpoint, dateAdapter]);
 
   const currentYear = useMemo(
     () => dateAdapter.getYear(currentDate),
-    [currentDate]
+    [currentDate, dateAdapter]
   );
 
   const isCurrentMonth = useMemo(
     () => dateAdapter.isCurrentMonth(currentDate),
-    [currentDate]
+    [currentDate, dateAdapter]
   );
 
   // Does this need memo?
@@ -65,7 +65,7 @@ export const CalendarProvider = ({
     if (breakpoint === 'medium') format = 'short';
     if (breakpoint === 'small') format = 'narrow';
     return dateAdapter.getDaysOfWeek(format);
-  }, [breakpoint]);
+  }, [breakpoint, dateAdapter]);
 
   const calendarView = useMemo(
     () => dateAdapter.getCalendarView(currentDate),
