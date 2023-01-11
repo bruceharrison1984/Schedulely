@@ -63,6 +63,7 @@ export const EventIntersectionProvider = ({
         const matchingEvent = events.find((x) => x.id === eventId);
         if (matchingEvent === undefined) return;
 
+        // unmount error is thrown here
         setEventVisibility((current) => {
           current[matchingEvent.id] = matchingEvent;
           current[matchingEvent.id].visible = x.intersectionRatio >= 1;
@@ -81,6 +82,7 @@ export const EventIntersectionProvider = ({
   }, [checkIntersection, parentContainerRef]);
 
   useEffect(() => {
+    console.log('observe');
     Object.values(childContainerRefs).map((eventRef) =>
       observerRef.current!.observe(eventRef!)
     );
