@@ -1,6 +1,6 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: ['plugin:react-hooks/recommended', 'turbo', 'prettier'],
+  extends: ['plugin:react-hooks/recommended','plugin:jsx-a11y/recommended', 'turbo', 'prettier'],
   plugins: ['sort-imports-es6-autofix', '@typescript-eslint'],
   rules: {
     'react/jsx-key': 'off',

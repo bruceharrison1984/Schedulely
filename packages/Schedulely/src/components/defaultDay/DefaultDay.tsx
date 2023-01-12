@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { DayComponent } from '@/types';
 
 export const DefaultDay: DayComponent = ({
@@ -28,7 +30,7 @@ export const DefaultDay: DayComponent = ({
       }`}
       onClick={() => onDayClick(date)}
     >
-      <div role={'heading'} className="default-day-header">
+      <div role={'heading'} aria-level={2} className="default-day-header">
         {dayHeader}
       </div>
       {isOverflowed && (

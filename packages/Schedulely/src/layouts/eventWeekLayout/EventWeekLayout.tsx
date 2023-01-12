@@ -48,6 +48,7 @@ export const EventWeekLayout = ({
               visibility: 'hidden', // start hidden to avoid flashes of events that will be hidden
             }}
             onMouseOver={() => setHighlight(event.id)}
+            onFocus={() => setHighlight(event.id)}
             onMouseLeave={clearHighlight}
           >
             <EventComponent
