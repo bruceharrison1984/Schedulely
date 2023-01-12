@@ -28,7 +28,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
   const { eventComponent: EventComponent } = useComponents();
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
-  const { setParentContainerRef, isEventVisible } = useEventIntersection();
+  const { setParentContainerRef } = useEventIntersection();
 
   return (
     <div className="event-week-layout" ref={setParentContainerRef}>

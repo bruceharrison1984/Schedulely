@@ -47,8 +47,6 @@ export const EventIntersectionProvider = ({
     [eventVisibility, isDateBetween]
   );
 
-  const isEventVisible = (key: string) => eventVisibility[key]?.visible;
-
   /**
    * This method checks if an event is fully visible, and if not hides it
    * We do this via direct Refs because direct updates are faster and cleaner than relying upon
@@ -105,7 +103,6 @@ export const EventIntersectionProvider = ({
 
   const value: EventIntersectionState = {
     setParentContainerRef,
-    isEventVisible,
     getEventsOnDate,
   };
 
