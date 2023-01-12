@@ -2,6 +2,7 @@ import { defineConfig } from 'rollup';
 import copy from 'rollup-plugin-copy';
 import inject from '@rollup/plugin-inject';
 import postcss from 'rollup-plugin-postcss';
+import progress from 'rollup-plugin-progress';
 import ts from 'rollup-plugin-ts';
 
 const options = defineConfig({
@@ -34,6 +35,7 @@ const options = defineConfig({
     inject({
       React: 'react',
     }),
+    progress()
   ],
 });
 
