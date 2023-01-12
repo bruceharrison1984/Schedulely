@@ -48,6 +48,10 @@
       "last 1 safari version"
     ]
   },
+  "overrides":{
+    "got": ">=11.8.5",
+    "trim": ">=0.0.3"
+  },
   "engines": {
     "node": ">=16.14"
   }

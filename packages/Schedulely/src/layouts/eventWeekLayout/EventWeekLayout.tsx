@@ -7,7 +7,7 @@ import {
 } from '@/hooks';
 
 export interface EventLayoutProps {
-  events: InternalCalendarEvent[];
+  eventsInWeek: InternalCalendarEvent[];
   daysInweek: Date[];
 }
 
@@ -24,7 +24,10 @@ export const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
  * This component controls the layout of an individual events within a week
  * @returns EventLayout Component
  */
-export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
+export const EventWeekLayout = ({
+  eventsInWeek,
+  daysInweek,
+}: EventLayoutProps) => {
   const { eventComponent: EventComponent } = useComponents();
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
@@ -34,7 +37,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
     <div className="event-week-layout" ref={setParentContainerRef}>
       <div className="event-week-layout-grid">
         <div className="event-week-layout-header-spacer" />
-        {events.map((event) => (
+        {eventsInWeek.map((event) => (
           <div
             key={event.id}
             className="event-position-layout"
@@ -42,8 +45,10 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
             style={{
               gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
               gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
+              visibility: 'hidden', // start hidden to avoid flashes of events that will be hidden
             }}
             onMouseOver={() => setHighlight(event.id)}
+            onFocus={() => setHighlight(event.id)}
             onMouseLeave={clearHighlight}
           >
             <EventComponent
