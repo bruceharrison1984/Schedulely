@@ -30,10 +30,6 @@ export const EventIntersectionProvider = ({
     dateAdapter: { isDateBetween },
   } = useCalendar();
 
-  const [childContainerRefs, setChildContainerRefs] = useState<
-    Record<string, HTMLElement | null>
-  >({});
-
   const [parentContainerRef, setParentContainerRef] =
     useState<HTMLElement | null>(null);
 
@@ -43,12 +39,6 @@ export const EventIntersectionProvider = ({
 
   const observerRef = useRef<IntersectionObserver | undefined>();
 
-  const setRefFromKey = (key: string) => (element: HTMLElement | null) =>
-    setChildContainerRefs((current) => {
-      current[key] = element;
-      return current;
-    });
-
   const getEventsOnDate = (date: Date) =>
     Object.values(eventVisibility).filter((x) =>
       isDateBetween(date, x.start, x.end)
@@ -56,17 +46,35 @@ export const EventIntersectionProvider = ({
 
   const isEventVisible = (key: string) => eventVisibility[key]?.visible;
 
+  /**
+   * This method checks if an event is fully visible, and if not hides it
+   * We do this via direct Refs because direct updates are faster and cleaner than relying upon
+   * React to route the property before and after a render.
+   *
+   * This could possibly be done in a more React-y way by splitting this context, but this seems pretty straight-forward as it.
+   */
   const checkIntersection: IntersectionObserverCallback = useCallback(
     (entries) =>
       entries.map((x) => {
         var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
+
+        const currentStyle = x.target
+          .getAttribute('style')
+          ?.replaceAll(/\svisibility:.*;/g, '');
+
+        if (x.isIntersecting)
+          x.target.setAttribute('style', currentStyle || '');
+        else {
+          x.target.setAttribute('style', currentStyle + ' visibility: hidden;');
+        }
+
         const matchingEvent = events.find((x) => x.id === eventId);
         if (matchingEvent === undefined) return;
 
         // unmount error is thrown here
         setEventVisibility((current) => {
           current[matchingEvent.id] = matchingEvent;
-          current[matchingEvent.id].visible = x.intersectionRatio >= 1;
+          current[matchingEvent.id].visible = x.isIntersecting;
           return { ...current };
         });
       }),
@@ -79,22 +87,22 @@ export const EventIntersectionProvider = ({
       rootMargin: '0px 0px -15% 0px',
       threshold: 1,
     });
-  }, [checkIntersection, parentContainerRef]);
 
-  useEffect(() => {
-    console.log('observe');
-    Object.values(childContainerRefs).map((eventRef) =>
-      observerRef.current!.observe(eventRef!)
+    const eventContainers = parentContainerRef?.getElementsByClassName(
+      'event-position-layout'
     );
+
+    if (eventContainers)
+      for (const element of eventContainers)
+        observerRef.current!.observe(element);
 
     return () => {
       observerRef.current!.disconnect();
     };
-  }, [parentContainerRef, childContainerRefs]);
+  }, [checkIntersection, parentContainerRef]);
 
   const value: EventIntersectionState = {
     setParentContainerRef,
-    setRefFromKey,
     isEventVisible,
     getEventsOnDate,
   };

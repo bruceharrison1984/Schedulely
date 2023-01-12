@@ -5,7 +5,6 @@ export type EventIntersectionState = {
   setParentContainerRef: React.Dispatch<
     React.SetStateAction<HTMLElement | null>
   >;
-  setRefFromKey: (key: string) => (element: HTMLElement | null) => void;
   /** Lookup an event and retrieve its visibility */
   isEventVisible: (key: string) => boolean;
   /** Gets an array of events that occur on or span the supplied date. */
