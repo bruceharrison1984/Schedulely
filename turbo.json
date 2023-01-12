@@ -80,13 +80,6 @@
         "^rollup"
       ],
       "cache": false
-    },
-    "ssr-test": {
-      "dependsOn": [
-        "build",
-        "^rollup"
-      ],
-      "cache": false
     }
   }
 }
