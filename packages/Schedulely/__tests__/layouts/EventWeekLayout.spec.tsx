@@ -72,7 +72,7 @@ describe('EventWeekLayout', () => {
   beforeEach(() => {
     mockSetParentContainerRef.mockClear();
     testObject = render(
-      <EventWeekLayout events={events} daysInweek={daysInWeek} />
+      <EventWeekLayout eventsInWeek={events} daysInweek={daysInWeek} />
     );
   });
 

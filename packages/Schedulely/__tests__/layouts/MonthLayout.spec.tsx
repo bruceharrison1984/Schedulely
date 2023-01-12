@@ -110,12 +110,12 @@ jest.mock('@/providers', () => ({
   EventIntersectionProvider: jest.fn(
     ({
       children,
-      events,
+      eventsInWeek,
     }: {
       children: ReactNode;
-      events: InternalCalendarEvent[];
+      eventsInWeek: InternalCalendarEvent[];
     }) => {
-      mockEventIntersectionProviderPropsCheck(events);
+      mockEventIntersectionProviderPropsCheck(eventsInWeek);
       return <div data-testid="intersection-provider-mock">{children}</div>;
     }
   ),
@@ -126,8 +126,8 @@ jest.mock('@/providers', () => ({
 
 const mockEventWeekPropsCheck = jest.fn();
 jest.mock('@/layouts/eventWeekLayout', () => ({
-  EventWeekLayout: jest.fn(({ events, daysInweek }: EventLayoutProps) => {
-    mockEventWeekPropsCheck(events, daysInweek);
+  EventWeekLayout: jest.fn(({ eventsInWeek, daysInweek }: EventLayoutProps) => {
+    mockEventWeekPropsCheck(eventsInWeek, daysInweek);
     return <div data-testid="event-week-layout-mock"></div>;
   }),
 }));
