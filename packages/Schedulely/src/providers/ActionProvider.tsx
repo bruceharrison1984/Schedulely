@@ -19,23 +19,12 @@ export const ActionProvider = ({
   children,
   actions,
 }: PropsWithChildren<ActionProviderProps>) => {
-  const onEventClick = useCallback(actions?.onEventClick || (() => null), [
-    actions?.onEventClick,
-  ]);
+  const defaultAction = () => null;
 
-  const onMoreEventsClick = useCallback(
-    actions?.onMoreEventsClick || (() => null),
-    [actions?.onMoreEventsClick]
-  );
-
-  const onDayClick = useCallback(actions?.onDayClick || (() => null), [
-    actions?.onDayClick,
-  ]);
-
-  const onMonthChangeClick = useCallback(
-    actions?.onMonthChangeClick || (() => null),
-    [actions?.onMonthChangeClick]
-  );
+  const onEventClick = actions?.onEventClick || defaultAction;
+  const onMoreEventsClick = actions?.onMoreEventsClick || defaultAction;
+  const onDayClick = actions?.onDayClick || defaultAction;
+  const onMonthChangeClick = actions?.onMonthChangeClick || defaultAction;
 
   const context: ActionContextState = {
     onEventClick,

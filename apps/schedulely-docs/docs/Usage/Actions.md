@@ -4,8 +4,9 @@ description: Functions used for interacting with Schedulely
 ---
 
 While Schedulely expects developers to implement their own components to achieve their desired goals, we have provided clear interfaces for how actions should be handled.
-The ActionProvider is used under the hood to take in functions as arguments, memoize them, and pass them in to the calendar components. This makes state management within
-Schedulely simple, and ensures we are re-rendering the bare minimum.
+The ActionProvider is used under the hood to take in functions as arguments and pass them in to the calendar components. This makes state management within
+Schedulely simple, and ensures we are re-rendering the bare minimum. If you are creating custom calendar components, these actions are available to you on each components
+respective interface, and can be implemented(or not implemented) however you choose.
 
 **All actions return `() => null` unless explicitly overridden.**
 

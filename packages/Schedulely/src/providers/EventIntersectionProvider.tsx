@@ -1,5 +1,12 @@
 import { EventIntersectionState, InternalCalendarEvent } from '@/types';
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useCalendar } from '@/hooks/useCalendar';
 
 export const EventIntersectionContext =
@@ -23,10 +30,6 @@ export const EventIntersectionProvider = ({
     dateAdapter: { isDateBetween },
   } = useCalendar();
 
-  const [childContainerRefs, setChildContainerRefs] = useState<
-    Record<string, HTMLElement | null>
-  >({});
-
   const [parentContainerRef, setParentContainerRef] =
     useState<HTMLElement | null>(null);
 
@@ -34,53 +37,75 @@ export const EventIntersectionProvider = ({
     Record<string, InternalCalendarEvent>
   >({});
 
-  const setRefFromKey = (key: string) => (element: HTMLElement | null) =>
-    setChildContainerRefs((current) => {
-      current[key] = element;
-      return current;
-    });
+  const observerRef = useRef<IntersectionObserver | undefined>();
 
-  const getEventsOnDate = (date: Date) =>
-    Object.values(eventVisibility).filter((x) =>
-      isDateBetween(date, x.start, x.end)
-    );
+  const getEventsOnDate = useCallback(
+    (date: Date) =>
+      Object.values(eventVisibility).filter((x) =>
+        isDateBetween(date, x.start, x.end)
+      ),
+    [eventVisibility, isDateBetween]
+  );
 
-  const isEventVisible = (key: string) => eventVisibility[key]?.visible;
+  /**
+   * This method checks if an event is fully visible, and if not hides it
+   * We do this via direct Refs because direct updates are faster and cleaner than relying upon
+   * React to route the property before and after a render.
+   *
+   * This could possibly be done in a more React-y way by splitting this context, but this seems pretty straight-forward as it.
+   */
+  const checkIntersection: IntersectionObserverCallback = useCallback(
+    (entries) =>
+      entries.map((x) => {
+        var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
 
-  const checkIntersection: IntersectionObserverCallback = (entries) =>
-    entries.map((x) => {
-      var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
-      const matchingEvent = events.find((x) => x.id === eventId);
-      if (matchingEvent === undefined) return;
+        const currentStyle =
+          x.target
+            .getAttribute('style')
+            ?.split(';')
+            .filter((x) => x && !x.includes('visibility')) || [];
 
-      setEventVisibility((current) => {
-        current[matchingEvent.id] = matchingEvent;
-        current[matchingEvent.id].visible = x.intersectionRatio >= 1;
-        return { ...current };
-      });
-    });
+        if (x.isIntersecting)
+          x.target.setAttribute('style', currentStyle.join(';'));
+        else {
+          currentStyle.push('visibility: hidden');
+          x.target.setAttribute('style', currentStyle.join(';'));
+        }
+
+        const matchingEvent = events.find((x) => x.id === eventId);
+        if (matchingEvent === undefined) return;
+
+        setEventVisibility((current) => {
+          current[matchingEvent.id] = matchingEvent;
+          current[matchingEvent.id].visible = x.isIntersecting;
+          return { ...current };
+        });
+      }),
+    [events]
+  );
 
   useEffect(() => {
-    const observer = new IntersectionObserver(checkIntersection, {
+    observerRef.current = new IntersectionObserver(checkIntersection, {
       root: parentContainerRef,
       rootMargin: '0px 0px -15% 0px',
       threshold: 1,
     });
 
-    Object.values(childContainerRefs).map((eventRef) => {
-      if (eventRef) observer.observe(eventRef!);
-    });
+    const eventContainers = parentContainerRef?.getElementsByClassName(
+      'event-position-layout'
+    );
+
+    if (eventContainers)
+      for (const element of eventContainers)
+        observerRef.current!.observe(element);
 
     return () => {
-      observer.takeRecords().map((x) => observer.unobserve(x.target));
-      observer.disconnect();
+      observerRef.current!.disconnect();
     };
-  }, [parentContainerRef, events]);
+  }, [checkIntersection, parentContainerRef]);
 
   const value: EventIntersectionState = {
     setParentContainerRef,
-    setRefFromKey,
-    isEventVisible,
     getEventsOnDate,
   };
 

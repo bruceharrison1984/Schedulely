@@ -94,7 +94,7 @@ const mockCalendarWithEvents = [
     events: [] as InternalCalendarEvent[],
     eventsOnDays: {},
   },
-] as InternalEventWeek[];
+] as (InternalEventWeek & { weekStart: Date; weekEnd: Date })[];
 
 const mockUseKeyboardControls = jest.fn(() => null);
 

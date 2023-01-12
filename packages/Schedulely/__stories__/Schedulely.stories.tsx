@@ -23,6 +23,11 @@ export const NoEvents = () => {
   const props: SchedulelyProps = {
     events: [],
     initialDate: new Date().toISOString(),
+    actions: {
+      onMoreEventsClick: (events) => console.log(events),
+      onEventClick: (event) => console.log(event),
+      onDayClick: (day) => console.log(day),
+    },
   };
 
   return (
@@ -39,6 +44,11 @@ export const DefaultTheme = () => {
   const props: SchedulelyProps = {
     events: storyEvents,
     initialDate: new Date().toISOString(),
+    actions: {
+      onMoreEventsClick: (events) => console.log(events),
+      onEventClick: (event) => console.log(event),
+      onDayClick: (day) => console.log(day),
+    },
   };
   return (
     <Schedulely
