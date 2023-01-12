@@ -48,8 +48,6 @@ let mockIsHighlighted = jest.fn((eventId: string) => false);
 let mockEventOnClickHandler = jest.fn(() => {});
 
 let mockSetParentContainerRef = jest.fn((eventId: string) => {});
-let mockSetRefFromKey = jest.fn((eventId: string) => {});
-let mockIsEventVisible = jest.fn((eventId: string) => true);
 
 jest.mock('@/hooks', () => ({
   useComponents: jest.fn(() => ({
@@ -65,8 +63,6 @@ jest.mock('@/hooks', () => ({
   })),
   useEventIntersection: jest.fn(() => ({
     setParentContainerRef: mockSetParentContainerRef,
-    setRefFromKey: mockSetRefFromKey,
-    isEventVisible: mockIsEventVisible,
   })),
 }));
 
@@ -78,11 +74,6 @@ describe('EventWeekLayout', () => {
     testObject = render(
       <EventWeekLayout events={events} daysInweek={daysInWeek} />
     );
-  });
-
-  afterEach(() => {
-    mockIsEventVisible.mockClear();
-    mockSetRefFromKey.mockClear();
   });
 
   describe.each(events.map((x) => x.summary))('event %s', (value) => {
@@ -125,22 +116,6 @@ describe('EventWeekLayout', () => {
   describe('useEventIntersection', () => {
     it('setParentContainerRef is called on the parent', () =>
       expect(mockSetParentContainerRef).toHaveBeenCalledTimes(1));
-
-    it('isEventVisible is called', () =>
-      expect(mockIsEventVisible).toHaveBeenCalledTimes(events.length));
-
-    it('isEventVisible is called with each eventId', () =>
-      expect(mockIsEventVisible.mock.calls.flat().sort()).toEqual(
-        events.map((x) => x.id).sort()
-      ));
-
-    it('setRefFromKey is called', () =>
-      expect(mockSetRefFromKey).toHaveBeenCalledTimes(events.length));
-
-    it('setRefFromKey is called with each eventId', () =>
-      expect(mockSetRefFromKey.mock.calls.flat().sort()).toEqual(
-        events.map((x) => x.id).sort()
-      ));
   });
 
   describe('getGridEndIndex', () => {
