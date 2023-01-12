@@ -59,14 +59,17 @@ export const EventIntersectionProvider = ({
       entries.map((x) => {
         var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
 
-        const currentStyle = x.target
-          .getAttribute('style')
-          ?.replaceAll(/\svisibility:.*;/g, '');
+        const currentStyle =
+          x.target
+            .getAttribute('style')
+            ?.split(';')
+            .filter((x) => x && !x.includes('visibility')) || [];
 
         if (x.isIntersecting)
-          x.target.setAttribute('style', currentStyle || '');
+          x.target.setAttribute('style', currentStyle.join(';'));
         else {
-          x.target.setAttribute('style', `${currentStyle} visibility: hidden;`);
+          currentStyle.push('visibility: hidden');
+          x.target.setAttribute('style', currentStyle.join(';'));
         }
 
         const matchingEvent = events.find((x) => x.id === eventId);
