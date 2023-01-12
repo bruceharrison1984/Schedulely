@@ -42,6 +42,7 @@ export const EventWeekLayout = ({ events, daysInweek }: EventLayoutProps) => {
             style={{
               gridColumnStart: getGridStartIndex(event.start, daysInweek[0]),
               gridColumnEnd: getGridEndIndex(event.end, daysInweek[6]),
+              visibility: 'hidden',
             }}
             onMouseOver={() => setHighlight(event.id)}
             onMouseLeave={clearHighlight}
