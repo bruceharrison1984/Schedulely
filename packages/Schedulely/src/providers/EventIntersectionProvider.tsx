@@ -65,7 +65,7 @@ export const EventIntersectionProvider = ({
         if (x.isIntersecting)
           x.target.setAttribute('style', currentStyle || '');
         else {
-          x.target.setAttribute('style', currentStyle + ' visibility: hidden;');
+          x.target.setAttribute('style', `${currentStyle} visibility: hidden;`);
         }
 
         const matchingEvent = events.find((x) => x.id === eventId);
