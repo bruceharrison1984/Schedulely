@@ -39,10 +39,13 @@ export const EventIntersectionProvider = ({
 
   const observerRef = useRef<IntersectionObserver | undefined>();
 
-  const getEventsOnDate = (date: Date) =>
-    Object.values(eventVisibility).filter((x) =>
-      isDateBetween(date, x.start, x.end)
-    );
+  const getEventsOnDate = useCallback(
+    (date: Date) =>
+      Object.values(eventVisibility).filter((x) =>
+        isDateBetween(date, x.start, x.end)
+      ),
+    [eventVisibility, isDateBetween]
+  );
 
   const isEventVisible = (key: string) => eventVisibility[key]?.visible;
 
