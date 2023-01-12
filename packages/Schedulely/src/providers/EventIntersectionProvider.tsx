@@ -21,10 +21,10 @@ EventIntersectionContext.displayName = 'EventIntersectionContext';
  */
 export const EventIntersectionProvider = ({
   children,
-  events,
+  eventsInWeek,
 }: {
   children: ReactNode;
-  events: InternalCalendarEvent[];
+  eventsInWeek: InternalCalendarEvent[];
 }) => {
   const {
     dateAdapter: { isDateBetween },
@@ -72,7 +72,7 @@ export const EventIntersectionProvider = ({
           x.target.setAttribute('style', currentStyle.join(';'));
         }
 
-        const matchingEvent = events.find((x) => x.id === eventId);
+        const matchingEvent = eventsInWeek.find((x) => x.id === eventId);
         if (matchingEvent === undefined) return;
 
         setEventVisibility((current) => {
@@ -81,7 +81,7 @@ export const EventIntersectionProvider = ({
           return { ...current };
         });
       }),
-    [events]
+    [eventsInWeek]
   );
 
   useEffect(() => {

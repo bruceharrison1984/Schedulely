@@ -14,18 +14,15 @@ export const MonthLayout = () => {
   return (
     <div className="calendar-body-container">
       <HighlightProvider>
-        {calendarWithEvents.map((week, idx) => (
+        {calendarWithEvents.map(({ daysInWeek, events }, idx) => (
           <div
-            key={week.daysInWeek[0].toISOString()}
+            key={daysInWeek[0].toISOString()}
             className="week-container"
             data-week={idx}
           >
-            <EventIntersectionProvider events={week.events}>
-              <EventWeekLayout
-                events={week.events}
-                daysInweek={week.daysInWeek}
-              />
-              <WeekLayout dates={week.daysInWeek} />
+            <EventIntersectionProvider eventsInWeek={events}>
+              <EventWeekLayout eventsInWeek={events} daysInweek={daysInWeek} />
+              <WeekLayout dates={daysInWeek} />
             </EventIntersectionProvider>
           </div>
         ))}
