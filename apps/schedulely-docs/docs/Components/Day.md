@@ -9,7 +9,7 @@ The `DayComponent` is used to display individual days on the calendar grid. Vari
 ## Component Props
 
 ```tsx
-export interface DayComponentProps {
+export interface DayComponentProps<T extends object = {}> {
   isCurrentMonth: boolean;
   date: Date;
   isToday: boolean;
