@@ -37,7 +37,7 @@ The included default calendar components can be simply used as is, but the real 
 
 ### Turborepo
 
-These project uses Turborepo for building, so many of these tasks are additive and will call other tasks.
+This project uses Turborepo for building, so many of these tasks are additive and will call other tasks.
 
 The following commands are used for development:
 
