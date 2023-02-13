@@ -83,7 +83,21 @@ const DefaultDay = ({
   );
 };
 
-const events = [...generateEvents(2)];
+// simulate fetching events from somewhere
+const events = [
+  ...generateEvents(2),
+  {
+    id: '1',
+    start: new Date(),
+    end: new Date(),
+    summary: 'This is an event',
+    color: 'lightblue',
+    data: {
+      extraProp1: 1,
+      extraProp2: 'some-more-data',
+    },
+  },
+];
 
 render(
   <div className="schedulely" style={{ height: '7em', width: '7em' }}>
