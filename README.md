@@ -12,7 +12,7 @@ _This component is still very early in development. Everything is currently stil
 
 ---
 
-[![npm](https://img.shields.io/npm/v/schedulely)](https://www.npmjs.com/package/schedulely) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/schedulely)](https://bundlephobia.com/package/schedulely) [![install size](https://packagephobia.com/badge?p=schedulely)](https://packagephobia.com/result?p=schedulely) ![NPM](https://img.shields.io/npm/l/schedulely?color=blue)
+[![npm](https://img.shields.io/npm/v/schedulely)](https://www.npmjs.com/package/schedulely) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/schedulely)](https://bundlephobia.com/package/schedulely) ![NPM](https://img.shields.io/npm/l/schedulely?color=blue)
 
 ## 📃 Description
 
