@@ -48,3 +48,7 @@ The following commands are used for development:
 | `npm run dev`      | Run Schedulely within Ladle. This is used for real-time local development |
 | `npm run test`     | Run Jest unit tests for Schedulely                                        |
 | `npm run dev-docs` | Run Docusaurus documentation with real-time updates.                      |
+
+## Documentation Development
+
+The documentation project builds `Schedulely` and adds it directly to the documentation pages. It does _not_ utilize a released NPM package. This ensures that the documentation always reflects exactly what is on main, and doesn't require us to continually keep bumping the Schedulely package version between releases.
