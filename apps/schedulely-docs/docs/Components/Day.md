@@ -74,7 +74,7 @@ const DefaultDay = ({
         <div
           className="additional-events-indicator"
           title={hiddenEventTooltip}
-          onClick={() => onMoreEventsClick(JSON.stringify(events))}
+          onClick={() => onMoreEventsClick(JSON.stringify(events, null, 2))}
         >
           ...
         </div>
