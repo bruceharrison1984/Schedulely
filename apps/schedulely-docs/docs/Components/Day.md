@@ -14,21 +14,21 @@ export interface DayComponentProps {
   date: Date;
   isToday: boolean;
   isOverflowed: boolean;
-  events: InternalCalendarEvent[];
-  onMoreEventsClick: (event: InternalCalendarEvent[]) => void;
+  events: InternalCalendarEvent<T>[];
+  onMoreEventsClick: (event: InternalCalendarEvent<T>[]) => void;
   onDayClick: (day: Date) => void;
 }
 ```
 
-| Property          | Type                                       | Description                                                                     |
-| ----------------- | ------------------------------------------ | ------------------------------------------------------------------------------- |
-| isCurrentMonth    | `boolean`                                  | True if this date occurs in the current visible month                           |
-| isToday           | `boolean`                                  | True is this date is equal to today's date                                      |
-| date              | `Date`                                     | JS Date object for the day                                                      |
-| events            | `InternalCalendarEvent[]`                  | Array of _all_ events that occur or span this date (both hidden and visible)    |
-| isOverflowed      | `boolean`                                  | True if the date has more events than can visible fit. (Some events are hidden) |
-| onMoreEventsClick | `(event: InternalCalendarEvent[]) => void` | This function should be called whenever the 'More Events' indicator is clicked  |
-| onDayClick        | `(day: Date) => void`                      | This function should be called whenever a Day Component is clicked on           |
+| Property          | Type                                          | Description                                                                     |
+| ----------------- | --------------------------------------------- | ------------------------------------------------------------------------------- |
+| isCurrentMonth    | `boolean`                                     | True if this date occurs in the current visible month                           |
+| isToday           | `boolean`                                     | True is this date is equal to today's date                                      |
+| date              | `Date`                                        | JS Date object for the day                                                      |
+| events            | `InternalCalendarEvent<T>[]`                  | Array of _all_ events that occur or span this date (both hidden and visible)    |
+| isOverflowed      | `boolean`                                     | True if the date has more events than can visible fit. (Some events are hidden) |
+| onMoreEventsClick | `(event: InternalCalendarEvent<T>[]) => void` | This function should be called whenever the 'More Events' indicator is clicked  |
+| onDayClick        | `(day: Date) => void`                         | This function should be called whenever a Day Component is clicked on           |
 
 ## Dealing with hidden events
 
