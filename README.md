@@ -12,7 +12,7 @@ _This component is still very early in development. Everything is currently stil
 
 ---
 
-[![npm](https://img.shields.io/npm/v/schedulely)](https://www.npmjs.com/package/schedulely) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/schedulely)](https://bundlephobia.com/package/schedulely) [![install size](https://packagephobia.com/badge?p=schedulely)](https://packagephobia.com/result?p=schedulely) ![NPM](https://img.shields.io/npm/l/schedulely?color=blue)
+[![npm](https://img.shields.io/npm/v/schedulely)](https://www.npmjs.com/package/schedulely) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/schedulely)](https://bundlephobia.com/package/schedulely) ![NPM](https://img.shields.io/npm/l/schedulely?color=blue)
 
 ## 📃 Description
 
@@ -28,14 +28,27 @@ The included default calendar components can be simply used as is, but the real 
 
 ## Development
 
-These project uses Turborepo for building, so many of these tasks are additive and will call other tasks.
+### Projects
+
+| location                 | description                                                                  |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `./packages/Schedulely`  | The Schedulely component that is used to create the NPM package              |
+| `./apps/schedulely-docs` | The Docusaurus project that contains the formal documentation for Schedulely |
+
+### Turborepo
+
+This project uses Turborepo for building, so many of these tasks are additive and will call other tasks.
 
 The following commands are used for development:
-| | |
-|------------|---------------------------------------------------------------------------|
-| `build` | Build all artifacts |
-| `rollup` | Build the Schedulely NPM package artifact |
-| `dev` | Run Schedulely within Ladle. This is used for real-time local development |
-| `test` | Run Jest unit tests |
-| `dev-docs` | Run Docusaurus documentation with real-time updates. |
-| `ssr-test` | Run NextJS server-side app. Used to the SSR functionality |
+
+| command            | description                                                               |
+| ------------------ | ------------------------------------------------------------------------- |
+| `npm run build`    | Build all artifacts (Schedulely and docs)                                 |
+| `npm run rollup`   | Build the Schedulely NPM package artifact                                 |
+| `npm run dev`      | Run Schedulely within Ladle. This is used for real-time local development |
+| `npm run test`     | Run Jest unit tests for Schedulely                                        |
+| `npm run dev-docs` | Run Docusaurus documentation with real-time updates.                      |
+
+### Documentation Development
+
+The documentation project builds `Schedulely` and adds it directly to the documentation pages. It does _not_ utilize a released NPM package. This ensures that the documentation always reflects exactly what is on main, and doesn't require us to continually keep bumping the Schedulely package version between releases.

@@ -34,6 +34,10 @@ const generateEvents = (
       end: end.toISOString(),
       summary,
       color,
+      data: {
+        animal: chance().animal(),
+        address: chance().address(),
+      },
     });
   }
   return events;

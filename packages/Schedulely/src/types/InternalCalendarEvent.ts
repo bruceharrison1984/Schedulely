@@ -1,7 +1,7 @@
 /**
  * This object represents an event that is supplied by the client
  */
-export interface CalendarEvent {
+export type CalendarEvent<T extends object = {}> = {
   /** Unique *external* ID of the event */
   id: string;
 
@@ -16,27 +16,24 @@ export interface CalendarEvent {
 
   /** Visible color of the event *(css color value)* */
   color: string;
-}
+
+  /** Optional event data object */
+  data?: T;
+};
 
 /**
- * This object represents an event that is displayed on the calendar
+ * This object is used internally to represent Events
  */
-export interface InternalCalendarEvent {
-  /** Unique *external* ID of the event */
-  id: string;
-
+export type InternalCalendarEvent<T extends object = {}> = Omit<
+  CalendarEvent<T>,
+  'start' | 'end'
+> & {
   /** Start date of the event */
   start: Date;
 
   /** End date of the event */
   end: Date;
 
-  /** Text that will be visible on the event */
-  summary: string;
-
-  /** Visible color of the event *(css color value)* */
-  color: string;
-
   /** Is this event visible (not hidden) */
   visible: boolean;
-}
+};

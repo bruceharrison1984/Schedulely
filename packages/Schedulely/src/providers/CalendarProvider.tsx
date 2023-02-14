@@ -59,7 +59,6 @@ export const CalendarProvider = ({
     [currentDate, dateAdapter]
   );
 
-  // Does this need memo?
   const daysOfWeek = useMemo(() => {
     let format: 'long' | 'short' | 'narrow' = 'long';
     if (breakpoint === 'medium') format = 'short';
@@ -75,14 +74,15 @@ export const CalendarProvider = ({
   const events = useMemo(
     () =>
       calendarEvents
-        .map((x) => {
+        .map(({ start, end, color, id, summary, data }) => {
           const internalEvent: InternalCalendarEvent = {
-            start: dateAdapter.convertIsoToDate(x.start),
-            end: dateAdapter.convertIsoToDate(x.end),
-            color: x.color,
-            id: x.id,
-            summary: x.summary,
+            start: dateAdapter.convertIsoToDate(start),
+            end: dateAdapter.convertIsoToDate(end),
+            color,
+            id,
+            summary,
             visible: false,
+            data,
           };
           return internalEvent;
         })

@@ -9,26 +9,26 @@ The `DayComponent` is used to display individual days on the calendar grid. Vari
 ## Component Props
 
 ```tsx
-export interface DayComponentProps {
+export interface DayComponentProps<T extends object = {}> {
   isCurrentMonth: boolean;
   date: Date;
   isToday: boolean;
   isOverflowed: boolean;
-  events: InternalCalendarEvent[];
-  onMoreEventsClick: (event: InternalCalendarEvent[]) => void;
+  events: InternalCalendarEvent<T>[];
+  onMoreEventsClick: (event: InternalCalendarEvent<T>[]) => void;
   onDayClick: (day: Date) => void;
 }
 ```
 
-| Property          | Type                                       | Description                                                                     |
-| ----------------- | ------------------------------------------ | ------------------------------------------------------------------------------- |
-| isCurrentMonth    | `boolean`                                  | True if this date occurs in the current visible month                           |
-| isToday           | `boolean`                                  | True is this date is equal to today's date                                      |
-| date              | `Date`                                     | JS Date object for the day                                                      |
-| events            | `InternalCalendarEvent[]`                  | Array of _all_ events that occur or span this date (both hidden and visible)    |
-| isOverflowed      | `boolean`                                  | True if the date has more events than can visible fit. (Some events are hidden) |
-| onMoreEventsClick | `(event: InternalCalendarEvent[]) => void` | This function should be called whenever the 'More Events' indicator is clicked  |
-| onDayClick        | `(day: Date) => void`                      | This function should be called whenever a Day Component is clicked on           |
+| Property          | Type                                          | Description                                                                     |
+| ----------------- | --------------------------------------------- | ------------------------------------------------------------------------------- |
+| isCurrentMonth    | `boolean`                                     | True if this date occurs in the current visible month                           |
+| isToday           | `boolean`                                     | True is this date is equal to today's date                                      |
+| date              | `Date`                                        | JS Date object for the day                                                      |
+| events            | `InternalCalendarEvent<T>[]`                  | Array of _all_ events that occur or span this date (both hidden and visible)    |
+| isOverflowed      | `boolean`                                     | True if the date has more events than can visible fit. (Some events are hidden) |
+| onMoreEventsClick | `(event: InternalCalendarEvent<T>[]) => void` | This function should be called whenever the 'More Events' indicator is clicked  |
+| onDayClick        | `(day: Date) => void`                         | This function should be called whenever a Day Component is clicked on           |
 
 ## Dealing with hidden events
 
@@ -74,7 +74,7 @@ const DefaultDay = ({
         <div
           className="additional-events-indicator"
           title={hiddenEventTooltip}
-          onClick={() => onMoreEventsClick(JSON.stringify(events))}
+          onClick={() => onMoreEventsClick(JSON.stringify(events, null, 2))}
         >
           ...
         </div>
@@ -83,7 +83,21 @@ const DefaultDay = ({
   );
 };
 
-const events = [...generateEvents(2)];
+// simulate fetching events from somewhere
+const events = [
+  ...generateEvents(2),
+  {
+    id: '1',
+    start: new Date(),
+    end: new Date(),
+    summary: 'This is an event',
+    color: 'lightblue',
+    data: {
+      extraProp1: 1,
+      extraProp2: 'some-more-data',
+    },
+  },
+];
 
 render(
   <div className="schedulely" style={{ height: '7em', width: '7em' }}>
@@ -99,3 +113,10 @@ render(
   </div>
 );
 ```
+
+## Custom Day Component
+
+The `DayComponent` also has an optional generic parameter that can be used to enfore strong-typing of the `data` property. This can be leveraged if writing
+your own custom DayComponent.
+
+More information can be found on the [Custom Event Data Page](/docs/Usage/CustomEventData).

@@ -34,6 +34,10 @@ export const generateEvents = (
       end: end.toISOString(),
       summary,
       color,
+      data: {
+        randomAnimal: chance().animal(),
+        randomAddress: chance().address(),
+      },
     });
   }
   return events;
