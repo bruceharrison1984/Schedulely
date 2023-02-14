@@ -7,8 +7,14 @@ import { createDefaultAdapter } from '@/dateAdapters/date';
 import { render } from '@testing-library/react';
 import { useCalendar } from '@/hooks';
 
+/**
+ * Many of the tests here are simply pass-through tests. We just make sure the DateAdapter is called with the correct args,
+ * since the DateAdapter is tested separately.
+ */
+
 const testDate = Chance().date();
 
+/** useEffect call requires calendar to be available */
 const testCalendarView = [
   [
     new Date(2020, 11, 27),
@@ -106,9 +112,11 @@ jest.mock<{ createDefaultAdapter: (Date: Date) => DateTimeAdapter }>(
   })
 );
 
+const testDateAdapter = createDefaultAdapter();
+
 const wrapper = ({ children }: { children: ReactNode }) => (
   <CalendarProvider
-    dateAdapter={createDefaultAdapter()}
+    dateAdapter={testDateAdapter}
     initialDate={testDate.toISOString()}
     calendarEvents={[]}
   >
@@ -153,6 +161,13 @@ describe('useCalendar', () => {
   it('isCurrentMonth should return correct value', () =>
     expect(isCurrentMonth).toHaveBeenCalledWith(testDate));
 
+  it('dateAdapter should return correct value', () => {
+    const { result } = fireHook();
+    act(() => {
+      expect(result.current.dateAdapter).toEqual(testDateAdapter);
+    });
+  });
+
   describe('daysOfWeek should be called with correct arguments', () => {
     it('for "small" size', () => {
       mockBreakpoint = 'small';
@@ -195,6 +210,10 @@ describe('useCalendar', () => {
     const { result } = fireHook();
     act(() => result.current.onPrevYear());
     expect(addMonthsToDate).toHaveBeenCalledWith(testDate, -12);
+  });
+
+  it.skip('calendarWithEvents should return correct value', () => {
+    // need to come up with a test case for this
   });
 
   it('throws when called outside of provider', () => {
