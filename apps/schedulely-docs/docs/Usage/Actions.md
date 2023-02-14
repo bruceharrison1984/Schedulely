@@ -8,8 +8,6 @@ The ActionProvider is used under the hood to take in functions as arguments and 
 Schedulely simple, and ensures we are re-rendering the bare minimum. If you are creating custom calendar components, these actions are available to you on each components
 respective interface, and can be implemented(or not implemented) however you choose.
 
-**All actions return `() => null` unless explicitly overridden.**
-
 ## Provided Actions
 
 By default, the actions will print their target Events in to the javascript console.
@@ -23,27 +21,15 @@ By default, the actions will print their target Events in to the javascript cons
 
 ## Default Actions
 
-The default behavior will just print Event information to the javascript console. This behavior is intended to be overridden.
-
-```tsx live noInline
-// This demo is an example of what a custom component might look like if you wanted to override the default.
-// If you are using the default components, you don't need to worry about this.
-
-const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
-
-render(
-  <Schedulely events={events} dark={localStorage.getItem('theme') === 'dark'} />
-);
-```
+All actions return `() => null` unless explicitly overridden. This is effectively a no-op, and all action handlers can be considered disabled.
 
 ## Setting Custom Actions
 
 Action behavior can be easily set by passing in a function for the desired action when initializing Schedulely.
 
-This simple example replaces the default `console.log` action action with `alert`.
+This simple example replaces the default `() => null` action action with `alert`.
 
 ```tsx live noInline
-/* array of CalendarEvents */
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
 render(
@@ -51,34 +37,31 @@ render(
     events={events}
     dark={localStorage.getItem('theme') === 'dark'}
     actions={{
-      onEventClick: (event) => alert(JSON.stringify(event)),
-      onMoreEventClick: (events) => alert(JSON.stringify(events)),
+      onEventClick: (event) => alert(JSON.stringify(event, null, 2)),
+      onMoreEventClick: (events) => alert(JSON.stringify(events, null, 2)),
+    }}
+  />
+);
+```
+
+Similarly, you could also print info to the console:
+
+```tsx live noInline
+const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
+
+render(
+  <Schedulely
+    events={events}
+    dark={localStorage.getItem('theme') === 'dark'}
+    actions={{
+      onEventClick: (event) => console.log(event),
+      onMoreEventClick: (events) => console.log(events),
     }}
   />
 );
 ```
 
 This principal could easily be expanded upon to display an information modal with more details about that particular event. We leave this implementation up to you.
-
-## Disabling Actions
-
-If you have no need for custom actions(or otherwise), the default `console.log` actions can easily be disabled by having them simply return `null`.
-
-```tsx live noInline
-/* array of CalendarEvents */
-const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
-
-render(
-  <Schedulely
-    events={events}
-    dark={localStorage.getItem('theme') === 'dark'}
-    actions={{
-      onEventClick: (event) => null,
-      onMoreEventClick: (events) => null,
-    }}
-  />
-);
-```
 
 ## Custom Components and Actions
 
