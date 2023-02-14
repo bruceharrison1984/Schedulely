@@ -38,7 +38,7 @@ render(
     dark={localStorage.getItem('theme') === 'dark'}
     actions={{
       onEventClick: (event) => alert(JSON.stringify(event, null, 2)),
-      onMoreEventClick: (events) => alert(JSON.stringify(events, null, 2)),
+      onMoreEventsClick: (events) => alert(JSON.stringify(events, null, 2)),
     }}
   />
 );
@@ -55,7 +55,7 @@ render(
     dark={localStorage.getItem('theme') === 'dark'}
     actions={{
       onEventClick: (event) => console.log(event),
-      onMoreEventClick: (events) => console.log(events),
+      onMoreEventsClick: (events) => console.log(events),
     }}
   />
 );
