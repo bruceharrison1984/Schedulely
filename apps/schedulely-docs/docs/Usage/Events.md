@@ -1,5 +1,5 @@
 ---
-title: Events
+title: Event Data
 description: Event model and usage
 ---
 
@@ -29,6 +29,12 @@ const storyEvents: CalendarEvent[] = [
 
 <Schedulely events={storyEvents} dark={colorMode === 'dark'} theme={theme} />;
 ```
+
+## Internal Implementation
+
+Once you pass in your array of events, it is transformed into an `InternalCalendarEvent`. This allows us to make consistent transformations from input string dates to `Date`-types, as well as perform any validations all at once. If you require additional metadata for your events, you will need to utilize [Custom Event Data](/docs/Usage/CustomEventData), and possibly create custom Day/Event components depending on your intended usage.
+
+**Any additional Event properties passed in that are not listed in the `CalendarEvent` type will be discarded and will not reach the Day/Event components.**
 
 ## Custom Event Metadata
 
