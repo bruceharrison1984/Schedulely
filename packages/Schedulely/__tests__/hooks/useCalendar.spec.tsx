@@ -1,24 +1,13 @@
 import { CalendarProvider } from '@/providers';
+import { Chance } from 'chance';
 import { ComponentSize, DateTimeAdapter } from '@/types';
 import { ReactNode } from 'react';
+import { act, renderHook } from '@testing-library/react-hooks';
 import { createDefaultAdapter } from '@/dateAdapters/date';
 import { render } from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
 import { useCalendar } from '@/hooks';
 
-const mockOnMonthChangeClick = jest.fn();
-jest.mock('@/hooks/useActions', () => ({
-  useActions: jest.fn(() => ({
-    onMonthChangeClick: mockOnMonthChangeClick,
-  })),
-}));
-
-let mockBreakpoint: ComponentSize = 'large';
-jest.mock('@/hooks/useBreakpoint', () => ({
-  useBreakpoint: jest.fn(() => ({
-    breakpoint: mockBreakpoint,
-  })),
-}));
+const testDate = Chance().date();
 
 const testCalendarView = [
   [
@@ -77,29 +66,45 @@ const testCalendarView = [
   ],
 ];
 
-const mockConvertIsoDate = jest.fn((isoDate: string) => testDate);
-const mockGetYear = jest.fn();
-const mockGetCalendarView = jest.fn(() => testCalendarView);
+const mockOnMonthChangeClick = jest.fn();
+jest.mock('@/hooks/useActions', () => ({
+  useActions: jest.fn(() => ({
+    onMonthChangeClick: mockOnMonthChangeClick,
+  })),
+}));
+
+let mockBreakpoint: ComponentSize = 'large';
+jest.mock('@/hooks/useBreakpoint', () => ({
+  useBreakpoint: jest.fn(() => ({
+    breakpoint: mockBreakpoint,
+  })),
+}));
+
+const convertIsoToDate = jest.fn((isoDate: string) => testDate);
+const getYear = jest.fn();
+const getMonthName = jest.fn();
+const isCurrentMonth = jest.fn();
+const getDaysOfWeek = jest.fn();
+const addMonthsToDate = jest.fn();
+const getCalendarView = jest.fn(() => testCalendarView);
 jest.mock<{ createDefaultAdapter: (Date: Date) => DateTimeAdapter }>(
   '@/dateAdapters/date',
   () => ({
     createDefaultAdapter: jest.fn<DateTimeAdapter, any>(() => ({
-      getCalendarView: mockGetCalendarView,
-      getDaysOfWeek: jest.fn(),
-      getMonthName: jest.fn(),
-      getYear: mockGetYear,
+      getCalendarView,
+      getDaysOfWeek,
+      getMonthName,
+      getYear,
       isSameMonth: jest.fn(),
       isDateToday: jest.fn(),
-      addMonthsToDate: jest.fn(),
+      addMonthsToDate,
       isEventInWeek: jest.fn(),
-      convertIsoToDate: mockConvertIsoDate,
-      isCurrentMonth: jest.fn(),
+      convertIsoToDate,
+      isCurrentMonth,
       isDateBetween: jest.fn(),
     })),
   })
 );
-
-const testDate = new Date(2023, 1, 14);
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <CalendarProvider
@@ -111,44 +116,86 @@ const wrapper = ({ children }: { children: ReactNode }) => (
   </CalendarProvider>
 );
 
+const fireHook = () => renderHook(() => useCalendar(), { wrapper });
+
 describe('useCalendar', () => {
-  it('currentDate should return correct date', () => {
-    renderHook(() => useCalendar(), { wrapper });
-    expect(mockConvertIsoDate).toHaveBeenCalledWith(testDate.toISOString());
+  let hook;
+  beforeEach(() => {
+    hook = fireHook();
   });
 
-  it('currentYear should return correct value', () => {
-    renderHook(() => useCalendar(), { wrapper });
-    expect(mockGetYear).toHaveBeenCalledWith(testDate);
+  it('currentDate should be called with correct arguments', () =>
+    expect(convertIsoToDate).toHaveBeenCalledWith(testDate.toISOString()));
+
+  it('currentYear should be called with correct arguments', () =>
+    expect(getYear).toHaveBeenCalledWith(testDate));
+
+  describe('currentMonth should be called with correct arguments', () => {
+    it('for "small" size', () => {
+      mockBreakpoint = 'small';
+      fireHook();
+      expect(getMonthName).toHaveBeenCalledWith(testDate, 'short');
+    });
+
+    it('for "medium" size', () => {
+      mockBreakpoint = 'medium';
+      fireHook();
+      expect(getMonthName).toHaveBeenCalledWith(testDate, 'long');
+    });
+
+    it('for "large" size', () => {
+      mockBreakpoint = 'large';
+      fireHook();
+      expect(getMonthName).toHaveBeenCalledWith(testDate, 'long');
+    });
   });
 
-  // describe('currentMonth should return correct value', () => {
-  //   it('for "small" size', () => {
-  //     mockBreakpoint = 'small';
-  //     const { result } = renderHook(() => useCalendar(), { wrapper });
-  //     expect(result.current.currentMonth).toEqual('Feb');
-  //   });
+  it('isCurrentMonth should return correct value', () =>
+    expect(isCurrentMonth).toHaveBeenCalledWith(testDate));
 
-  //   it('for "medium" size', () => {
-  //     mockBreakpoint = 'medium';
-  //     const { result } = renderHook(() => useCalendar(), { wrapper });
-  //     expect(result.current.currentMonth).toEqual('February');
-  //   });
+  describe('daysOfWeek should be called with correct arguments', () => {
+    it('for "small" size', () => {
+      mockBreakpoint = 'small';
+      fireHook();
+      expect(getDaysOfWeek).toHaveBeenCalledWith('narrow');
+    });
 
-  //   it('for "large" size', () => {
-  //     mockBreakpoint = 'large';
-  //     const { result } = renderHook(() => useCalendar(), { wrapper });
-  //     expect(result.current.currentMonth).toEqual('February');
-  //   });
-  // });
+    it('for "medium" size', () => {
+      mockBreakpoint = 'medium';
+      fireHook();
+      expect(getDaysOfWeek).toHaveBeenCalledWith('short');
+    });
 
-  // /* The expected result of this test changes depending on if the current month is the same as the test month */
-  // it('isCurrentMonth should return correct value', () => {
-  //   const { result } = renderHook(() => useCalendar(), { wrapper });
-  //   expect(result.current.isCurrentMonth).toEqual(
-  //     testDate.getMonth() === new Date().getMonth()
-  //   );
-  // });
+    it('for "large" size', () => {
+      mockBreakpoint = 'large';
+      fireHook();
+      expect(getDaysOfWeek).toHaveBeenCalledWith('long');
+    });
+  });
+
+  it('onNextMonth should be called with correct arguments', () => {
+    const { result } = fireHook();
+    act(() => result.current.onNextMonth());
+    expect(addMonthsToDate).toHaveBeenCalledWith(testDate, 1);
+  });
+
+  it('onNextYear should be called with correct arguments', () => {
+    const { result } = fireHook();
+    act(() => result.current.onNextYear());
+    expect(addMonthsToDate).toHaveBeenCalledWith(testDate, 12);
+  });
+
+  it('onPrevMonth should be called with correct arguments', () => {
+    const { result } = fireHook();
+    act(() => result.current.onPrevMonth());
+    expect(addMonthsToDate).toHaveBeenCalledWith(testDate, -1);
+  });
+
+  it('onPrevYear should be called with correct arguments', () => {
+    const { result } = fireHook();
+    act(() => result.current.onPrevYear());
+    expect(addMonthsToDate).toHaveBeenCalledWith(testDate, -12);
+  });
 
   it('throws when called outside of provider', () => {
     const ExceptionWrapper = () => {
