@@ -4,7 +4,7 @@ import { JSXElementConstructor, PropsWithChildren } from 'react';
 /**
  * Props interface for creating Day components
  */
-export interface DayComponentProps {
+export interface DayComponentProps<T extends object = {}> {
   /** Does this date represent the current month (used for coloring trailing/leading days) */
   isCurrentMonth: boolean;
 
@@ -15,10 +15,10 @@ export interface DayComponentProps {
   isOverflowed: boolean;
 
   /** Events occuring on this date */
-  events: InternalCalendarEvent[];
+  events: InternalCalendarEvent<T>[];
 
   /** Function executes when the more events indicator is clicked */
-  onMoreEventsClick: (event: InternalCalendarEvent[]) => void;
+  onMoreEventsClick: (event: InternalCalendarEvent<T>[]) => void;
 
   /** Function executes when the day container is clicked */
   onDayClick: (day: Date) => void;
@@ -30,6 +30,6 @@ export interface DayComponentProps {
 /**
  * Type used for creating DayComponent
  */
-export type DayComponent = JSXElementConstructor<
-  PropsWithChildren<DayComponentProps>
+export type DayComponent<T extends object = {}> = JSXElementConstructor<
+  PropsWithChildren<DayComponentProps<T>>
 >;

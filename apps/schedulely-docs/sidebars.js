@@ -30,7 +30,13 @@ const sidebars = {
       link: {
         type: 'generated-index',
       },
-      items: ['Usage/Actions', 'Usage/DateTime', 'Usage/Keyboard'],
+      items: [
+        'Usage/Events',
+        'Usage/CustomEventData',
+        'Usage/Actions',
+        'Usage/DateTime',
+        'Usage/Keyboard',
+      ],
     },
     {
       type: 'category',

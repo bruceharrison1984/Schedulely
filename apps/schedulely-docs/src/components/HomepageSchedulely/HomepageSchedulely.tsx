@@ -59,7 +59,10 @@ const HomepageSchedulely = () => {
             events={storyEvents}
             dark={colorMode === 'dark'}
             theme={theme}
-            initialDayOfWeekFormat={'small'}
+            actions={{
+              onEventClick: (event) => console.log(event),
+              onMoreEventsClick: (events) => console.log(events),
+            }}
           />
           <div className="resize-action-message">
             Test{' '}
