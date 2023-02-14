@@ -21,7 +21,7 @@ By default, the actions will print their target Events in to the javascript cons
 
 ## Default Actions
 
-All actions return `() => null` unless explicitly overridden. This is effectively a no-op, and all action handlers can be considered disabled.
+By default, all actions return `() => null` unless explicitly overridden. This equates to a no-op, so any event handlers can be considered disabled unless expressly defined.
 
 ## Setting Custom Actions
 
