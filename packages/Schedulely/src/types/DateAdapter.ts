@@ -1,3 +1,5 @@
+import { WeekDay } from './WeekDay';
+
 /**
  * Common interface for porting date libraries so they can be used with Schedulely
  */
@@ -51,14 +53,3 @@ export interface DateTimeAdapter {
   /** What day of the week the week starts on, with 0 = Sunday, 1 = Monday, etc. */
   weekStartsOn: WeekDay;
 }
-
-export const WeekDayNames = [
-  'sunday',
-  'monday',
-  'tuesday',
-  'wednesday',
-  'thursday',
-  'friday',
-  'saturday',
-] as const;
-export type WeekDay = (typeof WeekDayNames)[number];
