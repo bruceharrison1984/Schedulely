@@ -1,18 +1,46 @@
-import { DateTimeAdapter } from '@/types';
+import { DateTimeAdapter, WeekDay, WeekDayNames } from '@/types';
 
 /**
  * Create an instance of the default date adapter
  * @param locale Locale override
  * @returns DateTimeAdapter
  */
-export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
-  const getDaysOfWeek = (format?: 'long' | 'short' | 'narrow') => {
+export const createDefaultAdapter = (
+  locale: string = 'en',
+  dayWeekStartsOn: WeekDay = 'sunday'
+): DateTimeAdapter => {
+  const getDaysOfWeek = (
+    format?: 'long' | 'short' | 'narrow',
+    weekStartsOn?: WeekDay
+  ) => {
+    const weekStart = weekStartsOn ? weekStartsOn : dayWeekStartsOn;
     const formatter = new Intl.DateTimeFormat(locale, {
       weekday: format,
     });
-    return [0, 1, 2, 3, 4, 5, 6].map((x) =>
+    const dates = [0, 1, 2, 3, 4, 5, 6].map((x) =>
       formatter.format(new Date(2012, 0, x + 1))
     );
+    // Get the formatted version of weekStartsOn
+    const formattedWeekStartsOn = new Intl.DateTimeFormat(locale, {
+      weekday: format,
+    }).format(new Date(Date.UTC(2012, 0, WeekDayNames.indexOf(weekStart) + 1)));
+
+    // Find the index of weekStartsOn in the array
+    const startDayIndex = dates.indexOf(formattedWeekStartsOn);
+
+    // Validate weekStartsOn input
+    if (startDayIndex === -1) {
+      throw new Error(
+        "weekStartsOn should be one of: 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'"
+      );
+    }
+
+    // Rotate the array until weekStartsOn is the first element
+    for (let i = 0; i < startDayIndex; i++) {
+      dates.push(dates.shift()!);
+    }
+
+    return dates;
   };
 
   /**
@@ -132,5 +160,6 @@ export const createDefaultAdapter = (locale = 'en'): DateTimeAdapter => {
     convertIsoToDate,
     isCurrentMonth,
     isDateBetween,
+    weekStartsOn: dayWeekStartsOn,
   };
 };

@@ -6,7 +6,7 @@ export interface DateTimeAdapter {
   addMonthsToDate: (date: Date, amount: number) => Date;
 
   /** Returns all days in the month, split apart by week. Includes leading/trailing days. */
-  getCalendarView: (date: Date) => Date[][];
+  getCalendarView: (date: Date, weekStartsOn?: WeekDay) => Date[][];
 
   /**
    * Get names of all days of the week in the format specified
@@ -47,4 +47,18 @@ export interface DateTimeAdapter {
 
   /** Does the target date fall between the supplied dates */
   isDateBetween: (targetDate: Date, dateOne: Date, dateTwo: Date) => boolean;
+
+  /** What day of the week the week starts on, with 0 = Sunday, 1 = Monday, etc. */
+  weekStartsOn: WeekDay;
 }
+
+export const WeekDayNames = [
+  'sunday',
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+] as const;
+export type WeekDay = (typeof WeekDayNames)[number];

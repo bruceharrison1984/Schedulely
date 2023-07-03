@@ -1,3 +1,4 @@
+import { WeekDay } from '../../src';
 import chance from 'chance';
 
 const DEFAULT_ITERATIONS = 30;
@@ -201,25 +202,51 @@ export const getMonthNameFromDateTestCases = () => [
   },
 ];
 
-export const getDaysOfWeekTestCases = () => [
-  {
-    format: 'long' as 'long' | 'short' | 'narrow',
-    expected: [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ],
-  },
-  {
-    format: 'short' as 'long' | 'short' | 'narrow',
-    expected: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  },
-  {
-    format: 'narrow' as 'long' | 'short' | 'narrow',
-    expected: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-  },
-];
+export const getDaysOfWeekTestCases = (weekStartsOn: WeekDay) =>
+  weekStartsOn === 'sunday'
+    ? [
+        {
+          format: 'long' as 'long' | 'short' | 'narrow',
+          expected: [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+          ],
+        },
+        {
+          format: 'short' as 'long' | 'short' | 'narrow',
+          expected: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        },
+        {
+          format: 'narrow' as 'long' | 'short' | 'narrow',
+          expected: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+        },
+      ]
+    : weekStartsOn === 'monday'
+    ? [
+        {
+          format: 'long' as 'long' | 'short' | 'narrow',
+          expected: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday',
+          ],
+        },
+        {
+          format: 'short' as 'long' | 'short' | 'narrow',
+          expected: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        },
+        {
+          format: 'narrow' as 'long' | 'short' | 'narrow',
+          expected: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        },
+      ]
+    : [];

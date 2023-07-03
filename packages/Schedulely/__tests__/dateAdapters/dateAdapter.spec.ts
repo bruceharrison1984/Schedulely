@@ -21,6 +21,10 @@ const adapters = [
     name: 'Date',
     adapter: createDefaultAdapter(),
   },
+  {
+    name: 'DateWithStartOfWeek',
+    adapter: createDefaultAdapter('en', 'monday'),
+  },
 ];
 
 describe('Date Adapter', () => {
@@ -116,7 +120,7 @@ describe('Date Adapter', () => {
 
     describe('getDaysOfWeek', () => {
       it.each<{ format: 'long' | 'short' | 'narrow'; expected: string[] }>(
-        getDaysOfWeekTestCases()
+        getDaysOfWeekTestCases(adapter.weekStartsOn)
       )('with format "$format" returns $expected', ({ format, expected }) => {
         const result = adapter.getDaysOfWeek(format);
         expect(result).toEqual(expected);
