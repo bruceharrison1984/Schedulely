@@ -2,6 +2,7 @@ import { DateTimeAdapter } from '@/types/index';
 import { createDefaultAdapter } from '@/dateAdapters/date';
 import {
   getAddMonthsToDateTestCases,
+  getCalendarViewTestCases,
   getDaysOfWeekTestCases,
   getIsSameMonthMonthTestCases,
   getIsTodayTestCases,
@@ -57,65 +58,16 @@ describe('Date Adapter', () => {
     });
 
     describe('getCalendarView', () => {
-      it('returns correct values (including sibling days)', () => {
-        const result = adapter.getCalendarView(new Date(2021, 0, 10));
-        expect(result).toEqual([
-          [
-            new Date(2020, 11, 27),
-            new Date(2020, 11, 28),
-            new Date(2020, 11, 29),
-            new Date(2020, 11, 30),
-            new Date(2020, 11, 31),
-            new Date(2021, 0, 1),
-            new Date(2021, 0, 2),
-          ],
-          [
-            new Date(2021, 0, 3),
-            new Date(2021, 0, 4),
-            new Date(2021, 0, 5),
-            new Date(2021, 0, 6),
-            new Date(2021, 0, 7),
-            new Date(2021, 0, 8),
-            new Date(2021, 0, 9),
-          ],
-          [
-            new Date(2021, 0, 10),
-            new Date(2021, 0, 11),
-            new Date(2021, 0, 12),
-            new Date(2021, 0, 13),
-            new Date(2021, 0, 14),
-            new Date(2021, 0, 15),
-            new Date(2021, 0, 16),
-          ],
-          [
-            new Date(2021, 0, 17),
-            new Date(2021, 0, 18),
-            new Date(2021, 0, 19),
-            new Date(2021, 0, 20),
-            new Date(2021, 0, 21),
-            new Date(2021, 0, 22),
-            new Date(2021, 0, 23),
-          ],
-          [
-            new Date(2021, 0, 24),
-            new Date(2021, 0, 25),
-            new Date(2021, 0, 26),
-            new Date(2021, 0, 27),
-            new Date(2021, 0, 28),
-            new Date(2021, 0, 29),
-            new Date(2021, 0, 30),
-          ],
-          [
-            new Date(2021, 0, 31),
-            new Date(2021, 1, 1),
-            new Date(2021, 1, 2),
-            new Date(2021, 1, 3),
-            new Date(2021, 1, 4),
-            new Date(2021, 1, 5),
-            new Date(2021, 1, 6),
-          ],
-        ]);
-      });
+      it.each(getCalendarViewTestCases(adapter.weekStartsOn))(
+        'returns correct values (including sibling days)',
+        ({ firstDayOfMonth, expected }) => {
+          const result = adapter.getCalendarView(
+            firstDayOfMonth,
+            adapter.weekStartsOn
+          );
+          expect(result).toEqual(expected);
+        }
+      );
     });
 
     describe('getDaysOfWeek', () => {

@@ -50,16 +50,18 @@ export const createDefaultAdapter = (
    * @param date Native JS date object
    * @returns Date[][]
    */
-  const getCalendarView = (date: Date) => {
+  const getCalendarView = (date: Date, weekStartsOn?: WeekDay) => {
+    const weekStart = weekStartsOn ? weekStartsOn : dayWeekStartsOn;
+
     const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-    const finalsOfPrevMonth = [];
-    const currentMonth = [];
-    const startsOfSchedulely = [];
+    const finalsOfPrevMonth: Date[] = [];
+    const currentMonth: Date[] = [];
+    const startsOfSchedulely: Date[] = [];
 
     let iteratedDate = startOfMonth;
-    while (iteratedDate.getDay() !== 0) {
+    while (iteratedDate.getDay() !== WeekDayNames.indexOf(weekStart)) {
       iteratedDate = new Date(
         iteratedDate.getFullYear(),
         iteratedDate.getMonth(),
@@ -79,8 +81,9 @@ export const createDefaultAdapter = (
     }
 
     iteratedDate = endOfMonth;
-    //only gather enough days until sunday
-    while (iteratedDate.getDay() + 1 !== 7) {
+    // only gather enough days until the the last day of the week
+    const lastDayCount = 7 - WeekDayNames.indexOf(weekStart);
+    while (iteratedDate.getDay() + 1 !== 7 - lastDayCount) {
       iteratedDate = new Date(
         iteratedDate.getFullYear(),
         iteratedDate.getMonth(),
