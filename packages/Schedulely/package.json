@@ -18,8 +18,8 @@
     "rollup": "rollup -c",
     "lint": "eslint . --ext .ts --ext .tsx",
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
-    "test": "jest --maxWorkers 2",
-    "test:ci": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json",
+    "test": "jest",
+    "test:ci": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --workerIdleMemoryLimit",
     "dev": "ladle serve --stories=__stories__/**.stories.tsx",
     "build-ladle": "ladle build"
   },
