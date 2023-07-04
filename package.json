@@ -16,6 +16,7 @@
     "dev-docs": "turbo run dev-docs --no-daemon",
     "lint": "turbo run lint --no-daemon",
     "test": "turbo run test --no-daemon",
+    "test:ci": "turbo run test:ci --no-daemon",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install",
     "serve": "turbo run serve --no-daemon"
