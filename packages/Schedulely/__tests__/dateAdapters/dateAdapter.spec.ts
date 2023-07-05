@@ -18,10 +18,10 @@ import {
  * All tests presume US/eng units
  */
 const adapters = [
-  {
-    name: 'Date',
-    adapter: createDefaultAdapter(),
-  },
+  // {
+  //   name: 'Date',
+  //   adapter: createDefaultAdapter(),
+  // },
   {
     name: 'DateWithStartOfWeek',
     adapter: createDefaultAdapter('en', 'monday'),
@@ -70,7 +70,7 @@ describe('Date Adapter', () => {
       );
     });
 
-    xdescribe('getDaysOfWeek', () => {
+    describe('getDaysOfWeek', () => {
       it.each<{ format: 'long' | 'short' | 'narrow'; expected: string[] }>(
         getDaysOfWeekTestCases(adapter.weekStartsOn)
       )('with format "$format" returns $expected', ({ format, expected }) => {

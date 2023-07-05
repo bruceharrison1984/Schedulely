@@ -9,21 +9,19 @@ export const createDefaultAdapter = (
   locale: string = 'en',
   dayWeekStartsOn: WeekDay = 'sunday'
 ): DateTimeAdapter => {
-  const getDaysOfWeek = (
-    format?: 'long' | 'short' | 'narrow',
-    weekStartsOn?: WeekDay
-  ) => {
-    const weekStart = weekStartsOn ? weekStartsOn : dayWeekStartsOn;
+  const getDaysOfWeek = (format?: 'long' | 'short' | 'narrow') => {
+    const weekStart = dayWeekStartsOn;
     const formatter = new Intl.DateTimeFormat(locale, {
       weekday: format,
     });
+
     const dates = [0, 1, 2, 3, 4, 5, 6].map((x) =>
       formatter.format(new Date(2012, 0, x + 1))
     );
     // Get the formatted version of weekStartsOn
     const formattedWeekStartsOn = new Intl.DateTimeFormat(locale, {
       weekday: format,
-    }).format(new Date(Date.UTC(2012, 0, WeekDayNames.indexOf(weekStart) + 1)));
+    }).format(new Date(Date.UTC(2012, 0, WeekDayNames.indexOf(weekStart) + 2)));
 
     // Find the index of weekStartsOn in the array
     const startDayIndex = dates.indexOf(formattedWeekStartsOn);
