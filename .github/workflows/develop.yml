@@ -57,4 +57,4 @@ jobs:
       - name: NPM Install
         run: npm ci
       - name: Test
-        run: npm run test
+        run: npm run test:ci

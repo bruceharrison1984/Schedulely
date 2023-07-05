@@ -3,19 +3,21 @@
   "pipeline": {
     "barrels": {
       "dependsOn": [],
-      "outputs": [
-        "src/**/index.ts"
-      ],
-      "inputs": [
-        "src/**/*.tsx",
-        "src/**/*.ts"
-      ]
+      "outputs": ["src/**/index.ts"],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts"]
     },
     "test": {
-      "dependsOn": [
-        "lint",
-        "barrels"
-      ],
+      "dependsOn": ["lint", "barrels"],
+      "outputs": [],
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "__tests__/**/*.tsx",
+        "__tests__/**/*.ts"
+      ]
+    },
+    "test:ci": {
+      "dependsOn": ["lint", "barrels"],
       "outputs": [],
       "inputs": [
         "src/**/*.tsx",
@@ -25,43 +27,22 @@
       ]
     },
     "rollup": {
-      "dependsOn": [
-        "test"
-      ],
-      "inputs": [
-        "src/**",
-        "rollup.config.js"
-      ],
-      "outputs": [
-        "dist/**"
-      ]
+      "dependsOn": ["test"],
+      "inputs": ["src/**", "rollup.config.js"],
+      "outputs": ["dist/**"]
     },
     "build": {
-      "dependsOn": [
-        "^rollup"
-      ],
-      "outputs": [
-        "build/**"
-      ]
+      "dependsOn": ["^rollup"],
+      "outputs": ["build/**"]
     },
     "serve": {
-      "dependsOn": [
-        "build"
-      ],
-      "outputs": [
-        "build/**",
-        ".docusaurus/**"
-      ],
+      "dependsOn": ["build"],
+      "outputs": ["build/**", ".docusaurus/**"],
       "cache": false
     },
     "build-ladle": {
-      "inputs": [
-        "src/**",
-        "rollup.config.js"
-      ],
-      "outputs": [
-        "build/**"
-      ]
+      "inputs": ["src/**", "rollup.config.js"],
+      "outputs": ["build/**"]
     },
     "lint": {
       "outputs": [],
@@ -76,9 +57,7 @@
       "cache": false
     },
     "dev-docs": {
-      "dependsOn": [
-        "^rollup"
-      ],
+      "dependsOn": ["^rollup"],
       "cache": false
     }
   }
