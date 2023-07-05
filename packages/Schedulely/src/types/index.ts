@@ -11,4 +11,3 @@ export * from './SchedulelyProps';
 export * from './WeekDay';
 export * from './components/index';
 export * from './state/index';
-export * from './WeekDay';

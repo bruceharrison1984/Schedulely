@@ -1,5 +1,4 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-// eslint-disable-next-line no-undef
+/** @type {import('jest').Config} */
 module.exports = {
   moduleNameMapper: {
     '@/(.*)$': '<rootDir>/src/$1',
