@@ -28,10 +28,10 @@ jobs:
         id: getReleaseVersion
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/v}
 
-      - name: Use Node.js 16.x
+      - name: Use Node.js 16.10.0
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: '16.10.0'
           registry-url: https://registry.npmjs.org/
 
       - name: Update NPM
