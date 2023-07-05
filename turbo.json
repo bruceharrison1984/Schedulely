@@ -27,7 +27,6 @@
       ]
     },
     "rollup": {
-      "dependsOn": ["test"],
       "inputs": ["src/**", "rollup.config.js"],
       "outputs": ["dist/**"]
     },
