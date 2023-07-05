@@ -19,7 +19,7 @@
     "lint": "eslint . --ext .ts --ext .tsx",
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
     "test": "jest",
-    "test:ci": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --workerIdleMemoryLimit 50%",
+    "test:ci": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --maxWorkers 50%",
     "dev": "ladle serve --stories=__stories__/**.stories.tsx",
     "build-ladle": "ladle build"
   },
