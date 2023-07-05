@@ -43,10 +43,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 16.10.0
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
-          node-version: '16.10.0'
+          node-version: 16.x
           cache: 'npm'
       - name: Update NPM
         run: npm install -g npm
@@ -55,7 +55,7 @@ jobs:
       - uses: ArtiomTr/jest-coverage-report-action@v2.2.4
         id: coverage
         with:
-          test-script: npm run test
+          test-script: npm run test:ci
           output: report-markdown
           working-directory: ./packages/Schedulely
       - uses: marocchino/sticky-pull-request-comment@v2
