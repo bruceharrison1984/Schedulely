@@ -82,12 +82,12 @@ describe('EventWeekLayout', () => {
 
     beforeEach(() => {
       eventDomObject = testObject.getByText(value);
-    });
 
-    afterEach(() => {
-      mockSetHighlight.mockClear();
-      mockClearHighlight.mockClear();
-      mockEventOnClickHandler.mockClear();
+      return async () => {
+        mockSetHighlight.mockClear();
+        mockClearHighlight.mockClear();
+        mockEventOnClickHandler.mockClear();
+      };
     });
 
     it('is in document', () => expect(eventDomObject).toBeTruthy());

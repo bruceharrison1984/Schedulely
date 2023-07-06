@@ -1,8 +1,5 @@
 {
-  "vitest.commandLine": "npx vitest --config ./packages/Schedulely/vitest.config.ts",
-  "vitest.showFailMessages": false,
-  "vitest.enable": true,
-  "vitest.include": [
-    "packages/Schedulely/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"
-  ]
+  "vitest.commandLine": "npx vitest --config packages/Schedulely/vitest.config.ts",
+  "vitest.showFailMessages": true,
+  "vitest.enable": true
 }

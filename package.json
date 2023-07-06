@@ -33,8 +33,7 @@
     "husky": "^8.0.3",
     "prettier": "^3.0.0",
     "turbo": "^1.10.7",
-    "typescript": "^5.1.6",
-    "vitest-dom": "^0.1.0"
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=16.0.0"

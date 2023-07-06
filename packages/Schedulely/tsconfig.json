@@ -21,7 +21,7 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "types": ["vitest/globals", "vitest-dom/extend-expect"]
+    "types": ["vitest/globals", "vitest/importMeta"]
   },
   "include": [
     "src",
