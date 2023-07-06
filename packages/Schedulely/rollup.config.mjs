@@ -1,4 +1,5 @@
 import { defineConfig } from 'rollup';
+import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import inject from '@rollup/plugin-inject';
 import postcss from 'rollup-plugin-postcss';
@@ -15,6 +16,7 @@ const options = defineConfig({
   },
   external: ['react', 'react-dom'],
   plugins: [
+    commonjs(),
     copy({
       targets: [{ src: '../../README.md', dest: './' }],
     }),

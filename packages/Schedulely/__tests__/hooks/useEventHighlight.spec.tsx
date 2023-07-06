@@ -1,8 +1,7 @@
 import { HighlightProvider } from '@/providers';
 import { ReactNode } from 'react';
-import { act } from 'react-test-renderer';
+import { act, renderHook } from '@testing-library/react-hooks';
 import { render } from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
 import { useEventHighlight } from '@/hooks';
 import Chance from 'chance';
 
