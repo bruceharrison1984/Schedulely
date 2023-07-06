@@ -18,7 +18,8 @@
     "rollup": "rollup -c",
     "lint": "eslint . --ext .ts --ext .tsx",
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:ci": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --maxWorkers 1",
     "dev": "ladle serve --stories=__stories__/**.stories.tsx",
     "build-ladle": "ladle build"
