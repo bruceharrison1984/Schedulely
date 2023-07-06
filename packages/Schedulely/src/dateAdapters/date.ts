@@ -31,68 +31,42 @@ export const createDefaultAdapter = (
   };
 
   /**
-   * This function will return an array of arrays representing a month, split into weeks 7 days long.
-   * This includes leading/trailing days.
+   * This function will return an array of arrays representing a month as a 6*7 data table. This includes leading/trailing days.
+   *
    * This only uses native JS objects, so no external libs are needed
-   * @param date Native JS date object
+   *
+   * It only iterates a single time, so it is highly performant
+   * @param date The month of this Date object determines the calendar that will be generated.
    * @returns Date[][]
    */
   const getCalendarView = (date: Date) => {
     const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    const finalOfPrevMonth: Date[] = [];
-    const currentMonth: Date[] = [];
-    const startOfNextMonth: Date[] = [];
 
-    // get trailing days from previous month
-    let iteratedDate = startOfMonth;
-    while (iteratedDate.getDay() !== dayWeekStartsOn) {
-      iteratedDate = new Date(
-        iteratedDate.getFullYear(),
-        iteratedDate.getMonth(),
-        iteratedDate.getDate() - 1
-      );
-      finalOfPrevMonth.push(iteratedDate);
-
-      // fail-safe to prevent run-away iteration
-      if (finalOfPrevMonth.length > 7) break;
+    let leadingDaysDifferential = dayWeekStartsOn - startOfMonth.getDay();
+    if (leadingDaysDifferential > 0) {
+      //invert the leading days so slack is evenly divided between top/bottom
+      leadingDaysDifferential = -(7 - leadingDaysDifferential);
     }
 
-    // get all days for current month
-    iteratedDate = startOfMonth;
-    while (iteratedDate.getMonth() === startOfMonth.getMonth()) {
-      currentMonth.push(iteratedDate);
-      iteratedDate = new Date(
-        iteratedDate.getFullYear(),
-        iteratedDate.getMonth(),
-        iteratedDate.getDate() + 1
-      );
+    let dateIterator = new Date(
+      startOfMonth.getFullYear(),
+      startOfMonth.getMonth(),
+      startOfMonth.getDate() + leadingDaysDifferential
+    );
 
-      // fail-safe to prevent run-away iteration
-      if (currentMonth.length > 7) break;
+    const dates: Date[] = [dateIterator];
+    // fixed sized for 6x7 calendar body
+    for (let index = 0; index < 41; index++) {
+      dateIterator = new Date(
+        dateIterator.getFullYear(),
+        dateIterator.getMonth(),
+        dateIterator.getDate() + 1
+      );
+      dates.push(dateIterator);
     }
 
-    // dayWeekEndsOn: WeekDay = (dayWeekStartsOn + 6) % 7
-    let trailingDays = (dayWeekStartsOn + 5) % 7;
-
-    iteratedDate = endOfMonth;
-    for (let index = 0; index < trailingDays; index++) {
-      iteratedDate = new Date(
-        iteratedDate.getFullYear(),
-        iteratedDate.getMonth(),
-        iteratedDate.getDate() + 1
-      );
-      startOfNextMonth.push(iteratedDate);
-    }
-
-    const flatMonthView = [
-      ...finalOfPrevMonth.reverse(),
-      ...currentMonth,
-      ...startOfNextMonth,
-    ];
-
-    const monthView = [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>
-      flatMonthView.splice(0, 7)
+    const monthView = [...Array(Math.ceil(dates.length / 7))].map(() =>
+      dates.splice(0, 7)
     );
 
     return monthView;
