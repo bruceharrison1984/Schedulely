@@ -18,10 +18,10 @@ import {
  * All tests presume US/eng units
  */
 const adapters = [
-  // {
-  //   name: 'Date',
-  //   adapter: createDefaultAdapter(),
-  // },
+  {
+    name: 'Date',
+    adapter: createDefaultAdapter(),
+  },
   {
     name: 'DateWithStartOfWeek',
     adapter: createDefaultAdapter('en', WeekDay.Monday),
@@ -57,15 +57,15 @@ describe('Date Adapter', () => {
       );
     });
 
-    // describe('getCalendarView', () => {
-    //   it.each(getCalendarViewTestCases(adapter.weekStartsOn))(
-    //     'returns correct values (including sibling days)',
-    //     ({ firstDayOfMonth, expected }) => {
-    //       const result = adapter.getCalendarView(firstDayOfMonth);
-    //       expect(result).toEqual(expected);
-    //     }
-    //   );
-    // });
+    describe('getCalendarView', () => {
+      it.each(getCalendarViewTestCases(adapter.weekStartsOn))(
+        'returns correct values (including sibling days)',
+        ({ firstDayOfMonth, expected }) => {
+          const result = adapter.getCalendarView(firstDayOfMonth);
+          expect(result).toEqual(expected);
+        }
+      );
+    });
 
     describe('getDaysOfWeek', () => {
       it.each<{ format: 'long' | 'short' | 'narrow'; expected: string[] }>(

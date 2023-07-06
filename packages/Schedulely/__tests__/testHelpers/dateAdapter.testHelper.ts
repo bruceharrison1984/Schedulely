@@ -364,6 +364,15 @@ export const getCalendarViewTestCases = (weekStartsOn: WeekDay) =>
               new Date(2021, 0, 30),
               new Date(2021, 0, 31),
             ],
+            [
+              new Date(2021, 1, 1),
+              new Date(2021, 1, 2),
+              new Date(2021, 1, 3),
+              new Date(2021, 1, 4),
+              new Date(2021, 1, 5),
+              new Date(2021, 1, 6),
+              new Date(2021, 1, 7),
+            ],
           ],
         },
       ]
