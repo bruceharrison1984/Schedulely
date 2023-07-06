@@ -210,9 +210,7 @@ describe('useCalendar', () => {
     expect(addMonthsToDate).toHaveBeenCalledWith(testDate, -12);
   });
 
-  it.skip('calendarWithEvents should return correct value', () => {
-    // need to come up with a test case for this
-  });
+  it.todo('calendarWithEvents should return correct value');
 
   it('throws when called outside of provider', () => {
     const ExceptionWrapper = () => {
