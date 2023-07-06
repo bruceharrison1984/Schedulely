@@ -15,16 +15,14 @@ export const createDefaultAdapter = (
       weekday: format,
     });
 
-    // this represents a week of days, with sunday being 0
-    const weekDayArray = [0, 1, 2, 3, 4, 5, 6];
-    // const dayWeekStartsOnNumber = WeekDayNames.indexOf(weekStart);
-
-    // Validate weekStartsOn input
     if ((dayWeekStartsOn as number) === -1) {
       throw new Error(
         "weekStartsOn should be one of: 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'"
       );
     }
+
+    // this represents a week of days, with sunday being 0
+    const weekDayArray = [0, 1, 2, 3, 4, 5, 6];
 
     // rotate array until start day lines up
     for (let i = 0; i < (dayWeekStartsOn as number); i++) {
@@ -47,9 +45,9 @@ export const createDefaultAdapter = (
     const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-    const finalsOfPrevMonth: Date[] = [];
+    const finalOfPrevMonth: Date[] = [];
     const currentMonth: Date[] = [];
-    const startsOfSchedulely: Date[] = [];
+    const startOfNextMonth: Date[] = [];
 
     let iteratedDate = startOfMonth;
     while (iteratedDate.getDay() !== (weekStart as number)) {
@@ -58,7 +56,7 @@ export const createDefaultAdapter = (
         iteratedDate.getMonth(),
         iteratedDate.getDate() - 1
       );
-      finalsOfPrevMonth.push(iteratedDate);
+      finalOfPrevMonth.push(iteratedDate);
     }
 
     iteratedDate = startOfMonth;
@@ -73,20 +71,19 @@ export const createDefaultAdapter = (
 
     iteratedDate = endOfMonth;
     // only gather enough days until the the last day of the week
-    const lastDayCount = 7 - (weekStart as number);
-    while (iteratedDate.getDay() + 1 !== 7 - lastDayCount) {
+    while (iteratedDate.getDay() + 1 !== 7 - (weekStart as number)) {
       iteratedDate = new Date(
         iteratedDate.getFullYear(),
         iteratedDate.getMonth(),
         iteratedDate.getDate() + 1
       );
-      startsOfSchedulely.push(iteratedDate);
+      startOfNextMonth.push(iteratedDate);
     }
 
     const flatMonthView = [
-      ...finalsOfPrevMonth.reverse(),
+      ...finalOfPrevMonth.reverse(),
       ...currentMonth,
-      ...startsOfSchedulely,
+      ...startOfNextMonth,
     ];
 
     return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>

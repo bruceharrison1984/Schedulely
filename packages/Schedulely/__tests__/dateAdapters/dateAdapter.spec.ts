@@ -57,7 +57,7 @@ describe('Date Adapter', () => {
       );
     });
 
-    xdescribe('getCalendarView', () => {
+    describe('getCalendarView', () => {
       it.each(getCalendarViewTestCases(adapter.weekStartsOn))(
         'returns correct values (including sibling days)',
         ({ firstDayOfMonth, expected }) => {
