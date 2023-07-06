@@ -1,5 +1,3 @@
-import 'vitest-dom/extend-expect';
-
 import { DayComponentProps, InternalCalendarEvent } from '@/types';
 import { DefaultDay } from '@/components';
 import { RenderResult, fireEvent, render } from '@testing-library/react';

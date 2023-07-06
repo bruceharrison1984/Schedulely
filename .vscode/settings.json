@@ -1,5 +1,5 @@
 {
-  "vitest.commandLine": "npx vitest --config ./packages/Schedulely/vitest.config.js",
+  "vitest.commandLine": "npx vitest --config ./packages/Schedulely/vitest.config.ts",
   "vitest.showFailMessages": false,
   "vitest.enable": true,
   "vitest.include": [

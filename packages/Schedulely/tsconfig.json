@@ -6,8 +6,7 @@
     "lib": ["ES2021", "DOM"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "types": ["vitest-dom/extend-expect"]
+      "@/*": ["src/*"]
     },
     "composite": false,
     "declaration": true,
@@ -21,8 +20,15 @@
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "types": ["vitest/globals", "vitest-dom/extend-expect"]
   },
-  "include": ["src", "__tests__", "__stories__"],
+  "include": [
+    "src",
+    "__tests__",
+    "__stories__",
+    "vitest-setup.ts",
+    "vitest.config.ts"
+  ],
   "exclude": ["node_modules"]
 }

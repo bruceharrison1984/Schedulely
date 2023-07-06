@@ -47,12 +47,11 @@ describe('DefaultHeader', () => {
     describe('is false', () => {
       let testObject: RenderResult;
 
-      beforeEach(
-        () =>
-          (testObject = render(
-            <DefaultHeader {...defaults} isCurrentMonth={false} />
-          ))
-      );
+      beforeEach(() => {
+        testObject = render(
+          <DefaultHeader {...defaults} isCurrentMonth={false} />
+        );
+      });
 
       it('indicator is rendered', () =>
         expect(testObject.queryByRole('alert')).toBeNull());
@@ -61,7 +60,9 @@ describe('DefaultHeader', () => {
     describe('onClick', () => {
       let testObject: RenderResult;
 
-      beforeEach(() => (testObject = render(<DefaultHeader {...defaults} />)));
+      beforeEach(() => {
+        testObject = render(<DefaultHeader {...defaults} />);
+      });
 
       it('for previous month calls handler', () => {
         fireEvent.click(testObject.getByTitle('Previous Month'));
