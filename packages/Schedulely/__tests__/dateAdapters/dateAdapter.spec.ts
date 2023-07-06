@@ -58,7 +58,7 @@ describe('Date Adapter', () => {
     });
 
     describe('getCalendarView', () => {
-      it.each(getCalendarViewTestCases(adapter.startOfWeek))(
+      it.each(getCalendarViewTestCases(adapter.firstDayOfWeek))(
         'returns correct values (including sibling days)',
         ({ firstDayOfMonth, expected }) => {
           const result = adapter.getCalendarView(firstDayOfMonth);
@@ -69,7 +69,7 @@ describe('Date Adapter', () => {
 
     describe('getDaysOfWeek', () => {
       it.each<{ format: 'long' | 'short' | 'narrow'; expected: string[] }>(
-        getDaysOfWeekTestCases(adapter.startOfWeek)
+        getDaysOfWeekTestCases(adapter.firstDayOfWeek)
       )('with format "$format" returns $expected', ({ format, expected }) => {
         const result = adapter.getDaysOfWeek(format);
         expect(result).toEqual(expected);
