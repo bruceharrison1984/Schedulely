@@ -55,7 +55,7 @@ export const createDefaultAdapter = (
       finalOfPrevMonth.push(iteratedDate);
 
       // fail-safe to prevent run-away iteration
-      if (startOfNextMonth.length > 7) break;
+      if (finalOfPrevMonth.length > 7) break;
     }
 
     // get all days for current month
@@ -69,7 +69,7 @@ export const createDefaultAdapter = (
       );
 
       // fail-safe to prevent run-away iteration
-      if (startOfNextMonth.length > 7) break;
+      if (currentMonth.length > 7) break;
     }
 
     // dayWeekEndsOn: WeekDay = (dayWeekStartsOn + 6) % 7
