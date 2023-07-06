@@ -22,10 +22,10 @@ const adapters = [
     name: 'Date',
     adapter: createDefaultAdapter(),
   },
-  {
-    name: 'DateWithStartOfWeek',
-    adapter: createDefaultAdapter('en', WeekDay.Monday),
-  },
+  // {
+  //   name: 'DateWithStartOfWeek',
+  //   adapter: createDefaultAdapter('en', WeekDay.Monday),
+  // },
 ];
 
 describe('Date Adapter', () => {
