@@ -1,4 +1,4 @@
-import { WeekDay } from '../../src';
+import { WeekDay } from '@/types';
 import chance from 'chance';
 
 const DEFAULT_ITERATIONS = 30;
@@ -203,7 +203,7 @@ export const getMonthNameFromDateTestCases = () => [
 ];
 
 export const getDaysOfWeekTestCases = (weekStartsOn: WeekDay) =>
-  weekStartsOn === 'sunday'
+  weekStartsOn === WeekDay.Sunday
     ? [
         {
           format: 'long' as 'long' | 'short' | 'narrow',
@@ -226,7 +226,7 @@ export const getDaysOfWeekTestCases = (weekStartsOn: WeekDay) =>
           expected: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
         },
       ]
-    : weekStartsOn === 'monday'
+    : weekStartsOn === WeekDay.Monday
     ? [
         {
           format: 'long' as 'long' | 'short' | 'narrow',
@@ -252,7 +252,7 @@ export const getDaysOfWeekTestCases = (weekStartsOn: WeekDay) =>
     : [];
 
 export const getCalendarViewTestCases = (weekStartsOn: WeekDay) =>
-  weekStartsOn === 'sunday'
+  weekStartsOn === WeekDay.Sunday
     ? [
         {
           firstDayOfMonth: new Date(2021, 0, 10),
@@ -314,7 +314,7 @@ export const getCalendarViewTestCases = (weekStartsOn: WeekDay) =>
           ],
         },
       ]
-    : weekStartsOn === 'monday'
+    : weekStartsOn === WeekDay.Monday
     ? [
         {
           firstDayOfMonth: new Date(2021, 0, 10),

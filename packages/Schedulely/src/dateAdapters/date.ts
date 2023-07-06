@@ -1,4 +1,4 @@
-import { DateTimeAdapter, WeekDay, WeekDayNames } from '@/types';
+import { DateTimeAdapter, WeekDay } from '@/types';
 
 /**
  * Create an instance of the default date adapter
@@ -7,7 +7,7 @@ import { DateTimeAdapter, WeekDay, WeekDayNames } from '@/types';
  */
 export const createDefaultAdapter = (
   locale: string = 'en',
-  dayWeekStartsOn: WeekDay = 'sunday'
+  dayWeekStartsOn: WeekDay = WeekDay.Sunday
 ): DateTimeAdapter => {
   const getDaysOfWeek = (format?: 'long' | 'short' | 'narrow') => {
     const weekStart = dayWeekStartsOn;
@@ -15,30 +15,23 @@ export const createDefaultAdapter = (
       weekday: format,
     });
 
-    const dates = [0, 1, 2, 3, 4, 5, 6].map((x) =>
-      formatter.format(new Date(2012, 0, x + 1))
-    );
-    // Get the formatted version of weekStartsOn
-    const formattedWeekStartsOn = new Intl.DateTimeFormat(locale, {
-      weekday: format,
-    }).format(new Date(Date.UTC(2012, 0, WeekDayNames.indexOf(weekStart) + 2)));
-
-    // Find the index of weekStartsOn in the array
-    const startDayIndex = dates.indexOf(formattedWeekStartsOn);
+    // this represents a week of days, with sunday being 0
+    const weekDayArray = [0, 1, 2, 3, 4, 5, 6];
+    // const dayWeekStartsOnNumber = WeekDayNames.indexOf(weekStart);
 
     // Validate weekStartsOn input
-    if (startDayIndex === -1) {
+    if ((dayWeekStartsOn as number) === -1) {
       throw new Error(
         "weekStartsOn should be one of: 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'"
       );
     }
 
-    // Rotate the array until weekStartsOn is the first element
-    for (let i = 0; i < startDayIndex; i++) {
-      dates.push(dates.shift()!);
+    // rotate array until start day lines up
+    for (let i = 0; i < (dayWeekStartsOn as number); i++) {
+      weekDayArray.push(weekDayArray.shift()!);
     }
 
-    return dates;
+    return weekDayArray.map((x) => formatter.format(new Date(2012, 0, x + 1)));
   };
 
   /**
@@ -59,7 +52,7 @@ export const createDefaultAdapter = (
     const startsOfSchedulely: Date[] = [];
 
     let iteratedDate = startOfMonth;
-    while (iteratedDate.getDay() !== WeekDayNames.indexOf(weekStart)) {
+    while (iteratedDate.getDay() !== (weekStart as number)) {
       iteratedDate = new Date(
         iteratedDate.getFullYear(),
         iteratedDate.getMonth(),
@@ -80,7 +73,7 @@ export const createDefaultAdapter = (
 
     iteratedDate = endOfMonth;
     // only gather enough days until the the last day of the week
-    const lastDayCount = 7 - WeekDayNames.indexOf(weekStart);
+    const lastDayCount = 7 - (weekStart as number);
     while (iteratedDate.getDay() + 1 !== 7 - lastDayCount) {
       iteratedDate = new Date(
         iteratedDate.getFullYear(),
