@@ -1,6 +1,7 @@
 import { DefaultEvent } from '@/components';
 import { EventComponentProps, InternalCalendarEvent } from '@/types';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
+import { vi } from 'vitest';
 import chance from 'chance';
 
 const testEvent: InternalCalendarEvent = {
@@ -11,7 +12,7 @@ const testEvent: InternalCalendarEvent = {
   color: chance().color({ format: 'rgb' }),
   visible: false,
 };
-const onClickHandler = jest.fn((event: InternalCalendarEvent) => null);
+const onClickHandler = vi.fn((event: InternalCalendarEvent) => null);
 const defaults: EventComponentProps = {
   event: testEvent,
   isHovered: false,

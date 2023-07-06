@@ -1,13 +1,14 @@
 import { Chance } from 'chance';
 import { DayOfWeekLayout } from '@/layouts';
 import { RenderResult, render } from '@testing-library/react';
+import { vi } from 'vitest';
 
 // randomize day names for the hell of it
 const chance = Chance();
 const mockDaysOfTheWeek = chance.unique(() => chance.string(), 7);
 
-jest.mock('@/hooks', () => ({
-  useCalendar: jest.fn(() => ({
+vi.mock('@/hooks', () => ({
+  useCalendar: vi.fn(() => ({
     daysOfWeek: mockDaysOfTheWeek,
   })),
 }));

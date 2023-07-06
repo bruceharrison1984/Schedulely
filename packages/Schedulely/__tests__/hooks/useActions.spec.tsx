@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { useActions } from '@/hooks';
+import { vi } from 'vitest';
 
 const testEvents: InternalCalendarEvent[] = [
   {
@@ -17,14 +18,12 @@ const testEvents: InternalCalendarEvent[] = [
   },
 ];
 
-const onEventClickHandler = jest.fn((event: InternalCalendarEvent) => null);
-let onMonthChangeClickHandler = jest.fn(
+const onEventClickHandler = vi.fn((event: InternalCalendarEvent) => null);
+let onMonthChangeClickHandler = vi.fn(
   (firstOfMonth: Date, lastOfMonth: Date) => null
 );
-let onMoreEventsClickHandler = jest.fn(
-  (event: InternalCalendarEvent[]) => null
-);
-let onDayClickHandler = jest.fn((day: Date) => null);
+let onMoreEventsClickHandler = vi.fn((event: InternalCalendarEvent[]) => null);
+let onDayClickHandler = vi.fn((day: Date) => null);
 
 const wrapper = ({ children }: { children: ReactNode }) => (
   <ActionProvider

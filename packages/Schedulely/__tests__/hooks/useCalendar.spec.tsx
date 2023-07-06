@@ -6,6 +6,7 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import { createDefaultAdapter } from '@/dateAdapters/date';
 import { render } from '@testing-library/react';
 import { useCalendar } from '@/hooks';
+import { vi } from 'vitest';
 
 /**
  * Many of the tests here are simply pass-through tests. We just make sure the DateAdapter is called with the correct args,
@@ -72,45 +73,42 @@ const testCalendarView = [
   ],
 ];
 
-const mockOnMonthChangeClick = jest.fn();
-jest.mock('@/hooks/useActions', () => ({
-  useActions: jest.fn(() => ({
+const mockOnMonthChangeClick = vi.fn();
+vi.mock('@/hooks/useActions', () => ({
+  useActions: vi.fn(() => ({
     onMonthChangeClick: mockOnMonthChangeClick,
   })),
 }));
 
 let mockBreakpoint: ComponentSize = 'large';
-jest.mock('@/hooks/useBreakpoint', () => ({
-  useBreakpoint: jest.fn(() => ({
+vi.mock('@/hooks/useBreakpoint', () => ({
+  useBreakpoint: vi.fn(() => ({
     breakpoint: mockBreakpoint,
   })),
 }));
 
-const convertIsoToDate = jest.fn((isoDate: string) => testDate);
-const getYear = jest.fn();
-const getMonthName = jest.fn();
-const isCurrentMonth = jest.fn();
-const getDaysOfWeek = jest.fn();
-const addMonthsToDate = jest.fn();
-const getCalendarView = jest.fn(() => testCalendarView);
-jest.mock<{ createDefaultAdapter: (Date: Date) => DateTimeAdapter }>(
-  '@/dateAdapters/date',
-  () => ({
-    createDefaultAdapter: jest.fn<DateTimeAdapter, any>(() => ({
-      getCalendarView,
-      getDaysOfWeek,
-      getMonthName,
-      getYear,
-      isSameMonth: jest.fn(),
-      isDateToday: jest.fn(),
-      addMonthsToDate,
-      isEventInWeek: jest.fn(),
-      convertIsoToDate,
-      isCurrentMonth,
-      isDateBetween: jest.fn(),
-    })),
-  })
-);
+const convertIsoToDate = vi.fn((isoDate: string) => testDate);
+const getYear = vi.fn();
+const getMonthName = vi.fn();
+const isCurrentMonth = vi.fn();
+const getDaysOfWeek = vi.fn();
+const addMonthsToDate = vi.fn();
+const getCalendarView = vi.fn(() => testCalendarView);
+vi.mock('@/dateAdapters/date', () => ({
+  createDefaultAdapter: vi.fn(() => ({
+    getCalendarView,
+    getDaysOfWeek,
+    getMonthName,
+    getYear,
+    isSameMonth: vi.fn(),
+    isDateToday: vi.fn(),
+    addMonthsToDate,
+    isEventInWeek: vi.fn(),
+    convertIsoToDate,
+    isCurrentMonth,
+    isDateBetween: vi.fn(),
+  })),
+}));
 
 const testDateAdapter = createDefaultAdapter();
 

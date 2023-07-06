@@ -1,12 +1,13 @@
 import { DefaultHeader } from '@/components';
 import { HeaderComponentProps } from '@/types';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
+import { vi } from 'vitest';
 import chance from 'chance';
 
-const onNextMonthHandler = jest.fn(() => null);
-const onNextYearHandler = jest.fn(() => null);
-const onPrevMonthHandler = jest.fn(() => null);
-const onPrevYearHandler = jest.fn(() => null);
+const onNextMonthHandler = vi.fn(() => null);
+const onNextYearHandler = vi.fn(() => null);
+const onPrevMonthHandler = vi.fn(() => null);
+const onPrevYearHandler = vi.fn(() => null);
 
 const defaults: HeaderComponentProps = {
   month: chance().month(),

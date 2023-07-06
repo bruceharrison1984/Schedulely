@@ -2,6 +2,7 @@ import { DefaultEvent } from '@/components';
 import { EventWeekLayout, getGridEndIndex, getGridStartIndex } from '@/layouts';
 import { InternalCalendarEvent } from '@/types';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
+import { vi } from 'vitest';
 
 // Oct 2-8 2022 is the test week
 const daysInWeek = [
@@ -41,27 +42,27 @@ let events: InternalCalendarEvent[] = [
   },
 ];
 
-let mockSetHighlight = jest.fn((eventId: string) => {});
-let mockClearHighlight = jest.fn(() => {});
-let mockIsHighlighted = jest.fn((eventId: string) => false);
+let mockSetHighlight = vi.fn((eventId: string) => {});
+let mockClearHighlight = vi.fn(() => {});
+let mockIsHighlighted = vi.fn((eventId: string) => false);
 
-let mockEventOnClickHandler = jest.fn(() => {});
+let mockEventOnClickHandler = vi.fn(() => {});
 
-let mockSetParentContainerRef = jest.fn((eventId: string) => {});
+let mockSetParentContainerRef = vi.fn((eventId: string) => {});
 
-jest.mock('@/hooks', () => ({
-  useComponents: jest.fn(() => ({
+vi.mock('@/hooks', () => ({
+  useComponents: vi.fn(() => ({
     eventComponent: DefaultEvent,
   })),
-  useEventHighlight: jest.fn(() => ({
+  useEventHighlight: vi.fn(() => ({
     setHighlight: mockSetHighlight,
     clearHighlight: mockClearHighlight,
     isHighlighted: mockIsHighlighted,
   })),
-  useActions: jest.fn(() => ({
+  useActions: vi.fn(() => ({
     onEventClick: mockEventOnClickHandler,
   })),
-  useEventIntersection: jest.fn(() => ({
+  useEventIntersection: vi.fn(() => ({
     setParentContainerRef: mockSetParentContainerRef,
   })),
 }));
@@ -112,7 +113,7 @@ describe('EventWeekLayout', () => {
     });
   });
 
-  // we can't really test this well in jest without a massive setup. Maybe later.
+  // we can't really test this well in vi without a massive setup. Maybe later.
   describe('useEventIntersection', () => {
     it('setParentContainerRef is called on the parent', () =>
       expect(mockSetParentContainerRef).toHaveBeenCalledTimes(1));

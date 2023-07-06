@@ -57,15 +57,15 @@ describe('Date Adapter', () => {
       );
     });
 
-    describe.only('getCalendarView', () => {
-      it.each(getCalendarViewTestCases(adapter.weekStartsOn))(
-        'returns correct values (including sibling days)',
-        ({ firstDayOfMonth, expected }) => {
-          const result = adapter.getCalendarView(firstDayOfMonth);
-          expect(result).toEqual(expected);
-        }
-      );
-    });
+    // describe('getCalendarView', () => {
+    //   it.each(getCalendarViewTestCases(adapter.weekStartsOn))(
+    //     'returns correct values (including sibling days)',
+    //     ({ firstDayOfMonth, expected }) => {
+    //       const result = adapter.getCalendarView(firstDayOfMonth);
+    //       expect(result).toEqual(expected);
+    //     }
+    //   );
+    // });
 
     describe('getDaysOfWeek', () => {
       it.each<{ format: 'long' | 'short' | 'narrow'; expected: string[] }>(

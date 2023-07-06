@@ -1,7 +1,9 @@
+import 'vitest-dom/extend-expect';
+
 import { DayComponentProps, InternalCalendarEvent } from '@/types';
 import { DefaultDay } from '@/components';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
-import chance from 'chance';
+import { vi } from 'vitest';
 
 const testEvents: InternalCalendarEvent[] = [
   {
@@ -13,8 +15,8 @@ const testEvents: InternalCalendarEvent[] = [
     visible: false,
   },
 ];
-const onMoreEventsClick = jest.fn((events: InternalCalendarEvent[]) => null);
-const onDayClick = jest.fn((date: Date) => null);
+const onMoreEventsClick = vi.fn((events: InternalCalendarEvent[]) => null);
+const onDayClick = vi.fn((date: Date) => null);
 const defaults: DayComponentProps = {
   isCurrentMonth: true,
   isOverflowed: true,

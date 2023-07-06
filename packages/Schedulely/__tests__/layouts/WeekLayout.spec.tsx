@@ -1,6 +1,7 @@
 import { DayComponentProps, InternalCalendarEvent } from '@/types';
 import { RenderResult, render } from '@testing-library/react';
 import { WeekLayout } from '@/layouts';
+import { vi } from 'vitest';
 
 // Oct 2-8 2022 is the test week
 const dates = [
@@ -13,8 +14,8 @@ const dates = [
   new Date(2022, 9, 8),
 ];
 
-let mockOnMoreEventsClick = jest.fn((events: InternalCalendarEvent[]) => {});
-let mockGetEventsOnDate = jest.fn(
+let mockOnMoreEventsClick = vi.fn((events: InternalCalendarEvent[]) => {});
+let mockGetEventsOnDate = vi.fn(
   (date: Date) =>
     [
       {
@@ -35,29 +36,29 @@ let mockGetEventsOnDate = jest.fn(
       },
     ] as InternalCalendarEvent[]
 );
-let mockIsDateToday = jest.fn((date: Date) => true);
-let mockIsSameMonth = jest.fn((date: Date, date2: Date) => true);
-let mockCurrentDate = jest.fn(() => Date);
+let mockIsDateToday = vi.fn((date: Date) => true);
+let mockIsSameMonth = vi.fn((date: Date, date2: Date) => true);
+let mockCurrentDate = vi.fn(() => Date);
 
-const mockDayComponentPropsCheck = jest.fn();
-jest.mock('@/hooks', () => ({
-  useComponents: jest.fn(() => ({
-    dayComponent: jest.fn((props: DayComponentProps) => {
+const mockDayComponentPropsCheck = vi.fn();
+vi.mock('@/hooks', () => ({
+  useComponents: vi.fn(() => ({
+    dayComponent: vi.fn((props: DayComponentProps) => {
       mockDayComponentPropsCheck(props);
       return <div data-testid={props.date.getDate().toString()}></div>;
     }),
   })),
-  useCalendar: jest.fn(() => ({
+  useCalendar: vi.fn(() => ({
     dateAdapter: {
       isDateToday: mockIsDateToday,
       isSameMonth: mockIsSameMonth,
     },
     currentDate: mockCurrentDate,
   })),
-  useActions: jest.fn(() => ({
+  useActions: vi.fn(() => ({
     onMoreEventsClick: mockOnMoreEventsClick,
   })),
-  useEventIntersection: jest.fn(() => ({
+  useEventIntersection: vi.fn(() => ({
     getEventsOnDate: mockGetEventsOnDate,
   })),
 }));

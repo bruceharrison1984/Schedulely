@@ -1,4 +1,8 @@
 {
-  "jest.jestCommandLine": "npm run test -- --",
-  "cSpell.words": ["Schedulely"]
+  "vitest.commandLine": "npx vitest --config ./packages/Schedulely/vitest.config.js",
+  "vitest.showFailMessages": false,
+  "vitest.enable": true,
+  "vitest.include": [
+    "packages/Schedulely/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"
+  ]
 }

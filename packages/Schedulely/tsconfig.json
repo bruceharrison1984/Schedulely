@@ -3,10 +3,11 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "target": "es6",
-    "lib": ["ES2021"],
+    "lib": ["ES2021", "DOM"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "types": ["vitest-dom/extend-expect"]
     },
     "composite": false,
     "declaration": true,

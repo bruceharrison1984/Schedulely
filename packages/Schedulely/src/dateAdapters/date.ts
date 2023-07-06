@@ -69,6 +69,7 @@ export const createDefaultAdapter = (
     iteratedDate = endOfMonth;
     // only gather enough days until the the last day of the week
     while (iteratedDate.getDay() !== 7 - dayWeekStartsOn) {
+      //TODO: Problem is here
       console.log({ day: iteratedDate.getDay(), offset: 6 - dayWeekStartsOn });
       iteratedDate = new Date(
         iteratedDate.getFullYear(),

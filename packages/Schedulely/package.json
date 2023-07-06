@@ -18,7 +18,7 @@
     "rollup": "rollup -c",
     "lint": "eslint . --ext .ts --ext .tsx",
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
-    "test": "jest",
+    "test": "vitest",
     "test:ci": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --maxWorkers 1",
     "dev": "ladle serve --stories=__stories__/**.stories.tsx",
     "build-ladle": "ladle build"
@@ -57,8 +57,6 @@
     "barrelsby": "^2.8.0",
     "cssnano": "^6.0.1",
     "cssnano-preset-advanced": "^6.0.1",
-    "jest": "^29.6.0",
-    "jest-environment-jsdom": "^29.6.0",
     "postcss": "^8.4.24",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -69,5 +67,8 @@
     "rollup-plugin-progress": "^1.1.2",
     "rollup-plugin-ts": "^3.2.0",
     "sass": "^1.63.6"
+  },
+  "dependencies": {
+    "vitest": "^0.33.0"
   }
 }
