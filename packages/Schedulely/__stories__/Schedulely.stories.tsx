@@ -2,10 +2,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import '../src/Schedulely.scss';
 
-import { EventComponent, SchedulelyProps } from '@/types/index';
+import { EventComponent, SchedulelyProps, WeekDay } from '@/types/index';
 import { Schedulely } from '../src/Schedulely';
 import { StoryDecorator, ThemeState, useLadleContext } from '@ladle/react';
+import { createDefaultAdapter } from '@/dateAdapters';
 import { storyEvents } from './helpers';
+import { useState } from 'react';
 
 const story = {
   title: 'Schedulely',
@@ -21,6 +23,7 @@ export default story;
 
 export const NoEvents = () => {
   const { globalState } = useLadleContext();
+  const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
 
   const props: SchedulelyProps = {
     events: [],
@@ -33,15 +36,21 @@ export const NoEvents = () => {
   };
 
   return (
-    <Schedulely
-      {...props}
-      dark={globalState.theme === ThemeState.Dark}
-    ></Schedulely>
+    <div>
+      <select>
+        <option>test</option>
+      </select>
+      <Schedulely
+        {...props}
+        dark={globalState.theme === ThemeState.Dark}
+      ></Schedulely>
+    </div>
   );
 };
 
 export const DefaultTheme = () => {
   const { globalState } = useLadleContext();
+  const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
 
   const props: SchedulelyProps = {
     events: storyEvents,
@@ -53,10 +62,22 @@ export const DefaultTheme = () => {
     },
   };
   return (
-    <Schedulely
-      {...props}
-      dark={globalState.theme === ThemeState.Dark}
-    ></Schedulely>
+    <>
+      <select onChange={(e) => setStartDay(Number.parseInt(e.target.value))}>
+        <option value={0}>Sunday</option>
+        <option value={1}>Monday</option>
+        <option value={2}>Tuesday</option>
+        <option value={3}>Wednesday</option>
+        <option value={4}>Thursday</option>
+        <option value={5}>Friday</option>
+        <option value={6}>Saturday</option>
+      </select>
+      <Schedulely
+        {...props}
+        dateAdapter={createDefaultAdapter('en', startDay)}
+        dark={globalState.theme === ThemeState.Dark}
+      ></Schedulely>
+    </>
   );
 };
 

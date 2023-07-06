@@ -107,16 +107,16 @@ export const CalendarProvider = ({
     () =>
       calendarView.map<InternalEventWeek>((week) => ({
         daysInWeek: week,
-        events: events
-          .filter((event) =>
-            dateAdapter.isEventInWeek(event.start, event.end, week)
-          )
-          .sort(
-            (x, y) =>
-              x.end.valueOf() -
-              x.start.valueOf() -
-              (y.end.valueOf() - y.end.valueOf())
-          ),
+        events: events,
+        // .filter((event) =>
+        //   dateAdapter.isEventInWeek(event.start, event.end, week)
+        // )
+        // .sort(
+        //   (x, y) =>
+        //     x.end.valueOf() -
+        //     x.start.valueOf() -
+        //     (y.end.valueOf() - y.end.valueOf())
+        // ),
         eventsOnDays: week.map((day) => ({
           date: day,
           events: events.filter(

@@ -27,7 +27,6 @@ export const createDefaultAdapter = (
     for (let i = 0; i < (dayWeekStartsOn as number); i++) {
       weekDayArray.push(weekDayArray.shift()!);
     }
-
     return weekDayArray.map((x) => formatter.format(new Date(2012, 0, x + 1)));
   };
 
@@ -41,11 +40,11 @@ export const createDefaultAdapter = (
   const getCalendarView = (date: Date) => {
     const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
     const finalOfPrevMonth: Date[] = [];
     const currentMonth: Date[] = [];
     const startOfNextMonth: Date[] = [];
 
+    // get trailing days from previous month
     let iteratedDate = startOfMonth;
     while (iteratedDate.getDay() !== dayWeekStartsOn) {
       iteratedDate = new Date(
@@ -54,8 +53,12 @@ export const createDefaultAdapter = (
         iteratedDate.getDate() - 1
       );
       finalOfPrevMonth.push(iteratedDate);
+
+      // fail-safe to prevent run-away iteration
+      if (startOfNextMonth.length > 7) break;
     }
 
+    // get all days for current month
     iteratedDate = startOfMonth;
     while (iteratedDate.getMonth() === startOfMonth.getMonth()) {
       currentMonth.push(iteratedDate);
@@ -64,13 +67,16 @@ export const createDefaultAdapter = (
         iteratedDate.getMonth(),
         iteratedDate.getDate() + 1
       );
+
+      // fail-safe to prevent run-away iteration
+      if (startOfNextMonth.length > 7) break;
     }
 
+    // dayWeekEndsOn: WeekDay = (dayWeekStartsOn + 6) % 7
+    let trailingDays = (dayWeekStartsOn + 5) % 7;
+
     iteratedDate = endOfMonth;
-    // only gather enough days until the the last day of the week
-    while (iteratedDate.getDay() !== 7 - dayWeekStartsOn) {
-      //TODO: Problem is here
-      console.log({ day: iteratedDate.getDay(), offset: 6 - dayWeekStartsOn });
+    for (let index = 0; index < trailingDays; index++) {
       iteratedDate = new Date(
         iteratedDate.getFullYear(),
         iteratedDate.getMonth(),
@@ -85,9 +91,11 @@ export const createDefaultAdapter = (
       ...startOfNextMonth,
     ];
 
-    return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>
+    const monthView = [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>
       flatMonthView.splice(0, 7)
     );
+
+    return monthView;
   };
 
   const getMonthName = (date: Date, format?: 'long' | 'short') => {
