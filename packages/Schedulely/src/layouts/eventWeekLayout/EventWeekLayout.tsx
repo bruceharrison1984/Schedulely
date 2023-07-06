@@ -1,4 +1,5 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
+import { WeekDay } from '@/types';
 import {
   useActions,
   useComponents,
@@ -9,6 +10,7 @@ import {
 export interface EventLayoutProps {
   eventsInWeek: InternalCalendarEvent[];
   daysInweek: Date[];
+  firstDayOfWeek: WeekDay;
 }
 
 export const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>

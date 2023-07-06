@@ -7,14 +7,14 @@ import { DateTimeAdapter, WeekDay } from '@/types';
  */
 export const createDefaultAdapter = (
   locale: string = 'en',
-  dayWeekStartsOn: WeekDay = WeekDay.Sunday
+  firstDayOfWeek: WeekDay = WeekDay.Sunday
 ): DateTimeAdapter => {
   const getDaysOfWeek = (format?: 'long' | 'short' | 'narrow') => {
     const formatter = new Intl.DateTimeFormat(locale, {
       weekday: format,
     });
 
-    if ((dayWeekStartsOn as number) === -1) {
+    if ((firstDayOfWeek as number) === -1) {
       throw new Error(
         "weekStartsOn should be one of: 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'"
       );
@@ -24,7 +24,7 @@ export const createDefaultAdapter = (
     const weekDayArray = [0, 1, 2, 3, 4, 5, 6];
 
     // rotate array until start day lines up
-    for (let i = 0; i < (dayWeekStartsOn as number); i++) {
+    for (let i = 0; i < (firstDayOfWeek as number); i++) {
       weekDayArray.push(weekDayArray.shift()!);
     }
     return weekDayArray.map((x) => formatter.format(new Date(2012, 0, x + 1)));
@@ -36,13 +36,13 @@ export const createDefaultAdapter = (
    * This only uses native JS objects, so no external libs are needed
    *
    * It only iterates a single time, so it is highly performant
-   * @param date The month of this Date object determines the calendar that will be generated.
+   * @param date The month/year of this Date object determines the calendar that will be generated.
    * @returns Date[][]
    */
   const getCalendarView = (date: Date) => {
     const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
 
-    let leadingDaysDifferential = dayWeekStartsOn - startOfMonth.getDay();
+    let leadingDaysDifferential = firstDayOfWeek - startOfMonth.getDay();
     if (leadingDaysDifferential > 0) {
       //invert the leading days so slack is evenly divided between top/bottom
       leadingDaysDifferential = -(7 - leadingDaysDifferential);
@@ -132,6 +132,6 @@ export const createDefaultAdapter = (
     convertIsoToDate,
     isCurrentMonth,
     isDateBetween,
-    weekStartsOn: dayWeekStartsOn,
+    firstDayOfWeek,
   };
 };

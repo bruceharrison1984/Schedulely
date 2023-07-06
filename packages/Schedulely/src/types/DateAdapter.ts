@@ -51,5 +51,5 @@ export interface DateTimeAdapter {
   isDateBetween: (targetDate: Date, dateOne: Date, dateTwo: Date) => boolean;
 
   /** What day of the week the week starts on, with 0 = Sunday, 1 = Monday, etc. */
-  weekStartsOn: WeekDay;
+  firstDayOfWeek: WeekDay;
 }

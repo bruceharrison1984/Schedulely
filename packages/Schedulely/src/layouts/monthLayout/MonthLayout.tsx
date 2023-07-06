@@ -8,7 +8,7 @@ import { useCalendar, useKeyboardControls } from '@/hooks';
  * @returns MonthLayout Component
  */
 export const MonthLayout = () => {
-  const { calendarWithEvents } = useCalendar();
+  const { calendarWithEvents, firstDayOfWeek: startOfWeek } = useCalendar();
   useKeyboardControls();
 
   return (
@@ -21,7 +21,11 @@ export const MonthLayout = () => {
             data-week={idx}
           >
             <EventIntersectionProvider eventsInWeek={events}>
-              <EventWeekLayout eventsInWeek={events} daysInweek={daysInWeek} />
+              <EventWeekLayout
+                eventsInWeek={events}
+                daysInweek={daysInWeek}
+                firstDayOfWeek={startOfWeek}
+              />
               <WeekLayout dates={daysInWeek} />
             </EventIntersectionProvider>
           </div>
