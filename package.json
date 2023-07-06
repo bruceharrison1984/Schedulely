@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build --no-daemon",
+    "build": "turbo run build",
     "barrels": "turbo run barrels --no-daemon",
     "build-ladle": "turbo run build-ladle --no-daemon",
     "rollup": "turbo run rollup --no-daemon",
