@@ -36,6 +36,7 @@ const sidebars = {
         'Usage/Actions',
         'Usage/DateTime',
         'Usage/Keyboard',
+        'Usage/StartOfWeek',
       ],
     },
     {
