@@ -1,7 +1,7 @@
 import 'schedulely/dist/index.css';
 
 import { Resizable } from 're-resizable';
-import { Schedulely } from 'schedulely';
+import { Schedulely, WeekDay, createDefaultAdapter } from 'schedulely';
 import { storyEvents } from './helpers.stories';
 import { useColorMode } from '@docusaurus/theme-common';
 import React, { useState } from 'react';
@@ -9,15 +9,53 @@ import React, { useState } from 'react';
 const HomepageSchedulely = () => {
   const { colorMode } = useColorMode();
   const [theme, setTheme] = useState<string>('default');
+  const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
 
   return (
     <>
-      <div style={{ marginTop: '0.5em', textAlign: 'center' }}>
-        <label htmlFor="theme-selector">Theme: </label>
-        <select id="theme-selector" onChange={(e) => setTheme(e.target.value)}>
-          <option>default</option>
-          <option>minimal</option>
-        </select>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '1em',
+        }}
+      >
+        <div
+          style={{
+            marginTop: '0.5em',
+            textAlign: 'center',
+          }}
+        >
+          <label htmlFor="theme-selector">Theme: </label>
+          <select
+            id="theme-selector"
+            onChange={(e) => setTheme(e.target.value)}
+          >
+            <option>default</option>
+            <option>minimal</option>
+          </select>
+        </div>
+        <div
+          style={{
+            marginTop: '0.5em',
+            textAlign: 'center',
+          }}
+        >
+          <label htmlFor="start-of-week-selector">Start Of Week: </label>
+          <select
+            id="start-of-week-selector"
+            onChange={(e) => setStartDay(Number.parseInt(e.target.value))}
+          >
+            <option value={0}>Sunday</option>
+            <option value={1}>Monday</option>
+            <option value={2}>Tuesday</option>
+            <option value={3}>Wednesday</option>
+            <option value={4}>Thursday</option>
+            <option value={5}>Friday</option>
+            <option value={6}>Saturday</option>
+          </select>
+        </div>
       </div>
       <div
         className="homepage-schedulely"
@@ -63,6 +101,7 @@ const HomepageSchedulely = () => {
               onEventClick: (event) => console.log(event),
               onMoreEventsClick: (events) => console.log(events),
             }}
+            dateAdapter={createDefaultAdapter('en', startDay)}
           />
           <div className="resize-action-message">
             Test{' '}
