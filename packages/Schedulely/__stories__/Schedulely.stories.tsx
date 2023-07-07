@@ -51,7 +51,7 @@ export const DefaultTheme = () => {
       color: '#4b578a',
       start: '2023-07-06T16:07:22.292Z',
       id: 'f147',
-      end: '2023-07-08T16:07:22.292Z',
+      end: '2023-07-07T16:07:22.292Z',
       summary: 'Craig Bishop',
     },
   ];

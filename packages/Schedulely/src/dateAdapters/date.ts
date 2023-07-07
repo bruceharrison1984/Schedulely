@@ -98,14 +98,18 @@ export const createDefaultAdapter = (
     eventEndDate: Date,
     week: Date[]
   ) => {
+    const weekStart = week[0];
+    const weekEnd = week[6];
     if (week.length !== 7) throw new Error('Week length must be 7');
-    eventStartDate.setHours(0, 0, 0, 0); // zero time to avoid slight mismatches, bug potential high
-    eventEndDate.setHours(0, 0, 0, 0); // zero time to avoid slight mismatches, bug potential high
+    weekStart.setHours(0, 0, 0, 0); // set week start to earliest possible time
+    weekEnd.setHours(23, 59, 59, 0); // set weekend to latest possible time
 
     const eventStartInWeek =
-      eventStartDate >= week[0] && eventStartDate <= week[6];
-    const eventEndsInWeek = eventEndDate >= week[0] && eventEndDate <= week[6];
-    const eventSpansWeek = eventStartDate <= week[0] && eventEndDate >= week[6];
+      eventStartDate >= weekStart && eventStartDate <= weekEnd;
+    const eventEndsInWeek =
+      eventEndDate >= weekStart && eventEndDate <= weekEnd;
+    const eventSpansWeek =
+      eventStartDate <= weekStart && eventEndDate >= weekEnd;
 
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
@@ -118,10 +122,14 @@ export const createDefaultAdapter = (
   };
 
   const isDateBetween = (targetDate: Date, dateOne: Date, dateTwo: Date) => {
+    // clone the dates to avoid mutating the original date object
+    const d1 = new Date(dateOne);
+    const d2 = new Date(dateTwo);
+
     // set dates to midnight to avoid missing on half-days
-    dateOne.setHours(0, 0, 0, 0);
-    dateTwo.setHours(0, 0, 0, 0);
-    return targetDate >= dateOne && targetDate <= dateTwo;
+    d1.setHours(0, 0, 0, 0);
+    d2.setHours(23, 59, 59, 0);
+    return targetDate >= d1 && targetDate <= d2;
   };
 
   return {

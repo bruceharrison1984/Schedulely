@@ -22,26 +22,6 @@ export const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
   return end;
 };
 
-export const getEventPosition = (
-  { start, end }: InternalCalendarEvent,
-  daysInWeek: Date[],
-  firstDayOfWeek: WeekDay
-) => {
-  start.setHours(0, 0, 0, 0); // zero time to avoid slight mismatches, bug potential high
-  end.setHours(0, 0, 0, 0); // zero time to avoid slight mismatches, bug potential high
-
-  let startIndex = 1; // default to first column
-  if (start >= daysInWeek[0])
-    startIndex = Math.abs(start.getDay() + 1 - firstDayOfWeek); //add one because css-grid isn't zero-index'd
-
-  let endIndex = 8; // default to full length
-  if (end < daysInWeek[6]) endIndex = end.getDay() + 2 - firstDayOfWeek; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
-
-  const gridColumnPosition = `${startIndex}/${endIndex}`;
-  // console.log({ gridColumnPosition, start, end });
-  return gridColumnPosition;
-};
-
 /**
  * This component controls the layout of an individual events within a week  getEventPosition(event.start, event.end, daysInweek[0], daysInweek[6], firstDayOfWeek),
  * @returns EventLayout Component
@@ -56,6 +36,38 @@ export const EventWeekLayout = ({
   const { onEventClick } = useActions();
   const { setParentContainerRef } = useEventIntersection();
 
+  const getEventPosition = (
+    { start, end }: InternalCalendarEvent,
+    daysInWeek: Date[]
+  ) => {
+    const weekStart = daysInWeek[0];
+    const weekEnd = daysInWeek[6];
+
+    weekStart.setHours(0, 0, 0, 0);
+    weekEnd.setHours(23, 59, 59, 0);
+
+    const startsAfterFirstDay = start >= daysInWeek[0];
+    const endsAfterLastDay = end < daysInWeek[6];
+
+    let startIndex = 1; // default to first column
+    if (startsAfterFirstDay)
+      startIndex = Math.abs(firstDayOfWeek - start.getDay()) + 1; //add one because css-grid isn't zero-index'd
+
+    let endIndex = 8; // default to full length
+    if (endsAfterLastDay) endIndex = end.getDay() + 2 - firstDayOfWeek; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
+
+    const gridColumnPosition = `${startIndex}/${endIndex}`;
+    console.log({
+      gridColumnPosition,
+      weekStart,
+      firstDayOfWeek,
+      start,
+      end,
+      startsAfterFirstDay,
+    });
+    return gridColumnPosition;
+  };
+
   return (
     <div className="event-week-layout" ref={setParentContainerRef}>
       <div className="event-week-layout-grid">
@@ -66,7 +78,7 @@ export const EventWeekLayout = ({
             className="event-position-layout"
             data-eventid={event.id}
             style={{
-              gridColumn: getEventPosition(event, daysInweek, firstDayOfWeek),
+              gridColumn: getEventPosition(event, daysInweek),
               visibility: 'hidden', // start hidden to avoid flashes of events that will be hidden
             }}
             onMouseOver={() => setHighlight(event.id)}
