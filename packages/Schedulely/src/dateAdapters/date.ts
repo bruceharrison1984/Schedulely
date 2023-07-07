@@ -144,6 +144,5 @@ export const createDefaultAdapter = (
     convertIsoToDate,
     isCurrentMonth,
     isDateBetween,
-    firstDayOfWeek,
   };
 };

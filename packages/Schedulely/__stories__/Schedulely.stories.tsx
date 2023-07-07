@@ -46,18 +46,8 @@ export const DefaultTheme = () => {
   const { globalState } = useLadleContext();
   const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
 
-  const events = [
-    {
-      color: '#4b578a',
-      start: '2023-07-06T16:07:22.292Z',
-      id: 'f147',
-      end: '2023-07-07T16:07:22.292Z',
-      summary: 'Craig Bishop',
-    },
-  ];
-
   const props: SchedulelyProps = {
-    events: events,
+    events: storyEvents,
     initialDate: new Date().toISOString(),
     actions: {
       onMoreEventsClick: (events) => console.log(events),

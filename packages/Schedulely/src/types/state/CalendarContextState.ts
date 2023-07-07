@@ -1,4 +1,4 @@
-import { DateTimeAdapter, WeekDay } from '..';
+import { DateTimeAdapter } from '..';
 import { InternalEventWeek } from '../InternalEventWeek';
 
 export type CalendarContextState = {
@@ -19,9 +19,6 @@ export type CalendarContextState = {
 
   /** The days of the week, for use in the calendar header */
   daysOfWeek: string[];
-
-  /** The day of the week that is first on the calendar left->right */
-  firstDayOfWeek: WeekDay;
 
   /** Advance the calendar one month */
   onNextMonth: () => void;

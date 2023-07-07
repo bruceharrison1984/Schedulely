@@ -59,11 +59,6 @@ export const CalendarProvider = ({
     [currentDate, dateAdapter]
   );
 
-  const firstDayOfWeek = useMemo(
-    () => dateAdapter.firstDayOfWeek,
-    [dateAdapter]
-  );
-
   const daysOfWeek = useMemo(() => {
     let format: 'long' | 'short' | 'narrow' = 'long';
     if (breakpoint === 'medium') format = 'short';
@@ -168,7 +163,6 @@ export const CalendarProvider = ({
     isCurrentMonth,
     daysOfWeek,
     calendarWithEvents,
-    firstDayOfWeek,
     onNextMonth,
     onNextYear,
     onPrevMonth,

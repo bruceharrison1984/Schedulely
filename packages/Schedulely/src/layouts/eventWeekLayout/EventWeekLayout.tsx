@@ -1,5 +1,4 @@
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
-import { WeekDay } from '@/types';
 import {
   useActions,
   useComponents,
@@ -10,7 +9,6 @@ import {
 export interface EventLayoutProps {
   eventsInWeek: InternalCalendarEvent[];
   daysInweek: Date[];
-  firstDayOfWeek: WeekDay;
 }
 
 export const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
@@ -29,7 +27,6 @@ export const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
 export const EventWeekLayout = ({
   eventsInWeek,
   daysInweek,
-  firstDayOfWeek,
 }: EventLayoutProps) => {
   const { eventComponent: EventComponent } = useComponents();
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
@@ -40,31 +37,26 @@ export const EventWeekLayout = ({
     { start, end }: InternalCalendarEvent,
     daysInWeek: Date[]
   ) => {
-    const weekStart = daysInWeek[0];
-    const weekEnd = daysInWeek[6];
+    const days = daysInWeek
+      .filter((x) => {
+        return (
+          (x.getDate() == start.getDate() &&
+            x.getFullYear() === start.getFullYear()) ||
+          (x.getDate() == end.getDate() &&
+            x.getFullYear() === end.getFullYear())
+        );
+      })
+      .map((x) => daysInWeek.indexOf(x))
+      .sort();
 
-    weekStart.setHours(0, 0, 0, 0);
-    weekEnd.setHours(23, 59, 59, 0);
+    let startIndex = days[0] + 1;
+    if (isNaN(startIndex) || start < daysInWeek[0]) startIndex = 1;
 
-    const startsAfterFirstDay = start >= daysInWeek[0];
-    const endsAfterLastDay = end < daysInWeek[6];
-
-    let startIndex = 1; // default to first column
-    if (startsAfterFirstDay)
-      startIndex = Math.abs(firstDayOfWeek - start.getDay()) + 1; //add one because css-grid isn't zero-index'd
-
-    let endIndex = 8; // default to full length
-    if (endsAfterLastDay) endIndex = end.getDay() + 2 - firstDayOfWeek; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
+    let endIndex = days.slice(-1)[0] + 2;
+    if (isNaN(endIndex) || end > daysInWeek[6]) endIndex = 8;
 
     const gridColumnPosition = `${startIndex}/${endIndex}`;
-    // console.log({
-    //   gridColumnPosition,
-    //   weekStart,
-    //   firstDayOfWeek,
-    //   start,
-    //   end,
-    //   startsAfterFirstDay,
-    // });
+
     return gridColumnPosition;
   };
 
