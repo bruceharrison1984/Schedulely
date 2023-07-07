@@ -38,7 +38,7 @@ export const getEventPosition = (
   if (end < daysInWeek[6]) endIndex = end.getDay() + 2 - firstDayOfWeek; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
 
   const gridColumnPosition = `${startIndex}/${endIndex}`;
-  console.log({ gridColumnPosition, start, end });
+  // console.log({ gridColumnPosition, start, end });
   return gridColumnPosition;
 };
 
