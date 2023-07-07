@@ -20,6 +20,32 @@ export const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
   return end;
 };
 
+const getEventPosition = (
+  { start, end }: InternalCalendarEvent,
+  daysInWeek: Date[]
+) => {
+  const days = daysInWeek
+    .filter((x) => {
+      return (
+        (x.getDate() == start.getDate() &&
+          x.getFullYear() === start.getFullYear()) ||
+        (x.getDate() == end.getDate() && x.getFullYear() === end.getFullYear())
+      );
+    })
+    .map((x) => daysInWeek.indexOf(x))
+    .sort();
+
+  let startIndex = days[0] + 1;
+  if (isNaN(startIndex) || start < daysInWeek[0]) startIndex = 1;
+
+  let endIndex = days.slice(-1)[0] + 2;
+  if (isNaN(endIndex) || end > daysInWeek[6]) endIndex = 8;
+
+  const gridColumnPosition = `${startIndex}/${endIndex}`;
+
+  return gridColumnPosition;
+};
+
 /**
  * This component controls the layout of an individual events within a week  getEventPosition(event.start, event.end, daysInweek[0], daysInweek[6], firstDayOfWeek),
  * @returns EventLayout Component
@@ -32,33 +58,6 @@ export const EventWeekLayout = ({
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
   const { setParentContainerRef } = useEventIntersection();
-
-  const getEventPosition = (
-    { start, end }: InternalCalendarEvent,
-    daysInWeek: Date[]
-  ) => {
-    const days = daysInWeek
-      .filter((x) => {
-        return (
-          (x.getDate() == start.getDate() &&
-            x.getFullYear() === start.getFullYear()) ||
-          (x.getDate() == end.getDate() &&
-            x.getFullYear() === end.getFullYear())
-        );
-      })
-      .map((x) => daysInWeek.indexOf(x))
-      .sort();
-
-    let startIndex = days[0] + 1;
-    if (isNaN(startIndex) || start < daysInWeek[0]) startIndex = 1;
-
-    let endIndex = days.slice(-1)[0] + 2;
-    if (isNaN(endIndex) || end > daysInWeek[6]) endIndex = 8;
-
-    const gridColumnPosition = `${startIndex}/${endIndex}`;
-
-    return gridColumnPosition;
-  };
 
   return (
     <div className="event-week-layout" ref={setParentContainerRef}>
