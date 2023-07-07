@@ -1,6 +1,6 @@
 import { DefaultEvent } from '@/components';
 import { EventWeekLayout, getGridEndIndex, getGridStartIndex } from '@/layouts';
-import { InternalCalendarEvent } from '@/types';
+import { InternalCalendarEvent, WeekDay } from '@/types';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { vi } from 'vitest';
 
@@ -73,7 +73,11 @@ describe('EventWeekLayout', () => {
   beforeEach(() => {
     mockSetParentContainerRef.mockClear();
     testObject = render(
-      <EventWeekLayout eventsInWeek={events} daysInweek={daysInWeek} />
+      <EventWeekLayout
+        eventsInWeek={events}
+        daysInweek={daysInWeek}
+        firstDayOfWeek={WeekDay.Sunday}
+      />
     );
   });
 
@@ -118,6 +122,10 @@ describe('EventWeekLayout', () => {
     it('setParentContainerRef is called on the parent', () =>
       expect(mockSetParentContainerRef).toHaveBeenCalledTimes(1));
   });
+
+  describe.todo(
+    'replace getGridEndIndex and getGridStartIndex with getEventPosition'
+  );
 
   describe('getGridEndIndex', () => {
     it.each<{ eventEnd: Date; endOfWeek: Date; expected: number }>([
