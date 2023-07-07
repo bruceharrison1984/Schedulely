@@ -15,7 +15,7 @@ import { Schedulely, WeekDay, createDefaultAdapter } from 'schedulely';
 <Schedulely dateAdapter={createDefaultAdapter('en', Weekday.Monday)} />;
 ```
 
-The calendar is setup to try it's best to wrap the trailing/leading days evenly on the top and bottom respectively. However, the top takes priority for the current month and if the month starts of the selected start of the week, you will not see trailing days from the previous month.
+The calendar is setup to try it's best to wrap the trailing/leading days evenly on the top and bottom respectively. However, the top takes priority for the current month and if the current month starts on the chosen start of the week day, you will not see trailing days from the previous month.
 
 ## Warning
 
