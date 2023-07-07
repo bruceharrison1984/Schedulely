@@ -57,14 +57,14 @@ export const EventWeekLayout = ({
     if (endsAfterLastDay) endIndex = end.getDay() + 2 - firstDayOfWeek; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
 
     const gridColumnPosition = `${startIndex}/${endIndex}`;
-    console.log({
-      gridColumnPosition,
-      weekStart,
-      firstDayOfWeek,
-      start,
-      end,
-      startsAfterFirstDay,
-    });
+    // console.log({
+    //   gridColumnPosition,
+    //   weekStart,
+    //   firstDayOfWeek,
+    //   start,
+    //   end,
+    //   startsAfterFirstDay,
+    // });
     return gridColumnPosition;
   };
 
