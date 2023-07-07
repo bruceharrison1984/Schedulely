@@ -1,12 +1,13 @@
 import { DefaultHeader } from '@/components';
 import { HeaderComponentProps } from '@/types';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
+import { vi } from 'vitest';
 import chance from 'chance';
 
-const onNextMonthHandler = jest.fn(() => null);
-const onNextYearHandler = jest.fn(() => null);
-const onPrevMonthHandler = jest.fn(() => null);
-const onPrevYearHandler = jest.fn(() => null);
+const onNextMonthHandler = vi.fn(() => null);
+const onNextYearHandler = vi.fn(() => null);
+const onPrevMonthHandler = vi.fn(() => null);
+const onPrevYearHandler = vi.fn(() => null);
 
 const defaults: HeaderComponentProps = {
   month: chance().month(),
@@ -46,12 +47,11 @@ describe('DefaultHeader', () => {
     describe('is false', () => {
       let testObject: RenderResult;
 
-      beforeEach(
-        () =>
-          (testObject = render(
-            <DefaultHeader {...defaults} isCurrentMonth={false} />
-          ))
-      );
+      beforeEach(() => {
+        testObject = render(
+          <DefaultHeader {...defaults} isCurrentMonth={false} />
+        );
+      });
 
       it('indicator is rendered', () =>
         expect(testObject.queryByRole('alert')).toBeNull());
@@ -60,7 +60,9 @@ describe('DefaultHeader', () => {
     describe('onClick', () => {
       let testObject: RenderResult;
 
-      beforeEach(() => (testObject = render(<DefaultHeader {...defaults} />)));
+      beforeEach(() => {
+        testObject = render(<DefaultHeader {...defaults} />);
+      });
 
       it('for previous month calls handler', () => {
         fireEvent.click(testObject.getByTitle('Previous Month'));

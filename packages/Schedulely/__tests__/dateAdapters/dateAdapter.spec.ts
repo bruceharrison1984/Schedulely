@@ -1,4 +1,4 @@
-import { DateTimeAdapter } from '@/types/index';
+import { DateTimeAdapter, WeekDay } from '@/types/index';
 import { createDefaultAdapter } from '@/dateAdapters/date';
 import {
   getAddMonthsToDateTestCases,
@@ -20,11 +20,13 @@ import {
 const adapters = [
   {
     name: 'Date',
-    adapter: createDefaultAdapter(),
+    adapter: createDefaultAdapter('en', WeekDay.Sunday),
+    startOfWeek: WeekDay.Sunday,
   },
   {
     name: 'DateWithStartOfWeek',
-    adapter: createDefaultAdapter('en', 'monday'),
+    adapter: createDefaultAdapter('en', WeekDay.Monday),
+    startOfWeek: WeekDay.Monday,
   },
 ];
 
@@ -32,7 +34,8 @@ describe('Date Adapter', () => {
   describe.each<{
     name: string;
     adapter: DateTimeAdapter;
-  }>(adapters)('$name', ({ adapter }) => {
+    startOfWeek: WeekDay;
+  }>(adapters)('$name', ({ adapter, startOfWeek }) => {
     describe('addMonthsToDate', () => {
       it.each<{ originalDate: Date; amount: number; expectedDate: Date }>(
         getAddMonthsToDateTestCases()
@@ -57,22 +60,19 @@ describe('Date Adapter', () => {
       );
     });
 
-    xdescribe('getCalendarView', () => {
-      it.each(getCalendarViewTestCases(adapter.weekStartsOn))(
+    describe('getCalendarView', () => {
+      it.each(getCalendarViewTestCases(startOfWeek))(
         'returns correct values (including sibling days)',
         ({ firstDayOfMonth, expected }) => {
-          const result = adapter.getCalendarView(
-            firstDayOfMonth,
-            adapter.weekStartsOn
-          );
+          const result = adapter.getCalendarView(firstDayOfMonth);
           expect(result).toEqual(expected);
         }
       );
     });
 
-    xdescribe('getDaysOfWeek', () => {
+    describe('getDaysOfWeek', () => {
       it.each<{ format: 'long' | 'short' | 'narrow'; expected: string[] }>(
-        getDaysOfWeekTestCases(adapter.weekStartsOn)
+        getDaysOfWeekTestCases(startOfWeek)
       )('with format "$format" returns $expected', ({ format, expected }) => {
         const result = adapter.getDaysOfWeek(format);
         expect(result).toEqual(expected);

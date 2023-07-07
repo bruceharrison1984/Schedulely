@@ -88,10 +88,18 @@ export const CalendarProvider = ({
         })
         .filter(
           (event) =>
-            dateAdapter.isSameMonth(event.start, currentDate) ||
-            dateAdapter.isSameMonth(event.end, currentDate)
+            dateAdapter.isDateBetween(
+              event.start,
+              calendarView[0][0],
+              calendarView[5][6]
+            ) ||
+            dateAdapter.isDateBetween(
+              event.end,
+              calendarView[0][0],
+              calendarView[5][6]
+            )
         ),
-    [currentDate, calendarEvents, dateAdapter]
+    [calendarEvents, dateAdapter, calendarView]
   );
 
   useEffect(() => {

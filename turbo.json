@@ -7,7 +7,6 @@
       "inputs": ["src/**/*.tsx", "src/**/*.ts"]
     },
     "test": {
-      "dependsOn": ["lint", "barrels"],
       "outputs": [],
       "inputs": [
         "src/**/*.tsx",

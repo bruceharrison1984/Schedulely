@@ -3,21 +3,22 @@ import { DefaultHeader } from '@/components';
 import { HeaderComponent } from '@/types';
 import { HeaderLayout } from '@/layouts';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
+import { vi } from 'vitest';
 
 let mockHeaderComponent: HeaderComponent = DefaultHeader;
 const mockCurrentMonth = Chance().month();
 const mockCurrentYear = Chance().year();
 const mockIsCurrentMonth = Chance().bool();
-const mockOnNextMonthClick = jest.fn();
-const mockOnNextYearHandler = jest.fn();
-const mockOnPrevMonthHandler = jest.fn();
-const mockOnPrevYearHandler = jest.fn();
+const mockOnNextMonthClick = vi.fn();
+const mockOnNextYearHandler = vi.fn();
+const mockOnPrevMonthHandler = vi.fn();
+const mockOnPrevYearHandler = vi.fn();
 
-jest.mock('@/hooks', () => ({
-  useComponents: jest.fn(() => ({
+vi.mock('@/hooks', () => ({
+  useComponents: vi.fn(() => ({
     headerComponent: mockHeaderComponent,
   })),
-  useCalendar: jest.fn(() => ({
+  useCalendar: vi.fn(() => ({
     currentMonth: mockCurrentMonth,
     currentYear: mockCurrentYear,
     isCurrentMonth: mockIsCurrentMonth,

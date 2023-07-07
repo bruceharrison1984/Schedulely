@@ -1,4 +1,4 @@
-import { DateTimeAdapter, WeekDay, WeekDayNames } from '@/types';
+import { DateTimeAdapter, WeekDay } from '@/types';
 
 /**
  * Create an instance of the default date adapter
@@ -7,100 +7,69 @@ import { DateTimeAdapter, WeekDay, WeekDayNames } from '@/types';
  */
 export const createDefaultAdapter = (
   locale: string = 'en',
-  dayWeekStartsOn: WeekDay = 'sunday'
+  firstDayOfWeek: WeekDay = WeekDay.Sunday
 ): DateTimeAdapter => {
-  const getDaysOfWeek = (
-    format?: 'long' | 'short' | 'narrow',
-    weekStartsOn?: WeekDay
-  ) => {
-    const weekStart = weekStartsOn ? weekStartsOn : dayWeekStartsOn;
+  const getDaysOfWeek = (format?: 'long' | 'short' | 'narrow') => {
     const formatter = new Intl.DateTimeFormat(locale, {
       weekday: format,
     });
-    const dates = [0, 1, 2, 3, 4, 5, 6].map((x) =>
-      formatter.format(new Date(2012, 0, x + 1))
-    );
-    // Get the formatted version of weekStartsOn
-    const formattedWeekStartsOn = new Intl.DateTimeFormat(locale, {
-      weekday: format,
-    }).format(new Date(Date.UTC(2012, 0, WeekDayNames.indexOf(weekStart) + 1)));
 
-    // Find the index of weekStartsOn in the array
-    const startDayIndex = dates.indexOf(formattedWeekStartsOn);
-
-    // Validate weekStartsOn input
-    if (startDayIndex === -1) {
+    if ((firstDayOfWeek as number) === -1) {
       throw new Error(
         "weekStartsOn should be one of: 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'"
       );
     }
 
-    // Rotate the array until weekStartsOn is the first element
-    for (let i = 0; i < startDayIndex; i++) {
-      dates.push(dates.shift()!);
-    }
+    // this represents a week of days, with sunday being 0
+    const weekDayArray = [0, 1, 2, 3, 4, 5, 6];
 
-    return dates;
+    // rotate array until start day lines up
+    for (let i = 0; i < (firstDayOfWeek as number); i++) {
+      weekDayArray.push(weekDayArray.shift()!);
+    }
+    return weekDayArray.map((x) => formatter.format(new Date(2012, 0, x + 1)));
   };
 
   /**
-   * This function will return an array of arrays representing a month, split into weeks 7 days long.
-   * This includes leading/trailing days.
+   * This function will return an array of arrays representing a month as a 6*7 data table. This includes leading/trailing days.
+   *
    * This only uses native JS objects, so no external libs are needed
-   * @param date Native JS date object
+   *
+   * It only iterates a single time, so it is highly performant
+   * @param date The month/year of this Date object determines the calendar that will be generated.
    * @returns Date[][]
    */
-  const getCalendarView = (date: Date, weekStartsOn?: WeekDay) => {
-    const weekStart = weekStartsOn ? weekStartsOn : dayWeekStartsOn;
-
+  const getCalendarView = (date: Date) => {
     const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-    const finalsOfPrevMonth: Date[] = [];
-    const currentMonth: Date[] = [];
-    const startsOfSchedulely: Date[] = [];
-
-    let iteratedDate = startOfMonth;
-    while (iteratedDate.getDay() !== WeekDayNames.indexOf(weekStart)) {
-      iteratedDate = new Date(
-        iteratedDate.getFullYear(),
-        iteratedDate.getMonth(),
-        iteratedDate.getDate() - 1
-      );
-      finalsOfPrevMonth.push(iteratedDate);
+    let leadingDaysDifferential = firstDayOfWeek - startOfMonth.getDay();
+    if (leadingDaysDifferential > 0) {
+      //invert the leading days so slack is evenly divided between top/bottom
+      leadingDaysDifferential = -(7 - leadingDaysDifferential);
     }
 
-    iteratedDate = startOfMonth;
-    while (iteratedDate.getMonth() === startOfMonth.getMonth()) {
-      currentMonth.push(iteratedDate);
-      iteratedDate = new Date(
-        iteratedDate.getFullYear(),
-        iteratedDate.getMonth(),
-        iteratedDate.getDate() + 1
-      );
-    }
-
-    iteratedDate = endOfMonth;
-    // only gather enough days until the the last day of the week
-    const lastDayCount = 7 - WeekDayNames.indexOf(weekStart);
-    while (iteratedDate.getDay() + 1 !== 7 - lastDayCount) {
-      iteratedDate = new Date(
-        iteratedDate.getFullYear(),
-        iteratedDate.getMonth(),
-        iteratedDate.getDate() + 1
-      );
-      startsOfSchedulely.push(iteratedDate);
-    }
-
-    const flatMonthView = [
-      ...finalsOfPrevMonth.reverse(),
-      ...currentMonth,
-      ...startsOfSchedulely,
-    ];
-
-    return [...Array(Math.ceil(flatMonthView.length / 7))].map(() =>
-      flatMonthView.splice(0, 7)
+    let dateIterator = new Date(
+      startOfMonth.getFullYear(),
+      startOfMonth.getMonth(),
+      startOfMonth.getDate() + leadingDaysDifferential
     );
+
+    const dates: Date[] = [dateIterator];
+    // fixed sized for 6x7 calendar body
+    for (let index = 0; index < 41; index++) {
+      dateIterator = new Date(
+        dateIterator.getFullYear(),
+        dateIterator.getMonth(),
+        dateIterator.getDate() + 1
+      );
+      dates.push(dateIterator);
+    }
+
+    const monthView = [...Array(Math.ceil(dates.length / 7))].map(() =>
+      dates.splice(0, 7)
+    );
+
+    return monthView;
   };
 
   const getMonthName = (date: Date, format?: 'long' | 'short') => {
@@ -129,11 +98,19 @@ export const createDefaultAdapter = (
     eventEndDate: Date,
     week: Date[]
   ) => {
+    const weekStart = week[0];
+    const weekEnd = week[6];
     if (week.length !== 7) throw new Error('Week length must be 7');
+    weekStart.setHours(0, 0, 0, 0); // set week start to earliest possible time
+    weekEnd.setHours(23, 59, 59, 0); // set weekend to latest possible time
+
     const eventStartInWeek =
-      eventStartDate >= week[0] && eventStartDate <= week[6];
-    const eventEndsInWeek = eventEndDate >= week[0] && eventEndDate <= week[6];
-    const eventSpansWeek = eventStartDate <= week[0] && eventEndDate >= week[6];
+      eventStartDate >= weekStart && eventStartDate <= weekEnd;
+    const eventEndsInWeek =
+      eventEndDate >= weekStart && eventEndDate <= weekEnd;
+    const eventSpansWeek =
+      eventStartDate <= weekStart && eventEndDate >= weekEnd;
+
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 
@@ -145,10 +122,14 @@ export const createDefaultAdapter = (
   };
 
   const isDateBetween = (targetDate: Date, dateOne: Date, dateTwo: Date) => {
+    // clone the dates to avoid mutating the original date object
+    const d1 = new Date(dateOne);
+    const d2 = new Date(dateTwo);
+
     // set dates to midnight to avoid missing on half-days
-    dateOne.setHours(0, 0, 0, 0);
-    dateTwo.setHours(0, 0, 0, 0);
-    return targetDate >= dateOne && targetDate <= dateTwo;
+    d1.setHours(0, 0, 0, 0);
+    d2.setHours(23, 59, 59, 0);
+    return targetDate >= d1 && targetDate <= d2;
   };
 
   return {
@@ -163,6 +144,5 @@ export const createDefaultAdapter = (
     convertIsoToDate,
     isCurrentMonth,
     isDateBetween,
-    weekStartsOn: dayWeekStartsOn,
   };
 };

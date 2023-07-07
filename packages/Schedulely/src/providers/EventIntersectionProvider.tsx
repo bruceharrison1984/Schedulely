@@ -96,7 +96,7 @@ export const EventIntersectionProvider = ({
     );
 
     if (eventContainers)
-      for (const element of eventContainers)
+      for (const element of Array.from(eventContainers))
         observerRef.current!.observe(element);
 
     return () => {

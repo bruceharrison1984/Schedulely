@@ -3,7 +3,7 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "target": "es6",
-    "lib": ["ES2021"],
+    "lib": ["ES2021", "DOM"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
@@ -20,8 +20,15 @@
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "types": ["vitest/globals", "vitest/importMeta"]
   },
-  "include": ["src", "__tests__", "__stories__"],
+  "include": [
+    "src",
+    "__tests__",
+    "__stories__",
+    "vitest-setup.ts",
+    "vitest.config.ts"
+  ],
   "exclude": ["node_modules"]
 }

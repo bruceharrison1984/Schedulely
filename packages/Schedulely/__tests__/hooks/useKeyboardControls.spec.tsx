@@ -1,12 +1,13 @@
 import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { useKeyboardControls } from '@/hooks/useKeyboardControls';
+import { vi } from 'vitest';
 
-const mockOnNextMonth = jest.fn();
-const mockOnPrevMonth = jest.fn();
-const mockOnNextYear = jest.fn();
-const mockOnPrevYear = jest.fn();
-jest.mock('@/hooks/useCalendar', () => ({
-  useCalendar: jest.fn(() => ({
+const mockOnNextMonth = vi.fn();
+const mockOnPrevMonth = vi.fn();
+const mockOnNextYear = vi.fn();
+const mockOnPrevYear = vi.fn();
+vi.mock('@/hooks/useCalendar', () => ({
+  useCalendar: vi.fn(() => ({
     onNextMonth: mockOnNextMonth,
     onPrevMonth: mockOnPrevMonth,
     onNextYear: mockOnNextYear,

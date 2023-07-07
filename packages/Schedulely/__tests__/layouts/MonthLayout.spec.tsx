@@ -2,6 +2,7 @@ import { EventLayoutProps, MonthLayout, WeekLayoutProps } from '@/layouts';
 import { InternalCalendarEvent, InternalEventWeek } from '@/types';
 import { ReactNode } from 'react';
 import { RenderResult, render } from '@testing-library/react';
+import { vi } from 'vitest';
 
 const mockCalendarWithEvents = [
   {
@@ -96,18 +97,18 @@ const mockCalendarWithEvents = [
   },
 ] as (InternalEventWeek & { weekStart: Date; weekEnd: Date })[];
 
-const mockUseKeyboardControls = jest.fn(() => null);
+const mockUseKeyboardControls = vi.fn(() => null);
 
-jest.mock('@/hooks', () => ({
-  useCalendar: jest.fn(() => ({
+vi.mock('@/hooks', () => ({
+  useCalendar: vi.fn(() => ({
     calendarWithEvents: mockCalendarWithEvents,
   })),
-  useKeyboardControls: jest.fn(() => mockUseKeyboardControls()),
+  useKeyboardControls: vi.fn(() => mockUseKeyboardControls()),
 }));
 
-const mockEventIntersectionProviderPropsCheck = jest.fn();
-jest.mock('@/providers', () => ({
-  EventIntersectionProvider: jest.fn(
+const mockEventIntersectionProviderPropsCheck = vi.fn();
+vi.mock('@/providers', () => ({
+  EventIntersectionProvider: vi.fn(
     ({
       children,
       eventsInWeek,
@@ -119,22 +120,22 @@ jest.mock('@/providers', () => ({
       return <div data-testid="intersection-provider-mock">{children}</div>;
     }
   ),
-  HighlightProvider: jest.fn(({ children }: { children: ReactNode }) => (
+  HighlightProvider: vi.fn(({ children }: { children: ReactNode }) => (
     <div data-testid="highlight-provider-mock">{children}</div>
   )),
 }));
 
-const mockEventWeekPropsCheck = jest.fn();
-jest.mock('@/layouts/eventWeekLayout', () => ({
-  EventWeekLayout: jest.fn(({ eventsInWeek, daysInweek }: EventLayoutProps) => {
+const mockEventWeekPropsCheck = vi.fn();
+vi.mock('@/layouts/eventWeekLayout', () => ({
+  EventWeekLayout: vi.fn(({ eventsInWeek, daysInweek }: EventLayoutProps) => {
     mockEventWeekPropsCheck(eventsInWeek, daysInweek);
     return <div data-testid="event-week-layout-mock"></div>;
   }),
 }));
 
-const mockWeekLayoutPropsCheck = jest.fn();
-jest.mock('@/layouts/weekLayout', () => ({
-  WeekLayout: jest.fn(({ dates }: WeekLayoutProps) => {
+const mockWeekLayoutPropsCheck = vi.fn();
+vi.mock('@/layouts/weekLayout', () => ({
+  WeekLayout: vi.fn(({ dates }: WeekLayoutProps) => {
     mockWeekLayoutPropsCheck(dates);
     return <div data-testid="week-layout-mock"></div>;
   }),
