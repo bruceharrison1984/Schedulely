@@ -99,10 +99,14 @@ export const createDefaultAdapter = (
     week: Date[]
   ) => {
     if (week.length !== 7) throw new Error('Week length must be 7');
+    eventStartDate.setHours(0, 0, 0, 0); // zero time to avoid slight mismatches, bug potential high
+    eventEndDate.setHours(0, 0, 0, 0); // zero time to avoid slight mismatches, bug potential high
+
     const eventStartInWeek =
       eventStartDate >= week[0] && eventStartDate <= week[6];
     const eventEndsInWeek = eventEndDate >= week[0] && eventEndDate <= week[6];
     const eventSpansWeek = eventStartDate <= week[0] && eventEndDate >= week[6];
+
     return eventSpansWeek || eventStartInWeek || eventEndsInWeek;
   };
 

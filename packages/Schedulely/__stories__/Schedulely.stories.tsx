@@ -23,7 +23,6 @@ export default story;
 
 export const NoEvents = () => {
   const { globalState } = useLadleContext();
-  const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
 
   const props: SchedulelyProps = {
     events: [],
@@ -36,15 +35,10 @@ export const NoEvents = () => {
   };
 
   return (
-    <div>
-      <select>
-        <option>test</option>
-      </select>
-      <Schedulely
-        {...props}
-        dark={globalState.theme === ThemeState.Dark}
-      ></Schedulely>
-    </div>
+    <Schedulely
+      {...props}
+      dark={globalState.theme === ThemeState.Dark}
+    ></Schedulely>
   );
 };
 
@@ -52,8 +46,18 @@ export const DefaultTheme = () => {
   const { globalState } = useLadleContext();
   const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
 
+  const events = [
+    {
+      color: '#4b578a',
+      start: '2023-07-06T16:07:22.292Z',
+      id: 'f147',
+      end: '2023-07-08T16:07:22.292Z',
+      summary: 'Craig Bishop',
+    },
+  ];
+
   const props: SchedulelyProps = {
-    events: storyEvents,
+    events: events,
     initialDate: new Date().toISOString(),
     actions: {
       onMoreEventsClick: (events) => console.log(events),
