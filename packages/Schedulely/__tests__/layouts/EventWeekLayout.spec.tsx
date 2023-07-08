@@ -1,6 +1,6 @@
 import { DefaultEvent } from '@/components';
-import { EventWeekLayout, getGridEndIndex, getGridStartIndex } from '@/layouts';
-import { InternalCalendarEvent, WeekDay } from '@/types';
+import { EventWeekLayout, getEventPosition } from '@/layouts';
+import { InternalCalendarEvent } from '@/types';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { vi } from 'vitest';
 
@@ -73,11 +73,7 @@ describe('EventWeekLayout', () => {
   beforeEach(() => {
     mockSetParentContainerRef.mockClear();
     testObject = render(
-      <EventWeekLayout
-        eventsInWeek={events}
-        daysInweek={daysInWeek}
-        firstDayOfWeek={WeekDay.Sunday}
-      />
+      <EventWeekLayout eventsInWeek={events} daysInweek={daysInWeek} />
     );
   });
 
@@ -123,78 +119,85 @@ describe('EventWeekLayout', () => {
       expect(mockSetParentContainerRef).toHaveBeenCalledTimes(1));
   });
 
-  describe.todo(
-    'replace getGridEndIndex and getGridStartIndex with getEventPosition'
-  );
+  describe('getEventPosition', () => {
+    const daysInWeek = [
+      new Date('2023-07-02T05:00:00.000Z'),
+      new Date('2023-07-03T05:00:00.000Z'),
+      new Date('2023-07-04T05:00:00.000Z'),
+      new Date('2023-07-05T05:00:00.000Z'),
+      new Date('2023-07-06T05:00:00.000Z'),
+      new Date('2023-07-07T05:00:00.000Z'),
+      new Date('2023-07-08T05:00:00.000Z'),
+    ];
 
-  describe('getGridEndIndex', () => {
-    it.each<{ eventEnd: Date; endOfWeek: Date; expected: number }>([
+    it.each<{
+      description: string;
+      event: InternalCalendarEvent;
+      daysInWeek: Date[];
+      expected?: string | Error;
+    }>([
       {
-        eventEnd: new Date(2022, 1, 11),
-        endOfWeek: new Date(2022, 1, 12),
-        expected: 7,
+        description: 'starts in previous week, ends outside of week',
+        event: {
+          start: new Date('2023-07-01T05:00:00.000Z'),
+          end: new Date('2023-07-09T05:00:00.000Z'),
+        } as InternalCalendarEvent,
+        daysInWeek,
+        expected: '1/8',
       },
       {
-        // event ends after end of week
-        eventEnd: new Date(2022, 1, 13),
-        endOfWeek: new Date(2022, 1, 12),
-        expected: 8,
+        description: 'starts in current week, ends outside of week',
+        event: {
+          start: new Date('2023-07-06T05:00:00.000Z'),
+          end: new Date('2023-07-09T05:00:00.000Z'),
+        } as InternalCalendarEvent,
+        daysInWeek,
+        expected: '5/8',
       },
       {
-        eventEnd: new Date(2022, 1, 9),
-        endOfWeek: new Date(2022, 1, 12),
-        expected: 5,
+        description: 'starts in previous week, ends in current week',
+        event: {
+          start: new Date('2023-07-01T05:00:00.000Z'),
+          end: new Date('2023-07-05T05:00:00.000Z'),
+        } as InternalCalendarEvent,
+        daysInWeek,
+        expected: '1/5',
       },
       {
-        // event ends on Sunday
-        eventEnd: new Date(2021, 8, 26),
-        endOfWeek: new Date(2021, 9, 2),
-        expected: 2,
+        description: 'starts on first of week, ends on last of week',
+        event: {
+          start: new Date('2023-07-02T05:00:00.000Z'),
+          end: new Date('2023-07-08T05:00:00.000Z'),
+        } as InternalCalendarEvent,
+        daysInWeek,
+        expected: '1/8',
       },
       {
-        // event that starts and ends on Sunday
-        eventEnd: new Date(2022, 0, 2),
-        endOfWeek: new Date(2022, 0, 8),
-        expected: 2,
+        description: 'starts in current week, ends in current week',
+        event: {
+          start: new Date('2023-07-03T05:00:00.000Z'),
+          end: new Date('2023-07-07T05:00:00.000Z'),
+        } as InternalCalendarEvent,
+        daysInWeek,
+        expected: '2/7',
       },
-    ])(
-      '$eventEnd with $endOfWeek returns $expected',
-      ({ eventEnd, endOfWeek, expected }) => {
-        const result = getGridEndIndex(eventEnd, endOfWeek);
+      {
+        description:
+          'event occurs outside of week (this shouldnt occur due to event filtering)',
+        event: {
+          start: new Date('2023-07-12T05:00:00.000Z'),
+          end: new Date('2023-07-13T05:00:00.000Z'),
+        } as InternalCalendarEvent,
+        daysInWeek,
+        expected: new Error(),
+      },
+    ])('$description returns $expected', ({ event, daysInWeek, expected }) => {
+      if (expected instanceof Error) {
+        expect(() => getEventPosition(event, daysInWeek)).toThrowError();
+      } else {
+        const result = getEventPosition(event, daysInWeek);
         expect(result).toBe(expected);
       }
-    );
-  });
-
-  describe('getGridStartIndex', () => {
-    it.each<{ eventStart: Date; startOfWeek: Date; expected: number }>([
-      {
-        eventStart: new Date(2022, 1, 7),
-        startOfWeek: new Date(2022, 1, 6),
-        expected: 2,
-      },
-      {
-        eventStart: new Date(2022, 1, 9),
-        startOfWeek: new Date(2022, 1, 6),
-        expected: 4,
-      },
-      {
-        eventStart: new Date(2022, 3, 10),
-        startOfWeek: new Date(2022, 3, 10),
-        expected: 1,
-      },
-      {
-        // event that starts and ends on Sunday
-        eventStart: new Date(2022, 0, 2),
-        startOfWeek: new Date(2022, 0, 2),
-        expected: 1,
-      },
-    ])(
-      '$eventStart with $startOfWeek returns $expected',
-      ({ eventStart, startOfWeek, expected }) => {
-        const result = getGridStartIndex(eventStart, startOfWeek);
-        expect(result).toBe(expected);
-      }
-    );
+    });
   });
 });

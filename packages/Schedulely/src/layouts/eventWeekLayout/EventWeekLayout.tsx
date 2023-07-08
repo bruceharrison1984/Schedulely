@@ -11,19 +11,22 @@ export interface EventLayoutProps {
   daysInweek: Date[];
 }
 
-export const getGridStartIndex = (eventDate: Date, startOfWeek: Date) =>
-  eventDate <= startOfWeek ? 1 : eventDate.getDay() + 1; //add one because css-grid isn't zero-index'd
-
-export const getGridEndIndex = (eventEndDate: Date, endOfWeek: Date) => {
-  if (eventEndDate > endOfWeek) return 8;
-  const end = eventEndDate.getDay() + 2; // add two because css-grid isn't zero index'd, and day of week is zero-index'd
-  return end;
-};
-
-const getEventPosition = (
+/**
+ * Calculate the CSS grid position for a given date within a week
+ * @param event The calendar event to position
+ * @param daysInWeek The week to position the event within
+ * @returns CSS grid-column value
+ */
+export const getEventPosition = (
   { start, end }: InternalCalendarEvent,
   daysInWeek: Date[]
 ) => {
+  if (
+    (start > daysInWeek[6] && end > daysInWeek[6]) ||
+    (start < daysInWeek[0] && end < daysInWeek[0])
+  )
+    throw new Error('Event doesnt cross over this week!');
+
   const days = daysInWeek
     .filter((x) => {
       return (
@@ -41,9 +44,7 @@ const getEventPosition = (
   let endIndex = days.slice(-1)[0] + 2;
   if (isNaN(endIndex) || end > daysInWeek[6]) endIndex = 8;
 
-  const gridColumnPosition = `${startIndex}/${endIndex}`;
-
-  return gridColumnPosition;
+  return `${startIndex}/${endIndex}`;
 };
 
 /**
