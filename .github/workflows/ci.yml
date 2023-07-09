@@ -45,6 +45,9 @@ jobs:
         run: npm run build
   test-pr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 16.x
@@ -56,14 +59,10 @@ jobs:
         run: npm install -g npm
       - name: NPM Install
         run: npm ci
-      - uses: ArtiomTr/jest-coverage-report-action@v2.2.4
-        if: github.event_name == 'pull_request'
-        id: coverage
-        with:
-          test-script: npm run test:ci
-          output: report-markdown
-          working-directory: ./packages/Schedulely
-      - uses: marocchino/sticky-pull-request-comment@v2
-        if: steps.coverage.outcome == 'success'
-        with:
-          message: ${{ steps.coverage.outputs.report }}
+      - name: Run unit tests
+        working-directory: ./packages/Schedulely
+        run: npx vitest run --coverage
+      - name: Report Coverage
+        if: always() # Also generate the report if tests are failing
+        working-directory: ./packages/Schedulely
+        uses: davelosert/vitest-coverage-report-action@v2
