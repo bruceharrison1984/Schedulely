@@ -20,7 +20,7 @@
     "prettier": "prettier --check './src/**.(ts|tsx|js|scss)'",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:ci": "npx jest --ci --json --coverage --testLocationInResults --outputFile=report.json --maxWorkers 1",
+    "test:ci": "vitest --coverage",
     "dev": "ladle serve --stories=__stories__/**.stories.tsx",
     "build-ladle": "ladle build"
   },
@@ -51,6 +51,7 @@
     "@types/react": "17.0.2",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
+    "@vitest/coverage-v8": "^0.33.0",
     "autoprefixer": "^10.4.14",
     "barrelsby": "^2.8.0",
     "cssnano": "^6.0.1",
