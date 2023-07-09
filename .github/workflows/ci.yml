@@ -63,6 +63,7 @@ jobs:
         working-directory: ./packages/Schedulely
         run: npx vitest run --coverage
       - name: Report Coverage
-        if: always() # Also generate the report if tests are failing
-        working-directory: ./packages/Schedulely
+        if: always()
         uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          working-directory: './packages/Schedulely'
