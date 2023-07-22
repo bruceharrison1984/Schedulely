@@ -242,6 +242,12 @@ describe('Date Adapter', () => {
           dateTwo: new Date(2022, 1, 9),
           expected: true,
         },
+        {
+          targetDate: new Date('2023-07-26T23:00:00.000Z'),
+          dateOne: new Date('2023-07-27T06:00:00.000Z'),
+          dateTwo: new Date('2023-07-27T12:00:00.000Z'),
+          expected: true,
+        },
       ])(
         '$targetDate between $dateOne and $dateTwo returns $expected',
         ({ targetDate, dateOne, dateTwo, expected }) => {

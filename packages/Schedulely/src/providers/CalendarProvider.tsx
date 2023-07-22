@@ -125,12 +125,16 @@ export const CalendarProvider = ({
               x.start.valueOf() -
               (y.end.valueOf() - y.end.valueOf())
           ),
-        eventsOnDays: week.map((day) => ({
-          date: day,
-          events: events.filter(
-            (event) => event.start <= day && event.end >= day
-          ),
-        })),
+        eventsOnDays: week.map((day) => {
+          const endOfDay = new Date(day);
+          endOfDay.setDate(day.getDate() + 1);
+          return {
+            date: day,
+            events: events.filter((event) =>
+              dateAdapter.isDateBetween(day, event.start, event.end)
+            ),
+          };
+        }),
       })),
     [calendarView, events, dateAdapter]
   );

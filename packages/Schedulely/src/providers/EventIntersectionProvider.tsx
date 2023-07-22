@@ -1,4 +1,4 @@
-import { EventIntersectionState, InternalCalendarEvent } from '@/types';
+import { EventIntersectionState, InternalEventWeek } from '@/types';
 import {
   ReactNode,
   createContext,
@@ -7,7 +7,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useCalendar } from '@/hooks/useCalendar';
 
 export const EventIntersectionContext =
   createContext<EventIntersectionState | null>(null);
@@ -21,30 +20,19 @@ EventIntersectionContext.displayName = 'EventIntersectionContext';
  */
 export const EventIntersectionProvider = ({
   children,
-  eventsInWeek,
+  eventsOnDays,
 }: {
   children: ReactNode;
-  eventsInWeek: InternalCalendarEvent[];
+  eventsOnDays: InternalEventWeek['eventsOnDays'];
 }) => {
-  const {
-    dateAdapter: { isDateBetween },
-  } = useCalendar();
-
   const [parentContainerRef, setParentContainerRef] =
     useState<HTMLElement | null>(null);
-
-  const [eventVisibility, setEventVisibility] = useState<
-    Record<string, InternalCalendarEvent>
-  >({});
 
   const observerRef = useRef<IntersectionObserver | undefined>();
 
   const getEventsOnDate = useCallback(
-    (date: Date) =>
-      Object.values(eventVisibility).filter((x) =>
-        isDateBetween(date, x.start, x.end)
-      ),
-    [eventVisibility, isDateBetween]
+    (date: Date) => eventsOnDays.find((x) => x.date === date)?.events ?? [],
+    [eventsOnDays]
   );
 
   /**
@@ -57,8 +45,6 @@ export const EventIntersectionProvider = ({
   const checkIntersection: IntersectionObserverCallback = useCallback(
     (entries) =>
       entries.map((x) => {
-        var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
-
         const currentStyle =
           x.target
             .getAttribute('style')
@@ -71,17 +57,8 @@ export const EventIntersectionProvider = ({
           currentStyle.push('visibility: hidden');
           x.target.setAttribute('style', currentStyle.join(';'));
         }
-
-        const matchingEvent = eventsInWeek.find((x) => x.id === eventId);
-        if (matchingEvent === undefined) return;
-
-        setEventVisibility((current) => {
-          current[matchingEvent.id] = matchingEvent;
-          current[matchingEvent.id].visible = x.isIntersecting;
-          return { ...current };
-        });
       }),
-    [eventsInWeek]
+    []
   );
 
   useEffect(() => {
