@@ -18,7 +18,10 @@ const options = defineConfig({
   plugins: [
     commonjs(),
     copy({
-      targets: [{ src: '../../README.md', dest: './' }],
+      targets: [
+        { src: '../../README.md', dest: './' },
+        { src: '../../LICENSE', dest: './' },
+      ],
     }),
     postcss({ extract: 'index.css', sourceMap: true }),
     ts({
@@ -37,7 +40,7 @@ const options = defineConfig({
     inject({
       React: 'react',
     }),
-    progress()
+    progress(),
   ],
 });
 
