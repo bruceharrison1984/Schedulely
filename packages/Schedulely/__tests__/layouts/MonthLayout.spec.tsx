@@ -111,12 +111,12 @@ vi.mock('@/providers', () => ({
   EventIntersectionProvider: vi.fn(
     ({
       children,
-      eventsInWeek,
+      eventsOnDays,
     }: {
       children: ReactNode;
-      eventsInWeek: InternalCalendarEvent[];
+      eventsOnDays: InternalEventWeek['eventsOnDays'];
     }) => {
-      mockEventIntersectionProviderPropsCheck(eventsInWeek);
+      mockEventIntersectionProviderPropsCheck(eventsOnDays);
       return <div data-testid="intersection-provider-mock">{children}</div>;
     }
   ),
@@ -181,7 +181,7 @@ describe('MonthLayout', () => {
         it('receives array of days', () => {
           expect(
             mockEventIntersectionProviderPropsCheck.mock.calls[week.index][0]
-          ).toEqual(mockCalendarWithEvents[week.index].events);
+          ).toEqual(mockCalendarWithEvents[week.index].eventsOnDays);
         });
       });
     }
