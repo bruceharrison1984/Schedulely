@@ -243,9 +243,9 @@ describe('Date Adapter', () => {
           expected: true,
         },
         {
-          targetDate: new Date('2023-07-26T23:00:00.000Z'),
-          dateOne: new Date('2023-07-27T06:00:00.000Z'),
-          dateTwo: new Date('2023-07-27T12:00:00.000Z'),
+          targetDate: new Date(2023, 6, 27, 0, 0, 0),
+          dateOne: new Date(2023, 6, 27, 6, 0, 0),
+          dateTwo: new Date(2023, 6, 27, 12, 0, 0),
           expected: true,
         },
       ])(
