@@ -1,15 +1,19 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
-  "about": {
-    "title": "About",
-    "type": "page"
+  "index": {
+    "title": "Introduction",
+    "theme": { "footer": false, "layout": "full" }
   },
-  "contact": {
-    "title": "Contact ↗",
-    "type": "page",
-    "href": "https://twitter.com/shuding_",
-    "newWindow": true
-  }
+  "getting-started": "Getting Started",
+  "components": {
+    "title": "🔧 Components",
+    "theme": { "footer": false }
+  },
+  "themes": {
+    "title": "🎨 Themes",
+    "theme": { "footer": false }
+  },
+  "usage": {
+    "title": "🔨 Usage"
+  },
+  "alternatives": "Alternatives"
 }
