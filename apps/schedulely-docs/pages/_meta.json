@@ -1,7 +1,7 @@
 {
   "index": {
-    "title": "Introduction",
-    "theme": { "footer": false, "layout": "full" }
+    "title": "Schedulely",
+    "theme": { "footer": false }
   },
   "getting-started": "Getting Started",
   "components": {

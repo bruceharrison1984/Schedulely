@@ -1,6 +1,4 @@
----
-title: Event Component
----
+# Event Component
 
 ## Description
 

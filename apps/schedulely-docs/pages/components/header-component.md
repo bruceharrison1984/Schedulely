@@ -1,6 +1,4 @@
----
-title: Header Component
----
+# Header Component
 
 ## Description
 
