@@ -2,7 +2,7 @@ import { CalendarProvider } from '@/providers';
 import { Chance } from 'chance';
 import { ComponentSize, DateTimeAdapter } from '@/types';
 import { ReactNode } from 'react';
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react';
 import { createDefaultAdapter } from '@/dateAdapters/date';
 import { render } from '@testing-library/react';
 import { useCalendar } from '@/hooks';
