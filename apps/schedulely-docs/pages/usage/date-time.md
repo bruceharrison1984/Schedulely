@@ -1,7 +1,4 @@
----
-title: DateTime
-description: DateTime implementations
----
+# DateTime
 
 Dates are currently handled in the **default JS string ISO format**. Internally, all strings are converted into back into native JS Date objects. The long-term plan
 is to switch over to `Temporal` once it starts appearing in browsers with some degree of frequency.

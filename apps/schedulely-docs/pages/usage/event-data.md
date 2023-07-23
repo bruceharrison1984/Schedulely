@@ -1,7 +1,4 @@
----
-title: Event Data
-description: Event model and usage
----
+# Event Data
 
 | Property | Type     | Description                                                                                                |
 | -------- | -------- | ---------------------------------------------------------------------------------------------------------- |

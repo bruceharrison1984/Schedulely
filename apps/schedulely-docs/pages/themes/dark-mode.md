@@ -1,7 +1,4 @@
----
-title: Dark Mode
-description: Dark Mode Settings
----
+# Dark Mode
 
 Dark mode is supported by setting the `dark` attribute to `true` on the main Schedulely component.
 Specific CSS selectors can be used to based on this attribute. See the included styles for guidance.

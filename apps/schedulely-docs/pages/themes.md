@@ -1,3 +1,5 @@
+# Themes
+
 Themes can be applied by passing in the correct theme name to the `theme` property on Schedulely. Additional themes can be easily added by creating a new `*.css` file and importing it where Schedulely is initialized. If you create any nice looking themes, please consider submitting them via PR.
 
 Example Theme:

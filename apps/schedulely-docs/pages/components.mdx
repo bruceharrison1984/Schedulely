@@ -1,16 +1,15 @@
----
-title: Components
----
+import { Callout } from 'nextra/components';
 
-## _Section Disclaimer_
+# Components
 
-_The components shown in this section represent the default components, and normally would be over-ridden and not directly instantiated.
-They are shown here to help identify where they appear within Schedulely, and to aid in developing custom versions._
+<Callout type="warning" emoji="⚠️">
+The components shown in this section represent the default components, and normally would be over-ridden and not directly instantiated.
+They are shown here to help identify where they appear within Schedulely, and to aid in developing custom versions.
 
-_The example code may contain additional elements that are not used or necessary within the context of the actual component(Schedulely), but are
-necessary to display an example._
+The example code may contain additional elements that are not used or necessary within the context of the actual component(Schedulely), but are
+necessary to display an example.
 
----
+</Callout>
 
 ## Description
 
@@ -22,13 +21,17 @@ The default components aren't really extensible. For example, the default event 
 
 All default components have interfaces available, and custom components can be passed in via the `schedulelyComponents` property.
 
-Care should be taken when styling custom components. The underlying calendar layout is flexible, but it can still be easily broken.
-
 ## Overriding Components
+
+<Callout type="warning" emoji="⚠️">
+Care should be taken when styling custom components. The underlying calendar layout is flexible, but it can still be broken.
+
+</Callout>
 
 If you do decide to use custom components, your implementation is just passed into the constructor.
 
-Components are individually overridden so if you create a custom DayComponent, you only need to pass in that DayComponent. Default components are used if they are not explicitly overridden.
+Components are individually overridden so if you create a custom DayComponent, you only need to pass in that DayComponent.
+Default components are used if they are not explicitly overridden.
 
 ```tsx
   <Schedulely

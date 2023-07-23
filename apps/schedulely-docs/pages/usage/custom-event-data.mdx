@@ -1,11 +1,13 @@
----
-title: Custom Event Data
-description: Supply additional event metadata
----
+import { Callout } from 'nextra/components';
+
+# Custom Event Data
 
 If you want to pass additional data to each event object, you can define the `data` property by supplying the generic parameter of `CalendarEvent`. This can be useful if you create custom Day or Event components.
 
-**The default Day/Event components will not display the custom data, though it _will_ be available through `onClick` handlers.**
+<Callout type="warning" emoji="⚠️">
+  The default Day/Event components will not display custom data, though it
+  _will_ be available through `onClick` handlers.
+</Callout>
 
 ```tsx
 // custom `data` prop type
