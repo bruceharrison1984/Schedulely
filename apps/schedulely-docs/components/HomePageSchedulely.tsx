@@ -1,13 +1,29 @@
-import 'schedulely/dist/index.css';
-
 import { Resizable } from 're-resizable';
 import { Schedulely, WeekDay, createDefaultAdapter } from 'schedulely';
 import { storyEvents } from './helpers.stories';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useTheme } from 'nextra-theme-docs';
 
 const HomepageSchedulely = () => {
   const [theme, setTheme] = useState<string>('default');
   const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
+  const { theme: nextraTheme } = useTheme();
+
+  useEffect(() => {
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        console.log(mutation);
+        // if (mutation.target.classList.contains('newclass')) {
+        // }
+      });
+    });
+
+    let element = document.getElementsByTagName('html')[0];
+    observer.observe(element, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  });
 
   return (
     <>
@@ -29,6 +45,10 @@ const HomepageSchedulely = () => {
           <select
             id="theme-selector"
             onChange={(e) => setTheme(e.target.value)}
+            style={{
+              border: '1px solid black',
+              borderRadius: '0.2em',
+            }}
           >
             <option>default</option>
             <option>minimal</option>
@@ -44,6 +64,10 @@ const HomepageSchedulely = () => {
           <select
             id="start-of-week-selector"
             onChange={(e) => setStartDay(Number.parseInt(e.target.value))}
+            style={{
+              border: '1px solid black',
+              borderRadius: '0.2em',
+            }}
           >
             <option value={0}>Sunday</option>
             <option value={1}>Monday</option>
@@ -56,7 +80,6 @@ const HomepageSchedulely = () => {
         </div>
       </div>
       <div
-        className="homepage-schedulely"
         style={{
           margin: 'auto',
           height: '100%',
@@ -93,7 +116,7 @@ const HomepageSchedulely = () => {
         >
           <Schedulely
             events={storyEvents}
-            dark={true}
+            dark={nextraTheme === 'dark'}
             theme={theme}
             actions={{
               onEventClick: (event) => console.log(event),
@@ -101,7 +124,14 @@ const HomepageSchedulely = () => {
             }}
             dateAdapter={createDefaultAdapter('en', startDay)}
           />
-          <div className="resize-action-message">
+          <div
+            style={{
+              fontSize: '0.7em',
+              width: '100%',
+              textAlign: 'end',
+              fontWeight: 'bold',
+            }}
+          >
             Test{' '}
             <a href="https://github.com/bokuweb/re-resizable" target={'_blank'}>
               live resize
