@@ -32,5 +32,8 @@
   },
   "devDependencies": {
     "@types/node": "18.11.10"
+  },
+  "overrides": {
+    "prism-react-renderer": "^2.0.6"
   }
 }

@@ -1,10 +1,21 @@
 import { Highlight, themes } from 'prism-react-renderer';
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { Schedulely } from 'schedulely';
 import { generateEvents } from './helpers.stories';
-import React, { PropsWithChildren, isValidElement } from 'react';
+import React, {
+  PropsWithChildren,
+  isValidElement,
+  useEffect,
+  useState,
+} from 'react';
 import ReactDOMServer from 'react-dom/server';
 import he from 'he';
+
+type ClientSideLiveReloadElements = {
+  liveProvider: any;
+  livePreview: any;
+  liveEditor: any;
+  liveError: any;
+};
 
 export const LivePre = (props: PropsWithChildren) => {
   const children = props.children as JSX.Element;
@@ -15,24 +26,43 @@ export const LivePre = (props: PropsWithChildren) => {
     ReactDOMServer.renderToString(children.props.children)
   );
 
-  if (live && isValidElement(props.children) && children.type.name === 'Code') {
+  const [reactLiveComponents, setReactLiveComponents] = useState<
+    ClientSideLiveReloadElements | undefined
+  >();
+
+  useEffect(() => {
+    import('react-live').then((x) =>
+      setReactLiveComponents({
+        liveEditor: x.LiveEditor,
+        livePreview: x.LivePreview,
+        liveProvider: x.LiveProvider,
+        liveError: x.LiveError,
+      })
+    );
+  }, []);
+
+  if (
+    live &&
+    reactLiveComponents &&
+    isValidElement(props.children) &&
+    children.type.name === 'Code'
+  ) {
     return (
-      <LiveProvider
+      <reactLiveComponents.liveProvider
         code={code}
         language={language}
         scope={{ React, generateEvents, Schedulely }} // <-- inject objects you need access to
         noInline={true}
-        enableTypeScript={true}
         theme={themes.vsDark}
       >
-        <LivePreview />
-        <LiveError />
-        <LiveEditor
+        <reactLiveComponents.livePreview />
+        <reactLiveComponents.liveError />
+        <reactLiveComponents.liveEditor
           code={code}
           language={language}
           style={{ borderRadius: '0.5em', overflow: 'hidden' }}
         />
-      </LiveProvider>
+      </reactLiveComponents.liveProvider>
     );
   }
 
