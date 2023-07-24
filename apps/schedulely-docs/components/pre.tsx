@@ -35,22 +35,23 @@ export const LivePre = (props: PropsWithChildren) => {
   }
 
   return (
-    <div suppressHydrationWarning={true}></div>
-    // <Highlight {...defaultProps} code={code} language={language}>
-    //   {({ className, style, tokens, getLineProps, getTokenProps }) => (
-    //     <pre style={{ ...style, borderRadius: '0.5em' }}>
-    //       {tokens.map((line, i) => {
-    //         if (line[0].empty) return;
-    //         return (
-    //           <div key={i} {...getLineProps({ line })}>
-    //             {line.map((token, key) => (
-    //               <span key={key} {...getTokenProps({ token })} />
-    //             ))}
-    //           </div>
-    //         );
-    //       })}
-    //     </pre>
-    //   )}
-    // </Highlight>
+    <div suppressHydrationWarning={true}>
+      <Highlight {...defaultProps} code={code} language={language}>
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre style={{ ...style, borderRadius: '0.5em' }}>
+            {tokens.map((line, i) => {
+              if (line[0].empty) return;
+              return (
+                <div key={i} {...getLineProps({ line })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token })} />
+                  ))}
+                </div>
+              );
+            })}
+          </pre>
+        )}
+      </Highlight>
+    </div>
   );
 };
