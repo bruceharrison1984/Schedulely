@@ -1,12 +1,10 @@
-import styles from 'schedulely/dist/index.css';
-
 # Getting Started
 
 The fastest way to get started using Schedulely is to just add the NPM package to your React project, and create an instance of Schedulely.
 
 ## 📦 Installation
 
-```bash
+```shell
 npm install schedulely
 ## or
 yarn install schedulely
@@ -34,7 +32,7 @@ You also need to import the default stylesheet, it will _not_ be loaded automati
 import 'schedulely/dist/index.css';
 ```
 
-```tsx live
+```tsx,live
 /* demo array of CalendarEvents */
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 

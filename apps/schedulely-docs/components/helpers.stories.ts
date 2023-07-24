@@ -1,14 +1,14 @@
 import { CalendarEvent } from 'schedulely';
 import chance from 'chance';
 
-const chanceSeed = chance(1);
-
 export const generateEvents = (
   numberOfEvents = 100,
   minLength = 0,
   maxLength = 15,
   idOffset = 0
 ) => {
+  const chanceSeed = chance(1);
+
   const events: CalendarEvent[] = [];
   const today = new Date();
   for (let index = 0; index < numberOfEvents; index++) {

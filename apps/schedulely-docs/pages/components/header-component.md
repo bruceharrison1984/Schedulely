@@ -31,7 +31,7 @@ export interface HeaderProps {
 
 ## Example (DefaultHeader)
 
-```tsx live noInline
+```tsx,live
 // This demo is an example of what a custom component might look like if you wanted to override the default.
 // If you are using the default components, you don't need to worry about this.
 

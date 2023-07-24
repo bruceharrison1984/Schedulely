@@ -1,31 +1,63 @@
+import { Highlight, themes } from 'prism-react-renderer';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
-import { PropsWithChildren, isValidElement } from 'react';
+import { Schedulely } from 'schedulely';
+import { generateEvents } from './helpers.stories';
+import React, { PropsWithChildren, isValidElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
+import he from 'he';
 
-export type LiveCodeBlockProps = {
-  live?: boolean;
-  className: string;
-};
+export const LivePre = (props: PropsWithChildren) => {
+  const options = props.children.props.className.split(',');
+  const language = options[0].replace(/language-/, '');
+  const live = !!options[1];
+  const code = he.decode(
+    ReactDOMServer.renderToString(props.children.props.children)
+  );
 
-export const Pre = (props: PropsWithChildren<LiveCodeBlockProps>) => {
-  if (isValidElement(props.children) && props.children.type.name === 'Code') {
-    console.log(props);
-    const language = props['data-language'];
-
+  if (
+    live &&
+    isValidElement(props.children) &&
+    props.children.type.name === 'Code'
+  ) {
+    // const code = he.decode(
+    //   ReactDOMServer.renderToString(props.children.props.children)
+    // );
     return (
       <LiveProvider
-        code={ReactDOMServer.renderToString(props.children)}
+        code={code}
         language={language}
+        scope={{ React, generateEvents, Schedulely }} // <-- inject objects you need access to
+        noInline={true}
+        enableTypeScript={true}
+        theme={themes.vsDark}
       >
         <LivePreview />
         <LiveError />
         <LiveEditor
-          code={ReactDOMServer.renderToString(props.children)}
+          code={code}
           language={language}
+          style={{ borderRadius: '0.5em', overflow: 'hidden' }}
         />
       </LiveProvider>
     );
   }
 
-  return <pre {...props}>{props.children}</pre>;
+  return (
+    <Highlight theme={themes.vsDark} code={code} language={language}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre style={{ ...style, borderRadius: '0.5em' }}>
+          {tokens.map((line, i) => {
+            if (line[0].empty) return;
+            return (
+              <div key={i} {...getLineProps({ line })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
+                ))}
+              </div>
+            );
+          })}
+        </pre>
+      )}
+    </Highlight>
+  );
 };

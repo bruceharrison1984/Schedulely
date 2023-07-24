@@ -1,6 +1,6 @@
 import { DocsThemeConfig } from 'nextra-theme-docs';
+import { LivePre } from './components/pre';
 import { PageLogo } from './components/Logo';
-import { Pre } from './components/pre';
 import React from 'react';
 
 const config: DocsThemeConfig = {
@@ -15,7 +15,7 @@ const config: DocsThemeConfig = {
     text: '🚧 There be dragons here. Please bear with us until the 1.0.0 release 🚧',
   },
   components: {
-    pre: Pre,
+    pre: LivePre,
   },
 };
 

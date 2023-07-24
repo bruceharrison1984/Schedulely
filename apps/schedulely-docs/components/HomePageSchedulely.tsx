@@ -9,22 +9,6 @@ const HomepageSchedulely = () => {
   const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
   const { theme: nextraTheme } = useTheme();
 
-  useEffect(() => {
-    var observer = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        console.log(mutation);
-        // if (mutation.target.classList.contains('newclass')) {
-        // }
-      });
-    });
-
-    let element = document.getElementsByTagName('html')[0];
-    observer.observe(element, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-  });
-
   return (
     <>
       <div
