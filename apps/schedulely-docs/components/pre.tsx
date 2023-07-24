@@ -25,12 +25,6 @@ export const LivePre = (props: PropsWithChildren) => {
     setMounted(true);
   }, []);
 
-  console.log({
-    live,
-    valid: isValidElement(props.children),
-    name: children.type.name,
-  });
-
   if (live && isValidElement(props.children) && children.type.name === 'Code') {
     if (!mounted) return <div>react-live placeholder</div>;
     return (

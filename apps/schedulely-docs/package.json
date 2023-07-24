@@ -4,7 +4,7 @@
   "description": "Nextra docs template",
   "scripts": {
     "dev-docs": "next dev",
-    "build": "next build",
+    "build": "next build --no-mangling",
     "start": "next start"
   },
   "repository": {
