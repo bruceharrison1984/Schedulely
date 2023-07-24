@@ -2,7 +2,12 @@ import { Highlight, themes } from 'prism-react-renderer';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { Schedulely } from 'schedulely';
 import { generateEvents } from './helpers.stories';
-import React, { PropsWithChildren, isValidElement } from 'react';
+import React, {
+  PropsWithChildren,
+  isValidElement,
+  useEffect,
+  useState,
+} from 'react';
 import ReactDOMServer from 'react-dom/server';
 import he from 'he';
 
@@ -15,6 +20,11 @@ export const LivePre = (props: PropsWithChildren) => {
     ReactDOMServer.renderToString(children.props.children)
   );
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   console.log({
     live,
     valid: isValidElement(props.children),
@@ -22,7 +32,7 @@ export const LivePre = (props: PropsWithChildren) => {
   });
 
   if (live && isValidElement(props.children) && children.type.name === 'Code') {
-    console.log('render');
+    if (!mounted) return <div>react-live placeholder</div>;
     return (
       <LiveProvider
         code={code}
