@@ -8,6 +8,7 @@ import React, {
   useState,
 } from 'react';
 import ReactDOMServer from 'react-dom/server';
+import dynamic from 'next/dynamic';
 import he from 'he';
 
 type ClientSideLiveReloadElements = {
@@ -40,8 +41,9 @@ export const LivePre = (props: PropsWithChildren) => {
         liveProvider: x.LiveProvider,
         liveError: x.LiveError,
       });
+      console.log(reactLiveComponents);
     });
-  }, []);
+  });
 
   if (
     live &&
