@@ -2,14 +2,11 @@ import { Highlight, themes } from 'prism-react-renderer';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { Schedulely } from 'schedulely';
 import { generateEvents } from './helpers.stories';
-import React, {
-  PropsWithChildren,
-  isValidElement,
-  useEffect,
-  useState,
-} from 'react';
+import React, { PropsWithChildren, isValidElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import he from 'he';
+
+const isSSREnabled = () => typeof window === 'undefined';
 
 export const LivePre = (props: PropsWithChildren) => {
   const children = props.children as JSX.Element;
@@ -21,6 +18,8 @@ export const LivePre = (props: PropsWithChildren) => {
   );
 
   if (live && isValidElement(props.children) && children.type.name === 'Code') {
+    if (!isSSREnabled) return <div>ReactLive placeholder</div>;
+
     return (
       <LiveProvider
         code={code}
