@@ -4,4 +4,11 @@ const withNextra = require('nextra')({
   codeHighlight: false,
 });
 
-module.exports = withNextra();
+module.exports = withNextra({
+  distDir: './dist',
+  output: 'export',
+  basePath: '/bruceharrison1984',
+  images: {
+    unoptimized: true,
+  },
+});
