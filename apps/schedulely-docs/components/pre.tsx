@@ -32,18 +32,15 @@ export const LivePre = (props: PropsWithChildren) => {
   >();
 
   useEffect(() => {
-    console.log('useeffect');
     import('react-live').then((x) => {
-      console.log('imported stuff');
       setReactLiveComponents({
         liveEditor: x.LiveEditor,
         livePreview: x.LivePreview,
         liveProvider: x.LiveProvider,
         liveError: x.LiveError,
       });
-      console.log(reactLiveComponents);
     });
-  });
+  }, []);
 
   if (
     live &&

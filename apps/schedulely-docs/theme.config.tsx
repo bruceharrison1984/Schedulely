@@ -1,6 +1,7 @@
 import { DocsThemeConfig } from 'nextra-theme-docs';
 import { LivePre } from './components/pre';
 import { PageLogo } from './components/Logo';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 const config: DocsThemeConfig = {
@@ -16,6 +17,11 @@ const config: DocsThemeConfig = {
   },
   components: {
     pre: LivePre,
+  },
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s - Schedulely',
+    };
   },
 };
 
