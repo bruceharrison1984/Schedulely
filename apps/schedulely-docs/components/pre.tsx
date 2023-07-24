@@ -6,8 +6,6 @@ import React, { PropsWithChildren, isValidElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import he from 'he';
 
-const isSSREnabled = () => typeof window === 'undefined';
-
 export const LivePre = (props: PropsWithChildren) => {
   const children = props.children as JSX.Element;
   const options = children.props.className.split(',');
@@ -17,9 +15,14 @@ export const LivePre = (props: PropsWithChildren) => {
     ReactDOMServer.renderToString(children.props.children)
   );
 
-  if (live && isValidElement(props.children) && children.type.name === 'Code') {
-    if (!isSSREnabled) return <div>ReactLive placeholder</div>;
+  console.log({
+    live,
+    valid: isValidElement(props.children),
+    name: children.type.name,
+  });
 
+  if (live && isValidElement(props.children) && children.type.name === 'Code') {
+    console.log('render');
     return (
       <LiveProvider
         code={code}
