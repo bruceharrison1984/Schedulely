@@ -26,13 +26,10 @@
     "re-resizable": "^6.9.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-live": "2.2.3",
+    "react-live": "^4.1.3",
     "schedulely": "*"
   },
   "devDependencies": {
     "@types/node": "18.11.10"
-  },
-  "overrides": {
-    "prism-react-renderer": "^2.0.6"
   }
 }

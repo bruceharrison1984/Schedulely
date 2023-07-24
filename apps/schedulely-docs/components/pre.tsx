@@ -1,8 +1,13 @@
+import { Highlight, themes } from 'prism-react-renderer';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { Schedulely } from 'schedulely';
 import { generateEvents } from './helpers.stories';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import React, { PropsWithChildren, isValidElement } from 'react';
+import React, {
+  PropsWithChildren,
+  isValidElement,
+  useEffect,
+  useState,
+} from 'react';
 import ReactDOMServer from 'react-dom/server';
 import he from 'he';
 
@@ -22,6 +27,7 @@ export const LivePre = (props: PropsWithChildren) => {
         language={language}
         scope={{ React, generateEvents, Schedulely }} // <-- inject objects you need access to
         noInline={true}
+        theme={themes.vsDark}
       >
         <LivePreview />
         <LiveError />
@@ -35,23 +41,21 @@ export const LivePre = (props: PropsWithChildren) => {
   }
 
   return (
-    <div suppressHydrationWarning={true}>
-      <Highlight {...defaultProps} code={code} language={language}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre style={{ ...style, borderRadius: '0.5em' }}>
-            {tokens.map((line, i) => {
-              if (line[0].empty) return;
-              return (
-                <div key={i} {...getLineProps({ line })}>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token })} />
-                  ))}
-                </div>
-              );
-            })}
-          </pre>
-        )}
-      </Highlight>
-    </div>
+    <Highlight theme={themes.vsDark} code={code} language={language}>
+      {({ style, tokens, getLineProps, getTokenProps }) => (
+        <pre style={{ ...style, borderRadius: '0.5em' }}>
+          {tokens.map((line, i) => {
+            if (line[0].empty) return;
+            return (
+              <div key={i} {...getLineProps({ line })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
+                ))}
+              </div>
+            );
+          })}
+        </pre>
+      )}
+    </Highlight>
   );
 };
