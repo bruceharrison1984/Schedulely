@@ -77,7 +77,7 @@ render(
 
 ## Custom Event Component
 
-The `EventComponent` also has an optional generic parameter that can be used to enfore strong-typing of the `data` property. This can be leveraged if writing
+The `EventComponent` also has an optional generic parameter that can be used to enforce strong-typing of the `data` property. This can be leveraged if writing
 your own custom EventComponent.
 
 More information can be found on the [Custom Event Data Page](/docs/Usage/CustomEventData).
