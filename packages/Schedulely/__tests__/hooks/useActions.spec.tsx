@@ -3,7 +3,7 @@ import { Chance } from 'chance';
 import { InternalCalendarEvent } from '@/types';
 import { ReactNode } from 'react';
 import { render } from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { useActions } from '@/hooks';
 import { vi } from 'vitest';
 

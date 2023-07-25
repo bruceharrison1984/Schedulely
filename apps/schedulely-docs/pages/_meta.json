@@ -1,0 +1,19 @@
+{
+  "index": {
+    "title": "Schedulely",
+    "theme": { "footer": false, "layout": "full" }
+  },
+  "getting-started": "Getting Started",
+  "components": {
+    "title": "🔧 Components",
+    "theme": { "footer": false }
+  },
+  "themes": {
+    "title": "🎨 Themes",
+    "theme": { "footer": false }
+  },
+  "usage": {
+    "title": "🔨 Usage"
+  },
+  "alternatives": "Alternatives"
+}
