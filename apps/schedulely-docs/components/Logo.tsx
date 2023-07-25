@@ -8,7 +8,7 @@ export const PageLogo = () => {
   useEffect(() => {
     if (localStorage.getItem('theme'))
       setIsDarkMode(localStorage.getItem('theme') === 'dark');
-  }, [setIsDarkMode]);
+  }, [theme]);
 
   return (
     <>

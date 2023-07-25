@@ -6,28 +6,6 @@ The `EventComponent` how events are displayed within Schedulely. The `EventCompo
 internally based on the start/end of the event. The `hover` effect is also handled internally, so all you need to do is describe what action should be taken if
 the event happens to be hovered.
 
-### Extra Event Data
-
-Additional data can be passed in by utilizing the `data` property on the `CalendarEvent` type.
-If using Typescript, you can passing the generic parameter to get strong-typing in your components. This isn't strictly necessary, but it is helpful if you are
-creating a custom Event component.
-
-## Component Props
-
-```tsx
-export interface EventComponentProps<T extends object = {}> {
-  event: InternalCalendarEvent<T>;
-  isHovered: boolean;
-  onClick: (event: InternalCalendarEvent<T>) => void;
-}
-```
-
-| Property  | Type                                        | Description                                                             |
-| --------- | ------------------------------------------- | ----------------------------------------------------------------------- |
-| event     | `InternalCalendarEvent<T>`                  | The event that this component represents                                |
-| isHovered | `boolean`                                   | True when event is hovered. Default behavior is used to highlight event |
-| onClick   | `(event: InternalCalendarEvent<T>) => void` | Function executes when the event is clicked                             |
-
 ## Example (DefaultEvent)
 
 ```tsx
@@ -80,4 +58,26 @@ render(
 The `EventComponent` also has an optional generic parameter that can be used to enforce strong-typing of the `data` property. This can be leveraged if writing
 your own custom EventComponent.
 
-More information can be found on the [Custom Event Data Page](/docs/Usage/CustomEventData).
+More information can be found on the [Custom Event Data Page](/usage/event-data/custom-event-data).
+
+### Extra Event Data
+
+Additional data can be passed in by utilizing the `data` property on the `CalendarEvent` type.
+If using Typescript, you can passing the generic parameter to get strong-typing in your components. This isn't strictly necessary, but it is helpful if you are
+creating a custom Event component.
+
+## Component Props
+
+```tsx
+export interface EventComponentProps<T extends object = {}> {
+  event: InternalCalendarEvent<T>;
+  isHovered: boolean;
+  onClick: (event: InternalCalendarEvent<T>) => void;
+}
+```
+
+| Property  | Type                                        | Description                                                             |
+| --------- | ------------------------------------------- | ----------------------------------------------------------------------- |
+| event     | `InternalCalendarEvent<T>`                  | The event that this component represents                                |
+| isHovered | `boolean`                                   | True when event is hovered. Default behavior is used to highlight event |
+| onClick   | `(event: InternalCalendarEvent<T>) => void` | Function executes when the event is clicked                             |
