@@ -32,7 +32,7 @@ You also need to import the default stylesheet, it will _not_ be loaded automati
 import 'schedulely/dist/index.css';
 ```
 
-```tsx,live
+```tsx
 /* demo array of CalendarEvents */
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 

@@ -30,7 +30,7 @@ Action behavior can be easily set by passing in a function for the desired actio
 
 This simple example replaces the default `() => null` action action with `alert`.
 
-```tsx,live
+```tsx
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
 render(
@@ -47,7 +47,7 @@ render(
 
 Similarly, you could also print info to the console:
 
-```tsx,live
+```tsx
 const events = [...generateEvents(100), ...generateEvents(100, 0, 1, 100)];
 
 render(

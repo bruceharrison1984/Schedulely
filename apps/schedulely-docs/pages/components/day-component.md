@@ -36,7 +36,7 @@ Once events overflow the day container, they will also begin being hidden. All e
 
 ## Example (DefaultDay)
 
-```tsx,live
+```tsx
 // This demo is an example of what a custom component might look like if you wanted to override the default.
 // If you are using the default components, you don't need to worry about this.
 
