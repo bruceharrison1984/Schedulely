@@ -1,86 +1,22 @@
+import { DayComponentExample } from '../../components/DayComponentExample';
+import { Callout } from 'nextra/components';
+import 'schedulely/dist/index.css';
+
 # Day Component
 
 ## Description
 
 The `DayComponent` is used to display individual days on the calendar grid. Various properties are used to control the color, indicators, and text of the calendar day.
 
+<Callout type="info">
+  The following example displays how to create a custom Day component. You
+  aren't required to create a DayComponent unless you want to override the
+  default version.
+</Callout>
+
 ## Example (DefaultDay)
 
-```tsx
-// This demo is an example of what a custom component might look like if you wanted to override the default.
-// If you are using the default components, you don't need to worry about this.
-
-const DefaultDay = ({
-  isCurrentMonth,
-  isToday,
-  date,
-  events,
-  isOverflowed,
-  onMoreEventsClick,
-  onDayClick,
-}) => {
-  const dayHeader = isToday ? (
-    <div className="default-day-header--indicator">
-      <span className="default-day-header--text">{date.getDate()}</span>
-    </div>
-  ) : (
-    <span className="default-day-header--text">{date.getDate()}</span>
-  );
-
-  const hiddenEventTooltip =
-    events.length > 1 ? `(${events.length}) hidden events` : '(1) hidden event';
-
-  return (
-    <div
-      className={`default-day ${
-        isCurrentMonth ? 'default-day-current' : 'default-day-sibling'
-      }`}
-      onClick={() => onDayClick(JSON.stringify(date))}
-    >
-      <div className="default-day-header">{dayHeader}</div>
-      {isOverflowed && (
-        <div
-          className="additional-events-indicator"
-          title={hiddenEventTooltip}
-          onClick={() => onMoreEventsClick(JSON.stringify(events, null, 2))}
-        >
-          ...
-        </div>
-      )}
-    </div>
-  );
-};
-
-// simulate fetching events from somewhere
-const events = [
-  ...generateEvents(2),
-  {
-    id: '1',
-    start: new Date(),
-    end: new Date(),
-    summary: 'This is an event',
-    color: 'lightblue',
-    data: {
-      extraProp1: 1,
-      extraProp2: 'some-more-data',
-    },
-  },
-];
-
-render(
-  <div className="schedulely" style={{ height: '7em', width: '7em' }}>
-    <DefaultDay
-      isCurrentMonth={true}
-      isToday={true}
-      date={new Date()}
-      events={events}
-      isOverflowed={true}
-      onMoreEventsClick={alert}
-      onDayClick={alert}
-    />
-  </div>
-);
-```
+<DayComponentExample />
 
 ## Dealing with hidden events
 
