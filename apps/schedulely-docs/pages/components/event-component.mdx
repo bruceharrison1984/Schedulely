@@ -1,3 +1,6 @@
+import { EventComponentLiveExample } from '../../components/EventComponentLiveExample';
+import { Callout } from 'nextra/components';
+
 # Event Component
 
 ## Description
@@ -6,52 +9,15 @@ The `EventComponent` how events are displayed within Schedulely. The `EventCompo
 internally based on the start/end of the event. The `hover` effect is also handled internally, so all you need to do is describe what action should be taken if
 the event happens to be hovered.
 
+<Callout type="info">
+  The following example displays how to create a custom Event component. You
+  aren't required to create an EventComponent unless you want to override the
+  default version.
+</Callout>
+
 ## Example (DefaultEvent)
 
-```tsx
-// This demo is an example of what a custom component might look like if you wanted to override the default.
-// If you are using the default components, you don't need to worry about this.
-
-const DefaultEvent = ({ event, isHovered, onClick }) => {
-  const classes = ['event'];
-  if (isHovered) classes.push('event-selected');
-
-  return (
-    <div
-      className={classes.join(' ')}
-      style={{
-        backgroundColor: event.color,
-      }}
-      title={event.summary}
-      onClick={() => onClick(event)}
-    >
-      <div className="event-text-container">{event.summary}</div>
-    </div>
-  );
-};
-
-const event = {
-  id: '1',
-  start: new Date(),
-  end: new Date(),
-  summary: 'This is an event',
-  color: 'lightblue',
-  data: {
-    extraProp1: 1,
-    extraProp2: 'some-more-data',
-  },
-};
-
-render(
-  <div className="schedulely">
-    <DefaultEvent
-      event={event}
-      isHovered={false}
-      onClick={() => alert(JSON.stringify(event, null, 2))}
-    />
-  </div>
-);
-```
+<EventComponentLiveExample />
 
 ## Custom Event Component
 

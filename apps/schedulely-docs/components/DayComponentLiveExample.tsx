@@ -2,7 +2,7 @@ import { Sandpack } from '@codesandbox/sandpack-react';
 import { useEffect, useState } from 'react';
 import { useTheme } from 'nextra-theme-docs';
 
-export const DayComponentExample = () => {
+export const DayComponentLiveExample = () => {
   const { theme } = useTheme();
   const [isDarkMode, setIsDarkMode] = useState<boolean>(theme === 'dark');
 
@@ -25,8 +25,7 @@ export const DayComponentExample = () => {
         showLineNumbers: true,
       }}
       files={{
-        '/DayExample.js': `import 'schedulely/dist/index.css';
-import { DayComponent } from 'schedulely';
+        '/DayExample.js': `import { DayComponent } from 'schedulely';
 export const DefaultDay: DayComponent = ({
   isCurrentMonth,
   isToday,
