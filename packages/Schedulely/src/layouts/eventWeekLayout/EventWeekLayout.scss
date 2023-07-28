@@ -19,6 +19,7 @@
     > .event-week-layout-header-spacer {
       grid-column-start: 1;
       grid-column-end: 8;
+      order: -999; // ensure header is always highest order priority
     }
 
     & > .event-position-layout {

@@ -1,4 +1,7 @@
-import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
+import {
+  CalendarEvent,
+  InternalCalendarEvent,
+} from '@/types/InternalCalendarEvent';
 import {
   useActions,
   useComponents,
@@ -47,6 +50,9 @@ export const getEventPosition = (
   return `${startIndex}/${endIndex}`;
 };
 
+const calculateOrder = (event: InternalCalendarEvent) =>
+  -(event.end.getTime() - event.start.getTime()) / (1000 * 3600 * 24);
+
 /**
  * This component controls the layout of an individual events within a week  getEventPosition(event.start, event.end, daysInweek[0], daysInweek[6], firstDayOfWeek),
  * @returns EventLayout Component
@@ -72,6 +78,7 @@ export const EventWeekLayout = ({
             style={{
               gridColumn: getEventPosition(event, daysInweek),
               visibility: 'hidden', // start hidden to avoid flashes of events that will be hidden
+              order: calculateOrder(event),
             }}
             onMouseOver={() => setHighlight(event.id)}
             onFocus={() => setHighlight(event.id)}
