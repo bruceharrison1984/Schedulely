@@ -73,7 +73,7 @@ export const CalendarProvider = ({
 
   const events = useMemo(
     () =>
-      calendarEvents
+      [...calendarEvents]
         .map(({ start, end, color, id, summary, data }) => {
           const internalEvent: InternalCalendarEvent = {
             start: dateAdapter.convertIsoToDate(start),

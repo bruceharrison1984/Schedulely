@@ -89,6 +89,9 @@ export const EventIntersectionProvider = ({
   );
 
   useEffect(() => {
+    // clear visibility dictionary to avoid stale entries building up
+    setEventVisibility({});
+
     observerRef.current = new IntersectionObserver(checkIntersection, {
       root: parentContainerRef,
       rootMargin: '0px 0px -15% 0px',
