@@ -8,6 +8,7 @@ import {
   useCalendarTester,
 } from './CalendarTester';
 import { EventComponent, SchedulelyProps } from '@/types/index';
+import { EventPriority } from '@/types/EventPriority';
 import { Schedulely } from '../src/Schedulely';
 import { StoryDecorator, ThemeState } from '@ladle/react';
 import { createDefaultAdapter } from '@/dateAdapters';
@@ -48,6 +49,7 @@ export const XDefaultTheme = () => {
         events={events}
         dateAdapter={createDefaultAdapter('en', startOfWeek)}
         dark={theme === ThemeState.Dark}
+        eventPriority={EventPriority.long}
         actions={{
           onMoreEventsClick: (events) => console.log(events),
           onEventClick: (event) => console.log(event),

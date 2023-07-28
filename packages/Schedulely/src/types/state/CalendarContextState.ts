@@ -1,4 +1,5 @@
 import { DateTimeAdapter } from '..';
+import { EventPriority } from '../EventPriority';
 import { InternalEventWeek } from '../InternalEventWeek';
 
 export type CalendarContextState = {
@@ -34,4 +35,11 @@ export type CalendarContextState = {
 
   /** Calendar with events that will be displayed */
   calendarWithEvents: InternalEventWeek[];
+
+  /** Which length of event should take priority.
+   * If set to short, long events will be pushed off the calendar before short ones.
+   * If set to long, short events will be pushed off the calendar before long ones.
+   *
+   * _Long is the default_ */
+  eventPriority: EventPriority;
 };

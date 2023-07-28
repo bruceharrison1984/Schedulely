@@ -5,6 +5,7 @@ import {
   InternalCalendarEvent,
   InternalEventWeek,
 } from '@/types';
+import { EventPriority } from '@/types/EventPriority';
 import {
   PropsWithChildren,
   createContext,
@@ -23,6 +24,7 @@ interface CalendarProviderProps {
   dateAdapter: DateTimeAdapter;
   initialDate: string;
   calendarEvents: CalendarEvent[];
+  eventPriority: EventPriority;
 }
 
 /**
@@ -34,6 +36,7 @@ export const CalendarProvider = ({
   dateAdapter,
   initialDate,
   calendarEvents,
+  eventPriority,
   children,
 }: PropsWithChildren<CalendarProviderProps>) => {
   const { onMonthChangeClick } = useActions();
@@ -161,6 +164,7 @@ export const CalendarProvider = ({
     onNextYear,
     onPrevMonth,
     onPrevYear,
+    eventPriority,
   };
 
   return (

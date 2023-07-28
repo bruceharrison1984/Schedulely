@@ -4,6 +4,7 @@ import {
   DateTimeAdapter,
   SchedulelyComponents,
 } from '@/types';
+import { EventPriority } from './EventPriority';
 
 /** Properties used to initialize Schedulely */
 export interface SchedulelyProps {
@@ -30,4 +31,11 @@ export interface SchedulelyProps {
 
   /** Initial Date that Schedulely should be opened to */
   initialDate?: string;
+
+  /** Which length of event should take priority.
+   * If set to short, long events will be pushed off the calendar before short ones.
+   * If set to long, short events will be pushed off the calendar before long ones.
+   *
+   * _Long is the default_ */
+  eventPriority?: EventPriority;
 }

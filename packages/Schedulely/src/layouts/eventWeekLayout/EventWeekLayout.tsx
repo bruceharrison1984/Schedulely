@@ -1,6 +1,8 @@
+import { EventPriority } from '@/types/EventPriority';
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import {
   useActions,
+  useCalendar,
   useComponents,
   useEventHighlight,
   useEventIntersection,
@@ -47,9 +49,6 @@ export const getEventPosition = (
   return `${startIndex}/${endIndex}`;
 };
 
-const calculateOrder = (event: InternalCalendarEvent) =>
-  -(event.end.getTime() - event.start.getTime()) / (1000 * 3600 * 24);
-
 /**
  * This component controls the layout of an individual events within a week  getEventPosition(event.start, event.end, daysInweek[0], daysInweek[6], firstDayOfWeek),
  * @returns EventLayout Component
@@ -62,6 +61,14 @@ export const EventWeekLayout = ({
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
   const { setParentContainerRef } = useEventIntersection();
+  const { eventPriority } = useCalendar();
+
+  const calculateOrder = (event: InternalCalendarEvent) => {
+    let priority =
+      -(event.end.getTime() - event.start.getTime()) / (1000 * 3600 * 24);
+    if (eventPriority === EventPriority.short) priority = -priority;
+    return priority;
+  };
 
   return (
     <div className="event-week-layout" ref={setParentContainerRef}>
