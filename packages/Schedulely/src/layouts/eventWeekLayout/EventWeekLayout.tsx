@@ -1,7 +1,4 @@
-import {
-  CalendarEvent,
-  InternalCalendarEvent,
-} from '@/types/InternalCalendarEvent';
+import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import {
   useActions,
   useComponents,
