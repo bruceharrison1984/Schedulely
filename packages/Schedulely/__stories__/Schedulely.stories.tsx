@@ -2,7 +2,13 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import '../src/Schedulely.scss';
 
-import { EventComponent, SchedulelyProps, WeekDay } from '@/types/index';
+import {
+  CalendarEvent,
+  EventComponent,
+  SchedulelyProps,
+  WeekDay,
+} from '@/types/index';
+import { Chance } from 'chance';
 import { Schedulely } from '../src/Schedulely';
 import { StoryDecorator, ThemeState, useLadleContext } from '@ladle/react';
 import { createDefaultAdapter } from '@/dateAdapters';
@@ -97,11 +103,14 @@ export const MinimalTheme = () => {
 export const CustomEvents = () => {
   const { globalState } = useLadleContext();
   const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
+  const [events, setEvents] = useState<CalendarEvent[]>([...storyEvents]);
+
+  const currentDate = new Date();
 
   const props: SchedulelyProps = {
-    events: storyEvents,
+    events,
     theme: 'minimal',
-    initialDate: new Date().toISOString(),
+    initialDate: currentDate.toISOString(),
   };
 
   const CustomEvent: EventComponent<{ animal: string; address: string }> = ({
@@ -143,6 +152,30 @@ export const CustomEvents = () => {
         <option value={5}>Friday</option>
         <option value={6}>Saturday</option>
       </select>
+      <button
+        onClick={() =>
+          setEvents((e) => {
+            e.push({
+              id: Chance().integer().toString(),
+              start: new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                1
+              ).toISOString(),
+              end: new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                3
+              ).toISOString(),
+              color: 'yellow',
+              summary: 'TEST TEST',
+            });
+            return [...e];
+          })
+        }
+      >
+        Add Event
+      </button>
       <div style={{ height: '100%', marginBottom: '5em' }}>
         <Schedulely
           {...props}

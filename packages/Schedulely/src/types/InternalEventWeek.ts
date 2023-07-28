@@ -7,7 +7,4 @@ export interface InternalEventWeek {
 
   /** The events that occur within the week */
   events: InternalCalendarEvent[];
-
-  /** The days of the week, with the events that occur on the given date */
-  eventsOnDays: { date: Date; events: InternalCalendarEvent[] }[];
 }

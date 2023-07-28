@@ -1,4 +1,8 @@
-import { EventIntersectionState, InternalEventWeek } from '@/types';
+import {
+  EventIntersectionState,
+  InternalCalendarEvent,
+  InternalEventWeek,
+} from '@/types';
 import {
   ReactNode,
   createContext,
@@ -7,6 +11,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useCalendar } from '@/hooks';
 
 export const EventIntersectionContext =
   createContext<EventIntersectionState | null>(null);
@@ -20,19 +25,30 @@ EventIntersectionContext.displayName = 'EventIntersectionContext';
  */
 export const EventIntersectionProvider = ({
   children,
-  eventsOnDays,
+  eventsInWeek,
 }: {
   children: ReactNode;
-  eventsOnDays: InternalEventWeek['eventsOnDays'];
+  eventsInWeek: InternalCalendarEvent[];
 }) => {
+  const {
+    dateAdapter: { isDateBetween },
+  } = useCalendar();
+
   const [parentContainerRef, setParentContainerRef] =
     useState<HTMLElement | null>(null);
 
   const observerRef = useRef<IntersectionObserver | undefined>();
 
+  const [eventVisibility, setEventVisibility] = useState<
+    Record<string, InternalCalendarEvent>
+  >({});
+
   const getEventsOnDate = useCallback(
-    (date: Date) => eventsOnDays.find((x) => x.date === date)?.events ?? [],
-    [eventsOnDays]
+    (date: Date) =>
+      Object.values(eventVisibility).filter((x) =>
+        isDateBetween(date, x.start, x.end)
+      ),
+    [eventVisibility, isDateBetween]
   );
 
   /**
@@ -45,6 +61,8 @@ export const EventIntersectionProvider = ({
   const checkIntersection: IntersectionObserverCallback = useCallback(
     (entries) =>
       entries.map((x) => {
+        var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
+
         const currentStyle =
           x.target
             .getAttribute('style')
@@ -57,8 +75,17 @@ export const EventIntersectionProvider = ({
           currentStyle.push('visibility: hidden');
           x.target.setAttribute('style', currentStyle.join(';'));
         }
+
+        const matchingEvent = eventsInWeek.find((x) => x.id === eventId);
+        if (matchingEvent === undefined) return;
+
+        setEventVisibility((current) => {
+          current[matchingEvent.id] = matchingEvent;
+          current[matchingEvent.id].visible = x.isIntersecting;
+          return { ...current };
+        });
       }),
-    []
+    [eventsInWeek]
   );
 
   useEffect(() => {
