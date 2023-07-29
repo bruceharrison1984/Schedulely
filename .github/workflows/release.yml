@@ -50,9 +50,9 @@ jobs:
         run: npm run build
 
       - name: Upload documentation artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
-          path: ./apps/schedulely-docs/build
+          path: ./apps/schedulely-docs/dist
 
       - name: Upload Schedulely package artifact
         uses: actions/upload-artifact@v3
@@ -106,4 +106,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
