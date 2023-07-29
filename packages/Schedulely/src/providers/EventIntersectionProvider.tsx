@@ -41,7 +41,7 @@ export const EventIntersectionProvider = ({
 
   const [eventVisibility, setEventVisibility] = useState<
     Record<string, InternalCalendarEvent>
-  >({});
+  >(Object.assign({}, ...eventsInWeek.map((x) => ({ [x.id]: x }))));
 
   const getEventsOnDate = useCallback(
     (date: Date) =>
@@ -61,8 +61,6 @@ export const EventIntersectionProvider = ({
   const checkIntersection: IntersectionObserverCallback = useCallback(
     (entries) =>
       entries.map((x) => {
-        var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
-
         const currentStyle =
           x.target
             .getAttribute('style')
@@ -76,12 +74,16 @@ export const EventIntersectionProvider = ({
           x.target.setAttribute('style', currentStyle.join(';'));
         }
 
-        const matchingEvent = eventsInWeek.find((x) => x.id === eventId);
-        if (matchingEvent === undefined) return;
-
+        // this controls the event data that is sent back to the DayComponent for event visibility
         setEventVisibility((current) => {
-          current[matchingEvent.id] = matchingEvent;
-          current[matchingEvent.id].visible = x.isIntersecting;
+          var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
+          if (!eventId) return { ...current };
+
+          if (!current[eventId]) {
+            const matchingEvent = eventsInWeek.find((x) => x.id === eventId)!;
+            current[eventId] = matchingEvent;
+          }
+          current[eventId].visible = x.isIntersecting;
           return { ...current };
         });
       }),
@@ -89,9 +91,6 @@ export const EventIntersectionProvider = ({
   );
 
   useEffect(() => {
-    // clear visibility dictionary to avoid stale entries building up
-    setEventVisibility({});
-
     observerRef.current = new IntersectionObserver(checkIntersection, {
       root: parentContainerRef,
       rootMargin: '0px 0px -15% 0px',
