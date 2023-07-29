@@ -7,6 +7,7 @@ import {
 } from '@/providers/index';
 import { BreakpointProvider } from './providers/BreakPointProvider';
 import { DayOfWeekLayout, HeaderLayout, MonthLayout } from '@/layouts/index';
+import { EventPriority } from './types/EventPriority';
 import { SchedulelyProps } from '@/types/index';
 import { StrictMode, useEffect, useRef, useState } from 'react';
 import { createDefaultAdapter } from './dateAdapters';
@@ -24,6 +25,7 @@ export const Schedulely = ({
   additionalClassNames = [],
   actions,
   dark,
+  eventPriority = EventPriority.long,
   initialDate = new Date().toISOString(),
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
@@ -60,6 +62,7 @@ export const Schedulely = ({
                 initialDate={initialDate}
                 dateAdapter={dateAdapter}
                 calendarEvents={events}
+                eventPriority={eventPriority}
               >
                 <HeaderLayout />
                 <DayOfWeekLayout />

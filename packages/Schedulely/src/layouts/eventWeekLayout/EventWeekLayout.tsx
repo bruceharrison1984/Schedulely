@@ -1,6 +1,8 @@
+import { EventPriority } from '@/types/EventPriority';
 import { InternalCalendarEvent } from '@/types/InternalCalendarEvent';
 import {
   useActions,
+  useCalendar,
   useComponents,
   useEventHighlight,
   useEventIntersection,
@@ -59,6 +61,14 @@ export const EventWeekLayout = ({
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
   const { setParentContainerRef } = useEventIntersection();
+  const { eventPriority } = useCalendar();
+
+  const calculateOrder = (event: InternalCalendarEvent) => {
+    let priority =
+      -(event.end.getTime() - event.start.getTime()) / (1000 * 3600 * 24);
+    if (eventPriority === EventPriority.short) priority = -priority;
+    return priority;
+  };
 
   return (
     <div className="event-week-layout" ref={setParentContainerRef}>
@@ -72,6 +82,7 @@ export const EventWeekLayout = ({
             style={{
               gridColumn: getEventPosition(event, daysInweek),
               visibility: 'hidden', // start hidden to avoid flashes of events that will be hidden
+              order: calculateOrder(event),
             }}
             onMouseOver={() => setHighlight(event.id)}
             onFocus={() => setHighlight(event.id)}

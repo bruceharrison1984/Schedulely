@@ -19,8 +19,9 @@ export const DefaultDay: DayComponent = ({
     <span className="default-day-header--text">{date.getDate()}</span>
   );
 
-  const hiddenEventTooltip =
-    events.length > 1 ? `(${events.length}) hidden events` : '(1) hidden event';
+  const hiddenEventTooltip = `(${
+    events.filter((x) => !x.visible).length
+  }) hidden events`;
 
   return (
     <div

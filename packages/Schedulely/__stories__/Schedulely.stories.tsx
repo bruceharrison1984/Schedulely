@@ -2,107 +2,90 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import '../src/Schedulely.scss';
 
-import { EventComponent, SchedulelyProps, WeekDay } from '@/types/index';
+import {
+  CalendarStoryTester,
+  CalendarTesterProvider,
+  useCalendarTester,
+} from './CalendarTester';
+import { EventComponent, SchedulelyProps } from '@/types/index';
+import { EventPriority } from '@/types/EventPriority';
 import { Schedulely } from '../src/Schedulely';
-import { StoryDecorator, ThemeState, useLadleContext } from '@ladle/react';
+import { StoryDecorator, ThemeState } from '@ladle/react';
 import { createDefaultAdapter } from '@/dateAdapters';
 import { storyEvents } from './helpers';
-import { useState } from 'react';
 
 const story = {
   title: 'Schedulely',
   decorators: [
-    (Component, context) => (
+    (Component) => (
       <div style={{ height: '100%' }}>
-        <Component />
+        <CalendarTesterProvider inputEvents={storyEvents}>
+          <Component />
+        </CalendarTesterProvider>
       </div>
     ),
   ] as StoryDecorator[],
 };
 export default story;
 
-export const DefaultTheme = () => {
-  const { globalState } = useLadleContext();
-  const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
+const defaultProps: SchedulelyProps = {
+  events: storyEvents,
+  initialDate: new Date().toISOString(),
+  actions: {
+    onMoreEventsClick: (events) => console.log(events),
+    onEventClick: (event) => console.log(event),
+    onDayClick: (day) => console.log(day),
+  },
+};
 
-  const props: SchedulelyProps = {
-    events: storyEvents,
-    initialDate: new Date().toISOString(),
-    actions: {
-      onMoreEventsClick: (events) => console.log(events),
-      onEventClick: (event) => console.log(event),
-      onDayClick: (day) => console.log(day),
-    },
-  };
+export const XDefaultTheme = () => {
+  const { startOfWeek, events, theme } = useCalendarTester();
+
   return (
     <>
-      <span>Start Day: </span>
-      <select
-        onChange={(e) => setStartDay(Number.parseInt(e.target.value))}
-        style={{ marginBottom: '10px' }}
-      >
-        <option value={0}>Sunday</option>
-        <option value={1}>Monday</option>
-        <option value={2}>Tuesday</option>
-        <option value={3}>Wednesday</option>
-        <option value={4}>Thursday</option>
-        <option value={5}>Friday</option>
-        <option value={6}>Saturday</option>
-      </select>
+      <CalendarStoryTester />
       <Schedulely
-        {...props}
-        dateAdapter={createDefaultAdapter('en', startDay)}
-        dark={globalState.theme === ThemeState.Dark}
+        {...defaultProps}
+        events={events}
+        dateAdapter={createDefaultAdapter('en', startOfWeek)}
+        dark={theme === ThemeState.Dark}
+        eventPriority={EventPriority.long}
+        actions={{
+          onMoreEventsClick: (events) => console.log(events),
+          onEventClick: (event) => console.log(event),
+          onDayClick: (day) => console.log(day),
+        }}
       ></Schedulely>
     </>
   );
 };
 
-export const MinimalTheme = () => {
-  const { globalState } = useLadleContext();
-  const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
-
-  const props: SchedulelyProps = {
-    events: storyEvents,
-    theme: 'minimal',
-    initialDate: new Date().toISOString(),
-  };
+export const XXMinimalTheme = () => {
+  const { startOfWeek, events, theme } = useCalendarTester();
 
   return (
     <>
-      <span>Start Day: </span>
-      <select
-        onChange={(e) => setStartDay(Number.parseInt(e.target.value))}
-        style={{ marginBottom: '10px' }}
-      >
-        <option value={0}>Sunday</option>
-        <option value={1}>Monday</option>
-        <option value={2}>Tuesday</option>
-        <option value={3}>Wednesday</option>
-        <option value={4}>Thursday</option>
-        <option value={5}>Friday</option>
-        <option value={6}>Saturday</option>
-      </select>
+      <CalendarStoryTester />
       <div style={{ height: '100%', marginBottom: '5em' }}>
         <Schedulely
-          {...props}
-          dateAdapter={createDefaultAdapter('en', startDay)}
-          dark={globalState.theme === ThemeState.Dark}
+          {...defaultProps}
+          events={events}
+          dateAdapter={createDefaultAdapter('en', startOfWeek)}
+          theme={'minimal'}
+          dark={theme === ThemeState.Dark}
+          actions={{
+            onMoreEventsClick: (events) => console.log(events),
+            onEventClick: (event) => console.log(event),
+            onDayClick: (day) => console.log(day),
+          }}
         ></Schedulely>
       </div>
     </>
   );
 };
 
-export const CustomEvents = () => {
-  const { globalState } = useLadleContext();
-  const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
-
-  const props: SchedulelyProps = {
-    events: storyEvents,
-    theme: 'minimal',
-    initialDate: new Date().toISOString(),
-  };
+export const XXXCustomEvents = () => {
+  const { startOfWeek, events, theme } = useCalendarTester();
 
   const CustomEvent: EventComponent<{ animal: string; address: string }> = ({
     event,
@@ -130,65 +113,21 @@ export const CustomEvents = () => {
 
   return (
     <>
-      <span>Start Day: </span>
-      <select
-        onChange={(e) => setStartDay(Number.parseInt(e.target.value))}
-        style={{ marginBottom: '10px' }}
-      >
-        <option value={0}>Sunday</option>
-        <option value={1}>Monday</option>
-        <option value={2}>Tuesday</option>
-        <option value={3}>Wednesday</option>
-        <option value={4}>Thursday</option>
-        <option value={5}>Friday</option>
-        <option value={6}>Saturday</option>
-      </select>
+      <CalendarStoryTester />
       <div style={{ height: '100%', marginBottom: '5em' }}>
         <Schedulely
-          {...props}
-          dateAdapter={createDefaultAdapter('en', startDay)}
-          dark={globalState.theme === ThemeState.Dark}
+          {...defaultProps}
+          events={events}
+          dateAdapter={createDefaultAdapter('en', startOfWeek)}
+          dark={theme === ThemeState.Dark}
           schedulelyComponents={{ eventComponent: CustomEvent }}
+          actions={{
+            onMoreEventsClick: (events) => console.log(events),
+            onEventClick: (event) => console.log(event),
+            onDayClick: (day) => console.log(day),
+          }}
         ></Schedulely>
       </div>
-    </>
-  );
-};
-
-export const NoEvents = () => {
-  const { globalState } = useLadleContext();
-  const [startDay, setStartDay] = useState<WeekDay>(WeekDay.Sunday);
-
-  const props: SchedulelyProps = {
-    events: [],
-    initialDate: new Date().toISOString(),
-    actions: {
-      onMoreEventsClick: (events) => console.log(events),
-      onEventClick: (event) => console.log(event),
-      onDayClick: (day) => console.log(day),
-    },
-  };
-
-  return (
-    <>
-      <span>Start Day: </span>
-      <select
-        onChange={(e) => setStartDay(Number.parseInt(e.target.value))}
-        style={{ marginBottom: '10px' }}
-      >
-        <option value={0}>Sunday</option>
-        <option value={1}>Monday</option>
-        <option value={2}>Tuesday</option>
-        <option value={3}>Wednesday</option>
-        <option value={4}>Thursday</option>
-        <option value={5}>Friday</option>
-        <option value={6}>Saturday</option>
-      </select>
-      <Schedulely
-        {...props}
-        dateAdapter={createDefaultAdapter('en', startDay)}
-        dark={globalState.theme === ThemeState.Dark}
-      ></Schedulely>
     </>
   );
 };

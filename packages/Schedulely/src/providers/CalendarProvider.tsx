@@ -5,6 +5,7 @@ import {
   InternalCalendarEvent,
   InternalEventWeek,
 } from '@/types';
+import { EventPriority } from '@/types/EventPriority';
 import {
   PropsWithChildren,
   createContext,
@@ -23,6 +24,7 @@ interface CalendarProviderProps {
   dateAdapter: DateTimeAdapter;
   initialDate: string;
   calendarEvents: CalendarEvent[];
+  eventPriority: EventPriority;
 }
 
 /**
@@ -34,6 +36,7 @@ export const CalendarProvider = ({
   dateAdapter,
   initialDate,
   calendarEvents,
+  eventPriority,
   children,
 }: PropsWithChildren<CalendarProviderProps>) => {
   const { onMonthChangeClick } = useActions();
@@ -73,7 +76,7 @@ export const CalendarProvider = ({
 
   const events = useMemo(
     () =>
-      calendarEvents
+      [...calendarEvents]
         .map(({ start, end, color, id, summary, data }) => {
           const internalEvent: InternalCalendarEvent = {
             start: dateAdapter.convertIsoToDate(start),
@@ -125,16 +128,6 @@ export const CalendarProvider = ({
               x.start.valueOf() -
               (y.end.valueOf() - y.end.valueOf())
           ),
-        eventsOnDays: week.map((day) => {
-          const endOfDay = new Date(day);
-          endOfDay.setDate(day.getDate() + 1);
-          return {
-            date: day,
-            events: events.filter((event) =>
-              dateAdapter.isDateBetween(day, event.start, event.end)
-            ),
-          };
-        }),
       })),
     [calendarView, events, dateAdapter]
   );
@@ -171,6 +164,7 @@ export const CalendarProvider = ({
     onNextYear,
     onPrevMonth,
     onPrevYear,
+    eventPriority,
   };
 
   return (

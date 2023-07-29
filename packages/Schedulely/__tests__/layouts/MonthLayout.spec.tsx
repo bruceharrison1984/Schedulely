@@ -18,7 +18,6 @@ const mockCalendarWithEvents = [
       new Date(2022, 9, 1),
     ],
     events: [] as InternalCalendarEvent[],
-    eventsOnDays: {},
   },
   {
     weekStart: new Date(2022, 9, 2),
@@ -111,12 +110,12 @@ vi.mock('@/providers', () => ({
   EventIntersectionProvider: vi.fn(
     ({
       children,
-      eventsOnDays,
+      eventsInWeek,
     }: {
       children: ReactNode;
-      eventsOnDays: InternalEventWeek['eventsOnDays'];
+      eventsInWeek: InternalCalendarEvent[];
     }) => {
-      mockEventIntersectionProviderPropsCheck(eventsOnDays);
+      mockEventIntersectionProviderPropsCheck(eventsInWeek);
       return <div data-testid="intersection-provider-mock">{children}</div>;
     }
   ),
@@ -181,7 +180,7 @@ describe('MonthLayout', () => {
         it('receives array of days', () => {
           expect(
             mockEventIntersectionProviderPropsCheck.mock.calls[week.index][0]
-          ).toEqual(mockCalendarWithEvents[week.index].eventsOnDays);
+          ).toEqual(mockCalendarWithEvents[week.index].events);
         });
       });
     }
