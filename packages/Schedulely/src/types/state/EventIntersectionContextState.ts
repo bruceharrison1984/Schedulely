@@ -8,4 +8,7 @@ export type EventIntersectionState = {
 
   /** Gets an array of events that occur on or span the supplied date. */
   getEventsOnDate: (date: Date) => InternalCalendarEvent[];
+
+  /** Gets an array of events that occur on or span the supplied date. */
+  getEvent: (eventId: string) => InternalCalendarEvent;
 };

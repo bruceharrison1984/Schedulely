@@ -1,6 +1,7 @@
 import { CalendarProvider } from '@/providers';
 import { Chance } from 'chance';
-import { ComponentSize, DateTimeAdapter } from '@/types';
+import { ComponentSize } from '@/types';
+import { EventPriority } from '@/types/EventPriority';
 import { ReactNode } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { createDefaultAdapter } from '@/dateAdapters/date';
@@ -117,6 +118,7 @@ const wrapper = ({ children }: { children: ReactNode }) => (
     dateAdapter={testDateAdapter}
     initialDate={testDate.toISOString()}
     calendarEvents={[]}
+    eventPriority={EventPriority.long}
   >
     {children}
   </CalendarProvider>

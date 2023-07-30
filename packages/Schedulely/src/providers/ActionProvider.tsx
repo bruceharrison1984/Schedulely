@@ -1,5 +1,5 @@
 import { ActionContextState } from '@/types';
-import { PropsWithChildren, createContext, useCallback } from 'react';
+import { PropsWithChildren, createContext } from 'react';
 
 export const ActionContext = createContext<ActionContextState | null>(null);
 ActionContext.displayName = 'ActionContext';

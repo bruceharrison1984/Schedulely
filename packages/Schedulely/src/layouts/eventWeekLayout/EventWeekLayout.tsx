@@ -60,7 +60,7 @@ export const EventWeekLayout = ({
   const { eventComponent: EventComponent } = useComponents();
   const { setHighlight, clearHighlight, isHighlighted } = useEventHighlight();
   const { onEventClick } = useActions();
-  const { setParentContainerRef } = useEventIntersection();
+  const { setParentContainerRef, getEvent } = useEventIntersection();
   const { eventPriority } = useCalendar();
 
   const calculateOrder = (event: InternalCalendarEvent) => {
@@ -81,7 +81,7 @@ export const EventWeekLayout = ({
             data-eventid={event.id}
             style={{
               gridColumn: getEventPosition(event, daysInweek),
-              visibility: 'hidden', // start hidden to avoid flashes of events that will be hidden
+              visibility: getEvent(event.id)?.visible ? undefined : 'hidden', // start hidden to avoid flashes of events that will be hidden
               order: calculateOrder(event),
             }}
             onMouseOver={() => setHighlight(event.id)}

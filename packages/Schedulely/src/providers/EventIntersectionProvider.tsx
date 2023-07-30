@@ -1,8 +1,4 @@
-import {
-  EventIntersectionState,
-  InternalCalendarEvent,
-  InternalEventWeek,
-} from '@/types';
+import { EventIntersectionState, InternalCalendarEvent } from '@/types';
 import {
   ReactNode,
   createContext,
@@ -11,7 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useCalendar } from '@/hooks';
+import { useCalendar } from '../hooks/useCalendar';
 
 export const EventIntersectionContext =
   createContext<EventIntersectionState | null>(null);
@@ -26,9 +22,11 @@ EventIntersectionContext.displayName = 'EventIntersectionContext';
 export const EventIntersectionProvider = ({
   children,
   eventsInWeek,
+  weekNumber,
 }: {
   children: ReactNode;
   eventsInWeek: InternalCalendarEvent[];
+  weekNumber: number;
 }) => {
   const {
     dateAdapter: { isDateBetween },
@@ -39,9 +37,19 @@ export const EventIntersectionProvider = ({
 
   const observerRef = useRef<IntersectionObserver | undefined>();
 
+  const getEventIntersectionId = useCallback(
+    (eventId: string) => [eventId, weekNumber].join('-'),
+    [weekNumber]
+  );
+
   const [eventVisibility, setEventVisibility] = useState<
     Record<string, InternalCalendarEvent>
-  >(Object.assign({}, ...eventsInWeek.map((x) => ({ [x.id]: x }))));
+  >(
+    Object.assign(
+      {},
+      ...eventsInWeek.map((x) => ({ [getEventIntersectionId(x.id)]: x }))
+    )
+  );
 
   const getEventsOnDate = useCallback(
     (date: Date) =>
@@ -52,42 +60,34 @@ export const EventIntersectionProvider = ({
   );
 
   /**
-   * This method checks if an event is fully visible, and if not hides it
-   * We do this via direct Refs because direct updates are faster and cleaner than relying upon
-   * React to route the property before and after a render.
-   *
-   * This could possibly be done in a more React-y way by splitting this context, but this seems pretty straight-forward as it.
+   * this controls the event data that is sent back to the DayComponent for retrieving event visibility via getEventsOnDate
    */
   const checkIntersection: IntersectionObserverCallback = useCallback(
     (entries) =>
-      entries.map((x) => {
-        const currentStyle =
-          x.target
-            .getAttribute('style')
-            ?.split(';')
-            .filter((x) => x && !x.includes('visibility')) || [];
-
-        if (x.isIntersecting)
-          x.target.setAttribute('style', currentStyle.join(';'));
-        else {
-          currentStyle.push('visibility: hidden');
-          x.target.setAttribute('style', currentStyle.join(';'));
-        }
-
-        // this controls the event data that is sent back to the DayComponent for event visibility
+      entries.map(({ target, isIntersecting }) =>
         setEventVisibility((current) => {
-          var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
-          if (!eventId) return { ...current };
+          var eventId = target.attributes.getNamedItem('data-eventid')?.value;
+
+          if (!eventId)
+            throw new Error(
+              'Event does not have a data-eventid attribute! Did you manually create it?'
+            );
 
           if (!current[eventId]) {
-            const matchingEvent = eventsInWeek.find((x) => x.id === eventId)!;
-            current[eventId] = matchingEvent;
+            const matchingEvent = eventsInWeek.find(({ id }) => id === eventId);
+
+            if (!matchingEvent) {
+              throw new Error(
+                `Event ${eventId} not found in event intersection dictionary!`
+              );
+            }
+            current[getEventIntersectionId(eventId)] = matchingEvent;
           }
-          current[eventId].visible = x.isIntersecting;
+          current[getEventIntersectionId(eventId)].visible = isIntersecting;
           return { ...current };
-        });
-      }),
-    [eventsInWeek]
+        })
+      ),
+    [eventsInWeek, getEventIntersectionId]
   );
 
   useEffect(() => {
@@ -113,6 +113,7 @@ export const EventIntersectionProvider = ({
   const value: EventIntersectionState = {
     setParentContainerRef,
     getEventsOnDate,
+    getEvent: (id) => eventVisibility[getEventIntersectionId(id)],
   };
 
   return (
