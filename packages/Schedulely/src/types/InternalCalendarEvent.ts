@@ -36,7 +36,4 @@ export type InternalCalendarEvent<T extends object = {}> = Omit<
 
   /** Is this event visible (not hidden) */
   visible: boolean;
-
-  /** The week that this event falls in for the current month */
-  weekNumber?: number;
 };

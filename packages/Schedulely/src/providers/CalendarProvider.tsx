@@ -86,7 +86,6 @@ export const CalendarProvider = ({
             summary,
             visible: false,
             data,
-            weekNumber: 1, // this shouldn't be set
           };
           return internalEvent;
         })
