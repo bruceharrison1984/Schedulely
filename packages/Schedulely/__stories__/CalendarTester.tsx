@@ -111,11 +111,11 @@ export const CalendarStoryTester = (props: PropsWithChildren) => {
               changeEvents(events);
             }}
           >
-            Add Event
+            Add Event To Initial Month
           </button>
         </div>
         <div>
-          <button onClick={clearEvents}>Clear Events</button>
+          <button onClick={clearEvents}>Clear All Events</button>
         </div>
       </div>
       <hr />

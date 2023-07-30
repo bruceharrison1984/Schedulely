@@ -49,6 +49,7 @@ let mockIsHighlighted = vi.fn((eventId: string) => false);
 let mockEventOnClickHandler = vi.fn(() => {});
 
 let mockSetParentContainerRef = vi.fn((eventId: string) => {});
+let mockGetEvent = vi.fn((eventId: string) => {});
 let mockEventPriority = vi.fn(() => {});
 
 vi.mock('@/hooks', () => ({
@@ -65,6 +66,7 @@ vi.mock('@/hooks', () => ({
   })),
   useEventIntersection: vi.fn(() => ({
     setParentContainerRef: mockSetParentContainerRef,
+    getEvent: mockGetEvent,
   })),
   useCalendar: vi.fn(() => ({
     eventPriority: mockEventPriority,
