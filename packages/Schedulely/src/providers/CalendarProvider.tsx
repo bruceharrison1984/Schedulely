@@ -86,6 +86,7 @@ export const CalendarProvider = ({
             summary,
             visible: false,
             data,
+            weekNumber: 1, // this shouldn't be set
           };
           return internalEvent;
         })
@@ -116,12 +117,13 @@ export const CalendarProvider = ({
 
   const calendarWithEvents = useMemo<InternalEventWeek[]>(
     () =>
-      calendarView.map<InternalEventWeek>((week) => ({
+      calendarView.map<InternalEventWeek>((week, weekNumber) => ({
         daysInWeek: week,
         events: events
           .filter((event) =>
             dateAdapter.isEventInWeek(event.start, event.end, week)
           )
+          .map((x) => ({ ...x, weekNumber: weekNumber + 1 }))
           .sort(
             (x, y) =>
               x.end.valueOf() -

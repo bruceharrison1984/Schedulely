@@ -1,8 +1,4 @@
-import {
-  EventIntersectionState,
-  InternalCalendarEvent,
-  InternalEventWeek,
-} from '@/types';
+import { EventIntersectionState, InternalCalendarEvent } from '@/types';
 import {
   ReactNode,
   createContext,
@@ -41,7 +37,12 @@ export const EventIntersectionProvider = ({
 
   const [eventVisibility, setEventVisibility] = useState<
     Record<string, InternalCalendarEvent>
-  >(Object.assign({}, ...eventsInWeek.map((x) => ({ [x.id]: x }))));
+  >(
+    Object.assign(
+      {},
+      ...eventsInWeek.map((x) => ({ [[x.id, x.weekNumber].join('-')]: x }))
+    )
+  );
 
   const getEventsOnDate = useCallback(
     (date: Date) =>
@@ -51,29 +52,9 @@ export const EventIntersectionProvider = ({
     [eventVisibility, isDateBetween]
   );
 
-  /**
-   * This method checks if an event is fully visible, and if not hides it
-   * We do this via direct Refs because direct updates are faster and cleaner than relying upon
-   * React to route the property before and after a render.
-   *
-   * This could possibly be done in a more React-y way by splitting this context, but this seems pretty straight-forward as it.
-   */
   const checkIntersection: IntersectionObserverCallback = useCallback(
     (entries) =>
       entries.map((x) => {
-        const currentStyle =
-          x.target
-            .getAttribute('style')
-            ?.split(';')
-            .filter((x) => x && !x.includes('visibility')) || [];
-
-        if (x.isIntersecting)
-          x.target.setAttribute('style', currentStyle.join(';'));
-        else {
-          currentStyle.push('visibility: hidden');
-          x.target.setAttribute('style', currentStyle.join(';'));
-        }
-
         // this controls the event data that is sent back to the DayComponent for event visibility
         setEventVisibility((current) => {
           var eventId = x.target.attributes.getNamedItem('data-eventid')?.value;
@@ -113,6 +94,7 @@ export const EventIntersectionProvider = ({
   const value: EventIntersectionState = {
     setParentContainerRef,
     getEventsOnDate,
+    getEvent: (id) => eventVisibility[id],
   };
 
   return (
