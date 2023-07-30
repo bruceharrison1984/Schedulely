@@ -1,13 +1,19 @@
 import { DarkModeLiveExample } from '../../components/DarkModeLiveExample';
+import { Callout } from 'nextra/components';
 
 # Dark Mode
 
-Dark mode is supported by setting the `dark` attribute to `true` on the main Schedulely component.
-Specific CSS selectors can be used to based on this attribute. See the included styles for guidance.
+Dark mode is supported by setting the `dark` attribute to `true` on the main Schedulely component. We known there are countless
+ways to trigger dark mode in other components (media query, html tag, data-tag,etc) and rather than force a specific implementation
+upon your application, we'll let you decide the best way to communicate to Schedulely that `Dark Mode` should be enabled by providing
+a single entry point.
+
+<Callout type="warning">
+  For custom themes, specific CSS selectors are used based on the `dark`
+  attribute. See the included styles for guidance on how to implement dark/light
+  themes.
+</Callout>
+
+## Example
 
 <DarkModeLiveExample />
-
-### Why an attribute?
-
-There are countless ways to trigger dark mode (media query, html data-tag, etc) and rather than force an implementation upon your application, we'll let you
-decide the best way to communicate to Schedulely that Dark Mode should be enabled.
