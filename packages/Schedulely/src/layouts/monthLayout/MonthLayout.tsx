@@ -20,10 +20,7 @@ export const MonthLayout = () => {
             className="week-container"
             data-week={idx}
           >
-            <EventIntersectionProvider
-              eventsInWeek={events}
-              weekNumber={idx + 1}
-            >
+            <EventIntersectionProvider eventsInWeek={events} weekNumber={idx}>
               <EventWeekLayout eventsInWeek={events} daysInweek={daysInWeek} />
               <WeekLayout dates={daysInWeek} />
             </EventIntersectionProvider>
