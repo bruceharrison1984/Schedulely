@@ -37,12 +37,17 @@ export const EventIntersectionProvider = ({
 
   const observerRef = useRef<IntersectionObserver | undefined>();
 
+  const getEventIntersectionId = useCallback(
+    (eventId: string) => [eventId, weekNumber].join('-'),
+    [weekNumber]
+  );
+
   const [eventVisibility, setEventVisibility] = useState<
     Record<string, InternalCalendarEvent>
   >(
     Object.assign(
       {},
-      ...eventsInWeek.map((x) => ({ [[x.id, weekNumber].join('-')]: x }))
+      ...eventsInWeek.map((x) => ({ [getEventIntersectionId(x.id)]: x }))
     )
   );
 
@@ -76,13 +81,13 @@ export const EventIntersectionProvider = ({
                 `Event ${eventId} not found in event intersection dictionary!`
               );
             }
-            current[[eventId, weekNumber].join('-')] = matchingEvent;
+            current[getEventIntersectionId(eventId)] = matchingEvent;
           }
-          current[[eventId, weekNumber].join('-')].visible = isIntersecting;
+          current[getEventIntersectionId(eventId)].visible = isIntersecting;
           return { ...current };
         })
       ),
-    [eventsInWeek, weekNumber]
+    [eventsInWeek, getEventIntersectionId]
   );
 
   useEffect(() => {
@@ -108,7 +113,7 @@ export const EventIntersectionProvider = ({
   const value: EventIntersectionState = {
     setParentContainerRef,
     getEventsOnDate,
-    getEvent: (id) => eventVisibility[[id, weekNumber].join('-')],
+    getEvent: (id) => eventVisibility[getEventIntersectionId(id)],
   };
 
   return (
