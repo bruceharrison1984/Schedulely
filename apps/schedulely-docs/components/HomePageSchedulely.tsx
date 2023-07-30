@@ -1,7 +1,7 @@
 import { Resizable } from 're-resizable';
 import { Schedulely, WeekDay, createDefaultAdapter } from 'schedulely';
 import { storyEvents } from './helpers.stories';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from 'nextra-theme-docs';
 
 const HomepageSchedulely = () => {

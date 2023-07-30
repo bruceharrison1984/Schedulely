@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useCalendar } from '@/hooks';
+import { useCalendar } from '../hooks/useCalendar';
 
 export const EventIntersectionContext =
   createContext<EventIntersectionState | null>(null);
