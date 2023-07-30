@@ -33,10 +33,7 @@ export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
     return (
       <div style={{backgroundColor: isDarkMode ? 'black' : 'white'}}>
-        <span style={{color: isDarkMode ? 'white' : 'black'}}>Dark Mode:</span> <select onChange={(e) => {
-          console.log(e.target.value)
-          setIsDarkMode(e.target.value === "1" ? true : false)
-        }}>
+        <span style={{color: isDarkMode ? 'white' : 'black'}}>Dark Mode:</span> <select onChange={(e) => setIsDarkMode(e.target.value === "1" ? true : false) }>
           <option value="0">false</option>
           <option value="1">true</option>
         </select>
