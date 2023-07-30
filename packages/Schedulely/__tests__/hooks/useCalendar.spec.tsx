@@ -1,6 +1,6 @@
 import { CalendarProvider } from '@/providers';
 import { Chance } from 'chance';
-import { ComponentSize, DateTimeAdapter } from '@/types';
+import { ComponentSize } from '@/types';
 import { ReactNode } from 'react';
 import { act, renderHook } from '@testing-library/react';
 import { createDefaultAdapter } from '@/dateAdapters/date';

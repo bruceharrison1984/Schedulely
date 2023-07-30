@@ -1,5 +1,4 @@
 import { HeaderComponent } from '@/types';
-import { useCallback } from 'react';
 
 /**
  * The default header representation
