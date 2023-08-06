@@ -131,3 +131,34 @@ export const XXXCustomEvents = () => {
     </>
   );
 };
+
+export const XXXXCustomKeyboardHandlers = () => {
+  const { startOfWeek, events, theme } = useCalendarTester();
+
+  return (
+    <>
+      <CalendarStoryTester />
+      <div style={{ height: '100%', marginBottom: '5em' }}>
+        <Schedulely
+          {...defaultProps}
+          events={events}
+          dateAdapter={createDefaultAdapter('en', startOfWeek)}
+          dark={theme === ThemeState.Dark}
+          calendarOptions={{
+            keyboardEvents: {
+              onLeftArrow: () => console.log('left'),
+              onRightArrow: () => console.log('right'),
+              onUpArrow: () => console.log('up'),
+              onDownArrow: () => console.log('down'),
+            },
+          }}
+          actions={{
+            onMoreEventsClick: (events) => console.log(events),
+            onEventClick: (event) => console.log(event),
+            onDayClick: (day) => console.log(day),
+          }}
+        ></Schedulely>
+      </div>
+    </>
+  );
+};

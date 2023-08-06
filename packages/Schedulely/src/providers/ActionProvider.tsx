@@ -1,4 +1,4 @@
-import { ActionContextState } from '@/types';
+import { ActionContextState, KeyboardEvents } from '@/types';
 import { PropsWithChildren, createContext } from 'react';
 
 export const ActionContext = createContext<ActionContextState | null>(null);
@@ -6,6 +6,7 @@ ActionContext.displayName = 'ActionContext';
 
 interface ActionProviderProps {
   actions?: Partial<ActionContextState>;
+  keyboardEvents?: KeyboardEvents;
 }
 
 /**
@@ -18,6 +19,7 @@ interface ActionProviderProps {
 export const ActionProvider = ({
   children,
   actions,
+  keyboardEvents,
 }: PropsWithChildren<ActionProviderProps>) => {
   const defaultAction = () => null;
 
@@ -31,6 +33,7 @@ export const ActionProvider = ({
     onMoreEventsClick,
     onMonthChangeClick,
     onDayClick,
+    keyboardEvents,
   };
 
   return (

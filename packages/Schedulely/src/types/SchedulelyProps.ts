@@ -6,6 +6,22 @@ import {
 } from '@/types';
 import { EventPriority } from './EventPriority';
 
+export interface KeyboardEvents {
+  /** Typically used to navigate to the previous month */
+  onLeftArrow?: () => void;
+  /** Typically used to navigate to the next month */
+  onRightArrow?: () => void;
+  /** Typically used to navigate to the next year */
+  onUpArrow?: () => void;
+  /** Typically used to navigate to the previous year */
+  onDownArrow?: () => void;
+}
+
+export interface CalendarOptions {
+  /** Provides a way to customise the keyboard actions within the calendar */
+  keyboardEvents?: KeyboardEvents;
+}
+
 /** Properties used to initialize Schedulely */
 export interface SchedulelyProps {
   /** DateAdapter used to process dates */
@@ -38,4 +54,7 @@ export interface SchedulelyProps {
    *
    * _Long is the default_ */
   eventPriority?: EventPriority;
+
+  /** Options to customize the calendar */
+  calendarOptions?: CalendarOptions;
 }
