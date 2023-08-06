@@ -1,4 +1,5 @@
-import { ActionProvider } from '../../src/providers';
+import { ActionProvider } from '../../src/providers/ActionProvider';
+import { KeyboardEvents } from '../../src';
 import { RenderResult, fireEvent, render } from '@testing-library/react';
 import { useKeyboardControls } from '@/hooks/useKeyboardControls';
 import { vi } from 'vitest';
@@ -26,9 +27,13 @@ const Wrapper = () => {
   return <div></div>;
 };
 
-const TestWrapper = () => {
+const TestWrapper = ({
+  keyboardEvents,
+}: {
+  keyboardEvents?: KeyboardEvents;
+}) => {
   return (
-    <ActionProvider>
+    <ActionProvider keyboardEvents={keyboardEvents}>
       <Wrapper />
     </ActionProvider>
   );
@@ -37,42 +42,42 @@ const TestWrapper = () => {
 describe('useKeyboardControls', () => {
   let testObject: RenderResult;
 
-  beforeEach(() => {
-    testObject = render(<TestWrapper />);
-  });
+  describe('default keyboard events', () => {
+    beforeEach(() => {
+      testObject = render(<TestWrapper />);
+    });
 
-  it('ArrowUp calls onNextYear', () => {
-    fireEvent.keyDown(testObject.container, { key: 'ArrowUp' });
-    expect(mockOnNextYear).toHaveBeenCalledTimes(1);
-  });
+    it('ArrowUp calls onNextYear', () => {
+      fireEvent.keyDown(testObject.container, { key: 'ArrowUp' });
+      expect(mockOnNextYear).toHaveBeenCalledTimes(1);
+    });
 
-  it('ArrowRight calls onNextMonth', () => {
-    fireEvent.keyDown(testObject.container, { key: 'ArrowRight' });
-    expect(mockOnNextMonth).toHaveBeenCalledTimes(1);
-  });
+    it('ArrowRight calls onNextMonth', () => {
+      fireEvent.keyDown(testObject.container, { key: 'ArrowRight' });
+      expect(mockOnNextMonth).toHaveBeenCalledTimes(1);
+    });
 
-  it('ArrowLeft calls onPrevMonth', () => {
-    fireEvent.keyDown(testObject.container, { key: 'ArrowLeft' });
-    expect(mockOnPrevMonth).toHaveBeenCalledTimes(1);
-  });
+    it('ArrowLeft calls onPrevMonth', () => {
+      fireEvent.keyDown(testObject.container, { key: 'ArrowLeft' });
+      expect(mockOnPrevMonth).toHaveBeenCalledTimes(1);
+    });
 
-  it('ArrowDown calls onPrevYear', () => {
-    fireEvent.keyDown(testObject.container, { key: 'ArrowDown' });
-    expect(mockOnPrevYear).toHaveBeenCalledTimes(1);
+    it('ArrowDown calls onPrevYear', () => {
+      fireEvent.keyDown(testObject.container, { key: 'ArrowDown' });
+      expect(mockOnPrevYear).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe('custom keyboard events', () => {
     beforeEach(() => {
-      vi.mock('@/hooks/useActions', () => ({
-        useActions: vi.fn(() => ({
-          keyboardEvents: {
-            onUpArrow: mockOnUpArrow,
-            onDownArrow: mockOnDownArrow,
-            onLeftArrow: mockOnLeftArrow,
-            onRightArrow: mockOnRightArrow,
-          },
-        })),
-      }));
+      const keyboardEvents: KeyboardEvents = {
+        onUpArrow: mockOnUpArrow,
+        onDownArrow: mockOnDownArrow,
+        onLeftArrow: mockOnLeftArrow,
+        onRightArrow: mockOnRightArrow,
+      };
+
+      testObject = render(<TestWrapper keyboardEvents={keyboardEvents} />);
     });
 
     it('ArrowUp calls onUpArrow', () => {
