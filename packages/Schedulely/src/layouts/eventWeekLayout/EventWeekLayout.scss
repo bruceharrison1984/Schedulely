@@ -5,6 +5,7 @@
   overflow: hidden;
 
   > .event-week-layout-grid {
+    pointer-events: none;
     position: relative;
     display: grid;
     grid-area: 1 / 1;
