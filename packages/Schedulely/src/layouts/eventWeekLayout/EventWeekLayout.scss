@@ -27,5 +27,9 @@
       min-width: 0;
       min-height: 0;
     }
+
+    & > div {
+      pointer-events: visible;
+    }
   }
 }
