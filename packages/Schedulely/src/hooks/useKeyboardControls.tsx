@@ -1,39 +1,64 @@
+import { useActions } from './useActions';
 import { useCalendar } from '@/hooks/useCalendar';
 import { useCallback, useEffect } from 'react';
 
 /**
  * Enables keyboard controls.
- * TODO: This could be expanded to allow for users to pass in their own keybindings
  */
 export const useKeyboardControls = () => {
   const { onNextMonth, onNextYear, onPrevMonth, onPrevYear } = useCalendar();
+  const { keyboardEvents } = useActions();
 
   const navigatePrevMonth = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') onPrevMonth();
+      if (event.key === 'ArrowLeft') {
+        if (keyboardEvents?.onLeftArrow) {
+          keyboardEvents.onLeftArrow();
+        } else {
+          onPrevMonth();
+        }
+      }
     },
-    [onPrevMonth]
+    [onPrevMonth, keyboardEvents]
   );
 
   const navigatePrevYear = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === 'ArrowDown') onPrevYear();
+      if (event.key === 'ArrowDown') {
+        if (keyboardEvents?.onDownArrow) {
+          keyboardEvents.onDownArrow();
+        } else {
+          onPrevYear();
+        }
+      }
     },
-    [onPrevYear]
+    [onPrevYear, keyboardEvents]
   );
 
   const navigateNextMonth = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === 'ArrowRight') onNextMonth();
+      if (event.key === 'ArrowRight') {
+        if (keyboardEvents?.onRightArrow) {
+          keyboardEvents.onRightArrow();
+        } else {
+          onNextMonth();
+        }
+      }
     },
-    [onNextMonth]
+    [onNextMonth, keyboardEvents]
   );
 
   const navigateNextYear = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === 'ArrowUp') onNextYear();
+      if (event.key === 'ArrowUp') {
+        if (keyboardEvents?.onUpArrow) {
+          keyboardEvents.onUpArrow();
+        } else {
+          onNextYear();
+        }
+      }
     },
-    [onNextYear]
+    [onNextYear, keyboardEvents]
   );
 
   useEffect(() => {

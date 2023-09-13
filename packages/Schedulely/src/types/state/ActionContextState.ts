@@ -1,4 +1,5 @@
 import { InternalCalendarEvent } from '../InternalCalendarEvent';
+import { KeyboardEvents } from '../SchedulelyProps';
 
 /** Represents the state of the ActionProvider */
 export interface ActionContextState {
@@ -13,4 +14,7 @@ export interface ActionContextState {
 
   /** function that will run whenever a day container on the calendar is clicked */
   onDayClick: (day: Date) => void;
+
+  /** Object that contains optional keyboard shortcut overrides */
+  keyboardEvents?: KeyboardEvents;
 }

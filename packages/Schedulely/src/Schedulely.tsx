@@ -27,6 +27,7 @@ export const Schedulely = ({
   dark,
   eventPriority = EventPriority.long,
   initialDate = new Date().toISOString(),
+  calendarOptions = {},
 }: SchedulelyProps) => {
   if (!dateAdapter) throw new Error('Date Adapter must be supplied!');
 
@@ -56,7 +57,10 @@ export const Schedulely = ({
         ref={containerRef}
       >
         <BreakpointProvider containerRef={containerRef}>
-          <ActionProvider actions={actions}>
+          <ActionProvider
+            actions={actions}
+            keyboardEvents={calendarOptions.keyboardEvents}
+          >
             <ComponentProvider calendarComponents={schedulelyComponents}>
               <CalendarProvider
                 initialDate={initialDate}
